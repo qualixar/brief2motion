@@ -1,0 +1,37 @@
+{
+  "name": "brief2motion",
+  "owner": {
+    "name": "Varun Pratap Bhardwaj",
+    "url": "https://github.com/qualixar"
+  },
+  "metadata": {
+    "description": "brief2motion: write a brief, get live web motion. One skill for Claude Code and Codex."
+  },
+  "plugins": [
+    {
+      "name": "brief2motion",
+      "source": "./",
+      "description": "Turn a plain brief into live, measured web motion: dust that forms your product, face or logo, a paper plane across the page, scroll scenes. Sibling of brief2mp4.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Varun Pratap Bhardwaj"
+      },
+      "homepage": "https://github.com/qualixar/brief2motion",
+      "repository": "https://github.com/qualixar/brief2motion",
+      "license": "MIT",
+      "keywords": [
+        "web-motion",
+        "motion-graphics",
+        "particles",
+        "threejs",
+        "gsap",
+        "scrollytelling",
+        "animation",
+        "agent-skills",
+        "text-to-web",
+        "skill"
+      ],
+      "category": "productivity"
+    }
+  ]
+}

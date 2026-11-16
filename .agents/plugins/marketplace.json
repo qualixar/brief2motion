@@ -1,0 +1,11 @@
+{
+  "name": "brief2motion",
+  "plugins": [
+    {
+      "name": "brief2motion",
+      "source": { "source": "local", "path": "./" },
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Productivity"
+    }
+  ]
+}
