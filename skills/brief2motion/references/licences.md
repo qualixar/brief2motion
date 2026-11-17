@@ -1,6 +1,6 @@
 # Licences: what brief2motion bundles, loads and offers
 
-Checked on 16 Nov 2026; the GSAP terms were read again on 17 Nov 2026. This is a plain guide, not legal advice.
+Checked on 16 Nov 2026; the GSAP terms were read again on 17 Nov 2026, and the table of loaded libraries was brought up to version 1.0.0 the same day. This is a plain guide, not legal advice.
 
 brief2motion has three kinds of code. Keep them apart.
 
@@ -10,15 +10,26 @@ Everything inside this repository, the skill text, the templates and the scripts
 
 ## 2. Loaded from a CDN at runtime (never copied into the repo)
 
-The generated page asks a CDN for these files when a visitor opens it. The versions are pinned, and the four script tags carry integrity hashes (SRI), so the browser rejects a file that has changed. The CDN is `cdn.jsdelivr.net`, the only third-party host the page talks to, and `check_motion` fails if any other host shows up.
+A generated page asks a CDN for these files when a visitor opens it. The versions are pinned. Fixed files on script tags carry integrity hashes (SRI), so the browser rejects a file that has changed. The CDN is `cdn.jsdelivr.net`, the only third-party host a page talks to, and both checkers fail a page if any other host shows up.
 
 | Library | Version | Licence | What it means for you |
 |---|---|---|---|
 | three.js | r187 (npm 0.187.0) | MIT | Free for any use. Keep the copyright notice. |
-| GSAP (with ScrollTrigger) | 3.15.0 | GSAP Standard "no charge" licence (not open source) | Free for commercial work, including code an AI wrote. Not allowed inside no-code animation builders that compete with Webflow. The licence grants use, reproduction and display for permitted uses and forbids removing its notices, so if you must work offline you may save the pinned files next to the site and point the script tags at them, keeping the copyright headers in the files. We load from the CDN by default and do not ship the files. |
+| GSAP, with ScrollTrigger, SplitText, DrawSVG, MotionPath | 3.15.1 | GSAP Standard "no charge" licence (not open source) | Free for commercial work, including code an AI wrote. Not allowed inside no-code animation builders that compete with Webflow. The licence forbids removing its notices, so load it from the CDN or npm; if you must work offline, save the pinned files next to the site with their copyright headers. We do not ship the files. |
 | Lenis | 1.3.27 | MIT | Free for any use. Keep the copyright notice. |
+| Motion (`motion`, `motion/react`) | 14.14.0 | MIT | Free for any use. Motion+ is a separate paid product and is not used. |
+| React, React DOM | 19.3.1 | MIT | Free for any use. |
+| htm | 3.1.1 | Apache-2.0 | Free for any use. Keep the notice. |
+| lottie-web (light build) | 5.13.0 | MIT | Free for any use. The animation files you play have their own licences. |
+| Rive runtime (`@rive-app/canvas-lite`) | 2.51.0 | MIT | Free for any use. The `.riv` files you play have their own licences. |
+| d3-scale, d3-shape | 4.0.2, 3.2.0 | ISC | Free for any use. Keep the notice. |
+| React Three Fiber, drei | 9.8.2, 10.7.9 | MIT | Used only in React projects with a bundler, and in this repo's test page. |
 
-Source for GSAP terms: https://gsap.com/community/standard-license/ (the page lists "Prohibited Uses" as tools that let users build visual animations without code and compete with Webflow, and says AI-generated GSAP code is not a prohibited use). If your project is that kind of tool, do not use GSAP.
+Source for GSAP terms: https://gsap.com/community/standard-license/ (the page lists "Prohibited Uses" as tools that let users build visual animations without code and compete with Webflow, and says AI-generated GSAP code is not a prohibited use). If your project is that kind of tool, do not use GSAP: the kit and Motion cover most of the same ground.
+
+jsDelivr's `+esm` addresses are bundles it generates on request. They cannot carry an integrity hash, and they resolve a package's own dependencies at build time. Pin exact versions, and use them for demos and small pages; a real React project should install from npm and bundle.
+
+Code taken from other projects: none is copied into this repository. `NOTICE` at the repo root lists the projects whose published patterns shaped the kit and the examples, with their licences.
 
 **Fonts.** The page uses system font stacks (Georgia for headings, the operating system's UI font for text), so no font file is downloaded and no request goes to a font service. If you add a web font, host the file yourself, keep its licence notice (Fraunces and Inter, for example, are under the SIL Open Font Licence 1.1), and add it to the notice below. Loading fonts from a third-party font service sends every visitor's IP address to that service, which in some regions needs consent.
 
@@ -40,10 +51,15 @@ Two more things to know. react-bits is MIT plus the Commons Clause: use its comp
 Written by brief2motion on {{DATE}}. Plain guide, not legal advice.
 
 ## Loaded from a CDN when the page opens
-- three.js {{THREE_VERSION}} (MIT), copyright the three.js authors.
-- GSAP {{GSAP_VERSION}} (GSAP Standard "no charge" licence), https://gsap.com/community/standard-license/
+List only what this page really loads, with the pinned version. Lines to choose from:
+- three.js {{VERSION}} (MIT), copyright the three.js authors.
+- GSAP {{VERSION}} (GSAP Standard "no charge" licence), https://gsap.com/community/standard-license/
   Free for commercial use. Not allowed in no-code animation builders that compete with Webflow.
-- Lenis {{LENIS_VERSION}} (MIT).
+- Lenis {{VERSION}} (MIT), copyright darkroom.engineering.
+- Motion {{VERSION}} (MIT), copyright Motion.
+- React and React DOM {{VERSION}} (MIT), copyright Meta Platforms. htm {{VERSION}} (Apache-2.0).
+- lottie-web {{VERSION}} (MIT), copyright Bodymovin. Rive runtime {{VERSION}} (MIT), copyright Rive.
+- d3-scale and d3-shape {{VERSION}} (ISC), copyright Mike Bostock.
 
 ## Fonts
 - System fonts only. {{WEB_FONTS_OR_NONE}}

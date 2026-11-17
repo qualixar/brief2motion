@@ -1,0 +1,1210 @@
+{
+  "tool": "check_site",
+  "site": "halvorsen",
+  "when": "2026-11-17T18:45:17.803Z",
+  "budgets": {
+    "desktopP95": 20,
+    "mobileP95": 40,
+    "localBytes": 1572864,
+    "tapTarget": 24,
+    "contrast": 4.5,
+    "contrastLarge": 3
+  },
+  "perfMeasured": true,
+  "chrome": "157.0.8103.79",
+  "pages": {
+    "index.html": {
+      "state": "ready",
+      "desktop": {
+        "samples": 499,
+        "medianMs": 16.7,
+        "p95Ms": 16.8,
+        "maxMs": 16.8,
+        "fps": 59.9
+      },
+      "shots": [
+        "shots/index-desktop-0.png",
+        "shots/index-desktop-1.png",
+        "shots/index-desktop-2.png",
+        "shots/index-desktop-3.png",
+        "shots/index-desktop-4.png",
+        "shots/index-desktop-5.png",
+        "shots/index-phone-0.png",
+        "shots/index-phone-2.png",
+        "shots/index-phone-4.png"
+      ],
+      "basics": {
+        "h1": 1,
+        "lang": "en",
+        "title": "Noor Halvorsen · type designer",
+        "description": "Portfolio of Noor Halvorsen, a made-up type designer. A brief2motion example of page transitions: each poster grows into the next page using the View Transitions API, with no animation library.",
+        "viewport": "width=device-width, initial-scale=1",
+        "imgsNoAlt": [],
+        "skip": true,
+        "main": true,
+        "webglCanvases": 0
+      },
+      "focus": [
+        {
+          "what": "a.skip-link \"Skip to content\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.brand \"Noor Halvorsen\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"Work\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"About\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "button \"All\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "button \"Serif\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "button \"Sans\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "button \"Display\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "button \"Mono\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "button \"Newest first\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"Ember SerifSerif · 2\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"Quay GroteskSans · 2\"",
+          "ring": true,
+          "onScreen": true
+        }
+      ],
+      "weightDesktop": {
+        "localBytes": 31424,
+        "cdnBytes": 0
+      },
+      "phone": {
+        "samples": 499,
+        "medianMs": 16.7,
+        "p95Ms": 16.8,
+        "maxMs": 16.8,
+        "fps": 59.9
+      },
+      "weightPhone": {
+        "localBytes": 31424,
+        "cdnBytes": 0
+      },
+      "contrast": {
+        "measured": 131,
+        "notMeasured": 3,
+        "failures": []
+      },
+      "noJs": {
+        "h1Visible": true,
+        "visibleChars": 859
+      }
+    },
+    "work/ember.html": {
+      "state": "ready",
+      "desktop": {
+        "samples": 499,
+        "medianMs": 16.7,
+        "p95Ms": 16.8,
+        "maxMs": 16.8,
+        "fps": 59.9
+      },
+      "shots": [
+        "shots/work-ember-desktop-0.png",
+        "shots/work-ember-desktop-1.png",
+        "shots/work-ember-desktop-2.png",
+        "shots/work-ember-desktop-3.png",
+        "shots/work-ember-desktop-4.png",
+        "shots/work-ember-desktop-5.png",
+        "shots/work-ember-phone-0.png",
+        "shots/work-ember-phone-2.png",
+        "shots/work-ember-phone-4.png"
+      ],
+      "basics": {
+        "h1": 1,
+        "lang": "en",
+        "title": "Ember Serif · Noor Halvorsen",
+        "description": "Ember Serif, a made-up typeface by Noor Halvorsen. A warm text serif with a soft, slightly flared stroke. Part of a brief2motion example of page-to-page view transitions.",
+        "viewport": "width=device-width, initial-scale=1",
+        "imgsNoAlt": [],
+        "skip": true,
+        "main": true,
+        "webglCanvases": 0
+      },
+      "focus": [
+        {
+          "what": "a.skip-link \"Skip to content\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.brand \"Noor Halvorsen\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"Work\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"About\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"Work\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "input \"Sample size in pixel\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "p.tester-sample \"The quiet kettle hum\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"NextQuay Grotesk\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"brief2motion\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.skip-link \"Skip to content\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.brand \"Noor Halvorsen\"",
+          "ring": true,
+          "onScreen": true
+        }
+      ],
+      "weightDesktop": {
+        "localBytes": 25826,
+        "cdnBytes": 0
+      },
+      "phone": {
+        "samples": 499,
+        "medianMs": 16.7,
+        "p95Ms": 16.7,
+        "maxMs": 16.8,
+        "fps": 59.9
+      },
+      "weightPhone": {
+        "localBytes": 25826,
+        "cdnBytes": 0
+      },
+      "contrast": {
+        "measured": 122,
+        "notMeasured": 7,
+        "failures": []
+      },
+      "noJs": {
+        "h1Visible": true,
+        "visibleChars": 577
+      }
+    },
+    "work/quay.html": {
+      "state": "ready",
+      "desktop": {
+        "samples": 499,
+        "medianMs": 16.7,
+        "p95Ms": 16.7,
+        "maxMs": 16.8,
+        "fps": 59.9
+      },
+      "shots": [
+        "shots/work-quay-desktop-0.png",
+        "shots/work-quay-desktop-1.png",
+        "shots/work-quay-desktop-2.png",
+        "shots/work-quay-desktop-3.png",
+        "shots/work-quay-desktop-4.png",
+        "shots/work-quay-desktop-5.png",
+        "shots/work-quay-phone-0.png",
+        "shots/work-quay-phone-2.png",
+        "shots/work-quay-phone-4.png"
+      ],
+      "basics": {
+        "h1": 1,
+        "lang": "en",
+        "title": "Quay Grotesk · Noor Halvorsen",
+        "description": "Quay Grotesk, a made-up typeface by Noor Halvorsen. A harbour-sign grotesque with flat terminals and wide numerals. Part of a brief2motion example of page-to-page view transitions.",
+        "viewport": "width=device-width, initial-scale=1",
+        "imgsNoAlt": [],
+        "skip": true,
+        "main": true,
+        "webglCanvases": 0
+      },
+      "focus": [
+        {
+          "what": "a.skip-link \"Skip to content\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.brand \"Noor Halvorsen\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"Work\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"About\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"Work\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "input \"Sample size in pixel\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "p.tester-sample \"Ferry 14 departs fro\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"NextMoth Display\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"brief2motion\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.skip-link \"Skip to content\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.brand \"Noor Halvorsen\"",
+          "ring": true,
+          "onScreen": true
+        }
+      ],
+      "weightDesktop": {
+        "localBytes": 25829,
+        "cdnBytes": 0
+      },
+      "phone": {
+        "samples": 499,
+        "medianMs": 16.7,
+        "p95Ms": 16.7,
+        "maxMs": 16.8,
+        "fps": 59.9
+      },
+      "weightPhone": {
+        "localBytes": 25829,
+        "cdnBytes": 0
+      },
+      "contrast": {
+        "measured": 120,
+        "notMeasured": 7,
+        "failures": []
+      },
+      "noJs": {
+        "h1Visible": true,
+        "visibleChars": 586
+      }
+    },
+    "work/moth.html": {
+      "state": "ready",
+      "desktop": {
+        "samples": 499,
+        "medianMs": 16.7,
+        "p95Ms": 16.7,
+        "maxMs": 16.8,
+        "fps": 59.9
+      },
+      "shots": [
+        "shots/work-moth-desktop-0.png",
+        "shots/work-moth-desktop-1.png",
+        "shots/work-moth-desktop-2.png",
+        "shots/work-moth-desktop-3.png",
+        "shots/work-moth-desktop-4.png",
+        "shots/work-moth-desktop-5.png",
+        "shots/work-moth-phone-0.png",
+        "shots/work-moth-phone-2.png",
+        "shots/work-moth-phone-4.png"
+      ],
+      "basics": {
+        "h1": 1,
+        "lang": "en",
+        "title": "Moth Display · Noor Halvorsen",
+        "description": "Moth Display, a made-up typeface by Noor Halvorsen. A high-contrast display face for large sizes only. Part of a brief2motion example of page-to-page view transitions.",
+        "viewport": "width=device-width, initial-scale=1",
+        "imgsNoAlt": [],
+        "skip": true,
+        "main": true,
+        "webglCanvases": 0
+      },
+      "focus": [
+        {
+          "what": "a.skip-link \"Skip to content\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.brand \"Noor Halvorsen\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"Work\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"About\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"Work\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "input \"Sample size in pixel\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "p.tester-sample \"Night falls softly o\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"NextLedger Mono\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"brief2motion\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.skip-link \"Skip to content\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.brand \"Noor Halvorsen\"",
+          "ring": true,
+          "onScreen": true
+        }
+      ],
+      "weightDesktop": {
+        "localBytes": 25844,
+        "cdnBytes": 0
+      },
+      "phone": {
+        "samples": 499,
+        "medianMs": 16.7,
+        "p95Ms": 16.8,
+        "maxMs": 16.8,
+        "fps": 59.9
+      },
+      "weightPhone": {
+        "localBytes": 25844,
+        "cdnBytes": 0
+      },
+      "contrast": {
+        "measured": 127,
+        "notMeasured": 7,
+        "failures": []
+      },
+      "noJs": {
+        "h1Visible": true,
+        "visibleChars": 569
+      }
+    },
+    "work/ledger.html": {
+      "state": "ready",
+      "desktop": {
+        "samples": 499,
+        "medianMs": 16.7,
+        "p95Ms": 16.7,
+        "maxMs": 16.8,
+        "fps": 59.9
+      },
+      "shots": [
+        "shots/work-ledger-desktop-0.png",
+        "shots/work-ledger-desktop-1.png",
+        "shots/work-ledger-desktop-2.png",
+        "shots/work-ledger-desktop-3.png",
+        "shots/work-ledger-desktop-4.png",
+        "shots/work-ledger-desktop-5.png",
+        "shots/work-ledger-phone-0.png",
+        "shots/work-ledger-phone-2.png",
+        "shots/work-ledger-phone-4.png"
+      ],
+      "basics": {
+        "h1": 1,
+        "lang": "en",
+        "title": "Ledger Mono · Noor Halvorsen",
+        "description": "Ledger Mono, a made-up typeface by Noor Halvorsen. A monospace with a slashed zero and ledger-book figures. Part of a brief2motion example of page-to-page view transitions.",
+        "viewport": "width=device-width, initial-scale=1",
+        "imgsNoAlt": [],
+        "skip": true,
+        "main": true,
+        "webglCanvases": 0
+      },
+      "focus": [
+        {
+          "what": "a.skip-link \"Skip to content\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.brand \"Noor Halvorsen\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"Work\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"About\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"Work\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "input \"Sample size in pixel\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "p.tester-sample \"total = sum(rows) - \"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"NextEmber Serif\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"brief2motion\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.skip-link \"Skip to content\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.brand \"Noor Halvorsen\"",
+          "ring": true,
+          "onScreen": true
+        }
+      ],
+      "weightDesktop": {
+        "localBytes": 25836,
+        "cdnBytes": 0
+      },
+      "phone": {
+        "samples": 499,
+        "medianMs": 16.7,
+        "p95Ms": 16.7,
+        "maxMs": 16.8,
+        "fps": 59.9
+      },
+      "weightPhone": {
+        "localBytes": 25836,
+        "cdnBytes": 0
+      },
+      "contrast": {
+        "measured": 122,
+        "notMeasured": 7,
+        "failures": []
+      },
+      "noJs": {
+        "h1Visible": true,
+        "visibleChars": 572
+      }
+    }
+  },
+  "noWebgl": {
+    "state": "ready",
+    "webgl": 0,
+    "fallbacks": 0,
+    "h1": true
+  },
+  "thirdPartyHosts": [],
+  "consoleErrors": {
+    "index.html desktop": [],
+    "index.html phone": [],
+    "index.html reduced": [],
+    "work/ember.html desktop": [],
+    "work/ember.html phone": [],
+    "work/ember.html reduced": [],
+    "work/quay.html desktop": [],
+    "work/quay.html phone": [],
+    "work/quay.html reduced": [],
+    "work/moth.html desktop": [],
+    "work/moth.html phone": [],
+    "work/moth.html reduced": [],
+    "work/ledger.html desktop": [],
+    "work/ledger.html phone": [],
+    "work/ledger.html reduced": [],
+    "index.html no-webgl": []
+  },
+  "checks": [
+    {
+      "name": "[index.html] page signals its motion state",
+      "pass": true,
+      "detail": "<html data-motion=\"ready\">"
+    },
+    {
+      "name": "[index.html] desktop p95 frame <= 20 ms",
+      "pass": true,
+      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+    },
+    {
+      "name": "[index.html] desktop: no sideways scroll",
+      "pass": true,
+      "detail": "6 scroll stops at 1440 px"
+    },
+    {
+      "name": "[index.html] one <h1>",
+      "pass": true,
+      "detail": "1 found"
+    },
+    {
+      "name": "[index.html] <html lang> set",
+      "pass": true,
+      "detail": "en"
+    },
+    {
+      "name": "[index.html] real <title> and description",
+      "pass": true,
+      "detail": "title 30 chars, description 193 chars (need 10 and 50)"
+    },
+    {
+      "name": "[index.html] viewport meta allows zoom",
+      "pass": true,
+      "detail": "width=device-width, initial-scale=1"
+    },
+    {
+      "name": "[index.html] every <img> has alt",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "name": "[index.html] <main> landmark and a skip link",
+      "pass": true,
+      "detail": "main=true, skip link=true"
+    },
+    {
+      "name": "[index.html] keyboard focus is visible",
+      "pass": true,
+      "detail": "12 stops, all ringed and on screen"
+    },
+    {
+      "name": "[index.html] desktop page weight <= 1.5 MiB",
+      "pass": true,
+      "detail": "local 0.03 MiB, CDN 0.00 MiB"
+    },
+    {
+      "name": "[index.html] phone p95 frame <= 40 ms",
+      "pass": true,
+      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+    },
+    {
+      "name": "[index.html] phone: no sideways scroll",
+      "pass": true,
+      "detail": "6 scroll stops at 390 px"
+    },
+    {
+      "name": "[index.html] phone: tap targets >= 24 px",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "name": "[index.html] phone page weight <= 1.5 MiB",
+      "pass": true,
+      "detail": "local 0.03 MiB, CDN 0.00 MiB"
+    },
+    {
+      "name": "[index.html] 320 px wide: no sideways scroll",
+      "pass": true,
+      "detail": "4 scroll stops"
+    },
+    {
+      "name": "[index.html] reduced motion: page says so",
+      "pass": true,
+      "detail": "<html data-motion=\"reduced\"> (want \"reduced\")"
+    },
+    {
+      "name": "[index.html] reduced motion: nothing keeps animating",
+      "pass": true,
+      "detail": "no running animation longer than 250 ms"
+    },
+    {
+      "name": "[index.html] reduced motion: the picture holds still",
+      "pass": true,
+      "detail": "two screenshots 0.7 s apart match at 0%, 50% and 100% scroll"
+    },
+    {
+      "name": "[index.html] reduced motion: all text visible",
+      "pass": true,
+      "detail": "7 headings and paragraphs, each fully visible at some point of the scroll (8 stops)"
+    },
+    {
+      "name": "[index.html] text contrast meets WCAG AA",
+      "pass": true,
+      "detail": "131 text runs measured, 3 over pictures or canvas not measured (look at the screenshots)"
+    },
+    {
+      "name": "[index.html] reduced motion: normal scrolling works",
+      "pass": true,
+      "detail": "asked for 400px, page is at 400px"
+    },
+    {
+      "name": "[index.html] JavaScript off: the page still reads",
+      "pass": true,
+      "detail": "headline visible, 859 characters of text"
+    },
+    {
+      "name": "[work/ember.html] page signals its motion state",
+      "pass": true,
+      "detail": "<html data-motion=\"ready\">"
+    },
+    {
+      "name": "[work/ember.html] desktop p95 frame <= 20 ms",
+      "pass": true,
+      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+    },
+    {
+      "name": "[work/ember.html] desktop: no sideways scroll",
+      "pass": true,
+      "detail": "6 scroll stops at 1440 px"
+    },
+    {
+      "name": "[work/ember.html] one <h1>",
+      "pass": true,
+      "detail": "1 found"
+    },
+    {
+      "name": "[work/ember.html] <html lang> set",
+      "pass": true,
+      "detail": "en"
+    },
+    {
+      "name": "[work/ember.html] real <title> and description",
+      "pass": true,
+      "detail": "title 28 chars, description 170 chars (need 10 and 50)"
+    },
+    {
+      "name": "[work/ember.html] viewport meta allows zoom",
+      "pass": true,
+      "detail": "width=device-width, initial-scale=1"
+    },
+    {
+      "name": "[work/ember.html] every <img> has alt",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "name": "[work/ember.html] <main> landmark and a skip link",
+      "pass": true,
+      "detail": "main=true, skip link=true"
+    },
+    {
+      "name": "[work/ember.html] keyboard focus is visible",
+      "pass": true,
+      "detail": "11 stops, all ringed and on screen"
+    },
+    {
+      "name": "[work/ember.html] desktop page weight <= 1.5 MiB",
+      "pass": true,
+      "detail": "local 0.02 MiB, CDN 0.00 MiB"
+    },
+    {
+      "name": "[work/ember.html] phone p95 frame <= 40 ms",
+      "pass": true,
+      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+    },
+    {
+      "name": "[work/ember.html] phone: no sideways scroll",
+      "pass": true,
+      "detail": "6 scroll stops at 390 px"
+    },
+    {
+      "name": "[work/ember.html] phone: tap targets >= 24 px",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "name": "[work/ember.html] phone page weight <= 1.5 MiB",
+      "pass": true,
+      "detail": "local 0.02 MiB, CDN 0.00 MiB"
+    },
+    {
+      "name": "[work/ember.html] 320 px wide: no sideways scroll",
+      "pass": true,
+      "detail": "4 scroll stops"
+    },
+    {
+      "name": "[work/ember.html] reduced motion: page says so",
+      "pass": true,
+      "detail": "<html data-motion=\"reduced\"> (want \"reduced\")"
+    },
+    {
+      "name": "[work/ember.html] reduced motion: nothing keeps animating",
+      "pass": true,
+      "detail": "no running animation longer than 250 ms"
+    },
+    {
+      "name": "[work/ember.html] reduced motion: the picture holds still",
+      "pass": true,
+      "detail": "two screenshots 0.7 s apart match at 0%, 50% and 100% scroll"
+    },
+    {
+      "name": "[work/ember.html] reduced motion: all text visible",
+      "pass": true,
+      "detail": "13 headings and paragraphs, each fully visible at some point of the scroll (8 stops)"
+    },
+    {
+      "name": "[work/ember.html] text contrast meets WCAG AA",
+      "pass": true,
+      "detail": "122 text runs measured, 7 over pictures or canvas not measured (look at the screenshots)"
+    },
+    {
+      "name": "[work/ember.html] reduced motion: normal scrolling works",
+      "pass": true,
+      "detail": "asked for 400px, page is at 400px"
+    },
+    {
+      "name": "[work/ember.html] JavaScript off: the page still reads",
+      "pass": true,
+      "detail": "headline visible, 577 characters of text"
+    },
+    {
+      "name": "[work/quay.html] page signals its motion state",
+      "pass": true,
+      "detail": "<html data-motion=\"ready\">"
+    },
+    {
+      "name": "[work/quay.html] desktop p95 frame <= 20 ms",
+      "pass": true,
+      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+    },
+    {
+      "name": "[work/quay.html] desktop: no sideways scroll",
+      "pass": true,
+      "detail": "6 scroll stops at 1440 px"
+    },
+    {
+      "name": "[work/quay.html] one <h1>",
+      "pass": true,
+      "detail": "1 found"
+    },
+    {
+      "name": "[work/quay.html] <html lang> set",
+      "pass": true,
+      "detail": "en"
+    },
+    {
+      "name": "[work/quay.html] real <title> and description",
+      "pass": true,
+      "detail": "title 29 chars, description 180 chars (need 10 and 50)"
+    },
+    {
+      "name": "[work/quay.html] viewport meta allows zoom",
+      "pass": true,
+      "detail": "width=device-width, initial-scale=1"
+    },
+    {
+      "name": "[work/quay.html] every <img> has alt",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "name": "[work/quay.html] <main> landmark and a skip link",
+      "pass": true,
+      "detail": "main=true, skip link=true"
+    },
+    {
+      "name": "[work/quay.html] keyboard focus is visible",
+      "pass": true,
+      "detail": "11 stops, all ringed and on screen"
+    },
+    {
+      "name": "[work/quay.html] desktop page weight <= 1.5 MiB",
+      "pass": true,
+      "detail": "local 0.02 MiB, CDN 0.00 MiB"
+    },
+    {
+      "name": "[work/quay.html] phone p95 frame <= 40 ms",
+      "pass": true,
+      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+    },
+    {
+      "name": "[work/quay.html] phone: no sideways scroll",
+      "pass": true,
+      "detail": "6 scroll stops at 390 px"
+    },
+    {
+      "name": "[work/quay.html] phone: tap targets >= 24 px",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "name": "[work/quay.html] phone page weight <= 1.5 MiB",
+      "pass": true,
+      "detail": "local 0.02 MiB, CDN 0.00 MiB"
+    },
+    {
+      "name": "[work/quay.html] 320 px wide: no sideways scroll",
+      "pass": true,
+      "detail": "4 scroll stops"
+    },
+    {
+      "name": "[work/quay.html] reduced motion: page says so",
+      "pass": true,
+      "detail": "<html data-motion=\"reduced\"> (want \"reduced\")"
+    },
+    {
+      "name": "[work/quay.html] reduced motion: nothing keeps animating",
+      "pass": true,
+      "detail": "no running animation longer than 250 ms"
+    },
+    {
+      "name": "[work/quay.html] reduced motion: the picture holds still",
+      "pass": true,
+      "detail": "two screenshots 0.7 s apart match at 0%, 50% and 100% scroll"
+    },
+    {
+      "name": "[work/quay.html] reduced motion: all text visible",
+      "pass": true,
+      "detail": "13 headings and paragraphs, each fully visible at some point of the scroll (8 stops)"
+    },
+    {
+      "name": "[work/quay.html] text contrast meets WCAG AA",
+      "pass": true,
+      "detail": "120 text runs measured, 7 over pictures or canvas not measured (look at the screenshots)"
+    },
+    {
+      "name": "[work/quay.html] reduced motion: normal scrolling works",
+      "pass": true,
+      "detail": "asked for 400px, page is at 400px"
+    },
+    {
+      "name": "[work/quay.html] JavaScript off: the page still reads",
+      "pass": true,
+      "detail": "headline visible, 586 characters of text"
+    },
+    {
+      "name": "[work/moth.html] page signals its motion state",
+      "pass": true,
+      "detail": "<html data-motion=\"ready\">"
+    },
+    {
+      "name": "[work/moth.html] desktop p95 frame <= 20 ms",
+      "pass": true,
+      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+    },
+    {
+      "name": "[work/moth.html] desktop: no sideways scroll",
+      "pass": true,
+      "detail": "6 scroll stops at 1440 px"
+    },
+    {
+      "name": "[work/moth.html] one <h1>",
+      "pass": true,
+      "detail": "1 found"
+    },
+    {
+      "name": "[work/moth.html] <html lang> set",
+      "pass": true,
+      "detail": "en"
+    },
+    {
+      "name": "[work/moth.html] real <title> and description",
+      "pass": true,
+      "detail": "title 29 chars, description 167 chars (need 10 and 50)"
+    },
+    {
+      "name": "[work/moth.html] viewport meta allows zoom",
+      "pass": true,
+      "detail": "width=device-width, initial-scale=1"
+    },
+    {
+      "name": "[work/moth.html] every <img> has alt",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "name": "[work/moth.html] <main> landmark and a skip link",
+      "pass": true,
+      "detail": "main=true, skip link=true"
+    },
+    {
+      "name": "[work/moth.html] keyboard focus is visible",
+      "pass": true,
+      "detail": "11 stops, all ringed and on screen"
+    },
+    {
+      "name": "[work/moth.html] desktop page weight <= 1.5 MiB",
+      "pass": true,
+      "detail": "local 0.02 MiB, CDN 0.00 MiB"
+    },
+    {
+      "name": "[work/moth.html] phone p95 frame <= 40 ms",
+      "pass": true,
+      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+    },
+    {
+      "name": "[work/moth.html] phone: no sideways scroll",
+      "pass": true,
+      "detail": "6 scroll stops at 390 px"
+    },
+    {
+      "name": "[work/moth.html] phone: tap targets >= 24 px",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "name": "[work/moth.html] phone page weight <= 1.5 MiB",
+      "pass": true,
+      "detail": "local 0.02 MiB, CDN 0.00 MiB"
+    },
+    {
+      "name": "[work/moth.html] 320 px wide: no sideways scroll",
+      "pass": true,
+      "detail": "4 scroll stops"
+    },
+    {
+      "name": "[work/moth.html] reduced motion: page says so",
+      "pass": true,
+      "detail": "<html data-motion=\"reduced\"> (want \"reduced\")"
+    },
+    {
+      "name": "[work/moth.html] reduced motion: nothing keeps animating",
+      "pass": true,
+      "detail": "no running animation longer than 250 ms"
+    },
+    {
+      "name": "[work/moth.html] reduced motion: the picture holds still",
+      "pass": true,
+      "detail": "two screenshots 0.7 s apart match at 0%, 50% and 100% scroll"
+    },
+    {
+      "name": "[work/moth.html] reduced motion: all text visible",
+      "pass": true,
+      "detail": "13 headings and paragraphs, each fully visible at some point of the scroll (8 stops)"
+    },
+    {
+      "name": "[work/moth.html] text contrast meets WCAG AA",
+      "pass": true,
+      "detail": "127 text runs measured, 7 over pictures or canvas not measured (look at the screenshots)"
+    },
+    {
+      "name": "[work/moth.html] reduced motion: normal scrolling works",
+      "pass": true,
+      "detail": "asked for 400px, page is at 400px"
+    },
+    {
+      "name": "[work/moth.html] JavaScript off: the page still reads",
+      "pass": true,
+      "detail": "headline visible, 569 characters of text"
+    },
+    {
+      "name": "[work/ledger.html] page signals its motion state",
+      "pass": true,
+      "detail": "<html data-motion=\"ready\">"
+    },
+    {
+      "name": "[work/ledger.html] desktop p95 frame <= 20 ms",
+      "pass": true,
+      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+    },
+    {
+      "name": "[work/ledger.html] desktop: no sideways scroll",
+      "pass": true,
+      "detail": "6 scroll stops at 1440 px"
+    },
+    {
+      "name": "[work/ledger.html] one <h1>",
+      "pass": true,
+      "detail": "1 found"
+    },
+    {
+      "name": "[work/ledger.html] <html lang> set",
+      "pass": true,
+      "detail": "en"
+    },
+    {
+      "name": "[work/ledger.html] real <title> and description",
+      "pass": true,
+      "detail": "title 28 chars, description 172 chars (need 10 and 50)"
+    },
+    {
+      "name": "[work/ledger.html] viewport meta allows zoom",
+      "pass": true,
+      "detail": "width=device-width, initial-scale=1"
+    },
+    {
+      "name": "[work/ledger.html] every <img> has alt",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "name": "[work/ledger.html] <main> landmark and a skip link",
+      "pass": true,
+      "detail": "main=true, skip link=true"
+    },
+    {
+      "name": "[work/ledger.html] keyboard focus is visible",
+      "pass": true,
+      "detail": "11 stops, all ringed and on screen"
+    },
+    {
+      "name": "[work/ledger.html] desktop page weight <= 1.5 MiB",
+      "pass": true,
+      "detail": "local 0.02 MiB, CDN 0.00 MiB"
+    },
+    {
+      "name": "[work/ledger.html] phone p95 frame <= 40 ms",
+      "pass": true,
+      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+    },
+    {
+      "name": "[work/ledger.html] phone: no sideways scroll",
+      "pass": true,
+      "detail": "6 scroll stops at 390 px"
+    },
+    {
+      "name": "[work/ledger.html] phone: tap targets >= 24 px",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "name": "[work/ledger.html] phone page weight <= 1.5 MiB",
+      "pass": true,
+      "detail": "local 0.02 MiB, CDN 0.00 MiB"
+    },
+    {
+      "name": "[work/ledger.html] 320 px wide: no sideways scroll",
+      "pass": true,
+      "detail": "4 scroll stops"
+    },
+    {
+      "name": "[work/ledger.html] reduced motion: page says so",
+      "pass": true,
+      "detail": "<html data-motion=\"reduced\"> (want \"reduced\")"
+    },
+    {
+      "name": "[work/ledger.html] reduced motion: nothing keeps animating",
+      "pass": true,
+      "detail": "no running animation longer than 250 ms"
+    },
+    {
+      "name": "[work/ledger.html] reduced motion: the picture holds still",
+      "pass": true,
+      "detail": "two screenshots 0.7 s apart match at 0%, 50% and 100% scroll"
+    },
+    {
+      "name": "[work/ledger.html] reduced motion: all text visible",
+      "pass": true,
+      "detail": "13 headings and paragraphs, each fully visible at some point of the scroll (8 stops)"
+    },
+    {
+      "name": "[work/ledger.html] text contrast meets WCAG AA",
+      "pass": true,
+      "detail": "122 text runs measured, 7 over pictures or canvas not measured (look at the screenshots)"
+    },
+    {
+      "name": "[work/ledger.html] reduced motion: normal scrolling works",
+      "pass": true,
+      "detail": "asked for 400px, page is at 400px"
+    },
+    {
+      "name": "[work/ledger.html] JavaScript off: the page still reads",
+      "pass": true,
+      "detail": "headline visible, 572 characters of text"
+    },
+    {
+      "name": "WebGL off: headline readable",
+      "pass": true,
+      "detail": "h1 visible=true, state=ready"
+    },
+    {
+      "name": "WebGL off: a still stands in for each WebGL canvas",
+      "pass": true,
+      "detail": "the page has no canvas[data-webgl]"
+    },
+    {
+      "name": "third-party requests only to cdn.jsdelivr.net",
+      "pass": true,
+      "detail": "none"
+    },
+    {
+      "name": "console errors = 0 (every run)",
+      "pass": true,
+      "detail": "none in 16 runs"
+    }
+  ],
+  "pass": true
+}

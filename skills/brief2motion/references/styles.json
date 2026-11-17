@@ -1433,8 +1433,8 @@
     "grain",
     "noise",
     "texture",
-    "film",
-    "paper",
+    "film grain",
+    "paper texture",
     "analog",
     "printed",
     "risograph",
@@ -1791,7 +1791,7 @@
     "react",
     "component"
    ],
-   "stack": "motion-react",
+   "stack": "motion",
    "sources": [
     "https://www.nngroup.com/articles/microinteractions/",
     "https://www.nngroup.com/articles/animation-duration/"

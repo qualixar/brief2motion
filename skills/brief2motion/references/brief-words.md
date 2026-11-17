@@ -1,5 +1,33 @@
 # Brief words to settings
 
+Two tables. The first maps what a brief says to a stack and a reference, for any site. The second maps phrases to `config.js` settings for the dust engine. `scripts/route.mjs` applies the first table for you; `references/routing.json` is its full list.
+
+## Any site: phrase to stack
+
+| If the brief says | Stack | Read |
+|---|---|---|
+| "fade in", "subtle", "on hover", "no libraries", "lightweight" | plain CSS and JavaScript with the kit | `stacks/vanilla.md` |
+| "made of dust", "particles form", "halftone portrait" | the dust engine | `stacks/particles.md` |
+| "as you scroll", "pinned", "scrub", "horizontal scroll", "image sequence", "parallax" | GSAP with ScrollTrigger and Lenis | `stacks/gsap.md`, `stacks/scroll-story.md` |
+| "kinetic type", "word by word", "headline animates", "springy" | Motion (vanilla) | `stacks/motion.md`, `stacks/kinetic-type.md` |
+| "React" or "Next.js" with "drag", "reorder", "tabs", "layout animation", "dashboard" | Motion for React | `stacks/motion.md` |
+| "3D", "turntable", "rotate the product", "exploded view", "shader" | three.js; React Three Fiber if the project is React | `stacks/three.md` |
+| "page transitions", "between pages", "thumbnail grows into the page", "filter the grid" | View Transitions API | `stacks/view-transitions.md` |
+| "draws itself", "line animation", "chart", "data story", "count up" | SVG with the kit, D3 for scales | `stacks/svg-players.md`, `stacks/scroll-story.md` |
+| "Lottie", "After Effects", "Rive", "animated icons", "mascot" | the players in the kit | `stacks/svg-players.md` |
+| "fluid simulation", "millions of", "physics" | read the note before choosing | `stacks/wasm.md` |
+
+| If the brief says | It also means |
+|---|---|
+| "calm", "premium", "elegant" | few movements, 300 to 500 ms, ease-out, no bounce; minimalism or editorial |
+| "playful", "fun", "friendly" | springs with a little overshoot, squash on press; claymorphism, Memphis or neubrutalism |
+| "bold", "loud" | fast, physical moves of 100 to 200 ms, hard edges; neubrutalism or maximalism |
+| "fast", "works on phones", "accessible" | the default stack, fewer effects, check the phone run twice |
+| "like Apple", "like Stripe", "like Linear" | ask what about it: the glass, the gradient, the scroll scenes, the restraint. Build that quality, never a copy |
+| "make it pop", "feel alive", "modern" | too vague to route: propose one orchestrated moment in SPEC.md and build that |
+
+## The dust engine: phrase to setting
+
 | If the brief says | Do this |
 |---|---|
 | "made of dust", "particles", "dots", "sand", "stardust" | assemble, stipple style |

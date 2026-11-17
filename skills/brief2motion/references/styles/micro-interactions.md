@@ -13,7 +13,7 @@ Small animated answers to what a person just did: a toggle that slides, a row th
 
 ## Worked example
 
-`examples/mise/` is a complete site built this way, with its brief, its motion plan at the top of its script and a passing `site-report.json`. The stack reference to read is `references/stacks/motion-react.md`.
+`examples/mise/` is a complete site built this way, with its brief, its motion plan at the top of its script and a passing `site-report.json`. The stack reference to read is `references/stacks/motion.md`.
 
 ## Motion that fits
 

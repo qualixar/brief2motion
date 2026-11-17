@@ -79,6 +79,13 @@ const tests = {
     const px = await painted(t.page, 'canvas'); await t.close();
     return [px > 5000 && t.errors.length === 0, `${px} painted pixels, errors ${t.errors.length}${t.errors.length ? ': ' + t.errors[0].slice(0, 120) : ''}`];
   },
+  // three.js beyond the basics: a glTF model through GLTFLoader, a ShaderMaterial and a bloom pass
+  async 'three-pipeline'() {
+    const t = await open(path.join(ROOT, 'tests', 'fixtures', 'three-pipeline')); await sleep(1200);
+    const meshes = await t.page.evaluate(() => window.__loaded?.meshes ?? 0);
+    const px = await painted(t.page, 'canvas'); await t.close();
+    return [meshes >= 1 && px > 20000 && t.errors.length === 0, `${meshes} mesh loaded from a .glb, ${px} painted pixels, errors ${t.errors.length}${t.errors.length ? ': ' + t.errors[0].slice(0, 120) : ''}`];
+  },
   // GSAP ScrollTrigger + image sequence: the picture on the canvas depends on the scroll position
   async 'scroll-sequence'() {
     const t = await open(EX('tidewater')); await sleep(1500);

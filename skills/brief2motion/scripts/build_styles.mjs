@@ -40,6 +40,9 @@ export function scopedCss(style) {
   return `.stage[data-style="${style.id}"] {\n  ${tokenCss(style.tokens)}\n${body.split('\n').map((l) => (l.trim() ? '  ' + l : l)).join('\n').replace(/\s+$/, '')}\n}${frames.length ? '\n' + frames.join('\n') : ''}`;
 }
 
+// Everything below runs only when this file is the program (tests import the two functions above).
+const IS_MAIN = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+if (IS_MAIN) {
 const specimens = data.styles.filter((s) => s.specimen), approaches = data.styles.filter((s) => !s.specimen);
 const list = (items) => items.map((x) => `- ${x}`).join('\n');
 const files = new Map();   // absolute path -> content
@@ -159,3 +162,4 @@ for (const [file, content] of files) {
 }
 if (CHECK) { console.log(stale ? `${stale} generated file(s) out of date: run node ${path.relative(process.cwd(), fileURLToPath(import.meta.url))}` : `style system: ${files.size} generated files are current`); process.exit(stale ? 1 : 0); }
 console.log(`style system: ${data.styles.length} styles (${specimens.length} with a live specimen), ${files.size} files written`);
+}
