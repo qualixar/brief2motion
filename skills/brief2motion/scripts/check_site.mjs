@@ -304,19 +304,24 @@ try {
       }
       check(`${P}reduced motion: the picture holds still`, still, still ? 'two screenshots 0.7 s apart match at 0%, 50% and 100% scroll' : `pixels changed at ${where.join(', ')} scroll`);
       // every heading and paragraph visible; contrast measured here, where nothing is mid-fade
-      const dim = new Set(), low = new Set(); let measured = 0, skipped = 0;
+      // A pinned scene may show its captions one at a time, so text is judged over the whole scroll: every heading
+      // and paragraph must be fully visible at some stop (stops are half a screen apart).
+      const best = new Map(), low = new Set(); let measured = 0, skipped = 0;
+      const stops = Math.min(60, Math.max(8, Math.ceil(max / (VIEWPORTS.desktop.height / 2)) + 1));
       await eachStop(page, async () => {
         for (const t of await page.evaluate(TEXT_PROBE)) {
-          if (t.block && (t.opacity < 0.99 || t.hidden)) dim.add(`${t.tag}.${t.cls} "${t.text}" opacity ${t.opacity}`);
+          if (t.block) { const key = `${t.tag}.${t.cls} "${t.text}"`; best.set(key, Math.max(best.get(key) ?? 0, t.hidden ? 0 : t.opacity)); }
+          if (t.hidden) continue;
           if (t.unknownBg || t.opacity < 0.99) { skipped++; continue; }
           const fg = parseColor(t.color), bgc = parseColor(t.bg || 'rgb(255, 255, 255)'); if (!fg || !bgc) { skipped++; continue; }
           const ratio = contrastRatio(blend(fg, bgc), bgc); measured++;
           const large = t.size >= 24 || (t.size >= 18.66 && t.weight >= 700);
           if (ratio < (large ? BUDGET.contrastLarge : BUDGET.contrast) - 0.05) low.add(`${t.tag}.${t.cls} "${t.text}" ${ratio.toFixed(2)}:1 (${t.color} on ${t.bg || 'white'})`);
         }
-      }, { stops: 8 });
+      }, { stops });
+      const dim = [...best].filter(([, o]) => o < 0.99).map(([k, o]) => `${k} best opacity ${o}`);
       rep.contrast = { measured, notMeasured: skipped, failures: [...low] };
-      check(`${P}reduced motion: all text visible`, dim.size === 0, dim.size ? [...dim].slice(0, 5).join('; ') : 'every heading and paragraph at full opacity');
+      check(`${P}reduced motion: all text visible`, dim.length === 0, dim.length ? dim.slice(0, 5).join('; ') : `${best.size} headings and paragraphs, each fully visible at some point of the scroll (${stops} stops)`);
       check(`${P}text contrast meets WCAG AA`, low.size === 0, low.size ? [...low].slice(0, 5).join('; ') : `${measured} text runs measured, ${skipped} over pictures or canvas not measured (look at the screenshots)`);
       await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' })); await settle(page, 200);
       const want = Math.min(400, max);
