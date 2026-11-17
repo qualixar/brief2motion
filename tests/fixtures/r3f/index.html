@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>React Three Fiber fixture · brief2motion tests</title>
+  <meta name="description" content="A test page: the React Three Fiber and drei turntable pattern from references/three-r3f.md, run without a build step so the browser smoke test can prove it renders.">
+  <style>html, body, #root { height: 100%; margin: 0; background: #dfe3e8; }</style>
+  <!-- Test page only: it loads from esm.sh, which can leave "react" and "three" as bare imports (?external=...) so
+       this import map supplies exactly one copy of each. React is held at 19.3.0, the version the renderer inside
+       @react-three/fiber 9.8.2 was built against; React refuses to run with a renderer from another version.
+       A real React Three Fiber project uses a bundler (Vite or Next.js), which resolves all of this from package.json. -->
+  <script type="importmap">
+    { "imports": {
+      "react": "https://esm.sh/react@19.3.0",
+      "react/": "https://esm.sh/react@19.3.0/",
+      "react-dom": "https://esm.sh/react-dom@19.3.0?external=react",
+      "react-dom/": "https://esm.sh/react-dom@19.3.0&external=react/",
+      "three": "https://esm.sh/three@0.187.0",
+      "three/": "https://esm.sh/three@0.187.0/",
+      "@react-three/fiber": "https://esm.sh/@react-three/fiber@9.8.2?external=react,react-dom,three",
+      "@react-three/drei": "https://esm.sh/@react-three/drei@10.7.9?external=react,react-dom,three,@react-three/fiber",
+      "htm": "https://esm.sh/htm@3.1.1"
+    } }
+  </script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module">
+    import React, { useRef } from 'react';
+    import { createRoot } from 'react-dom/client';
+    import { Canvas, useFrame } from '@react-three/fiber';
+    import { RoundedBox, ContactShadows, PresentationControls } from '@react-three/drei';
+    import htm from 'htm';
+    const html = htm.bind(React.createElement);
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // The same component as in references/three-r3f.md, written with htm instead of JSX.
+    function Product() {
+      const group = useRef();
+      useFrame((state, dt) => { if (!still) group.current.rotation.y += dt * 0.4; });   // a slow turntable; no state updates per frame
+      return html`
+        <group ref=${group}>
+          <${RoundedBox} args=${[1.6, 1, 0.6]} radius=${0.12} smoothness=${4}>
+            <meshPhysicalMaterial color="#1d44c4" roughness=${0.25} clearcoat=${1} />
+          <//>
+          <mesh position=${[0.45, -0.1, 0.33]} rotation=${[Math.PI / 2, 0, 0]}>
+            <cylinderGeometry args=${[0.16, 0.16, 0.12, 32]} />
+            <meshStandardMaterial color="#b8935a" metalness=${1} roughness=${0.35} />
+          </mesh>
+        </group>`;
+    }
+    function App() {
+      return html`
+        <${Canvas} dpr=${[1, 2]} frameloop=${still ? 'demand' : 'always'} camera=${{ position: [0, 0.6, 4.2], fov: 32 }} onCreated=${() => { document.documentElement.dataset.motion = still ? 'reduced' : 'ready'; }}>
+          <ambientLight intensity=${0.9} />
+          <directionalLight position=${[3, 5, 4]} intensity=${2.2} />
+          <${PresentationControls} global polar=${[-0.2, 0.3]} azimuth=${[-1, 1]}>
+            <${Product} />
+          <//>
+          <${ContactShadows} position=${[0, -0.62, 0]} opacity=${0.45} scale=${6} blur=${2.4} far=${2} />
+        <//>`;
+    }
+    createRoot(document.getElementById('root')).render(html`<${App} />`);
+  </script>
+</body>
+</html>

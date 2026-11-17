@@ -300,6 +300,9 @@ try {
       let still = true; const where = [];
       for (const k of [0, 0.5, 1]) {
         await jump(page, Math.round(max * k)); await settle(page, 500);
+        // a picture that is still arriving is not motion: wait for the images on screen before comparing
+        await page.waitForFunction(() => [...document.images].every((im) => { const r = im.getBoundingClientRect(); return r.bottom < 0 || r.top > innerHeight || r.width === 0 || im.complete; }), null, { timeout: 5000 }).catch(() => {});
+        await settle(page, 300);
         const a = await page.screenshot(); await sleep(700); const b = await page.screenshot();
         if (!a.equals(b)) { still = false; where.push(`${Math.round(k * 100)}%`); }
         if (k === 0) fs.writeFileSync(path.join(outDir, 'shots', `${tag}-reduced.png`), b);

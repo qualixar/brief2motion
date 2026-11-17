@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rive fixture · brief2motion tests</title>
+  <meta name="description" content="A test page: kit/players.js mountRive() playing a .riv file that the smoke test downloads next to this page. No .riv file ships in this repository.">
+  <style>body { margin: 0; background: #fff; } canvas { width: 400px; height: 400px; display: block; }</style>
+</head>
+<body>
+  <canvas id="c" width="400" height="400" aria-label="Rive animation under test"></canvas>
+  <script type="module">
+    import { mountRive } from './kit/players.js';
+    import { signal, reducedMotion } from './kit/motion-core.js';
+    const src = new URLSearchParams(location.search).get('src') || 'test.riv';
+    const player = mountRive(document.getElementById('c'), { src });
+    // report ready once the runtime has loaded the file
+    const wait = setInterval(() => { if (player.rive?.loaded ?? player.rive) { clearInterval(wait); window.__rive = player.rive; signal(reducedMotion() ? 'reduced' : 'ready'); } }, 100);
+  </script>
+</body>
+</html>

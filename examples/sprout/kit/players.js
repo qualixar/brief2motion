@@ -9,7 +9,7 @@ export const CDN = {
 };
 let lottieLib = null, riveLib = null;
 const loadLottie = () => (lottieLib ||= import(CDN.lottie).then((m) => m.default || m));
-const loadRive = () => (riveLib ||= import(CDN.rive));
+const loadRive = () => (riveLib ||= import(CDN.rive).then((m) => (m.Rive ? m : m.default)));   // the CDN build exports the runtime as its default
 
 // mountLottie(el, { path: 'anim.json' } or { animationData }, { loop, stillFrame })
 // el should have a fixed aspect-ratio in CSS so the page does not jump when the animation arrives.
