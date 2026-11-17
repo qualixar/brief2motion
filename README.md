@@ -24,7 +24,7 @@
   <a href="#what-it-checks">Checks</a> ·
   <a href="#examples">Examples</a> ·
   <a href="#write-a-brief">Write a brief</a> ·
-  <a href="docs/guide/brief2motion-guide.pdf">Guide (PDF)</a> ·
+  <a href="docs/guide/brief2motion-guide.pdf">53-page guide (PDF)</a> ·
   <a href="#faq">FAQ</a>
 </p>
 
