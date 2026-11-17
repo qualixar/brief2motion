@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Relay · on-call paging for small teams</title>
+  <meta name="description" content="Relay is a made-up on-call paging product, built as a brief2motion example of kinetic type: split headlines, scroll-driven word bands and spring-driven interface motion.">
+  <meta property="og:title" content="Relay · on-call paging for small teams">
+  <meta property="og:description" content="A brief2motion example of kinetic type with Motion: split headlines, scroll-driven word bands and springs.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#e6eaf4">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+  <script type="importmap">
+    { "imports": { "motion": "https://cdn.jsdelivr.net/npm/motion@14.14.0/+esm" } }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="nav">
+    <a class="brand" href="#top" aria-label="Relay, home"><span class="brand-dot" aria-hidden="true"></span>Relay</a>
+    <nav aria-label="Main">
+      <a href="#how">How it works</a>
+      <a href="#rota">The rota</a>
+      <a class="btn btn-small" href="#start">Start a rota</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <h1 class="hero-title" data-split>The 3 a.m. page goes to <mark>one person.</mark> The right one.</h1>
+      <p class="hero-sub">Relay holds your on-call rota and sends each alert to whoever is on it right now. If they do not answer in five minutes, it moves to the next name. Nobody else's phone makes a sound.</p>
+      <p class="hero-actions">
+        <a class="btn" href="#start">Start a rota</a>
+        <a class="link" href="#how">See one page, start to finish</a>
+      </p>
+
+      <figure class="route" aria-label="Diagram: an alert travels from a service to the person on call. Two other people on the rota are not paged.">
+        <svg viewBox="0 0 640 260" role="presentation" focusable="false">
+          <path class="route-idle" d="M110 130 C 250 130, 300 50, 520 50" />
+          <path class="route-idle" d="M110 130 C 250 130, 300 210, 520 210" />
+          <path class="route-live" id="route-live" d="M110 130 C 240 130, 330 130, 520 130" />
+          <circle class="route-pulse" r="9" />
+        </svg>
+        <div class="node node-src"><span class="node-kicker">Alert</span>checkout-api · latency</div>
+        <div class="node node-a"><span class="node-kicker">Off tonight</span>Ines</div>
+        <div class="node node-b is-on"><span class="node-kicker">On call</span>Tomás</div>
+        <div class="node node-c"><span class="node-kicker">Next up</span>Wren</div>
+      </figure>
+    </section>
+
+    <section class="band" aria-labelledby="band-title">
+      <h2 class="sr-only" id="band-title">Page, acknowledge, resolve</h2>
+      <div class="band-row" data-dir="-1" aria-hidden="true"><span>Page.</span><span class="hollow">Page.</span><span>Page.</span><span class="hollow">Page.</span><span>Page.</span></div>
+      <div class="band-row band-accent" data-dir="1" aria-hidden="true"><span class="hollow">Acknowledge.</span><span>Acknowledge.</span><span class="hollow">Acknowledge.</span><span>Acknowledge.</span></div>
+      <div class="band-row" data-dir="-1" aria-hidden="true"><span>Resolve.</span><span class="hollow">Resolve.</span><span>Resolve.</span><span class="hollow">Resolve.</span><span>Resolve.</span></div>
+    </section>
+
+    <section class="how" id="how" aria-labelledby="how-title">
+      <h2 id="how-title" data-split>One page, start to finish</h2>
+      <ol class="steps">
+        <li class="step">
+          <h3>An alert arrives</h3>
+          <p>Your monitoring tool posts to Relay. Relay looks at the rota and picks the one person who is on call at that minute.</p>
+          <pre class="log" data-log aria-label="Example log"><code>03:07:12  alert   checkout-api latency above 2 s
+03:07:12  rota    on call: Tomás (until 08:00)
+03:07:13  page    Tomás · push + phone call</code></pre>
+        </li>
+        <li class="step">
+          <h3>They acknowledge, or it moves on</h3>
+          <p>One tap says "I have it" and the page stops. If five minutes pass with no tap, Relay pages the next name and tells the first one it did.</p>
+          <pre class="log" data-log aria-label="Example log"><code>03:07:41  ack     Tomás · "looking"
+03:07:41  hold    escalation timer stopped
+03:07:42  notify  #incidents · Tomás has it</code></pre>
+        </li>
+        <li class="step">
+          <h3>They resolve it, and the note stays</h3>
+          <p>When the alert clears, Relay closes the page and files what happened, with times, so the morning handover is a link and not a memory.</p>
+          <pre class="log" data-log aria-label="Example log"><code>03:31:05  clear   checkout-api latency normal
+03:31:06  resolve Tomás · "bad deploy, rolled back"
+03:31:06  file    handover note saved</code></pre>
+        </li>
+      </ol>
+    </section>
+
+    <section class="rota" id="rota" aria-labelledby="rota-title">
+      <div class="rota-copy">
+        <h2 id="rota-title">The rota is the whole product</h2>
+        <p>Pick a day. The highlighted name is the only person Relay will page that night. Swaps are one drag, and the person giving up a night has to agree.</p>
+      </div>
+      <div class="rota-board">
+        <div class="rota-days" role="group" aria-label="Day of the week">
+          <button type="button" data-day="0" aria-pressed="true">Mon</button>
+          <button type="button" data-day="1" aria-pressed="false">Tue</button>
+          <button type="button" data-day="2" aria-pressed="false">Wed</button>
+          <button type="button" data-day="3" aria-pressed="false">Thu</button>
+          <button type="button" data-day="4" aria-pressed="false">Fri</button>
+          <button type="button" data-day="5" aria-pressed="false">Sat</button>
+          <button type="button" data-day="6" aria-pressed="false">Sun</button>
+        </div>
+        <ul class="rota-people">
+          <li class="rota-highlight" aria-hidden="true"></li>
+          <li data-person="0"><span class="avatar" aria-hidden="true">I</span>Ines<span class="rota-state"></span></li>
+          <li data-person="1"><span class="avatar" aria-hidden="true">T</span>Tomás<span class="rota-state"></span></li>
+          <li data-person="2"><span class="avatar" aria-hidden="true">W</span>Wren<span class="rota-state"></span></li>
+        </ul>
+        <p class="rota-status" role="status" aria-live="polite">Monday night: Ines is on call.</p>
+      </div>
+    </section>
+
+    <section class="closer" id="start" aria-labelledby="closer-title">
+      <h2 id="closer-title" data-split>Sleep through someone else's night.</h2>
+      <p>Relay is a made-up product. This page is an example from brief2motion, and every word and motion on it came from one written brief.</p>
+      <p><a class="btn btn-invert" href="#top">Back to the top</a></p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>Relay is fictional. Built with <a href="https://github.com/qualixar/brief2motion">brief2motion</a> and <a href="https://motion.dev">Motion</a> (MIT).</p>
+  </footer>
+  <script type="module" src="main.js"></script>
+</body>
+</html>
