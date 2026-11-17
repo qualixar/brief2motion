@@ -274,7 +274,9 @@ try {
       check(`${P}phone page weight <= 1.5 MiB`, acc.localBytes <= BUDGET.localBytes, `local ${(acc.localBytes / MIB).toFixed(2)} MiB, CDN ${(acc.cdnBytes / MIB).toFixed(2)} MiB`);
       acc.hosts.forEach((h) => hosts.add(h)); allErrors[`${pg} phone`] = acc.errors;
       // the narrowest phones still in use
-      await page.setViewportSize(VIEWPORTS.small); await settle(page, 500);
+      // loaded fresh at that width, as such a phone would: an emulated phone that is resized after loading keeps
+      // reporting its old width to scripts whenever the old layout is wider than the new screen
+      await page.setViewportSize(VIEWPORTS.small); await page.reload({ waitUntil: 'load' }); await waitReady(page); await settle(page, 700);
       const lay2 = await eachStop(page, () => page.evaluate(LAYOUT_PROBE), { stops: 4 });
       const w2 = lay2.reduce((a, b) => (b.over > a.over ? b : a));
       check(`${P}320 px wide: no sideways scroll`, w2.over <= 1, w2.over <= 1 ? `${lay2.length} scroll stops` : `page is ${w2.over} px wider than the screen: ${w2.offenders.join('; ') || 'offender not found'}`);

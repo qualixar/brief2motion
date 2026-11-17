@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tidewater Salt Works · sea salt made by the tide</title>
+  <meta name="description" content="Tidewater Salt Works is a made-up sea salt maker, built as a brief2motion example of scroll storytelling with GSAP ScrollTrigger and Lenis: a pinned image sequence, a sideways gallery and text that reads itself as you scroll.">
+  <meta property="og:title" content="Tidewater Salt Works · sea salt made by the tide">
+  <meta property="og:description" content="A brief2motion example of scroll storytelling: pinned scenes, a scrubbed image sequence and a sideways gallery.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#16212c">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+  <script>document.documentElement.classList.add('js');</script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js" integrity="sha384-3vCAhD+a3BOliP3QqjQINn6ZWiZxoqu0WFxX5ZQZgqekDZuSb1mJBrrLMmu94H8f" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js" integrity="sha384-H2WL1iy/jKQQ7MTHU2hskZKNHTYWWD/KgKE1vCNnaWY8An2ESTh23KN/fTp8XS3j" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/SplitText.min.js" integrity="sha384-e98MX/fxZrUXA/6T+aCptryLfHgR2FpEmWxDbbPloHT0Qg79dEXKdLJ/iwD2lzxs" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/DrawSVGPlugin.min.js" integrity="sha384-fynVx3iMchteqKcx/rkUAX8fWugxllTPhisYGTDw03tf1trspBGOvlurai60MD4A" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js" integrity="sha384-R18XzqnxvVLEF+BYfhpmDx30v7eP83fAckyfoRzK7/Uf6nGqufcmsk0eAKo7S3RU" crossorigin="anonymous"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="nav">
+    <a class="brand" href="#top">Tidewater <span>Salt Works</span></a>
+    <nav aria-label="Main">
+      <a href="#harvest">The harvest</a>
+      <a href="#year">The year</a>
+      <a href="#tide">The tide</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <p class="hero-place">Saltmarsh coast · made-up, like the rest of this page</p>
+      <h1>Salt, made by the tide.</h1>
+      <p class="hero-sub">Twice a day the sea walks up the marsh and fills our clay pans. Sun and wind do the rest. We only open a sluice and wait.</p>
+      <svg class="tideline" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path d="M0 40 C 100 5, 200 5, 300 40 S 500 75, 600 40 S 800 5, 900 40 S 1100 75, 1200 40" />
+      </svg>
+    </section>
+
+    <section class="read" aria-label="How the salt is made, in one sentence">
+      <p data-read>Seawater is about three and a half percent salt. Let the tide bring it in, hold it still in shallow clay, and give the water somewhere to go. What stays behind is a crust of small hollow pyramids, and that is all we sell.</p>
+    </section>
+
+    <section class="seq" id="harvest" aria-labelledby="seq-title">
+      <div class="seq-pin">
+        <div class="seq-media">
+          <canvas aria-hidden="true"></canvas>
+          <img src="assets/seq/crystal-047.webp" width="960" height="600" alt="Drawing of a salt crystal: a stepped pyramid of small white cubes standing in dark still water.">
+        </div>
+        <div class="seq-copy">
+          <h2 id="seq-title">Six tides to one crystal</h2>
+          <ol class="seq-steps">
+            <li><h3>Flood</h3><p>On a spring tide we lift the sluice board. The pan takes a hand's depth of seawater and the board goes back down.</p></li>
+            <li><h3>Wait</h3><p>For six tides nobody touches it. The water thins, the brine thickens, and the first square flakes form on the surface.</p></li>
+            <li><h3>Rake</h3><p>Flakes grow from their edges, so each one builds into a hollow stepped pyramid. We rake them by hand before they sink.</p></li>
+          </ol>
+          <div class="seq-bar" aria-hidden="true"><i></i></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="year" id="year" aria-labelledby="year-title">
+      <div class="year-pin">
+        <h2 id="year-title">A year on the marsh</h2>
+        <ul class="year-track">
+          <li><span class="num">Mar</span><h3>Mend the clay</h3><p>Winter storms crack the pan walls. We puddle new clay with our feet, the way it was done here before pumps.</p></li>
+          <li><span class="num">May</span><h3>First flood</h3><p>The first spring tide with a warm week behind it. One pan only, to see how the brine behaves this year.</p></li>
+          <li><span class="num">Jul</span><h3>The long days</h3><p>Every pan is working. A full harvest takes about a week from flood to rake when the wind is from the land.</p></li>
+          <li><span class="num">Aug</span><h3>Rake at dawn</h3><p>Flakes are raked before the sun is high, while they still float. By noon the big ones have gone under.</p></li>
+          <li><span class="num">Oct</span><h3>Last crust</h3><p>Shorter days, slower pans. The last harvest is coarse and grey with clay, and goes to the smokehouse next door.</p></li>
+          <li><span class="num">Dec</span><h3>Let the sea in</h3><p>We pull every board and give the pans back to the tide until spring. The marsh birds take over.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="tide" id="tide" aria-labelledby="tide-title">
+      <h2 id="tide-title">Two tides a day, every day</h2>
+      <figure>
+        <svg viewBox="0 0 1200 320" role="img" aria-label="Chart: the height of the sea over two days, rising and falling four times. A dashed line marks the height of the sluice; the pans can only fill when the tide is above it.">
+          <line class="axis" x1="0" y1="300" x2="1200" y2="300" />
+          <line class="sluice" x1="0" y1="112" x2="1200" y2="112" />
+          <text class="lbl" x="8" y="100">sluice height</text>
+          <path class="curve" d="M0 250 C 60 250, 90 60, 150 60 S 240 250, 300 250 S 390 90, 450 90 S 540 262, 600 262 S 690 40, 750 40 S 840 248, 900 248 S 990 96, 1050 96 S 1140 240, 1200 240" />
+          <g class="marks"><circle cx="150" cy="60" r="7" /><circle cx="450" cy="90" r="7" /><circle cx="750" cy="40" r="7" /><circle cx="1050" cy="96" r="7" /></g>
+        </svg>
+        <figcaption>Sea height over two days, drawn as a sketch and not from a tide table. The four dots are high water: the only moments a pan can be filled.</figcaption>
+      </figure>
+    </section>
+
+    <section class="closer" aria-labelledby="closer-title">
+      <h2 id="closer-title">Tidewater is not a real salt works.</h2>
+      <p>It is a brief2motion example. The crystal is forty-eight pictures drawn by a script in this folder, played by your scroll position. Read <a href="https://github.com/qualixar/brief2motion">how it was made</a>.</p>
+    </section>
+  </main>
+  <footer class="foot"><p>Built with <a href="https://github.com/qualixar/brief2motion">brief2motion</a>, <a href="https://gsap.com">GSAP</a> and <a href="https://lenis.darkroom.engineering">Lenis</a>.</p></footer>
+  <script type="module" src="main.js"></script>
+</body>
+</html>
