@@ -10,6 +10,7 @@ If the port is busy it tries the next 20.
 """
 import functools
 import http.server
+import socketserver
 import mimetypes
 import os
 import sys
@@ -38,6 +39,15 @@ class NoCache(http.server.SimpleHTTPRequestHandler):
             sys.stderr.write('%s %s\n' % (self.address_string(), fmt % args))
 
 
+class LocalServer(http.server.ThreadingHTTPServer):
+    """Skips the reverse-DNS lookup in HTTPServer.server_bind, which can hang for a long time on some machines."""
+
+    def server_bind(self):
+        socketserver.TCPServer.server_bind(self)
+        self.server_name = 'localhost'
+        self.server_port = self.server_address[1]
+
+
 def main(argv):
     port, root, rest = 8421, '.', list(argv)
     if '--port' in rest:
@@ -57,7 +67,7 @@ def main(argv):
     server = None
     for p in range(port, port + 21) if port else [0]:
         try:
-            server = http.server.ThreadingHTTPServer(('127.0.0.1', p), handler)
+            server = LocalServer(('127.0.0.1', p), handler)
             break
         except OSError:
             continue
