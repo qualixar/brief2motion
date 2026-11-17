@@ -124,6 +124,21 @@ That makes the agent go back to your original brief line by line, show the evide
 
 Development and every run recorded here were on macOS with Chrome 157. The Windows and Linux paths are written but not run by the author.
 
+## brief2mp4: the video side, installed with it
+
+brief2motion makes the website. Its sister skill [brief2mp4](https://github.com/qualixar/brief2mp4) makes the video: write a plain brief and get a finished MP4, checked before you see it, with a `REPORT.md` that backs every line of the brief with a measurement or a still. It renders kinetic type, charts, 3D scenes and particles, and 30 animation art forms from claymation and paper cut-outs to anime and VHS.
+
+https://github.com/user-attachments/assets/8e975937-03d7-4648-b527-19b712c7e6c8
+
+**One command gives you both.** From brief2mp4 0.4.0, brief2motion is a plugin dependency of brief2mp4, so Claude Code installs the pair:
+
+```
+/plugin marketplace add qualixar/brief2mp4
+/plugin install brief2mp4@brief2mp4
+```
+
+The two skills hand work to each other: brief2motion films its own page with `capture_site.mjs --film`, and brief2mp4 finishes that footage as a checked MP4 for a launch video, a Short or a README. The [tutorial film](https://youtu.be/fI3a3oDvLE4) shows both skills at work, a story film and a website from the same brief. Examples and a [free 104-page guide](https://qualixar.com/learn/guides/brief2mp4-guide) are in the [brief2mp4 repo](https://github.com/qualixar/brief2mp4).
+
 ## What it makes
 
 | Kind of site | What the skill does for it | Stack | Example |
@@ -331,7 +346,7 @@ CHANGELOG.md                  what changed in each release
 
 ## Part of a small family
 
-[brief2mp4](https://github.com/qualixar/brief2mp4) turns a written brief into a finished, checked MP4, with 30 animation art forms from claymation to anime. brief2motion turns a brief into a live website. Use brief2motion when the motion should live on a site, and brief2mp4 when you want a video file. Installing brief2mp4 (0.4.0 or later) installs brief2motion with it, so one command gives you both.
+[brief2mp4](https://github.com/qualixar/brief2mp4) makes the video, brief2motion makes the website, and installing brief2mp4 (0.4.0 or later) installs both. See [brief2mp4: the video side](#brief2mp4-the-video-side-installed-with-it).
 
 ## Contributing
 
