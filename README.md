@@ -4,7 +4,7 @@
 
 <h1 align="center">brief2motion</h1>
 
-<p align="center"><b>Web motion for Claude Code and Codex. Write a plain brief, get a website with professional motion, checked in a real browser before you see it.</b><br>scroll stories · 3D product pages · kinetic type · page transitions · data stories · interface motion · particles that form a face · 32 visual styles</p>
+<p align="center"><b>The website animation skill for Claude Code and Codex. Write a plain brief, get a website with professional motion (GSAP scroll animation, three.js 3D, kinetic type, page transitions), checked in a real browser before you see it.</b><br>scroll stories · 3D product pages · kinetic type · page transitions · data stories · interface motion · particles that form a face · 32 visual styles</p>
 
 <p align="center">
   <a href="https://github.com/qualixar/brief2motion/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/qualixar/brief2motion?style=flat&color=FF5A1F"></a>
@@ -17,6 +17,7 @@
 </p>
 
 <p align="center">
+  <a href="#watch-it">Watch it</a> ·
   <a href="#quick-start">Quick start</a> ·
   <a href="#what-it-makes">What it makes</a> ·
   <a href="#the-stacks-it-chooses-from">Stacks</a> ·
@@ -24,7 +25,7 @@
   <a href="#what-it-checks">Checks</a> ·
   <a href="#examples">Examples</a> ·
   <a href="#write-a-brief">Write a brief</a> ·
-  <a href="docs/guide/brief2motion-guide.pdf">53-page guide (PDF)</a> ·
+  <a href="https://qualixar.com/learn/guides/brief2motion-guide">Free 53-page guide</a> ·
   <a href="#faq">FAQ</a>
 </p>
 
@@ -33,6 +34,20 @@
 </p>
 
 <p align="center"><b>One brief, one page.</b> This is <a href="examples/halden-one/">Halden One</a>, built from <a href="examples/halden-one/BRIEF.md">this brief</a>: a radio made of about forty shapes in three.js, with no model file and no photo. It turns, opens into an exploded view and changes colour as you scroll. Its <a href="examples/halden-one/site-report.json">report</a> shows 27 of 27 checks passed, including a still picture for browsers without WebGL and cuts instead of travel for visitors with reduced motion.</p>
+
+<p align="center"><b>▶ brief2motion in 84 seconds:</b> one product photo and a brief become a website whose dust forms the bottle, then nine more sites in nine different motion stacks.</p>
+
+https://github.com/user-attachments/assets/8b780cc9-e70f-4c7c-b3ac-7fdb56ede3ff
+
+<h2 id="watch-it" align="center">Watch the full tutorial</h2>
+
+<p align="center">
+  <a href="https://youtu.be/fI3a3oDvLE4"><img src="assets/video-thumbnail.jpg" alt="Watch the video: Claude Code Motion Graphics, make a film AND a website" width="720"></a>
+</p>
+
+<p align="center">
+  <b><a href="https://youtu.be/fI3a3oDvLE4">▶ Claude Code Motion Graphics: Make a Film AND a Website</a></b> (YouTube, English and Hindi audio) &nbsp;·&nbsp; <b><a href="https://qualixar.com/learn/guides/brief2motion-guide">Free 53-page learning guide</a></b> &nbsp;·&nbsp; <b><a href="https://github.com/qualixar/brief2mp4">brief2mp4, the video sister skill</a></b>
+</p>
 
 | You give it | You get back |
 |---|---|
@@ -54,6 +69,8 @@ brief2motion is a free, MIT-licensed agent skill. From your brief the agent pick
 /plugin marketplace add qualixar/brief2mp4
 /plugin install brief2motion@brief2mp4
 ```
+
+**Already use brief2mp4?** From brief2mp4 0.4.0, installing or updating brief2mp4 installs brief2motion too, because brief2mp4 lists it as a dependency. Run `/plugin install brief2mp4@brief2mp4` (or `/reload-plugins` after an update) and both skills are there.
 
 If you do not use brief2mp4, add this repo as its own marketplace instead: `/plugin marketplace add qualixar/brief2motion`, then `/plugin install brief2motion@brief2motion`.
 
@@ -264,6 +281,14 @@ The "done when" lines matter most, because they are what the checks measure. Say
 
 ## FAQ
 
+**How do I make website animations with Claude Code?** Install brief2motion, then describe the site in plain words: what it is for, what should move, the exact words. The skill picks the motion stack and a visual style, builds the site, checks it in Chrome and gives you a `localhost` link. The [quick start](#quick-start) has three briefs you can paste.
+
+**Is there a GSAP or three.js skill for Claude Code?** brief2motion covers both, and eight more: GSAP with ScrollTrigger and Lenis for scroll animation, three.js and React Three Fiber for 3D, Motion, the View Transitions API, SVG and D3, Lottie, Rive, native CSS scroll-driven animation and its own particle engine. Each has a reference file with tested patterns in [`references/stacks/`](skills/brief2motion/references/stacks/).
+
+**How is it different from Anthropic's frontend-design skill?** frontend-design guides how a page looks. brief2motion is about how it moves: it routes the brief to a motion stack, ships tested animation helpers, and measures frame time, layout, focus, contrast and reduced motion in a real browser before it says done. They work well together.
+
+**Which visual styles does it know?** 32, from neubrutalism, glassmorphism, neumorphism and claymorphism to Swiss, bento, Y2K, vaporwave, Art Deco and cyberpunk, each with design tokens, the motion that suits it, its accessibility pitfalls and sources. See the [style system](#the-style-system).
+
 **Does it cost anything?** The skill is free and MIT licensed. The agent runs on your own Claude Code or Codex plan, and the checks run on your machine.
 
 **Does it work in Codex?** The repo carries a Codex plugin manifest and marketplace file, and the skill is plain scripts and files that Codex can run. The author built and checked it from Claude Code and has not recorded a Codex run, so treat Codex as untested and open an issue if something breaks.
@@ -306,15 +331,11 @@ CHANGELOG.md                  what changed in each release
 
 ## Part of a small family
 
-[brief2mp4](https://github.com/qualixar/brief2mp4) turns a written brief into a finished, checked MP4. brief2motion turns a brief into a live website. Use brief2motion when the motion should live on a site, and brief2mp4 when you want a video file. If you already use brief2mp4, this skill installs from its marketplace: `/plugin install brief2motion@brief2mp4`.
+[brief2mp4](https://github.com/qualixar/brief2mp4) turns a written brief into a finished, checked MP4, with 30 animation art forms from claymation to anime. brief2motion turns a brief into a live website. Use brief2motion when the motion should live on a site, and brief2mp4 when you want a video file. Installing brief2mp4 (0.4.0 or later) installs brief2motion with it, so one command gives you both.
 
 ## Contributing
 
 Made something with it? Open an issue with the brief and a screenshot; the useful ones get added to the examples with your name on them. A page that failed a check is the most useful bug report: include the brief and `site-report.json`. Code changes are welcome; run `bash tests/run_checks.sh`, `node --test tests/*.test.mjs` and, with Chrome installed, `node tests/browser/smoke.mjs` first. To add a style, add an entry to `references/styles.json` with its sources and a CSS file beside it, then run `scripts/build_styles.mjs`. Releases are listed in [CHANGELOG.md](CHANGELOG.md).
-
-## Star history
-
-<a href="https://star-history.com/#qualixar/brief2motion&Date"><img alt="Star history chart for qualixar/brief2motion" src="https://api.star-history.com/svg?repos=qualixar/brief2motion&type=Date" width="600"></a>
 
 ## Licence and credits
 

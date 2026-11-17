@@ -36,7 +36,14 @@
         "accessibility",
         "agent-skills",
         "text-to-web",
-        "skill"
+        "skill",
+        "website-animation",
+        "scroll-animation",
+        "landing-page",
+        "claude-code",
+        "codex",
+        "neubrutalism",
+        "glassmorphism"
       ],
       "category": "productivity"
     }
