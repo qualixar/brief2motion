@@ -1,7 +1,7 @@
 {
   "tool": "check_site",
   "site": "tidewater",
-  "when": "2026-11-17T18:39:07.282Z",
+  "when": "2026-11-17T19:21:23.195Z",
   "budgets": {
     "desktopP95": 20,
     "mobileP95": 40,
@@ -16,7 +16,7 @@
     "index.html": {
       "state": "ready",
       "desktop": {
-        "samples": 498,
+        "samples": 499,
         "medianMs": 16.7,
         "p95Ms": 16.7,
         "maxMs": 16.8,
@@ -103,7 +103,7 @@
       ],
       "weightDesktop": {
         "localBytes": 759603,
-        "cdnBytes": 54407
+        "cdnBytes": 53096
       },
       "phone": {
         "samples": 499,
@@ -114,7 +114,7 @@
       },
       "weightPhone": {
         "localBytes": 759603,
-        "cdnBytes": 54393
+        "cdnBytes": 53095
       },
       "contrast": {
         "measured": 109,
@@ -151,7 +151,7 @@
     {
       "name": "desktop p95 frame <= 20 ms",
       "pass": true,
-      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 498 frames"
+      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
     },
     {
       "name": "desktop: no sideways scroll",

@@ -1,7 +1,7 @@
 {
   "tool": "check_site",
   "site": "halvorsen",
-  "when": "2026-11-17T18:45:17.803Z",
+  "when": "2026-11-17T19:26:01.248Z",
   "budgets": {
     "desktopP95": 20,
     "mobileP95": 40,
@@ -18,7 +18,7 @@
       "desktop": {
         "samples": 499,
         "medianMs": 16.7,
-        "p95Ms": 16.8,
+        "p95Ms": 16.7,
         "maxMs": 16.8,
         "fps": 59.9
       },
@@ -618,7 +618,7 @@
     {
       "name": "[index.html] desktop p95 frame <= 20 ms",
       "pass": true,
-      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
     },
     {
       "name": "[index.html] desktop: no sideways scroll",

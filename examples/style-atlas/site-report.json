@@ -1,7 +1,7 @@
 {
   "tool": "check_site",
   "site": "style-atlas",
-  "when": "2026-11-17T18:51:13.311Z",
+  "when": "2026-11-17T19:25:04.892Z",
   "budgets": {
     "desktopP95": 20,
     "mobileP95": 40,
@@ -111,10 +111,10 @@
         "cdnBytes": 0
       },
       "phone": {
-        "samples": 499,
+        "samples": 497,
         "medianMs": 16.7,
-        "p95Ms": 16.7,
-        "maxMs": 16.8,
+        "p95Ms": 16.8,
+        "maxMs": 50,
         "fps": 59.9
       },
       "weightPhone": {
@@ -204,7 +204,7 @@
     {
       "name": "phone p95 frame <= 40 ms",
       "pass": true,
-      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=50 ms, 497 frames"
     },
     {
       "name": "phone: no sideways scroll",
