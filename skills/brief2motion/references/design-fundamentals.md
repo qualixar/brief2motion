@@ -1,0 +1,103 @@
+# Design fundamentals: what every page gets, whatever the style
+
+Motion sits on top of a page. If the page under it is hard to read, badly spaced or slow, no animation rescues it. Apply everything here before choosing a style, and check it again after the motion is in. Each rule has a number you can test and the source it comes from (all read on 17 Nov 2026).
+
+## 1. Say what it is, at the top
+
+- The first screen states what the product is and what to do next, with real content. Nielsen Norman Group's homepage guidance: make the value clear at a glance, show actual offerings above the fold, give a clear call to action, keep motion minimal and never delay the hero behind an animation. <https://www.nngroup.com/articles/homepage-design-principles/>
+- People still spend most of their time near the top: 57% of viewing time above the fold and 74% in the first two screens (NN/g, 2018). Do not make the first screen a slow reveal of nothing. <https://www.nngroup.com/articles/scrolling-and-attention/>
+- Avoid a "false floor": a first screen that looks like the whole page. Let the next section show a little.
+
+A landing page that converts usually runs in this order. Use it when the brief gives no structure of its own:
+
+1. Hero: the claim in one line, one supporting sentence, one primary action, and the product itself (a picture, a demo, the 3D object).
+2. Proof that it is real: what it does, shown, in two to four parts.
+3. How it works, as steps only if it truly is a sequence.
+4. Detail for people who are nearly convinced: specification, pricing, questions.
+5. The primary action again, and a footer.
+
+Never invent proof. No made-up reviews, ratings, customer names, logos or numbers. If the brief has none, leave that section out.
+
+## 2. Visual hierarchy
+
+- One thing per screen is the most important, and it is the biggest or the highest in contrast. If three things shout, none is heard.
+- Build hierarchy from size, weight, colour and space, in that order. Decoration is the last resort.
+- Group with space before lines: related things sit closer together than unrelated things.
+- One primary button per view. Secondary actions look quieter (an outline or a text link).
+
+## 3. Type
+
+- Body text 16 px or larger. Apple's default body size on iOS is 17 pt, and it treats 11 pt as the floor. <https://developer.apple.com/design/human-interface-guidelines/accessibility>
+- Line length 45 to 90 characters; WCAG's own advice is no more than 80. Use `max-width` in `ch`. <https://practicaltypography.com/line-length.html> <https://www.w3.org/WAI/WCAG22/Understanding/visual-presentation.html>
+- Line height about 1.5 for body text (WCAG 1.4.8), tighter for headlines: 0.95 to 1.15.
+- A scale, not a pile of sizes. Tailwind's default steps are a good reference: 0.75, 0.875, 1, 1.125, 1.25, 1.5, 1.875, 2.25, 3, 3.75, 4.5, 6, 8 rem. Pick four or five.
+- Fluid headlines: `font-size: clamp(2.2rem, 6vw, 5.4rem)`. Always give `clamp()` a rem floor, so zooming still works.
+- `text-wrap: balance` on headlines, `text-wrap: pretty` on paragraphs.
+- One family or two. If two, make them clearly different (a serif with a sans).
+- Use system font stacks unless the brief supplies a font. A web font is a network request, a layout shift and a licence. If you add one, host the file with the site.
+
+## 4. Space and grid
+
+- Spacing in steps of 4 px (Tailwind's base unit is 0.25 rem; Material uses a 4 and 8 dp grid). Typical steps: 4, 8, 12, 16, 24, 32, 48, 64, 96.
+- Section padding scales with the screen: `padding-block: clamp(56px, 10vh, 120px)`.
+- Side gutters: `clamp(18px, 5vw, 72px)`.
+- Lay out with CSS Grid and `minmax(0, 1fr)` tracks, so long words cannot push a column wider than the screen.
+
+## 5. Colour and contrast
+
+- Text contrast at least 4.5:1; large text (24 px, or 18.66 px bold) at least 3:1 (WCAG 1.4.3). The thresholds are not rounded: 4.49 fails. <https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html>
+- Control boundaries and meaningful graphics at least 3:1 against what is next to them (WCAG 1.4.11). <https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html>
+- A palette is four to six named colours: a background, a surface, text, quieter text, one accent, and the text colour that sits on the accent. Check the two text colours on both backgrounds, and the accent pair, before writing CSS.
+- Never signal state with colour alone. Add text, an icon or a shape.
+- Light mode is the safer default. NN/g: for people with normal vision, light mode performs better most of the time. Offer dark mode with `prefers-color-scheme`; default to dark only when the audience expects it (developer tools, media, games). <https://www.nngroup.com/articles/dark-mode/>
+
+## 6. Responsive layout
+
+- Design for 320 px wide first. The site check loads every page at 1440, 390 and 320 px and fails any sideways scroll.
+- Common breakpoints, for reference: Tailwind 640, 768, 1024, 1280, 1536 px; Bootstrap 576, 768, 992, 1200, 1400 px. Choose breakpoints where your layout breaks, not from a list. <https://tailwindcss.com/docs/responsive-design> <https://getbootstrap.com/docs/5.3/layout/breakpoints/>
+- Touch targets at least 24 by 24 CSS px (WCAG 2.5.8); Apple's default is 44 by 44 pt. Aim for 44 on anything primary. <https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html>
+- Use `100svh` beside `100vh` for full-height sections, so mobile browser bars do not cut the bottom off.
+- Never disable zoom in the viewport meta tag.
+
+## 7. Speed: Core Web Vitals
+
+Google's thresholds, measured at the 75th percentile of real visits: <https://web.dev/articles/vitals>
+
+| Metric | What it measures | Good | Poor |
+|---|---|---|---|
+| LCP, Largest Contentful Paint | when the main content appears | 2.5 s or less | over 4.0 s |
+| INP, Interaction to Next Paint | how fast the page answers a tap or key | 200 ms or less | over 500 ms |
+| CLS, Cumulative Layout Shift | how much things jump while loading | 0.1 or less | over 0.25 |
+
+What motion does to them, and the fix:
+
+- LCP: text hidden until an entrance animation runs is late content. Render the headline visible, then animate from a state that is already readable, or keep the delay under 100 ms. Never wait for a library to load before showing text.
+- CLS: give every image, video, canvas and player a `width` and `height` or an `aspect-ratio`. Animate `transform` and `opacity`, not `top`, `width` or `margin`.
+- INP: do not run heavy work in scroll or pointer handlers. Read layout once per frame, write styles once per frame (`kit/motion-core.js` `onScroll` does this).
+
+`performance.md` has the frame-rate rules and the budgets the checker enforces.
+
+## 8. Motion principles
+
+- Every animation has a reason: it shows what changed, where something came from, or what to look at. If you cannot name the reason, remove it.
+- One orchestrated moment beats many scattered ones. A single page-load sequence, or a single reveal. A fade-and-slide on every section and a hover effect on every card is the commonest sign of a generated page.
+- Motion that answers input is welcome: opening, expanding, confirming, reordering.
+- Durations (NN/g): about 100 ms for direct feedback, 200 to 300 ms for most interface changes, up to 400 ms for large movements; 500 ms and more drags. Things entering can take slightly longer than things leaving (for example 300 ms in, 200 ms out). <https://www.nngroup.com/articles/animation-duration/>
+- Material's scale, if you want named steps: short 50 to 200 ms, medium 250 to 400 ms, long 450 to 600 ms, extra long 700 to 1000 ms. <https://github.com/material-components/material-web>
+- Easing: ease-out for things arriving (`cubic-bezier(.2, .8, .2, 1)`), ease-in for things leaving, ease-in-out for things that travel across the screen. Material's standard curve is `cubic-bezier(.2, 0, 0, 1)`. Linear is for scroll-linked values and continuous rotation only.
+- Springs for anything a person drags or can interrupt: they keep their speed when the target changes.
+- Choreography: stagger related items 30 to 80 ms apart, in reading order. More than about ten items in one stagger feels slow; group them.
+- Hero sequences read best when the whole thing is over in about 1.5 seconds.
+- Reduced motion is not optional. `accessibility.md` has the rules; in short: no travel, no parallax, no loops, and the finished state on screen.
+- Apple's guidance says the same in its own words: motion should be purposeful and optional, feedback brief and precise, and frequent interactions should not animate. <https://developer.apple.com/design/human-interface-guidelines/motion>
+
+## 9. Words
+
+- Use the brief's words exactly. If it gives none, write plain copy from what it says and mark it as drafted in `REPORT.md`.
+- A button says what happens: "Reserve a bottle", not "Submit".
+- Sentence case. No filler, no slogans in threes.
+- Made-up examples say that they are made up.
+
+## 10. Before you call it done
+
+Run `check_site.mjs`. It measures items 3 (one `<h1>`, a title, a description), 5 (contrast), 6 (three widths, tap targets, zoom) and the motion rules. Then look at the screenshots in `check/shots/` yourself: a checker cannot see that a headline is ugly, that a card is lost in space, or that the hero says nothing.

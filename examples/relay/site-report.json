@@ -1,0 +1,288 @@
+{
+  "tool": "check_site",
+  "site": "relay",
+  "when": "2026-11-17T19:22:03.248Z",
+  "budgets": {
+    "desktopP95": 20,
+    "mobileP95": 40,
+    "localBytes": 1572864,
+    "tapTarget": 24,
+    "contrast": 4.5,
+    "contrastLarge": 3
+  },
+  "perfMeasured": true,
+  "chrome": "157.0.8103.79",
+  "pages": {
+    "index.html": {
+      "state": "ready",
+      "desktop": {
+        "samples": 499,
+        "medianMs": 16.7,
+        "p95Ms": 16.7,
+        "maxMs": 16.8,
+        "fps": 59.9
+      },
+      "shots": [
+        "shots/index-desktop-0.png",
+        "shots/index-desktop-1.png",
+        "shots/index-desktop-2.png",
+        "shots/index-desktop-3.png",
+        "shots/index-desktop-4.png",
+        "shots/index-desktop-5.png",
+        "shots/index-phone-0.png",
+        "shots/index-phone-2.png",
+        "shots/index-phone-4.png"
+      ],
+      "basics": {
+        "h1": 1,
+        "lang": "en",
+        "title": "Relay · on-call paging for small teams",
+        "description": "Relay is a made-up on-call paging product, built as a brief2motion example of kinetic type: split headlines, scroll-driven word bands and spring-driven interface motion.",
+        "viewport": "width=device-width, initial-scale=1",
+        "imgsNoAlt": [],
+        "skip": true,
+        "main": true,
+        "webglCanvases": 0
+      },
+      "focus": [
+        {
+          "what": "a.skip-link \"Skip to content\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.brand \"Relay\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"How it works\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"The rota\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.btn \"Start a rota\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.btn \"Start a rota\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.link \"See one page, start \"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "button \"Mon\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "button \"Tue\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "button \"Wed\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "button \"Thu\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "button \"Fri\"",
+          "ring": true,
+          "onScreen": true
+        }
+      ],
+      "weightDesktop": {
+        "localBytes": 35608,
+        "cdnBytes": 63602
+      },
+      "phone": {
+        "samples": 499,
+        "medianMs": 16.7,
+        "p95Ms": 16.7,
+        "maxMs": 16.8,
+        "fps": 59.9
+      },
+      "weightPhone": {
+        "localBytes": 35608,
+        "cdnBytes": 63601
+      },
+      "contrast": {
+        "measured": 128,
+        "notMeasured": 43,
+        "failures": []
+      },
+      "noJs": {
+        "h1Visible": true,
+        "visibleChars": 1979
+      }
+    }
+  },
+  "noWebgl": {
+    "state": "ready",
+    "webgl": 0,
+    "fallbacks": 0,
+    "h1": true
+  },
+  "thirdPartyHosts": [
+    "cdn.jsdelivr.net"
+  ],
+  "consoleErrors": {
+    "index.html desktop": [],
+    "index.html phone": [],
+    "index.html reduced": [],
+    "index.html no-webgl": []
+  },
+  "checks": [
+    {
+      "name": "page signals its motion state",
+      "pass": true,
+      "detail": "<html data-motion=\"ready\">"
+    },
+    {
+      "name": "desktop p95 frame <= 20 ms",
+      "pass": true,
+      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+    },
+    {
+      "name": "desktop: no sideways scroll",
+      "pass": true,
+      "detail": "6 scroll stops at 1440 px"
+    },
+    {
+      "name": "one <h1>",
+      "pass": true,
+      "detail": "1 found"
+    },
+    {
+      "name": "<html lang> set",
+      "pass": true,
+      "detail": "en"
+    },
+    {
+      "name": "real <title> and description",
+      "pass": true,
+      "detail": "title 38 chars, description 169 chars (need 10 and 50)"
+    },
+    {
+      "name": "viewport meta allows zoom",
+      "pass": true,
+      "detail": "width=device-width, initial-scale=1"
+    },
+    {
+      "name": "every <img> has alt",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "name": "<main> landmark and a skip link",
+      "pass": true,
+      "detail": "main=true, skip link=true"
+    },
+    {
+      "name": "keyboard focus is visible",
+      "pass": true,
+      "detail": "12 stops, all ringed and on screen"
+    },
+    {
+      "name": "desktop page weight <= 1.5 MiB",
+      "pass": true,
+      "detail": "local 0.03 MiB, CDN 0.06 MiB"
+    },
+    {
+      "name": "phone p95 frame <= 40 ms",
+      "pass": true,
+      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+    },
+    {
+      "name": "phone: no sideways scroll",
+      "pass": true,
+      "detail": "6 scroll stops at 390 px"
+    },
+    {
+      "name": "phone: tap targets >= 24 px",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "name": "phone page weight <= 1.5 MiB",
+      "pass": true,
+      "detail": "local 0.03 MiB, CDN 0.06 MiB"
+    },
+    {
+      "name": "320 px wide: no sideways scroll",
+      "pass": true,
+      "detail": "4 scroll stops"
+    },
+    {
+      "name": "reduced motion: page says so",
+      "pass": true,
+      "detail": "<html data-motion=\"reduced\"> (want \"reduced\")"
+    },
+    {
+      "name": "reduced motion: nothing keeps animating",
+      "pass": true,
+      "detail": "no running animation longer than 250 ms"
+    },
+    {
+      "name": "reduced motion: the picture holds still",
+      "pass": true,
+      "detail": "two screenshots 0.7 s apart match at 0%, 50% and 100% scroll"
+    },
+    {
+      "name": "reduced motion: all text visible",
+      "pass": true,
+      "detail": "18 headings and paragraphs, each fully visible at some point of the scroll (9 stops)"
+    },
+    {
+      "name": "text contrast meets WCAG AA",
+      "pass": true,
+      "detail": "128 text runs measured, 43 over pictures or canvas not measured (look at the screenshots)"
+    },
+    {
+      "name": "reduced motion: normal scrolling works",
+      "pass": true,
+      "detail": "asked for 400px, page is at 400px"
+    },
+    {
+      "name": "JavaScript off: the page still reads",
+      "pass": true,
+      "detail": "headline visible, 1979 characters of text"
+    },
+    {
+      "name": "WebGL off: headline readable",
+      "pass": true,
+      "detail": "h1 visible=true, state=ready"
+    },
+    {
+      "name": "WebGL off: a still stands in for each WebGL canvas",
+      "pass": true,
+      "detail": "the page has no canvas[data-webgl]"
+    },
+    {
+      "name": "third-party requests only to cdn.jsdelivr.net",
+      "pass": true,
+      "detail": "cdn.jsdelivr.net"
+    },
+    {
+      "name": "console errors = 0 (every run)",
+      "pass": true,
+      "detail": "none in 4 runs"
+    }
+  ],
+  "pass": true
+}

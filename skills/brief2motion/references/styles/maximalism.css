@@ -1,0 +1,8 @@
+background: repeating-linear-gradient(45deg, #ff4f1a 0 22px, #ff6b3d 22px 44px);
+.s-title { font-style: italic; font-size: 2.6em; background: #ffe94a; display: inline; box-decoration-break: clone; -webkit-box-decoration-break: clone; padding: 0 .15em; }
+.s-text { background: #fff; padding: 10px 12px; border: var(--border); }
+.s-card { transform: rotate(2deg); box-shadow: var(--shadow); }
+.s-nav { background: #ff9ad5; box-shadow: 5px 5px 0 #1a0f3c; }
+.s-btn { box-shadow: 4px 4px 0 #0e7a4d; transition: transform .15s; }
+.s-btn:hover { transform: rotate(-3deg) scale(1.05); }
+.s-btn-2 { background: #ff9ad5; color: #1a0f3c; }

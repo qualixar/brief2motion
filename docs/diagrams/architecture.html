@@ -1,0 +1,54 @@
+<!doctype html>
+<!-- Source of assets/architecture.png. Render: bash docs/diagrams/render.sh -->
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=block" rel="stylesheet">
+<style>
+:root{--paper:#F2EDE4;--card:#FBF8F2;--ink:#16130F;--mute:#6E675C;--line:#D9D1C3;--acc:#FF5A1F}
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1600px;height:860px;background:var(--paper);font-family:Inter,sans-serif;color:var(--ink);position:relative;overflow:hidden}
+h1{position:absolute;left:64px;top:44px;font:700 46px 'Space Grotesk';letter-spacing:-.5px}
+h1 span{color:var(--acc)}
+.sub{position:absolute;left:66px;top:106px;font:400 20px Inter;color:var(--mute)}
+.row{position:absolute;left:64px;right:64px;top:170px;display:grid;grid-template-columns:repeat(6,1fr);gap:20px}
+.card{background:var(--card);border:2px solid var(--ink);border-radius:18px;padding:18px 18px 16px;min-height:236px;position:relative}
+.card.hot{background:var(--ink);color:var(--paper)}
+.card.hot .d{color:#CFC7B8}.card.hot .n{background:var(--acc);color:#fff}.card.hot .mono{background:#2A251E;color:var(--paper)}
+.n{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--paper);font:700 16px 'Space Grotesk';margin-bottom:10px}
+.t{font:700 22px 'Space Grotesk';margin-bottom:6px}
+.d{font:400 14.5px/1.42 Inter;color:var(--mute)}
+.mono{font:500 12.5px 'JetBrains Mono';background:var(--paper);border-radius:6px;padding:2px 6px;display:inline-block;margin-top:9px}
+.card:not(:last-child)::after{content:"";position:absolute;right:-17px;top:118px;border:7px solid transparent;border-left-color:var(--ink)}
+.loop{position:absolute;left:880px;width:392px;top:420px;height:44px;border:2px dashed var(--acc);border-top:0;border-radius:0 0 16px 16px}
+.loop span{position:absolute;left:50%;top:30px;transform:translateX(-50%);background:var(--paper);padding:0 10px;font:600 15px Inter;color:var(--acc);white-space:nowrap}
+h2{position:absolute;left:64px;top:520px;font:700 26px 'Space Grotesk'}
+.stacks{position:absolute;left:64px;right:64px;top:570px;display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.s{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px}
+.s b{display:block;font:700 16.5px 'Space Grotesk';margin-bottom:3px}
+.s i{font:400 13.5px/1.35 Inter;color:var(--mute);font-style:normal}
+</style></head>
+<body>
+<h1>How brief<span>2</span>motion works</h1>
+<div class="sub">One loop for every site: route, spec, build, check, fix, deliver. The checks run in a real Chrome on your machine.</div>
+<div class="row">
+  <div class="card"><div class="n">1</div><div class="t">Route</div><div class="d">Reads the brief and proposes a motion stack and a visual style, quoting the words that led there.</div><span class="mono">route.mjs</span></div>
+  <div class="card"><div class="n">2</div><div class="t">Spec</div><div class="d">Design plan, motion plan (load, scroll, input), exact copy, and a "done when" list that can be checked.</div><span class="mono">SPEC.md</span></div>
+  <div class="card"><div class="n">3</div><div class="t">Build</div><div class="d">Starts from the closest example, the shared kit and the reference for that stack and style.</div><span class="mono">site/</span></div>
+  <div class="card hot"><div class="n">4</div><div class="t">Check</div><div class="d">Frame time on desktop and an emulated phone, three widths, reduced motion, keyboard, contrast, no WebGL, no JavaScript.</div><span class="mono">check_site.mjs</span></div>
+  <div class="card"><div class="n">5</div><div class="t">Fix</div><div class="d">Fixes the page, never the budget, and measures again. Then looks at the screenshots.</div><span class="mono">check/shots/</span></div>
+  <div class="card"><div class="n">6</div><div class="t">Deliver</div><div class="d">A localhost link to the page and a report with the proof behind every line of the brief.</div><span class="mono">REPORT.md</span></div>
+</div>
+<div class="loop"><span>fails a check? fix and measure again</span></div>
+<h2>The stacks it chooses from</h2>
+<div class="stacks">
+  <div class="s"><b>CSS and JavaScript kit</b><i>the default: reveals, pinned scenes, counters, line drawing</i></div>
+  <div class="s"><b>GSAP, ScrollTrigger, Lenis</b><i>scroll stories, scrubbing, picture sequences</i></div>
+  <div class="s"><b>Motion</b><i>kinetic type and springs; layout and drag in React</i></div>
+  <div class="s"><b>three.js, React Three Fiber</b><i>3D products, exploded views, shaders</i></div>
+  <div class="s"><b>Dust engine</b><i>particles that form a product, face or word</i></div>
+  <div class="s"><b>View Transitions API</b><i>page to page, and grids that rearrange</i></div>
+  <div class="s"><b>SVG and D3 scales</b><i>charts and lines that draw themselves</i></div>
+  <div class="s"><b>Lottie and Rive</b><i>animation files from a designer</i></div>
+  <div class="s"><b>32 visual styles</b><i>tokens, tested CSS and accessibility notes for each</i></div>
+  <div class="s"><b>Fundamentals</b><i>hierarchy, type, contrast, Core Web Vitals</i></div>
+</div>
+</body></html>

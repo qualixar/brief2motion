@@ -1,6 +1,6 @@
 {
-  "site": "http://localhost:8421",
-  "when": "2026-11-17T10:11:06.729Z",
+  "site": "copper-no-7",
+  "when": "2026-11-17T19:20:05.968Z",
   "budgets": {
     "desktopP95": 20,
     "mobileP95": 40,
@@ -17,7 +17,7 @@
       "lenis": true,
       "framesBeforeScroll": 151,
       "scrollable": 9808,
-      "rafSamples": 319,
+      "rafSamples": 318,
       "fps": 59.9,
       "medianMs": 16.7,
       "p95Ms": 16.7,
@@ -39,106 +39,106 @@
       ],
       "consoleErrors": [],
       "weight": {
-        "localBytes": 370411,
-        "cdnBytes": 381068,
+        "localBytes": 370228,
+        "cdnBytes": 371649,
         "localFiles": [
           [
             "/",
-            2452
+            2442
           ],
           [
             "/style.css",
-            17223
+            17587
           ],
           [
             "/main.js",
-            5529
+            5667
           ],
           [
             "/config.js",
-            6434
+            6399
           ],
           [
             "/validate.js",
-            2005
-          ],
-          [
-            "/page.js",
-            9630
+            1970
           ],
           [
             "/flight.js",
-            2260
+            2225
+          ],
+          [
+            "/page.js",
+            9595
           ],
           [
             "/assemble.js",
-            24794
+            24759
           ],
           [
             "/assets/notes-1-720.webp",
-            21233
+            21183
           ],
           [
             "/assets/notes-2-720.webp",
-            22901
-          ],
-          [
-            "/assets/shape-cardamom.jpg",
-            26418
+            22851
           ],
           [
             "/assets/product.jpg",
-            87250
+            87200
+          ],
+          [
+            "/assets/shape-cardamom.jpg",
+            26368
           ],
           [
             "/assets/shape-rose.jpg",
-            28794
+            28744
           ],
           [
             "/assets/shape-amber.jpg",
-            40870
+            40820
           ],
           [
             "/assets/notes-3-720.webp",
-            25343
+            25293
           ],
           [
             "/assets/collection-1.webp",
-            15277
-          ],
-          [
-            "/assets/collection-3.webp",
-            15527
+            15227
           ],
           [
             "/assets/collection-2.webp",
-            16471
+            16421
+          ],
+          [
+            "/assets/collection-3.webp",
+            15477
           ]
         ],
         "cdnFiles": [
           [
-            "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/MotionPathPlugin.min.js",
-            10870
-          ],
-          [
-            "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js",
-            29707
-          ],
-          [
-            "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js",
-            18725
-          ],
-          [
             "https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js",
-            5941
+            5328
+          ],
+          [
+            "https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js",
+            25969
+          ],
+          [
+            "https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/MotionPathPlugin.min.js",
+            8896
+          ],
+          [
+            "https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js",
+            16354
           ],
           [
             "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js",
-            103730
+            103427
           ],
           [
             "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.core.js",
-            212095
+            211675
           ]
         ]
       }
@@ -153,7 +153,7 @@
       "rafSamples": 318,
       "fps": 59.9,
       "medianMs": 16.7,
-      "p95Ms": 16.8,
+      "p95Ms": 16.7,
       "maxMs": 16.8,
       "drawn": 25000,
       "minDrawn": 25000,
@@ -172,106 +172,106 @@
       ],
       "consoleErrors": [],
       "weight": {
-        "localBytes": 452817,
-        "cdnBytes": 381073,
+        "localBytes": 452634,
+        "cdnBytes": 371659,
         "localFiles": [
           [
-            "/",
-            2452
+            "/style.css",
+            17587
           ],
           [
-            "/style.css",
-            17223
+            "/",
+            2442
           ],
           [
             "/main.js",
-            5529
+            5667
           ],
           [
             "/config.js",
-            6434
+            6399
           ],
           [
             "/validate.js",
-            2005
+            1970
           ],
           [
             "/page.js",
-            9630
+            9595
           ],
           [
             "/flight.js",
-            2260
+            2225
           ],
           [
             "/assemble.js",
-            24794
+            24759
           ],
           [
             "/assets/notes-1-1200.webp",
-            42335
+            42285
           ],
           [
             "/assets/notes-2-1200.webp",
-            52307
-          ],
-          [
-            "/assets/shape-cardamom.jpg",
-            26418
-          ],
-          [
-            "/assets/shape-rose.jpg",
-            28794
-          ],
-          [
-            "/assets/shape-amber.jpg",
-            40870
+            52257
           ],
           [
             "/assets/product.jpg",
-            87250
+            87200
+          ],
+          [
+            "/assets/shape-cardamom.jpg",
+            26368
+          ],
+          [
+            "/assets/shape-rose.jpg",
+            28744
+          ],
+          [
+            "/assets/shape-amber.jpg",
+            40820
           ],
           [
             "/assets/notes-3-1200.webp",
-            57241
+            57191
           ],
           [
             "/assets/collection-1.webp",
-            15277
+            15227
           ],
           [
             "/assets/collection-2.webp",
-            16471
+            16421
           ],
           [
             "/assets/collection-3.webp",
-            15527
+            15477
           ]
         ],
         "cdnFiles": [
           [
-            "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js",
-            30123
-          ],
-          [
-            "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js",
-            18728
+            "https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/MotionPathPlugin.min.js",
+            8895
           ],
           [
             "https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js",
-            5947
+            4978
           ],
           [
-            "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/MotionPathPlugin.min.js",
-            10457
+            "https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js",
+            25957
+          ],
+          [
+            "https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js",
+            16717
           ],
           [
             "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js",
-            103724
+            103427
           ],
           [
             "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.core.js",
-            212094
+            211685
           ]
         ]
       }
@@ -279,8 +279,8 @@
     "reduced": {
       "mode": "reduced-motion",
       "p": 1,
-      "canvasInk": 154293,
-      "canvasInkAfterResize": 118977,
+      "canvasInk": 154320,
+      "canvasInkAfterResize": 119035,
       "headline": {
         "found": true,
         "opacity": 1,
@@ -318,12 +318,12 @@
     {
       "name": "reduced motion: finished shape on the canvas",
       "pass": true,
-      "detail": "mode=reduced-motion, uProgress=1, canvas ink px=154293"
+      "detail": "mode=reduced-motion, uProgress=1, canvas ink px=154320"
     },
     {
       "name": "reduced motion: shape survives a resize",
       "pass": true,
-      "detail": "canvas ink px after resize=118977"
+      "detail": "canvas ink px after resize=119035"
     },
     {
       "name": "reduced motion: headline readable",
@@ -368,7 +368,7 @@
     {
       "name": "mobile p95 frame <= 40 ms",
       "pass": true,
-      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=16.8 ms"
+      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms"
     },
     {
       "name": "desktop draws every dot (shed = 0)",
@@ -383,12 +383,12 @@
     {
       "name": "desktop page weight <= 1.5 MiB",
       "pass": true,
-      "detail": "local 0.35 MiB, CDN 0.36 MiB"
+      "detail": "local 0.35 MiB, CDN 0.35 MiB"
     },
     {
       "name": "mobile page weight <= 1.5 MiB",
       "pass": true,
-      "detail": "local 0.43 MiB, CDN 0.36 MiB"
+      "detail": "local 0.43 MiB, CDN 0.35 MiB"
     },
     {
       "name": "third-party requests only to cdn.jsdelivr.net",

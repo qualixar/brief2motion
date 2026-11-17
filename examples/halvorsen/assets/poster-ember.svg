@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Ember Serif specimen poster">
+<rect width="800" height="1000" fill="#c93a14"/>
+<g stroke="#fff4ec" stroke-opacity=".35" stroke-width="2"><line x1="60" y1="300" x2="740" y2="300"/><line x1="60" y1="420" x2="740" y2="420"/><line x1="60" y1="720" x2="740" y2="720"/><line x1="60" y1="800" x2="740" y2="800"/></g>
+<text x="60" y="720" font-family="&#x27;Iowan Old Style&#x27;, Palatino, &#x27;Palatino Linotype&#x27;, Georgia, serif" font-weight="600" font-size="420" fill="#fff4ec" letter-spacing="-12">Rg</text>
+<text x="60" y="120" font-family="system-ui, 'Helvetica Neue', Arial, sans-serif" font-weight="700" font-size="34" fill="#fff4ec">Ember Serif</text>
+<text x="740" y="120" text-anchor="end" font-family="system-ui, 'Helvetica Neue', Arial, sans-serif" font-weight="500" font-size="34" fill="#fff4ec">2024</text>
+<text x="60" y="910" font-family="system-ui, 'Helvetica Neue', Arial, sans-serif" font-weight="500" font-size="26" fill="#fff4ec" fill-opacity=".85">ascender · x-height · baseline · descender</text>
+</svg>

@@ -1,0 +1,5 @@
+.s-card { background: #ffffff; border-bottom: 4px solid #0b6bcb; }
+.s-btn { transition: background-color .15s ease; }
+.s-btn:hover { background: #0958a8; }
+.s-btn-2 { background: transparent; color: #0b6bcb; text-decoration: underline; text-underline-offset: 4px; }   /* an underline keeps the link recognisable with no shadow to help */
+.s-nav { border-bottom: 2px solid #d5dde6; border-radius: 0; padding-inline: 0; }

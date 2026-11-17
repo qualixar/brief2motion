@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mise · a weekly meal planner that moves with you</title>
+  <meta name="description" content="Mise is a made-up meal planner, built as a brief2motion example of interface motion with React and Motion: shared layout tabs, a list you can drag to reorder, items that fly between lists and a springy counter.">
+  <meta property="og:title" content="Mise · a weekly meal planner that moves with you">
+  <meta property="og:description" content="A brief2motion example of interface motion with React and Motion: layout animation, drag to reorder, presence and springs.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#e8e0f4">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+  <!-- React, Motion and htm as ES modules from the CDN: no build step, which suits a demo. A real React project uses a bundler. -->
+  <script type="importmap">
+    { "imports": {
+      "react": "https://cdn.jsdelivr.net/npm/react@19.3.1/+esm",
+      "react-dom/client": "https://cdn.jsdelivr.net/npm/react-dom@19.3.1/client/+esm",
+      "motion/react": "https://cdn.jsdelivr.net/npm/motion@14.14.0/react/+esm",
+      "htm": "https://cdn.jsdelivr.net/npm/htm@3.1.1/+esm"
+    } }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="nav">
+    <a class="brand" href="#top">mise</a>
+    <a class="nav-link" href="#how">How it moves</a>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <h1>Plan the week. Shop once. Cook what you planned.</h1>
+        <p>Mise keeps five dinners and one shopping list. Change a dinner and the list changes with it. Try it: this is the real thing, not a video.</p>
+      </div>
+
+      <div class="app" id="app" aria-label="Mise demo">
+        <!-- Shown until the app starts, and for good when JavaScript is off -->
+        <div class="app-static">
+          <h2>This week</h2>
+          <ol>
+            <li>Monday: Lentil dal with rice</li>
+            <li>Tuesday: Roast squash and feta tray</li>
+            <li>Wednesday: Tomato and white bean soup</li>
+            <li>Thursday: Egg fried rice</li>
+            <li>Friday: Mushroom ragù with pasta</li>
+          </ol>
+          <noscript><p>The interactive planner needs JavaScript. This is the week it starts with.</p></noscript>
+        </div>
+      </div>
+    </section>
+
+    <section class="how" id="how" aria-labelledby="how-title">
+      <h2 id="how-title">How it moves, and why</h2>
+      <ul class="how-list">
+        <li><h3>The tab marker slides</h3><p>One marker travels between tabs, so your eye is carried to the tab you picked. It is a shared layout element, not three separate highlights.</p></li>
+        <li><h3>Rows make room</h3><p>Drag a dinner and the others step aside as you pass. Open one and the rows below slide down together. Nothing jumps, so you never lose your place.</p></li>
+        <li><h3>Things go somewhere</h3><p>Tick an ingredient and it travels to the bought list. Remove a dinner and it shrinks away while the rest close the gap.</p></li>
+        <li><h3>Numbers settle</h3><p>The count of things left to buy rolls to its new value on a spring. A spring can be interrupted, so fast ticking never queues up.</p></li>
+      </ul>
+      <p class="how-note">Every one of these answers something you did. Nothing on this page moves on its own, and with reduced motion switched on the same changes happen at once.</p>
+    </section>
+  </main>
+  <footer class="foot"><p>Mise is made up. A <a href="https://github.com/qualixar/brief2motion">brief2motion</a> example built with <a href="https://react.dev">React</a> and <a href="https://motion.dev">Motion</a> (both MIT).</p></footer>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

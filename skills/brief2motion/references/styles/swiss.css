@@ -1,0 +1,7 @@
+.s-nav { border-top: 4px solid #0a0a0a; border-radius: 0; padding: 12px 0; }
+.s-title { text-wrap: balance; }
+.s-card { border-top: 1px solid #0a0a0a; border-radius: 0; padding-inline: 0; }
+.s-stat { color: #e30613; font-size: 4.2em; letter-spacing: -.05em; }
+.s-btn { border-radius: 0; transition: background-color .15s; }
+.s-btn:hover { background: #0a0a0a; }
+.s-btn-2 { background: none; color: #0a0a0a; border-bottom: 2px solid #0a0a0a; border-radius: 0; padding-inline: 0; }

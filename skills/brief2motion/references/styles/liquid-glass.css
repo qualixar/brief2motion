@@ -1,0 +1,12 @@
+background: radial-gradient(circle at 12% 4%, #ffb347 0 10%, transparent 30%), radial-gradient(circle at 85% 6%, #4de1ff 0 12%, transparent 34%), radial-gradient(circle at 30% 100%, #ff5d8f 0 12%, transparent 34%), #0f2a4a;
+.s-nav, .s-btn, .s-btn-2 { -webkit-backdrop-filter: blur(8px) saturate(1.8) brightness(1.08); backdrop-filter: blur(8px) saturate(1.8) brightness(1.08); border-radius: 999px; box-shadow: var(--shadow); }
+/* a dark tint inside the glass, as Apple suggests over bright content, keeps the labels readable */
+.s-nav { background: rgb(15 42 74 / .4); }
+.s-btn { background: rgb(15 42 74 / .45); color: #fff; transition: transform .25s cubic-bezier(.2, 1.4, .4, 1); }
+.s-btn-2 { background: rgb(15 42 74 / .25); }
+.s-btn:hover { transform: scale(1.05); }
+.s-btn:active { transform: scale(.96); }
+/* the content card is NOT glass: Apple's guidance keeps glass out of the content layer */
+.s-card { background: #f4f7fb; color: #0f2a4a; border: 0; box-shadow: 0 10px 30px rgb(0 10 30 / .3); }
+.s-card .s-note, .s-card .s-label { color: #3b5573; }
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) { .s-nav, .s-btn, .s-btn-2 { background: #17395f; -webkit-backdrop-filter: none; backdrop-filter: none; } }

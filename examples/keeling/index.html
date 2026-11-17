@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Keeling Curve in five steps · a data story</title>
+  <meta name="description" content="Sixty-seven years of carbon dioxide measurements from Mauna Loa, told as a scroll-driven chart. A brief2motion example of data storytelling with SVG and D3 scales, using NOAA's published annual means.">
+  <meta property="og:title" content="The Keeling Curve in five steps">
+  <meta property="og:description" content="A brief2motion example of data storytelling: one SVG chart that redraws itself as you read.">
+  <meta property="og:type" content="article">
+  <meta name="theme-color" content="#fbfbf8">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+  <script type="importmap">
+    { "imports": {
+      "d3-scale": "https://cdn.jsdelivr.net/npm/d3-scale@4.0.2/+esm",
+      "d3-shape": "https://cdn.jsdelivr.net/npm/d3-shape@3.2.0/+esm"
+    } }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="mast">
+    <a class="mast-name" href="#top">Field Notes on Air</a>
+    <a class="mast-link" href="#data">The data</a>
+  </header>
+
+  <main id="main">
+    <header class="lede" id="top">
+      <p class="dateline">Mauna Loa Observatory, Hawaii · annual means, 1959 to 2025</p>
+      <h1>One instrument, sixty-seven years, a line that has not once gone down.</h1>
+      <p class="standfirst">Since 1958 an analyser on the side of a Hawaiian volcano has measured how much carbon dioxide is in the air. Scroll, and the chart beside the text draws what it found.</p>
+    </header>
+
+    <section class="story" aria-label="The measurements, step by step">
+      <figure class="chart" aria-labelledby="chart-caption">
+        <div class="readout" aria-hidden="true"><span class="readout-year">1959</span><span class="readout-value"><b>315.98</b> ppm</span></div>
+        <svg viewBox="0 0 720 520" role="img" aria-label="Line chart of annual mean carbon dioxide at Mauna Loa. It rises every year, from 315.98 parts per million in 1959 to 427.35 in 2025. The full numbers are in the table at the end of the page."></svg>
+        <figcaption id="chart-caption">Annual mean CO₂ at Mauna Loa, parts per million. Data: NOAA Global Monitoring Laboratory and Scripps Institution of Oceanography.</figcaption>
+      </figure>
+
+      <div class="steps">
+        <article class="step" data-step="0">
+          <h2>1959: the first full year</h2>
+          <p>Charles David Keeling's analyser had been running since March 1958. Its first complete calendar year averaged <strong>315.98</strong> parts per million: of every million molecules of dry air, about 316 were carbon dioxide.</p>
+        </article>
+        <article class="step" data-step="1">
+          <h2>1988: past 350</h2>
+          <p>The yearly average went up every single year. In 1988 it reached <strong>351.69</strong>, the first annual mean above 350 parts per million.</p>
+        </article>
+        <article class="step" data-step="2">
+          <h2>2015: past 400</h2>
+          <p>Twenty-seven years later the annual mean was <strong>401.01</strong>. The first fifty took 29 years. The second fifty took 27.</p>
+        </article>
+        <article class="step" data-step="3">
+          <h2>2025: 427.35</h2>
+          <p>The latest full year. That is <strong data-count data-to="111.37" data-decimals="2">111.37</strong> parts per million more than 1959, a rise of <strong data-count data-to="35.2" data-decimals="1" data-suffix="%">35.2%</strong> over the length of the record.</p>
+        </article>
+        <article class="step" data-step="4">
+          <h2>And it is speeding up</h2>
+          <p>Same numbers, cut another way: the average rise per year in each decade. In the 1960s the air gained under one part per million a year. Since 2019 it has gained more than two and a half.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="data" id="data" aria-labelledby="data-title">
+      <h2 id="data-title">The data</h2>
+      <p>Every number on this page comes from one public file: NOAA's annual mean CO₂ at Mauna Loa, compiled by Dr. Xin Lan (NOAA/GML) and Dr. Ralph Keeling (Scripps Institution of Oceanography). The decade averages are computed in the page from the same numbers. From December 2022 to July 2023 the readings come from nearby Maunakea, because an eruption had closed the Mauna Loa site.</p>
+      <p><a href="https://gml.noaa.gov/ccgg/trends/">NOAA Global Monitoring Laboratory: Trends in CO₂</a> · <a href="https://scrippsco2.ucsd.edu/">Scripps CO₂ Program</a></p>
+      <details>
+        <summary>Show all 67 annual means as a table</summary>
+        <div class="table-wrap"><table><thead><tr><th scope="col">Year</th><th scope="col">CO₂, ppm</th></tr></thead><tbody id="rows"></tbody></table></div>
+      </details>
+      <noscript><p>The chart on this page is drawn with JavaScript. The numbers it shows are in NOAA's file, linked above.</p></noscript>
+    </section>
+  </main>
+  <footer class="foot"><p>A <a href="https://github.com/qualixar/brief2motion">brief2motion</a> example. Chart: hand-written SVG with <a href="https://d3js.org">D3</a> scales (ISC).</p></footer>
+  <script type="module" src="main.js"></script>
+</body>
+</html>

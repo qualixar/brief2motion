@@ -1,0 +1,7 @@
+background: radial-gradient(circle at 80% 10%, #c8ff3d 0 14%, transparent 40%), linear-gradient(160deg, #bfe8ff, #e9d6ff 60%, #ffd3ee);
+.s-title { background: linear-gradient(180deg, #5d6bff, #141a66 55%, #8fa0ff); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-stroke: 1px #141a66; }
+.s-card { box-shadow: var(--shadow); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.s-btn { border-radius: 999px; background: linear-gradient(180deg, #ff7cc6, #ff2fa0 55%, #d1127e); box-shadow: 0 4px 0 #141a66, inset 0 3px 0 rgb(255 255 255 / .65); border: 2px solid #141a66; transition: transform .12s; }
+.s-btn:active { transform: translateY(4px); box-shadow: 0 0 0 #141a66, inset 0 3px 0 rgb(255 255 255 / .65); }
+.s-btn-2 { background: linear-gradient(180deg, #f4ffc9, #c8ff3d 55%, #9ad600); color: #141a66; }
+.s-nav { border-radius: 999px; background: linear-gradient(180deg, #ffffff, #cfd8e6 50%, #f4f7fb); }   /* chrome */

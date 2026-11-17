@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Moth Display specimen poster">
+<rect width="800" height="1000" fill="#4d2378"/>
+<g stroke="#f3eaff" stroke-opacity=".35" stroke-width="2"><line x1="60" y1="300" x2="740" y2="300"/><line x1="60" y1="420" x2="740" y2="420"/><line x1="60" y1="720" x2="740" y2="720"/><line x1="60" y1="800" x2="740" y2="800"/></g>
+<text x="60" y="720" font-family="Didot, &#x27;Bodoni 72&#x27;, &#x27;Bodoni MT&#x27;, &#x27;Playfair Display&#x27;, Georgia, serif" font-weight="700" font-size="420" fill="#f3eaff" letter-spacing="-12">Mo</text>
+<text x="60" y="120" font-family="system-ui, 'Helvetica Neue', Arial, sans-serif" font-weight="700" font-size="34" fill="#f3eaff">Moth Display</text>
+<text x="740" y="120" text-anchor="end" font-family="system-ui, 'Helvetica Neue', Arial, sans-serif" font-weight="500" font-size="34" fill="#f3eaff">2025</text>
+<text x="60" y="910" font-family="system-ui, 'Helvetica Neue', Arial, sans-serif" font-weight="500" font-size="26" fill="#f3eaff" fill-opacity=".85">ascender · x-height · baseline · descender</text>
+</svg>

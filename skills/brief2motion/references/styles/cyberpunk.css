@@ -1,0 +1,8 @@
+.s-title { text-transform: uppercase; text-shadow: 0 0 12px rgb(0 229 255 / .7); }
+.s-card { clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px)); background: linear-gradient(135deg, #0e1119, #131a26); border: 0; box-shadow: none; outline: 0; }
+.s-stat { color: #f9f002; text-shadow: 0 0 14px rgb(249 240 2 / .6); }
+.s-btn { text-transform: uppercase; clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px); transition: background-color .12s, color .12s; }
+.s-btn:hover { background: #00e5ff; }
+.s-btn-2 { background: none; color: #00e5ff; clip-path: none; border: 1px solid #00e5ff; box-shadow: var(--shadow); }
+.s-field input { background: #07080c; color: #e8f6ff; border-color: #00e5ff; }
+.s-nav { border-width: 0 0 1px; border-radius: 0; padding-inline: 0; }

@@ -1,0 +1,1365 @@
+brief2motion 1.0.0: the web motion guide
+QualixarField guide · version 1.0.0
+brief2motion
+The web motion guide
+Write the brief. Choose the stack. Build the page. Check it in a real browser.Scroll stories · 3D products · kinetic type · page transitions · data stories · interface motion · 32 visual styles
+Varun Pratap Bhardwaj · github.com/qualixar/brief2motion · MIT licence · A companion to release 1.0.0, November 2026
+Contentsbrief2motion 1.0.0
+Contents
+What you can build
+How it works: one loop for every site
+Setup
+Writing a brief that can be checked
+Routing: how the stack and the style are chosen
+The default stack: plain CSS and JavaScript, with the kit
+GSAP, ScrollTrigger and Lenis
+Motion, for plain pages and for React
+three.js and React Three Fiber
+The dust engine
+Page transitions with the View Transitions API
+SVG, charts, Lottie and Rive
+Kinetic type and scroll stories
+Design fundamentals: what every page gets
+The style system: 32 styles and approaches
+Motion-led approaches
+Accessibility: the page works without the motion
+Performance
+The checks, one by one
+The examples
+Recipes on one page
+Troubleshooting and questions
+Sources and what was verified
+How to use this guideNew machine: start with Setup. To shape a request: the brief pages. To understand a choice the agent made: Routing and the stack pages. To pick a look: the style pages. To judge a result: the checks.
+Orientationbrief2motion 1.0.0
+What you can build
+brief2motion is a skill for Claude Code and Codex. You describe a website in plain words, and the agent builds it with motion that suits it, then measures the result in a real browser before you see it.
+This guide is for people who can describe what they want and would like to understand what they get back: founders, designers, marketers and developers. It explains how to write the brief, how the skill chooses its tools, what each tool is good at, the visual styles it knows, and what the checks mean. Every example in it is in the repository and runs on your machine.
+Kind of site
+What moves
+Built with
+Example
+Product launch
+a 3D object you can turn; scroll poses; an exploded view; colourways
+three.js
+halden-one
+Brand scroll story
+pinned scenes, a picture sequence scrubbed by scroll, a sideways gallery
+GSAP, ScrollTrigger, Lenis
+tidewater
+Type-led landing page
+a headline that sets word by word, rows of words that slide, springs
+Motion
+relay
+Portfolio
+a thumbnail that grows into the next page; a grid that glides when filtered
+View Transitions API
+halvorsen
+Data story
+one chart that redraws as you read; counters
+SVG, D3 scales
+keeling
+App interface
+tabs, drag to reorder, items moving between lists, numbers on springs
+React, Motion for React
+mise
+Illustrated page
+a drawing that draws itself, icon animations, pots that fill on scroll
+CSS, JavaScript, Lottie
+sprout
+Particles
+dust that forms a product, a logo, a face or a word
+the dust engine
+copper-no-7
+halden-one: a radio built from about forty shapes in three.js. No model file, no photograph.
+tidewater: the crystal is 48 pictures; your scroll position picks one.
+What it is notIt is not a page builder with a visual editor, and it does not host your site. It writes ordinary files (HTML, CSS, JavaScript) into a folder that you can read, change and upload anywhere.
+Orientationbrief2motion 1.0.0
+How it works: one loop for every site
+Whatever the brief asks for, the agent goes through the same six steps. The fourth is the one that matters: the page is measured, and a failed check is a fix, not a footnote.
+The loop, and the stacks the first step chooses from.
+Step
+What happens
+What you can read afterwards
+1. Route
+route.mjs reads the brief and proposes a motion stack and a visual style, quoting the words that led there. The agent agrees or overrules.
+the first lines of SPEC.md
+2. Spec
+A design plan, a motion plan in three lists (on load, on scroll, on input), every word of copy, and a "done when" list.
+SPEC.md
+3. Build
+Starts from the closest example and the shared kit, with the reference for that stack and style open.
+site/
+4. Check
+check_site.mjs opens the page in Chrome seven ways and measures it.
+check/site-report.json, check/shots/
+5. Fix
+Fixes the page, never the budget, and measures again. Then looks at the screenshots.
+the same files
+6. Deliver
+Starts a local preview and writes the report.
+REPORT.md and an http://localhost link
+Two ideas hold the loop together. The first is that a brief ends in things that can be checked, so "done" is a list of numbers and screenshots instead of an opinion. The second is that the page has to work for everyone who opens it: on a small phone, with a keyboard, with motion switched off, without WebGL, even with JavaScript off.
+Getting startedbrief2motion 1.0.0
+Setup
+Two commands in Claude Code, then a new session.
+If you do not use brief2mp4, add this repository as its own marketplace: /plugin marketplace add qualixar/brief2motion, then /plugin install brief2motion@brief2motion. In Codex: codex plugin marketplace add qualixar/brief2motion, then codex plugin add brief2motion@brief2motion. Or clone the repository and copy skills/brief2motion into ~/.claude/skills/ or ~/.codex/skills/.
+Tool
+Needed for
+Install on macOS
+Node.js 22 or newer
+everything
+brew install node
+Chrome or Chromium
+the checks, which need a real browser with WebGL
+brew install --cask google-chrome
+playwright-core 1.65.1
+driving the browser
+downloaded once by the first check, about 14 MB
+Python 3
+the preview server (a Node version is included)
+preinstalled
+ffmpeg
+a short film of the page (optional)
+brew install ffmpeg
+Check a machine at any time with bash skills/brief2motion/scripts/doctor.sh. It prints ok or the exact install command for each tool, for macOS, Windows and Linux.
+What has been testedEverything in this guide was built and measured on macOS with Chrome 157. The Windows and Linux commands are written but were not run by the author. Codex has a plugin manifest but no recorded run.
+Opening the page
+When the agent says it is done, it gives you a link such as http://localhost:8421/. Open that address. Do not double-click site/index.html: browsers refuse to load JavaScript modules from a file, so you would see a blank page. To start the preview yourself: python3 skills/brief2motion/scripts/serve.py site. It serves the folder on your own machine only, and Ctrl-C stops it. To publish, upload the site/ folder to any static host.
+The briefbrief2motion 1.0.0
+Writing a brief that can be checked
+The agent guesses less when the brief says more. Seven lines cover almost everything.
+Line
+What to write
+Why it matters
+What it is
+the product, and who it is for
+the router picks a visual style from the product and the audience
+What moves
+in your own words, in order: on load, as I scroll, when I click
+this picks the motion stack
+Words on the page
+the headline and button text, exactly
+the agent uses them as written and invents nothing
+Images
+what you have, or "none: draw it in code"
+it will not borrow pictures it has no right to
+Look
+colours, type, a mood, or a style by name
+your words replace any style the router would guess
+Stack
+only if you care: "plain HTML", "Next.js", "use GSAP"
+a named library is always used
+Done when
+one checkable line per thing you care about
+these are what the checks measure
+An annotated brief
+This is the brief that produced halden-one, as it is in the repository.
+"We have no photos and no 3D model yet, so build the radio in code" removes a whole class of problems: nothing to license, nothing to download, a page under 100 KB.
+"As I scroll it goes through four steps" gives the motion plan its structure. Four named poses are easier to build and to check than "it animates as you scroll".
+Every "done when" line can be tested: count the labels, switch WebGL off, switch reduced motion on, read a number.
+Briefs that go wrong
+The brief says
+What happens
+Say this instead
+"Make it pop", "feel alive", "modern"
+nothing to route on; the agent proposes one moment and builds that
+what should move, and when
+"Like Apple" or "like Stripe"
+the agent has to guess which quality you mean
+the quality: the glass, the scroll scenes, the restraint
+"Add animations everywhere"
+a fade on every section, which reads as generated
+the one moment you want people to remember
+"Use our customer logos and reviews" with none attached
+it leaves the section out; it will not invent proof
+attach them, or drop the section
+When the page is up, one follow-up is worth sending: "Check it against the brief." The agent goes back to your original words line by line, shows the evidence for each, fixes what falls short and measures again.
+The first stepbrief2motion 1.0.0
+Routing: how the stack and the style are chosen
+The router is a keyword scorer with a rule book you can read. It has never seen your product, so the agent treats its answer as a proposal.
+The stack
+Each stack has a list of phrases with weights. The stack with the highest total wins, and the default is the lightest one. A few rules keep it honest:
+The default is no library. "Something should move" is not evidence for GSAP or three.js. Reveals, hovers and a pinned scene are plain CSS and JavaScript.
+React changes the answer. 3D in a React project goes to React Three Fiber, and interface motion goes to Motion for React. Both come with a note that they need your project's bundler.
+Fallback requirements are not requests. "It must still read without WebGL" does not route to three.js.
+A named library wins. If the brief says GSAP, it is GSAP.
+The style
+A style named in the brief is used. Otherwise the router looks at what the product is, who it is for and the mood words, and one stray word is never enough: "paper" in "paper plane" does not pick a paper-textured look. The first rows of the audience table:
+The brief mentions
+Styles proposed, in order
+The reason it gives
+headphones, speaker, radio, earbuds, gadget, device, wearable, smartph ...
+Minimalism, Dark-mode-first, Editorial / magazine
+hardware sells on the object itself: a quiet page, one large product, little else
+bankw*, financw*, fintech, insurw*, legal, law firm, accounting, inves ...
+Swiss / International Typographic Style, Minimalism, Flat design
+money and law need trust and fast scanning: a strict grid, high contrast and almost no decoration
+healthw*, medical, clinic, hospital, pharmaw*, patient, therapy, care  ...
+Minimalism, Flat design, Material Design 3
+health audiences include people who are stressed or have low vision: calm, plain and high contrast
+kids, children, toddlers, school, classroom, learning app, education,  ...
+Claymorphism, Memphis, Neubrutalism
+a young audience responds to soft, toy-like shapes and bright colour
+developer, devtool, dev tool, api, sdk, cli, open source, infrastructu ...
+Dark-mode-first, Swiss / International Typographic Style, Neubrutalism
+developers work in dark editors and want density and directness; a dark default is expected here
+ai, machine learning, llm, model, agentproduct, platform, startup, too ...
+Aurora / mesh gradient, Dark-mode-first, Minimalism
+an abstract product with no photo to show: soft gradients carry the mood while plain type carries the claim
+luxury, premium, jewelw+, watches, perfume, fragrance, hotel, spa, fin ...
+Editorial / magazine, Art Deco, Minimalism
+luxury reads through restraint, large serif type and a lot of space
+music, festival, band, dj, club, record label, nightlife, concert ...
+Maximalism, Synthwave / retrowave, Duotone
+music brands sell energy: dense colour, big type and treated photography
+game, gaming, esports, arcade, streamer ...
+Cyberpunk / neon, Synthwave / retrowave, Glitch
+gaming audiences expect a dark, lit, high-energy look
+fashion, streetwear, apparel, sneakers, beauty, cosmetics ...
+Editorial / magazine, Maximalism, Y2K
+fashion follows magazine layout, or pushes against it on purpose
+creator, indie, maker, newsletter, side project, community, zine ...
+Neubrutalism, Memphis, Grain / noise texture
+independent products win by having a voice: bold outlines and flat colour are quick to recognise
+magazine, publication, journalisw+, newsroom, long-form, essay, report ...
+Editorial / magazine, Swiss / International Typographic Style, Grain / noise texture
+reading comes first: a type scale, a measure and a grid
+If nothing matches, it says so and suggests none. A brand's own colours and type always replace a style's tokens. The rule book is references/routing.json; adding a phrase is a one-line change, and the tests check that every example's own brief still routes to the stack that example was built with.
+Stacksbrief2motion 1.0.0
+The default stack: plain CSS and JavaScript, with the kit
+Most motion on a website needs no library. The kit is ten small files that handle the parts that are easy to get wrong.
+File
+What it does
+kit.css
+the accessibility floor: a skip link, a focus ring that shows on any background, the reduced-motion rule
+motion-core.js
+the reduced-motion switch, the state signal, frame loops that stop when hidden, one shared scroll listener, scroll progress for pinned scenes, and the maths
+reveal.js
+entrances with the Web Animations API; content stays visible if the script never runs
+split-text.js
+a heading cut into words, characters or lines, still read as one sentence by a screen reader
+counter.js
+a number that counts up while its real value stays in the page
+svg-draw.js
+lines that draw themselves
+image-sequence.js
+numbered pictures scrubbed on a canvas, loaded coarse to fine
+view-transitions.js
+same-page transitions and the shared element between pages
+three-stage.js
+a three.js renderer that fails softly, caps its pixel ratio, pauses off screen and holds one frame for reduced motion
+players.js
+Lottie and Rive, loaded only when needed and paused when unseen
+A pinned scene with no library
+Make the section tall and its child sticky. The kit turns scrolling into a number from 0 to 1 and writes it to a CSS variable.
+Scroll-driven animation with no script at all
+CSS can tie an animation to scroll position. sprout fills its pots this way. Browsers without the feature, and visitors with reduced motion, see the finished state.
+Every page reports its stateA page ends its setup with signal('ready'), signal('reduced') or signal('static'). The checker waits for it, and CSS can style on it. "Static" means something the motion needs is missing and the page fell back to a still.
+Stacksbrief2motion 1.0.0
+GSAP, ScrollTrigger and Lenis
+For choreography: several things moving in a set order, scenes pinned and scrubbed by scroll, sideways galleries, text that splits and sets.
+All of GSAP is free since 2025, the former paid plugins included. It is free under GSAP's own licence, not an open-source one: it allows commercial work and code an AI wrote, and forbids use inside no-code animation builders that compete with Webflow. Pages load it from a CDN at a pinned version with integrity hashes.
+tidewater: the section is pinned; the caption and the picture follow the scroll.
+One frame for every page
+gsap.matchMedia() owns every branch. Motion is created only inside it, and GSAP undoes all of it when a condition stops matching.
+scrub: true for things that must stay locked to the scroll; scrub: 0.5 for things that should glide.
+A pin of 200 to 300% of a screen is enough for one idea. Longer, and people think the page is stuck.
+Sideways sections on wide screens with motion on; a normal swipe row otherwise.
+Lenis stands down for reduced motion by itself. Give in-page links anchors: true, or they stop working.
+Stacksbrief2motion 1.0.0
+Motion, for plain pages and for React
+Motion is the library that used to be Framer Motion. Use it for how an interface feels: springs, gestures, layout changes, things entering and leaving.
+relay: the headline sets word by word; an amber block wipes in behind two words.
+mise: a React planner. Rows make room when you drag; ticking moves an item between lists.
+On a plain page
+In React
+Three things learned while building mise, each now in the reference:
+A reorderable list tracks rows by value. Objects made during render look new every time and the order never changes. Pass ids.
+A reorderable row is also a keyboard stop: Space picks it up, the arrow keys move it, Space drops it. Say so in its label.
+Motion in an interface answers input. If nothing was pressed, nothing moves, and with reduced motion the same changes happen at once.
+Stacksbrief2motion 1.0.0
+three.js and React Three Fiber
+For a real 3D object or scene: a product to turn, parts that come apart, a camera that travels, a shader.
+The exploded view: each part sits in its own group and moves along one axis.
+Colourways: a button repaints the enamel; a slider turns the radio for keyboard users.
+What the kit's stage does for you
+returns nothing instead of crashing when WebGL is missing, so the page can show its still picture;
+caps the pixel ratio at 2 (a phone at 3 would draw nine pixels for every one);
+sizes itself from the canvas, pauses when hidden or off screen, recovers from a lost context;
+with reduced motion, draws one frame and holds it until something changes.
+Light without files, a model without a file
+A generated room, blurred into an environment map, gives enamel and brass something to reflect with nothing to download. A plane with a soft dark gradient under the object reads as a contact shadow and costs almost nothing. The radio itself is about forty primitives. For a real model the reference covers glTF, compression and credits.
+Scroll poses
+Describe each pose as plain numbers (camera angle, distance, how far the parts are pulled apart), give each a scroll position, and interpolate, holding each pose for a while before travelling. With reduced motion the scene cuts from pose to pose.
+React Three Fiber needs a bundlerThe same scene can be written as React components with React Three Fiber and drei, and the reference shows how. Its renderer must match the installed React version exactly. A bundler takes care of that; a page that loads modules from a CDN cannot. The test page in the repository pins the versions by hand for that reason.
+Stacksbrief2motion 1.0.0
+The dust engine
+The one stack with a complete template: you change a settings file and the engine does the rest.
+copper-no-7: 60,000 dots form the bottle as the page loads.
+Each dot has a place in a slow galaxy of dust and a place in each shape. Two numbers drive everything: how far the dust has formed, and which shape it is forming. The graphics chip moves every dot, so sixty thousand cost about the same as six hundred.
+Stipple places dots by darkness and suits products and logos. Halftone puts round dots on a grid, sized by darkness, and suits faces. A portrait needs a calm, front-facing photo on a plain background.
+The brief says
+Setting
+"made of dust", "particles form my product"
+assemble.targets, stipple
+"portrait", "my face", "halftone"
+style: 'halftone', mask: 'oval'
+"turns into", "then back to the product"
+up to four shapes and a sequence
+"a plane flies across"
+flight.path
+"when I scroll"
+scroll.length
+The engine never passes a budget by quietly drawing fewer dots: its own checker fails a page that sheds any on desktop.
+Stacksbrief2motion 1.0.0
+Page transitions with the View Transitions API
+The browser takes a picture of the old page and morphs it into the new one. You write CSS and almost no script, and a browser without the feature changes the page the ordinary way.
+halvorsen: four posters on the index.
+A project page. The poster on the left is the one that was clicked: it grew into place.
+On the index only the clicked card may carry that name, so a few lines of script set it as the old page leaves and again when you come Back. That script has to run before the page's first frame:
+Without blocking="render" the first navigation after a fresh load showed no morph in testing. The smoke test now checks that both halves of the morph exist, in both directions.
+Keep the two elements the same shape. A 4:5 poster into a 4:5 poster is clean.
+One travelling element per navigation, and under about 600 ms: page changes are frequent.
+For filter, sort and tabs on one page, wrap the change in document.startViewTransition and give each item its own name.
+Stacksbrief2motion 1.0.0
+SVG, charts, Lottie and Rive
+Three ways to move illustration. SVG in code is the lightest. Lottie plays an animation exported from After Effects. Rive plays an interactive animation with states.
+keeling: the line is revealed by widening a clip, so it always ends exactly on the right year.
+sprout: the stem draws, then seven leaves grow from the points where they meet it.
+A line that draws itself
+Give the shape pathLength="1". A dash of length 1 then covers it whatever its real length, and progress from 0 to 1 maps straight onto the dash offset.
+Charts
+Write the SVG yourself and use D3 only for the maths: scales, and the path of a line. A chart needs a text alternative: a label that states the finding, a caption with the source, and the numbers in a table. Every number in keeling comes from one public file, and the page links to it.
+Players
+The kit loads a player from the CDN only when the first animation is near the screen, plays it only while visible, and shows one chosen still frame with reduced motion. Reserve the box with aspect-ratio, so nothing jumps when the animation arrives.
+The brief has
+Use
+lines, simple shapes, icons, a chart
+SVG with the kit
+a finished animation exported from After Effects
+Lottie
+a character or control that reacts to input, with several states
+Rive
+a looping illustration heavier than about 200 KB as Lottie
+a short muted video with a poster
+Techniquesbrief2motion 1.0.0
+Kinetic type and scroll stories
+Two techniques that cut across the stacks.
+Kinetic type
+A headline is cut into lines, words or characters, and each piece gets its own timing. The sentence has to stay one sentence for a screen reader, which the kit and GSAP's SplitText both handle.
+Piece
+Gap between pieces
+Whole headline
+Lines
+80 to 120 ms
+set within about 1.2 seconds
+Words
+30 to 60 ms
+Characters
+15 to 30 ms
+Move in reading order. Random-order reveals are slow to read.
+One kinetic headline per screen.
+With reduced motion there is no split at all: the plain heading is the finished state.
+Text that keeps moving by itself for more than 5 seconds needs a pause.
+Scroll stories
+Way
+How
+Use it for
+Step-triggered
+the section nearest a line on screen is active; switching runs a short transition
+charts and diagrams with distinct states; the most robust
+Scrubbed, CSS sticky
+a tall section, a sticky child, a number from 0 to 1
+one scene with no library
+Scrubbed, GSAP
+pin and scrub with a timeline
+several scenes, sideways travel
+Native CSS
+animation-timeline
+enhancements that may be absent
+Scrolling scrolls: do not hijack it, do not make one wheel tick equal one section, do not block the keyboard. One change per step, with the text beside the graphic. Parallax adds little by itself and makes some people nauseous; a 2013 Purdue study found it did not improve the experience.
+WebAssembly
+Almost no motion on a website needs it. It cannot speed up moving page elements or drawing, which the browser and the graphics chip already do. It can help with heavy arithmetic every frame: physics with thousands of bodies, fluid or cloth, processing pictures or video. Prove the JavaScript version is too slow first.
+Designbrief2motion 1.0.0
+Design fundamentals: what every page gets
+Motion sits on top of a page. If the page under it is hard to read, badly spaced or slow, no animation rescues it.
+Say what it is, at the top
+The first screen states what the product is and what to do next, with real content. People spend 57% of their viewing time above the fold and 74% in the first two screens (Nielsen Norman Group, 2018), so the first screen must not be a slow reveal of nothing.
+Type and space
+Body text 16 px or larger. Line length 45 to 90 characters. Line height about 1.5 for text, 0.95 to 1.15 for headlines.
+A scale of four or five sizes, not a pile. Fluid headlines with clamp() and a rem floor.
+One family or two; if two, clearly different. System fonts unless the brief supplies one.
+Spacing in steps of 4 px. Group with space before lines.
+Colour and contrast
+Text contrast at least 4.5:1; large text 3:1; control edges 3:1. The thresholds are not rounded.
+A palette is four to six named colours, with the text pairs checked before any CSS is written.
+Light mode is the safer default. Research says it reads better for most people; default to dark only when the audience expects it.
+Responsive, and fast
+Design for 320 px wide first. Tap targets at least 24 px, 44 for anything primary. Never disable zoom.
+Main content visible within 2.5 seconds, a tap answered within 200 ms, layout shift 0.1 or less (Google's Core Web Vitals).
+Text hidden until an entrance animation runs is late content. Render it visible; animate from a readable state.
+Give every picture, canvas and player a size, and animate transform and opacity, so nothing jumps.
+Motion principles
+Rule
+Number
+Direct feedback
+about 100 ms
+Most interface changes
+200 to 300 ms
+Large movements
+up to 400 ms; 500 ms and more drags
+Entering against leaving
+entering slightly longer, for example 300 ms in and 200 ms out
+Stagger between related items
+30 to 80 ms, in reading order
+A hero sequence
+over in about 1.5 seconds
+Every animation has a reason: it shows what changed, where something came from, or what to look at. One orchestrated moment beats many scattered ones. A fade on every section and a hover effect on every card is the commonest sign of a generated page. Motion that answers input is always welcome.
+Never invent proofNo made-up reviews, ratings, customer names, logos or numbers. If the brief has none, the section is left out. Made-up examples say that they are made up.
+Stylesbrief2motion 1.0.0
+The style system: 32 styles and approaches
+Web motion sits on a design, so the skill knows the major visual styles. Each was checked against a published source, and each has tokens, tested CSS, the motion that fits, its accessibility traps and when to choose it.
+The 28 looks are live on one page in the repository, examples/style-atlas/: the same small product fragment in every style, so they can be compared and measured. The pictures on the next pages are screenshots of it. The atlas, the reference pages and the router are generated from one data file, so they cannot drift apart.
+Family
+Styles
+Surface styles
+Neubrutalism, Web brutalism, Glassmorphism, Liquid Glass-inspired, Neumorphism (soft UI), Claymorphism, Skeuomorphism, Flat design, Material Design 3
+Layout and type styles
+Swiss / International Typographic Style, Minimalism, Maximalism, Bento grid, Editorial / magazine
+Retro and themed styles
+Y2K, Frutiger Aero, Vaporwave, Synthwave / retrowave, Memphis, Corporate Memphis, Art Deco, Cyberpunk / neon, Glitch
+Visual treatments
+Aurora / mesh gradient, Grain / noise texture, Duotone, Dark-mode-first, Isometric
+Motion-led approaches
+Kinetic typography, Scroll-driven storytelling, 3D / immersive WebGL, Micro-interactions
+How to use a style
+A style is a starting point for the look, never a reason to ignore the brief. Your colours and type replace its tokens.
+Take the signature rules, not the specimen. Neubrutalism is thick borders, hard shadows and loud flat colour; it is not that particular yellow.
+Read the accessibility list first. Several styles are defined by a property that fails contrast unless you compensate.
+Spend the boldness in one place. A neubrutalist page with glass panels and a neon glow is three styles and no design.
+Tools, not styles
+Organic / blob shapes. Soft, irregular shapes made with an eight-value border-radius, an SVG path or clip-path. A tool used inside other styles (claymorphism, Corporate Memphis), not a documented style of its own.
+Monochrome. One hue in several tints and shades. A palette decision used inside Swiss, minimal or dark-first work, not a style of its own.
+A name that is not a style
+Spectromorphism. Not a design style. No design source uses it; the nearest real word, spectromorphology, is a term from electroacoustic music. If a brief asks for it, ask whether neumorphism, skeuomorphism or glassmorphism was meant.
+Stylesbrief2motion 1.0.0
+Neubrutalism, Web brutalism
+Surface styles
+Neubrutalism
+Thick black outlines, hard offset shadows with no blur, and two or three loud flat colours. Raw like brutalism, but tidy and friendly.
+Choose it for
+Creator tools, indie products, developer tools, events, consumer brands that want a voice.
+Avoid it for
+Banking, healthcare, dense enterprise screens.
+Signature rules
+Borders 2 to 4 px, solid, usually black
+Shadow is one solid colour, offset about 4 px, blur 0
+Two or three saturated fills on a pale ground
+Headlines about twice the body size, neutral sans for body text
+Motion that fits
+Fast and physical: a button moves by its shadow offset on hover and lands on press (100 to 200 ms). Marquee strips and stickers tilted a degree or two suit it. No soft fades.
+Accessibility
+Loud colour pairs still have to pass contrast: yellow with cyan does not
+Condensed or decorative faces hurt paragraphs; keep body text plain
+Every control needs its border, or it stops looking pressable
+Origin
+An evolution of web brutalism that mixes its rawness with 1990s graphic design; described by Nielsen Norman Group in 2025.
+Surface styles
+Web brutalism
+The unstyled look on purpose: default fonts, visible structure, blue links, no decoration. A statement against polish.
+Choose it for
+Art, architecture and design studios, manifestos, personal sites.
+Avoid it for
+Anything that has to sell or convert.
+Signature rules
+Browser defaults kept: serif text, underlined blue links
+No rounded corners, no shadows, no gradients
+Structure shown, not hidden: borders, tables, raw lists
+Motion that fits
+None, or an instant state change. Motion would contradict the point.
+Accessibility
+It is naturally readable when the defaults are kept
+Do not remove focus outlines to look raw
+Origin
+A mid-2010s reaction to the light, optimistic mainstream web, collected at brutalistwebsites.com.
+Stylesbrief2motion 1.0.0
+Glassmorphism, Liquid Glass-inspired
+Surface styles
+Glassmorphism
+Frosted panels: a see-through fill, a blur of whatever is behind, a thin light edge and a soft shadow, floating over a colourful background.
+Choose it for
+Navigation bars, overlays and cards over pictures or gradients.
+Avoid it for
+Long reading text, data tables, low-end devices.
+Signature rules
+Fill about 15 to 40% opaque; a dark tint keeps white text readable when a bright shape drifts behind it
+backdrop-filter: blur of about 10 to 25 px (NN/g shows 25 px keeping edges readable; 100 px turns the background to mush)
+A 1 px light border and a soft drop shadow to lift the panel
+Needs something colourful behind it, or there is nothing to frost
+Motion that fits
+Slow drift of the shapes behind the glass, and a small lift on hover. Keep the blur radius fixed: animating blur is expensive.
+Accessibility
+Text over a see-through panel has uneven contrast: test against the lightest and darkest thing that can sit behind it
+Give a solid fallback for prefers-reduced-transparency (experimental) and prefers-contrast: more
+An ancestor with opacity, filter, mask or clip-path limits what the blur can see
+Origin
+Named and popularised around 2020 to 2021; assessed by Nielsen Norman Group in 2024.
+Surface styles
+Liquid Glass-inspired
+Glass that behaves like a lens: controls float in a thin clear layer above the content, pick up its colour, and have a bright rim. On the web this is an imitation, not an Apple API.
+Choose it for
+Media and photo products, Apple-platform companions, floating toolbars.
+Avoid it for
+Text-heavy pages, anything where the glass would sit on the content itself.
+Signature rules
+Glass only on the floating layer: bars, buttons, sheets
+Clearer than frosted glass: light blur, strong saturation, a bright top rim and an inner glow
+Pill and capsule shapes
+Over bright content, add a dark dimming layer (Apple suggests 35%)
+Motion that fits
+Springy scale on press, and controls that merge or split. Keep it to the control layer.
+Accessibility
+Legibility was the main complaint about the real thing: check text on glass against busy content
+Honour reduced transparency and increased contrast with a solid fill
+Do not call a web imitation "Apple Liquid Glass"
+Origin
+Apple introduced Liquid Glass in June 2025 for iOS 26 and macOS Tahoe 26. Its guidelines keep it for controls and navigation, never the content layer.
+Stylesbrief2motion 1.0.0
+Neumorphism, Claymorphism
+Surface styles
+Neumorphism (soft UI)
+Shapes pushed out of, or pressed into, a surface of the same colour, drawn only with one light shadow and one dark shadow.
+Choose it for
+A few decorative controls: a music player, a smart-home dial.
+Avoid it for
+Forms, data-heavy apps, anything that must be scanned quickly.
+Signature rules
+Element and background share one colour
+Two shadows: light towards the top left, dark towards the bottom right, about 8 px offset and 16 px blur
+Pressed state swaps to inset shadows
+Pastel, low-contrast palette
+Motion that fits
+A press swaps the raised shadow for an inset one in about 150 to 250 ms.
+Accessibility
+Its defining trait is low contrast: control edges fail WCAG 1.4.11 (3:1) unless you add a border or a strong icon
+Raised and pressed states look alike to many people
+Keep text itself at 4.5:1
+Origin
+The name was coined in 2019 ("neo" plus "skeuomorphism") after a Dribbble banking concept by Alexander Plyuto; it faded by 2021 over accessibility.
+Surface styles
+Claymorphism
+Inflated, toy-like shapes: very round corners, two inner shadows that model the form, and one big soft coloured shadow underneath.
+Choose it for
+Children and education products, playful consumer apps, onboarding screens.
+Avoid it for
+Finance, legal, anything that should feel sober.
+Signature rules
+Corner radius about 30 px or more
+Two inner shadows (light on top, darker below) plus one large outer shadow tinted with the shape colour
+Strong, cheerful accent colours on a pale ground
+Motion that fits
+Squash and stretch on a spring: a button flattens slightly on hover and bounces on press.
+Accessibility
+Needs strong accents and real contrast to avoid the neumorphism trap
+In dark mode the fill cannot be black or the shadows vanish
+Origin
+Named by designer Michal Malewicz in 2021 as a friendlier successor to neumorphism.
+Stylesbrief2motion 1.0.0
+Skeuomorphism, Flat design
+Surface styles
+Skeuomorphism
+Controls drawn like the physical things they stand for: metal knobs, leather, paper, switches with real lighting.
+Choose it for
+Audio tools and instruments, games, products where a physical metaphor teaches the use.
+Avoid it for
+Content sites, large design systems that must scale.
+Signature rules
+Gradients that imitate a light from above
+Bevels: a light top edge and a dark bottom edge
+Material textures and real-world metaphors
+Pressed states that actually move down
+Motion that fits
+Mechanical: a key travels 2 to 3 px and returns, a switch slides, a dial turns. Short and with no bounce unless the object has one.
+Accessibility
+The metaphor gives strong affordance, which flat design lost
+Texture behind text lowers contrast: check it
+Ornament must not hide state
+Origin
+Common in interfaces since the 1980s; Apple moved away from it with iOS 7 in 2013.
+Surface styles
+Flat design
+No depth at all: solid fills, clear type, simple icons, strong colour. Nothing pretends to be an object.
+Choose it for
+Marketing sites, dashboards, documentation, anything that must load fast.
+Avoid it for
+Products that rely on a physical metaphor.
+Signature rules
+Solid colour, no gradients, no shadows
+Simple geometric icons and plenty of space
+Hierarchy from size, weight and colour only
+Motion that fits
+Colour and opacity changes of 100 to 200 ms. Movement is rare and short.
+Accessibility
+With no depth cues, clickable things can look like labels: keep underlines, borders or fills on every control
+A Nielsen Norman Group study is often cited for flat interfaces being slower to use for that reason
+Origin
+Rooted in Swiss style; reached interfaces with Zune (2006), Windows Phone 7 (2010) and iOS 7 (2013).
+Stylesbrief2motion 1.0.0
+Material Design 3, Swiss
+Surface styles
+Material Design 3
+Google's system: tonal colour roles from one seed colour, surfaces at a few elevation levels, generous rounding and a defined motion scale.
+Choose it for
+Android and Google-ecosystem products, utility apps, teams that want a ready system.
+Avoid it for
+Brands that must not look like an Android app.
+Signature rules
+Colour roles (primary, on-primary, surface, on-surface) generated from a seed colour
+Corner tokens: 4, 12, 16, 28 px and full
+Motion tokens: durations from 50 to 1000 ms in steps, standard easing cubic-bezier(.2, 0, 0, 1)
+State layers: a tint of the content colour at 8% on hover and 12% on press
+Motion that fits
+Use the scale: 100 to 200 ms for small changes, 300 to 500 ms for larger ones, with the standard easing. Expressive adds springs.
+Accessibility
+Colour roles are designed in contrast pairs: use on-colours with their own background
+Google's own research found Expressive designs were found faster, but dropping familiar patterns hurt usability
+Origin
+Announced in 2014; Material You (Material 3) in 2021; Material 3 Expressive in 2025.
+Layout and type styles
+Swiss / International Typographic Style
+A strict grid, one grotesque typeface, flush-left text and lots of white space. The layout is the decoration.
+Choose it for
+Editorial sites, portfolios, B2B, culture, anything led by text.
+Avoid it for
+Brands that want warmth or playfulness.
+Signature rules
+A modular or 12-column grid, visibly obeyed
+One sans-serif family in two or three sizes
+Flush left, ragged right; asymmetric balance
+Black and white plus one accent
+Motion that fits
+Sparse and exact: text wipes along the grid, a rule that draws, one clean page-load sequence.
+Accessibility
+A naturally accessible style: high contrast, clear hierarchy
+Keep line length to roughly 45 to 90 characters
+Origin
+Switzerland, 1950s and 60s: Josef Müller-Brockmann, Armin Hofmann, Emil Ruder. Helvetica dates from 1957.
+Stylesbrief2motion 1.0.0
+Minimalism, Maximalism
+Layout and type styles
+Minimalism
+As few elements as the job allows: one idea per screen, wide margins, one accent, and nothing ornamental.
+Choose it for
+Premium products, portfolios, focused tools, any brief that says calm.
+Avoid it for
+Products that must show a lot at once.
+Signature rules
+One accent colour or none
+Large margins; white space does the grouping
+One or two type sizes above body
+Remove an element before adding one
+Motion that fits
+Almost none: opacity and position changes of 150 to 300 ms that explain a change of state.
+Accessibility
+Do not remove affordances along with decoration: links and fields still need to look like links and fields
+Thin grey text on white fails contrast quickly
+Origin
+From the 1960s art movement; "less is more" (Mies van der Rohe) and "less but better" (Dieter Rams).
+Layout and type styles
+Maximalism
+More is more: clashing colour, layered pattern, several typefaces, everything large and overlapping, held together by repetition.
+Choose it for
+Fashion, music, festivals, youth brands, campaigns.
+Avoid it for
+Tools, checkouts, anything people use while stressed.
+Signature rules
+Several saturated colours at once, plus pattern
+Mixed typefaces and sizes on purpose
+Overlap, rotation and collage
+One repeated device (a border, a colour) to keep it from falling apart
+Motion that fits
+Busy but ordered: things tilt, bounce and trade places; marquees run. Pick one thing to move most.
+Accessibility
+Text needs its own solid backing when the page behind is patterned
+Order in the markup still has to make sense to a screen reader
+Loops need a pause control or reduced-motion handling
+Origin
+A long-standing reaction to minimalism across art, music and interiors; on the web it shows up as dense, collaged pages.
+Stylesbrief2motion 1.0.0
+Bento grid, Editorial
+Layout and type styles
+Bento grid
+A grid of rounded tiles of different sizes, like a lunch box. Each tile holds one feature, and bigger tiles matter more.
+Choose it for
+Feature overviews, product pages, dashboards, portfolios.
+Avoid it for
+Arguments that have to be read in order.
+Signature rules
+CSS Grid with tiles spanning different numbers of columns and rows
+One consistent gap and one corner radius
+One idea per tile; size shows importance
+Collapses to a single column on phones
+Motion that fits
+Tiles scale a little on hover or play one small loop each. Stagger their entrance once, at most.
+Accessibility
+Visual order and DOM order drift apart easily: check the reading and tab order
+Do not hide the main message in a small tile
+Origin
+Named after the Japanese lunch box; popular since Apple product pages around 2023, with Windows Metro tiles as an earlier relative.
+Layout and type styles
+Editorial / magazine
+A printed page on screen: a serif headline, a standfirst, columns, pull quotes, captions and rules. Typography carries the page.
+Choose it for
+Publications, long-form stories, luxury and culture brands, case studies.
+Avoid it for
+Dense apps and tools.
+Signature rules
+A display serif for headlines with a readable text serif or sans
+Columns, rules, drop caps, pull quotes and captions
+A clear type scale with big jumps
+Images cropped with intent, text allowed to overlap them
+Motion that fits
+Quiet: a headline that sets line by line, images that reveal with a mask, captions that fade. Scroll-driven chapters suit long pieces.
+Accessibility
+Keep measure near 45 to 90 characters and line height near 1.5
+High-contrast display serifs get too thin at small sizes
+Origin
+Carried over from print magazines and newspapers; on the web it sits close to Swiss style.
+Stylesbrief2motion 1.0.0
+Y2K, Frutiger Aero
+Retro and themed styles
+Y2K
+The late-1990s vision of the future: chrome, bubbly rounded type, translucent plastic, lime and hot pink, shiny gradients.
+Choose it for
+Fashion, music, youth brands, nostalgia campaigns.
+Avoid it for
+Serious or long-lived product interfaces.
+Signature rules
+Lime, orange and hot pink with white and chrome
+Chunky rounded lettering, often outlined
+Glossy gradients with a hard white highlight
+Translucent plastic and bubbles
+Motion that fits
+Bouncy and toy-like: buttons click down, stars spin, things wobble on hover.
+Accessibility
+Gradient-filled text needs a readable fallback colour and enough contrast at its lightest point
+Sparkle and spin loops need reduced-motion handling
+Origin
+The look of roughly 1997 to 2004, revived in the 2020s.
+Retro and themed styles
+Frutiger Aero
+Glossy optimism from the Windows Vista era: sky blues and grass greens, water drops, bokeh, glassy rounded buttons.
+Choose it for
+Nostalgia projects, climate and wellness brands that want an optimistic tone.
+Avoid it for
+Anything that must look current and neutral.
+Signature rules
+Bright blue, green and white
+Gloss: a hard highlight across the top half of buttons
+Nature imagery, water and bokeh circles
+Translucent rounded panels
+Motion that fits
+Smooth and glossy: gentle glows, bubbles rising, soft fades of 200 to 400 ms.
+Accessibility
+Text over sky gradients and bokeh needs a panel behind it
+Gloss highlights can cut contrast across button labels
+Origin
+Roughly 2004 to 2013. Named in 2018 after the Frutiger typeface and Windows Aero.
+Stylesbrief2motion 1.0.0
+Vaporwave, Synthwave
+Retro and themed styles
+Vaporwave
+An ironic remix of 1990s computing and mall culture: pastel pink and cyan, marble busts, old window chrome, wide-spaced text.
+Choose it for
+Music, art and culture projects, merch, ironic campaigns.
+Avoid it for
+Mainstream commerce and tools.
+Signature rules
+Pastel pink, lilac and cyan gradients
+Serif or system type with wide letter-spacing, often uppercase
+Old operating-system window frames, grids, statues, palm trees
+A little VHS damage
+Motion that fits
+Slow and dreamy: drifting gradients, a hue shift on hover, a scan line that passes now and then.
+Accessibility
+Pastel on pastel fails contrast: keep text dark
+Wide-spaced uppercase text is tiring in paragraphs; use it for labels only
+Origin
+Grew out of an internet music scene in 2011 and 2012.
+Retro and themed styles
+Synthwave / retrowave
+A neon 1980s: a magenta sun, a perspective grid running to the horizon, chrome type, purple night sky.
+Choose it for
+Games, music, events, retro-tech products.
+Avoid it for
+Calm or corporate brands.
+Signature rules
+Magenta, cyan and orange on deep purple
+A grid floor in perspective and a striped sun
+Chrome or gradient display type, italic and uppercase
+Glow on everything that is lit
+Motion that fits
+The grid scrolls towards the viewer, glows pulse slowly, titles slide in with a streak.
+Accessibility
+Glow does not add contrast: the text colour itself has to pass
+A moving grid is a vestibular trigger: stop it for reduced motion
+Thin neon text is hard to read
+Origin
+A music and visual genre from the mid-2000s built on 1980s film and game imagery; also called retrowave or outrun.
+Stylesbrief2motion 1.0.0
+Memphis, Corporate Memphis
+Retro and themed styles
+Memphis
+Squiggles, triangles, dots and terrazzo in clashing primaries and pastels, scattered at angles. Loud, geometric and cheerful.
+Choose it for
+Events, education, playful consumer brands, posters.
+Avoid it for
+Sober or premium products.
+Signature rules
+Primary colours with pink, mint and yellow, plus black outlines
+Loose geometric shapes: circles, triangles, squiggles
+Patterns: dots, stripes, terrazzo
+Asymmetry and tilt
+Motion that fits
+Shapes drift, rotate and bounce at different speeds; hover gives a quick tilt.
+Accessibility
+Keep patterns away from text or put a solid panel behind it
+Decorative shapes should be hidden from assistive technology
+Origin
+The Memphis Group, an Italian design collective led by Ettore Sottsass, 1980 to 1987.
+Retro and themed styles
+Corporate Memphis
+The flat tech-company illustration style: friendly figures with long limbs and small heads in bright, flat colours.
+Choose it for
+Internal tools, onboarding, explainers where friendliness matters more than distinction.
+Avoid it for
+Brands that need to stand apart.
+Signature rules
+Flat bright fills, no outlines
+Blobs and simple figures as decoration
+Rounded cards with soft shadows
+A friendly geometric sans
+Motion that fits
+Gentle floating of illustrations, soft slide-ups of 300 to 400 ms.
+Accessibility
+Illustrations of people need alt text that says what they show, or should be marked decorative
+By 2023 the style was widely seen as generic: use it knowingly
+Origin
+Named by Mike Merrill; the best-known version, Alegria, was made for Facebook by the agency Buck in 2017.
+Stylesbrief2motion 1.0.0
+Art Deco, Cyberpunk
+Retro and themed styles
+Art Deco
+Symmetry, stepped forms, sunbursts and fine gold lines on black or navy, with tall elegant capitals.
+Choose it for
+Hotels, bars, jewellery, events, heritage brands.
+Avoid it for
+Casual, technical or youthful products.
+Signature rules
+Black or navy with gold, sometimes emerald or burgundy
+Strict symmetry and centred layouts
+Stepped shapes, chevrons, fans and sunbursts
+Tall, widely spaced capitals
+Motion that fits
+Stately: lines that draw outward from the centre, fans that open, slow fades of 400 to 600 ms.
+Accessibility
+Gold on black passes easily, gold on white does not
+Wide-spaced capitals are for headings only
+Origin
+France, 1910s; named after the 1925 Paris exhibition of decorative arts.
+Retro and themed styles
+Cyberpunk / neon
+A dark city at night: black panels, acid yellow and cyan neon, clipped corners, warning labels and terminal type.
+Choose it for
+Games, security and developer tools, music, hardware.
+Avoid it for
+General audiences reading at length.
+Signature rules
+Near-black background with one or two neon colours
+Cut corners, thin lines, hazard stripes, small technical labels
+Monospace or condensed type
+Glow made from stacked shadows
+Motion that fits
+Sharp and electric: flicker on entry (once), scan lines, quick clipped wipes of 100 to 200 ms.
+Accessibility
+Flashing must stay under three times a second (WCAG 2.3.1) and loops need a stop
+Glow is not contrast; thin neon text fails
+Default dark is a choice: say why in the brief
+Origin
+From 1980s science fiction; Blade Runner (1982) set the visual template.
+Stylesbrief2motion 1.0.0
+Glitch, Aurora
+Retro and themed styles
+Glitch
+Deliberate digital damage: colour channels that split apart, slices that jump sideways, torn scan lines.
+Choose it for
+Music, games, art, error pages, launch teasers.
+Avoid it for
+Reading-heavy pages, anxious contexts such as payments.
+Signature rules
+Red and cyan copies of the text offset by a pixel or two
+Horizontal slices displaced with clip-path
+Stepped timing, not smooth easing
+Used on one element, not the whole page
+Motion that fits
+Short bursts of 200 to 400 ms with stepped easing, then stillness. Triggered by hover, entry or an error state.
+Accessibility
+Keep bursts rare and under three flashes a second (WCAG 2.3.1)
+Never glitch body text or controls people are trying to use
+Turn it off for reduced motion
+Origin
+From glitch art and 1990s net.art, where broken data became the image.
+Visual treatments
+Aurora / mesh gradient
+Large, soft, blurred fields of colour that blend into each other like northern lights, usually behind plain text.
+Choose it for
+AI and developer products, landing page heroes, anything abstract with no photo to show.
+Avoid it for
+Pages where a product picture would say more.
+Signature rules
+Two to four large radial gradients, heavily blurred
+A dark or very pale base so the colours glow
+Plain type and few elements on top
+A little grain on top hides banding
+Motion that fits
+Very slow drift: 15 to 30 seconds per cycle, transform only. It should be barely noticeable.
+Accessibility
+Contrast changes as the colours move: test text against the brightest blob
+Stop the drift for reduced motion
+Animate transform, never the blur radius or gradient stops, on large areas
+Origin
+A descriptive label from the 2020s, not a movement. CSS has no true mesh gradient, so it is built from blurred blobs.
+Stylesbrief2motion 1.0.0
+Grain, Duotone
+Visual treatments
+Grain / noise texture
+A fine speckle over flat colour or gradients, like film grain or cheap print. It removes the plastic look and hides banding.
+Choose it for
+Craft, food, fashion, editorial, any brand that wants a printed or analogue feel.
+Avoid it for
+Crisp, clinical product interfaces.
+Signature rules
+SVG feTurbulence, type fractalNoise, baseFrequency about 0.7 to 1
+Overlay at low opacity with multiply or overlay blending
+A small repeating tile (stitchTiles) and never a live full-screen filter
+Works best over gradients and muted, printed-looking palettes
+Motion that fits
+The grain itself stays still. If it must flicker, step it at a few frames a second on a small layer.
+Accessibility
+Grain lowers text contrast slightly: keep it behind text or very faint
+Animated noise is tiring and costly: default to still
+Origin
+A print and film artefact, reproduced on the web with an SVG noise filter.
+Visual treatments
+Duotone
+Every picture mapped to just two colours, a dark and a light, so mixed photography looks like one set.
+Choose it for
+Sites with mixed or weak photography, music and events, campaigns with one strong brand colour.
+Avoid it for
+Products where true colour matters, such as food or fashion detail.
+Signature rules
+Convert the image to greyscale first
+Map shadows to one colour and highlights to another (multiply for the dark, lighten or screen for the light, or an SVG feComponentTransfer)
+Use the same pair across the whole site
+Pick a pair with strong lightness contrast
+Motion that fits
+Cross-fade between two colour pairs on hover or scroll; otherwise still.
+Accessibility
+Text over a duotone photo needs a scrim or a solid panel
+Check the pair itself for colour-blind confusion: lightness contrast matters more than hue
+Origin
+A printing technique: a halftone made with two inks.
+Stylesbrief2motion 1.0.0
+Dark-mode-first, Isometric
+Visual treatments
+Dark-mode-first
+The dark theme is the designed default: near-black surfaces in a few elevation steps, soft white text, one bright accent.
+Choose it for
+Developer tools, media and video, games, dashboards used in dim rooms.
+Avoid it for
+Long-form reading for a general audience, unless a light theme is one click away.
+Signature rules
+Background near black, not pure black; text off-white, not pure white
+Depth from lighter surfaces, not from shadows
+Accent colours less saturated than on white
+Ship a light theme too, switched by prefers-color-scheme
+Motion that fits
+The same as the light theme. Glows and gradients read stronger on dark, so use less.
+Accessibility
+Light mode performs better for most people in most conditions: offer both and respect the system setting
+Pure white text on pure black causes halation for some readers
+Borders need 3:1 against the surface to be seen
+Origin
+A practice, not a movement. Research from Nielsen Norman Group says light mode reads better for most people, so a dark default needs a reason.
+Visual treatments
+Isometric
+Objects drawn as if seen from above at an angle with no perspective, so parallel lines never meet. Reads as a tidy little model world.
+Choose it for
+Explaining systems, infrastructure, logistics, fintech flows, feature diagrams.
+Avoid it for
+Emotional or lifestyle brands.
+Signature rules
+Three visible faces per object: top lightest, one side mid, one side darkest
+True isometric uses 30° to the horizontal; pixel-friendly art uses a 2:1 slope
+One light direction for every object
+Flat colours; depth comes from the three tones
+Motion that fits
+Parts lift, stack and slide along the three axes. Layers separating vertically explain how a product is built.
+Accessibility
+Isometric scenes are illustrations: describe what they show in text
+Small isometric labels get hard to read at an angle; keep text flat
+Origin
+A technical drawing projection; familiar from games, which usually use a 2:1 pixel ratio.
+Stylesbrief2motion 1.0.0
+Motion-led approaches
+Four ways of using motion that are not looks. Each has a complete example site.
+Kinetic typography
+The words are the animation: letters, words and lines move, stretch and take turns, so reading and watching become one thing.
+Rules
+Split text into lines, words or characters and stagger them
+One typeface, very large
+Movement follows the reading order
+Keep the real sentence available to screen readers
+Motion
+A set headline on load (0.6 to 1.2 s), then words that react to scroll. Stagger 30 to 60 ms per word.
+Example
+examples/relay/
+Accessibility
+Split text must stay one sentence for assistive technology
+Text that never stops moving needs a pause, or must end within 5 seconds (WCAG 2.2.2)
+Scroll-driven storytelling
+The page is a sequence: sections pin, pictures scrub and charts redraw as the reader scrolls, so the scroll bar becomes the timeline.
+Rules
+Pin a scene and drive it with scroll progress
+One change per step
+Text beside the picture, never hidden behind the effect
+Everything still readable as a plain page
+Motion
+Scrubbed, not timed: the reader sets the speed. Smooth scroll is optional and must not fight the trackpad.
+Example
+examples/tidewater/
+Accessibility
+Parallax and zooms can cause nausea: reduce to cuts for reduced motion
+Pinned sections must not trap keyboard users
+A 2013 Purdue study found parallax did not improve the experience by itself
+3D / immersive WebGL
+A real-time 3D scene is the page: a product you can turn, a world the camera moves through, particles that form a shape.
+Rules
+One hero object, well lit, beats a busy scene
+Camera moves tied to scroll or pointer
+A still picture for no-WebGL and for reduced motion
+Pixel ratio capped at 2 and the loop paused off screen
+Motion
+Slow, weighty camera moves with damping. Idle motion of a few degrees keeps the scene alive.
+Example
+examples/halden-one/
+Accessibility
+The canvas is invisible to assistive technology: the same content must exist as text
+Large rotations and zooms should become cuts for reduced motion
+Give controls a keyboard path (a slider, buttons)
+Micro-interactions
+Small animated answers to what a person just did: a toggle that slides, a row that makes room, a number that settles.
+Rules
+Each one has a trigger and feedback
+Feedback within about 100 ms; most transitions 200 to 300 ms
+Entering slightly slower than leaving
+Springs for things people drag, so they can be interrupted
+Motion
+Only in response to input. If nothing was pressed, nothing moves.
+Example
+examples/mise/
+Accessibility
+State must also be shown without motion (text, icon, colour)
+Drag needs a keyboard alternative
+Announce results to screen readers with a live region
+Qualitybrief2motion 1.0.0
+Accessibility: the page works without the motion
+Some people get dizzy or nauseous from movement on a screen, and they tell their system so. Others use a keyboard, a screen reader, or a browser where a script failed. The page has to work for all of them.
+Reduced motion
+No travel across the screen, no parallax, no zoom, no rotation, no loop that plays by itself.
+The finished state is on screen: the headline is set, the line is drawn, the shape is formed.
+Things that change with scroll may still change, in cuts instead of travel.
+Normal scrolling works.
+Library
+How it honours the setting
+GSAP
+motion is created only inside gsap.matchMedia() for visitors with no preference
+Lenis
+on by default: no smoothing, instant programmatic scrolls
+Motion for React
+<MotionConfig reducedMotion="user"> turns transform and layout animation off
+three.js
+draw one frame and hold it; draw again only when something changes
+Lottie, Rive
+load paused on a chosen still frame
+View Transitions
+the opt-in rule sits inside a media query for visitors with no preference
+Without the script, without WebGL
+Content is in the HTML, and visible by default. Something is hidden for an entrance only by a script that is already running.
+Every WebGL canvas has a still picture standing by, shown when the context cannot be created, a library fails to load, or an error is caught.
+A blocked CDN leaves a complete, still page.
+Keyboard and screen readers
+Everything that works with a pointer works with a keyboard. A drag needs another way: a slider, arrow buttons, or a built-in keyboard grab.
+A visible focus ring on every control. A skip link first, and the content inside a main landmark.
+Split text keeps one readable sentence. Decorative canvases are hidden from assistive technology; meaningful ones have a label.
+The result of an action is announced in a live region, not shown by motion alone.
+A floor, not an auditThe checker verifies these mechanically. That catches the common failures. It does not replace testing with a screen reader and with real people.
+Qualitybrief2motion 1.0.0
+Performance
+A page that looks right on a fast laptop is not finished until it holds its budgets on the emulated phone.
+What
+Budget
+Frame time, desktop 1440 by 900
+95 in every 100 frames take 20 ms or less
+Frame time, emulated phone, processor slowed four times
+95 in every 100 frames take 40 ms or less
+Files from the project, per page
+1.5 MiB or less
+Third-party hosts
+one: cdn.jsdelivr.net
+Console errors
+none
+Rules that keep frames short
+Animate transform and opacity. They are composited without layout or paint.
+One read and one write per frame. Measuring layout after writing a style makes the browser lay out again.
+Stop what cannot be seen: loops pause when the tab is hidden and when their element is off screen.
+Do not animate a blur radius or a full-screen filter. Blur a picture once, then move it.
+On a 3D canvas, cap the pixel ratio at 2, light with an environment map and one light, and keep post-processing off the phone tier.
+What the examples measure
+Example
+Desktop, p95 frame
+Emulated phone, p95 frame
+halden-one
+16.8 ms
+16.8 ms
+tidewater
+16.7 ms
+16.7 ms
+relay
+16.8 ms
+16.8 ms
+keeling
+16.7 ms
+16.8 ms
+mise
+16.8 ms
+16.8 ms
+sprout
+16.8 ms
+16.8 ms
+copper-no-7
+16.7 ms
+16.8 ms
+style-atlas
+16.7 ms
+16.7 ms
+These are from the reports in the repository, measured on an Apple M-series laptop with Chrome 157. A screen that refreshes 60 times a second gives a frame every 16.7 ms, so these pages are at the screen's own limit. The phone run is this machine's graphics chip with the processor slowed down. It is not a real phone: it catches layout and most performance problems, and you should still look at the page on yours.
+Qualitybrief2motion 1.0.0
+The checks, one by one
+check_site.mjs opens every page in Chrome seven ways. A page with one WebGL canvas gets 27 checks.
+Run
+What it checks
+A failure means
+Desktop
+the page reports its motion state; frame time while idle and scrolling; no sideways scroll at six scroll positions; one main heading, a language, a title and description, zoom allowed, alt text, a main landmark and a skip link; a visible focus ring on the first twelve keyboard stops; page weight
+the page is slow, wider than the screen, or missing basics
+Phone, 390 px
+frame time with the processor slowed four times; sideways scroll; tap targets of 24 px or more; page weight
+it will stutter or be hard to tap
+Phone, 320 px
+sideways scroll, loaded fresh at that width
+the layout breaks on the narrowest phones
+Reduced motion
+the page says so; no animation longer than a quarter of a second is running; two screenshots 0.7 seconds apart are identical at three scroll positions; every heading and paragraph is fully visible at some point; text contrast; normal scrolling works
+something still moves, or some text never appears
+JavaScript off
+something readable is on the page
+the content only exists after a script runs
+WebGL off
+the headline is readable; a still stands in for each WebGL canvas
+visitors without WebGL get a hole
+Every run
+no console errors; requests only to the page itself and one CDN
+something is broken or leaking
+What a checker cannot see
+It cannot see that a layout is dull, that a headline says nothing, or that text sits on a busy picture: text over pictures, gradients and canvas has no single background colour, so its contrast is not measured. After the checks pass, the agent opens the screenshots and looks at them against every "done when" line. So should you.
+What the checker found in its first week
+In the version 0.2 template, the brand link was 20 px tall, and the navigation bar kept fading for 1.1 seconds when a reduced-motion visitor scrolled. Both are fixed.
+Five styles in the atlas had button text below 4.5:1. See-through panels were being measured as if they were solid, which was a fault in the checker itself; it now blends them first.
+A helper line faded to 86% opacity failed "all text visible". The fade was removed.
+Three layers of tests
+Unit tests cover the router, the kit's maths and the measuring code. A smoke test per stack opens the real example and proves the documented pattern does what it says: the poster really morphs between pages, keyboard reorder really moves the row, the canvas really changes with scroll. Then the full check runs on every example.
+Examplesbrief2motion 1.0.0
+The examples
+Eight sites, each built from the brief beside it. Run any of them: python3 skills/brief2motion/scripts/serve.py examples/tidewater.
+three.js
+Halden One: a product launch with a 3D turntable
+What to learn from it
+A radio built from primitives and lit by a generated room: nothing to download.
+Four poses on the scroll, with a hold on each.
+Labels that follow parts, by projecting a 3D point to the screen each frame.
+Reduced motion cuts between poses. No WebGL shows a still made from the same scene.
+Its report
+27 of 27 checks passed. Chrome 157.
+GSAP, ScrollTrigger, Lenis
+Tidewater: a scroll story
+What to learn from it
+A picture sequence drawn by a script and loaded coarse to fine.
+One matchMedia block decides what runs on which screen and for which visitor.
+The sideways gallery is a normal swipe row on phones.
+Text that "reads itself" defaults to fully visible, so it works with no script.
+Its report
+27 of 27 checks passed. Chrome 157.
+Motion
+Relay: kinetic type
+What to learn from it
+A headline split into words that a screen reader still hears as one sentence.
+A highlight marked in the HTML, so it is there before any script runs.
+Decorative repeated words are hidden from assistive technology; one real heading says it once.
+A rota highlight on a spring, which answers a click and can be interrupted.
+Its report
+27 of 27 checks passed. Chrome 157.
+View Transitions API
+Halvorsen: a portfolio with page transitions
+What to learn from it
+Five ordinary pages. The transition is added on top with CSS.
+The clicked poster is named as the page leaves, and again on Back.
+The script is render-blocking, so it runs before the first frame.
+Filter and sort run inside a same-page transition, and announce the result.
+Its report
+119 of 119 checks passed. Chrome 157.
+SVG, D3 scales
+Keeling: a data story
+What to learn from it
+Real numbers from one public file, with the source on the page.
+Five chart states, switched by whichever paragraph is nearest the middle of the screen.
+The line is revealed by a clip, so it ends on the right year.
+The decade figures are computed in the page from the same data, not typed in.
+Its report
+27 of 27 checks passed. Chrome 157.
+React, Motion for React
+Mise: an app interface
+What to learn from it
+A static list inside the mount point, so the page reads before React starts and with JavaScript off.
+Reordering by drag and from the keyboard.
+An item that moves between two lists keeps one identity, so it travels.
+Every motion answers an input.
+Its report
+27 of 27 checks passed. Chrome 157.
+CSS, JavaScript, Lottie
+Sprout: an illustrated page
+What to learn from it
+No animation library on the page itself.
+Leaves that grow from the point where they meet the stem.
+Lottie icons written by a script, loaded only when near the screen, still with reduced motion.
+Pots that fill with CSS alone, as an enhancement.
+Its report
+27 of 27 checks passed. Chrome 157.
+the dust engine
+Copper No. 7: particles
+What to learn from it
+A settings file and four pictures; the engine is untouched.
+Up to four shapes in a sequence, with a caption per step.
+A still picture of the finished shape for visitors without WebGL.
+Its own checker counts the dots, so it cannot pass by drawing fewer.
+Its report
+27 of 27 checks passed. Chrome 157.
+Referencebrief2motion 1.0.0
+Recipes on one page
+You want
+Do this
+A headline that sets word by word
+split it with the kit; stagger 30 to 60 ms per word; finished within 1.2 seconds
+A section that pins while something plays
+a tall section with a sticky child and scrollScene; or ScrollTrigger with pin and scrub
+A picture that follows the scroll
+40 to 60 WebP frames about 960 px wide; createSequence; keep the last frame as a plain image
+A sideways gallery
+pinned on wide screens with motion on; a swipe row with scroll snap otherwise
+A line that draws itself
+pathLength="1", dash 1, animate the offset from 1 to 0
+A number that counts up
+countUp; the real value stays in the page for screen readers
+A chart that changes as you read
+step-triggered states; the paragraph nearest the middle of the screen is active
+A 3D product to turn
+the kit stage, a generated environment, drag plus a slider, a still picture as fallback
+A thumbnail that grows into the next page
+@view-transition, one shared name, a render-blocking script
+A grid that rearranges
+change the page inside a view transition; name each card
+A list to drag and reorder
+Motion's Reorder with ids as values; it handles the keyboard too
+A spring
+Motion animate with type: spring; start the next one from the current value
+Soft colour behind a hero
+two to four blurred radial gradients; move them with transform only, over 15 to 30 seconds
+Grain
+one small noise tile from an SVG filter, repeated; never a live full-screen filter
+Glass panels
+a tinted see-through fill, a 10 to 25 px backdrop blur, a light edge, and a solid fallback for reduced transparency
+Dust that forms a picture
+the dust engine template: edit config.js only
+An icon animation from a designer
+mountLottie; reserve the box; choose the still frame
+Commands
+Referencebrief2motion 1.0.0
+Troubleshooting and questions
+Symptom
+Cause and fix
+The page is blank
+You opened the file, not the address. Run serve.py and open the link it prints.
+"Could not start a browser"
+Install Chrome, or run npx playwright@1.65.1 install chromium, or set BRIEF2MOTION_CHROME.
+"The page never set data-motion"
+The page did not report its state. Call signal() from the kit when setup is done.
+The frame-time check fails
+Usually layout properties being animated, an uncapped pixel ratio on a 3D canvas, or a loop running off screen. On a machine with no GPU, pass --no-perf.
+The reduced-motion check fails
+Something still moves, or some text never becomes visible. Check each library's own switch.
+Sideways scroll at 320 px
+The report names the element. Usually a row that does not wrap, or a grid track without minmax(0, 1fr).
+The weight check fails
+Pictures about 1200 px wide as WebP with a 720 px copy; a sequence about 960 px wide at quality 60 to 70.
+A dust portrait does not look like the person
+A calm, front-facing photo from the shoulders up on a plain background, with halftone and an oval mask.
+Questions
+Does it cost anything? The skill is free and MIT licensed. The agent runs on your own Claude Code or Codex plan, and the checks run on your machine.
+Does it upload my files? No. A built page loads its libraries from one CDN when a visitor opens it, and the first check downloads a browser driver once.
+Which frameworks? A plain static site is the default and the best tested. For React and Next.js the references cover Motion for React and React Three Fiber; those are built by your own bundler.
+Can I use the scripts without an agent? Yes: the router, the checker and the capture tool are ordinary command-line programs.
+Can it make a video? The capture tool makes a short loop of a scroll-through. For a finished, checked MP4, its sibling skill brief2mp4 is the tool.
+Words used in this guide
+Word
+Meaning
+Stack
+the set of libraries a page uses for its motion
+Pin
+holding a section still on screen while the page keeps scrolling
+Scrub
+tying an animation's position to the scroll position, so scrolling back plays it backwards
+p95 frame time
+the time that 95 in every 100 frames stay under
+Reduced motion
+a system setting that asks sites for less movement
+Fallback
+what a visitor sees when something the motion needs is missing
+Token
+a named design value such as a colour, a radius or a shadow
+Spring
+motion defined by stiffness and damping instead of a duration, so it can be interrupted
+Referencebrief2motion 1.0.0
+Sources and what was verified
+What this guide rests on, and where its limits are.
+Verified by running it
+Every example passes check_site.mjs; the reports are in the repository. The numbers on the performance page are read from those reports when this guide is built.
+Each stack's pattern is exercised by a smoke test in a real browser, including test pages for React Three Fiber, Rive, and a three.js model with post-processing.
+The router, the kit's maths, the measuring code and the style data have unit tests.
+Not verified
+Windows and Linux. Real phones and tablets. Safari and Firefox: the checks ran in Chrome 157 only.
+Codex: the manifest is included, no run is recorded.
+Screen readers: the structure is checked mechanically, not by listening.
+React stacks inside a real bundled project: the React example and the React Three Fiber test page run from CDN modules.
+Some style entries are thinner than others, and say so. Aurora, maximalism and editorial are documented as trends or traditions, not as defined web styles.
+Published sources for the styles and the rules
+The repositories studied, with licences and what was taken from each, are in RESOURCES.md. No code from another project is copied into brief2motion. Facts were checked on 17 November 2026.

@@ -1,0 +1,9 @@
+.s-card { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; background: none; padding: 0; box-shadow: none; }
+.s-card > * { background: #fff; border-radius: 18px; padding: 14px; box-shadow: var(--shadow); margin: 0; transition: transform .25s ease; }
+.s-card > *:hover { transform: scale(1.02); }
+.s-card .s-stat { grid-row: span 2; display: grid; align-content: end; font-size: 3.2em; background: #15171a; color: #fff; }
+.s-card .s-field { grid-column: span 2; }
+.s-card .s-label { background: #dff3e4; color: #0d4a22; }
+.s-card .s-note { background: #e6ecff; color: #1b2f7a; }
+.s-btn { border-radius: 999px; }
+.s-btn-2 { background: #fff; color: #15171a; }

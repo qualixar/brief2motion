@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quay Grotesk · Noor Halvorsen</title>
+  <meta name="description" content="Quay Grotesk, a made-up typeface by Noor Halvorsen. A harbour-sign grotesque with flat terminals and wide numerals. Part of a brief2motion example of page-to-page view transitions.">
+  <meta property="og:title" content="Quay Grotesk · Noor Halvorsen">
+  <meta property="og:description" content="Quay Grotesk, a made-up typeface by Noor Halvorsen. A harbour-sign grotesque with flat terminals and wide numerals. Part of a brief2motion example of page-to-page view transitions.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#f1f0ec">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../kit/kit.css">
+  <link rel="stylesheet" href="../style.css">
+  <!-- blocking="render": the page is not painted until this script has run, so it can name the shared poster before the transition starts -->
+  <script type="module" blocking="render" src="../site.js"></script>
+</head>
+<body style="--c: #1a39c9; --c-ink: #eef1ff">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="nav">
+    <a class="brand" href="../index.html">Noor Halvorsen</a>
+    <nav aria-label="Main"><a href="../index.html#work">Work</a><a href="../index.html#about">About</a></nav>
+  </header>
+  <main id="main" class="project">
+    <section class="project-hero">
+      <img class="project-poster" src="../assets/poster-quay.svg" width="800" height="1000" alt="Specimen poster for Quay Grotesk: the letters Qa on a coloured field.">
+      <div class="project-copy">
+        <p class="crumb"><a href="../index.html#work">Work</a> / Sans</p>
+        <h1>Quay Grotesk</h1>
+        <p class="project-line">A harbour-sign grotesque with flat terminals and wide numerals.</p>
+        <dl class="facts">
+          <div><dt>Released</dt><dd>2023</dd></div>
+          <div><dt>Family</dt><dd>10 styles, Thin to Heavy, one width</dd></div>
+          <div><dt>Made for</dt><dd>Started as lettering for a ferry timetable and grew into a family.</dd></div>
+        </dl>
+      </div>
+    </section>
+    <section class="tester" aria-labelledby="tester-title">
+      <h2 id="tester-title">Try a line</h2>
+      <p class="tester-note">The typeface is made up, so this is set in the closest font already on your device.</p>
+      <label class="tester-size"><span>Size</span><input type="range" min="20" max="160" value="72" aria-label="Sample size in pixels"><output>72 px</output></label>
+      <p class="tester-sample" contenteditable="true" spellcheck="false" role="textbox" aria-label="Sample text, editable" style="font-family: &#x27;Helvetica Neue&#x27;, &#x27;Arial Nova&#x27;, Arial, sans-serif; font-weight: 800">Ferry 14 departs from berth 7 at 06:45 sharp.</p>
+    </section>
+    <nav class="next" aria-label="Next project">
+      <a href="moth.html"><span>Next</span><strong>Moth Display</strong></a>
+    </nav>
+  </main>
+  <footer class="foot"><p>Noor Halvorsen and these typefaces are made up. A <a href="https://github.com/qualixar/brief2motion">brief2motion</a> example of page transitions with the View Transitions API; no animation library.</p></footer>
+</body>
+</html>

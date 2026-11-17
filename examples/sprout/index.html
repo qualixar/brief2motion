@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sprout · a watering reminder for house plants</title>
+  <meta name="description" content="Sprout is a made-up plant care app, built as a brief2motion example of illustration motion: an SVG plant that draws and grows, Lottie icons that play only while visible, and pots that fill with native CSS scroll-driven animation.">
+  <meta property="og:title" content="Sprout · a watering reminder for house plants">
+  <meta property="og:description" content="A brief2motion example of SVG drawing, Lottie players and CSS scroll-driven animation.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#f7dd72">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="nav">
+    <a class="brand" href="#top">Sprout</a>
+    <nav aria-label="Main"><a href="#how">How it helps</a><a href="#week">A week</a><a class="btn" href="#get">Get Sprout</a></nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <h1>Your plants, watered on the day they need it.</h1>
+        <p>Tell Sprout what is on your windowsill. It works out a rhythm for each pot from its size, the season and how bright the room is, and taps you on the shoulder when it is time.</p>
+        <p><a class="btn" href="#get">Get Sprout</a></p>
+      </div>
+      <svg class="plant" viewBox="0 0 420 520" role="img" aria-label="Drawing of a house plant with seven leaves in a terracotta pot.">
+        <g class="plant-top">
+          <path class="stem" d="M210 392 C 206 330, 222 270, 208 204 S 214 118, 210 70" />
+          <path class="leaf" style="--at: 210px 360px" d="M210 360 C 150 356, 112 318, 104 268 C 158 268, 200 306, 210 360 Z" />
+          <path class="leaf" style="--at: 212px 318px" d="M212 318 C 276 316, 318 276, 326 222 C 268 224, 222 262, 212 318 Z" />
+          <path class="leaf" style="--at: 213px 262px" d="M213 262 C 160 252, 130 214, 128 168 C 176 174, 210 210, 213 262 Z" />
+          <path class="leaf" style="--at: 210px 214px" d="M210 214 C 262 208, 296 172, 300 126 C 252 132, 216 166, 210 214 Z" />
+          <path class="leaf" style="--at: 209px 164px" d="M209 164 C 170 154, 148 124, 148 88 C 184 96, 208 124, 209 164 Z" />
+          <path class="leaf" style="--at: 211px 122px" d="M211 122 C 246 116, 268 92, 270 60 C 238 66, 214 88, 211 122 Z" />
+          <path class="leaf" style="--at: 210px 74px" d="M210 74 C 196 54, 198 32, 212 14 C 226 34, 224 56, 210 74 Z" />
+        </g>
+        <path class="pot-rim" d="M118 392 H302 V420 H118 Z" />
+        <path class="pot" d="M132 420 H288 L270 506 H150 Z" />
+      </svg>
+    </section>
+
+    <section class="how" id="how" aria-labelledby="how-title">
+      <h2 id="how-title">Three things it keeps track of, so you do not have to</h2>
+      <ul class="cards">
+        <li class="card">
+          <div class="lottie" data-lottie="assets/water.json" role="img" aria-label="Animation: a drop of water falls and ripples spread."></div>
+          <h3>How thirsty each pot is</h3>
+          <p>A fern in a small pot dries out in days. A snake plant in a deep one can go a month. Sprout keeps a separate clock for each.</p>
+        </li>
+        <li class="card">
+          <div class="lottie" data-lottie="assets/sun.json" role="img" aria-label="Animation: a sun with turning rays."></div>
+          <h3>How much light the room gets</h3>
+          <p>Plants drink faster in a bright south window and in summer. Say which way the room faces once and the rhythm follows the season.</p>
+        </li>
+        <li class="card">
+          <div class="lottie" data-lottie="assets/reminder.json" role="img" aria-label="Animation: a tick is drawn on a calendar page."></div>
+          <h3>What you did last time</h3>
+          <p>Tick a reminder when you water. Skip one and Sprout asks again tomorrow, then moves that plant's next date, without a lecture.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="week" id="week" aria-labelledby="week-title">
+      <h2 id="week-title">One week on a windowsill</h2>
+      <p class="week-note">Five pots, watered on different days. Keep scrolling and watch them fill.</p>
+      <ul class="pots" aria-label="Which plant is watered on which day">
+        <li style="--i: 0"><span class="water" aria-hidden="true"></span><strong>Fern</strong><span>Monday and Friday</span></li>
+        <li style="--i: 1"><span class="water" aria-hidden="true"></span><strong>Basil</strong><span>Every second day</span></li>
+        <li style="--i: 2"><span class="water" aria-hidden="true"></span><strong>Monstera</strong><span>Wednesday</span></li>
+        <li style="--i: 3"><span class="water" aria-hidden="true"></span><strong>Pothos</strong><span>Thursday</span></li>
+        <li style="--i: 4"><span class="water" aria-hidden="true"></span><strong>Snake plant</strong><span>Not this week</span></li>
+      </ul>
+    </section>
+
+    <section class="get" id="get" aria-labelledby="get-title">
+      <h2 id="get-title">Sprout does not exist.</h2>
+      <p>It is a made-up app for a brief2motion example. The plant is seven SVG paths, the three icons are Lottie files written by a script in this folder, and the pots fill with CSS alone.</p>
+      <p><a class="btn btn-light" href="#top">Back to the top</a></p>
+    </section>
+  </main>
+  <footer class="foot"><p>A <a href="https://github.com/qualixar/brief2motion">brief2motion</a> example. Icons play with <a href="https://github.com/airbnb/lottie-web">lottie-web</a> (MIT).</p></footer>
+  <script type="module" src="main.js"></script>
+</body>
+</html>

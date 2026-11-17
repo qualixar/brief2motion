@@ -1,0 +1,7 @@
+background: linear-gradient(180deg, #150a33 0 52%, transparent 52%), repeating-linear-gradient(90deg, rgb(0 240 255 / .26) 0 1px, transparent 1px 44px), repeating-linear-gradient(0deg, rgb(0 240 255 / .26) 0 1px, transparent 1px 26px), linear-gradient(180deg, #2a0b52, #3d0f6b);
+.s-title { text-transform: uppercase; font-style: italic; background: linear-gradient(180deg, #fff36b, #ff8a3d 50%, #ff2bd6); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 10px rgb(255 43 214 / .6)); }
+.s-card { box-shadow: var(--shadow); }
+.s-btn { text-transform: uppercase; letter-spacing: .08em; box-shadow: 0 0 18px rgb(255 43 214 / .7); transition: box-shadow .2s, transform .2s; }
+.s-btn:hover { box-shadow: 0 0 30px rgb(255 43 214 / 1); transform: translateY(-2px); }
+.s-btn-2 { background: none; color: #6ff6ff; border: 1px solid #00f0ff; box-shadow: 0 0 14px rgb(0 240 255 / .5); }
+.s-field input { background: #0d0626; color: #ffe9ff; border-color: #00f0ff; }

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Ledger Mono specimen poster">
+<rect width="800" height="1000" fill="#17603a"/>
+<g stroke="#eafbf1" stroke-opacity=".35" stroke-width="2"><line x1="60" y1="300" x2="740" y2="300"/><line x1="60" y1="420" x2="740" y2="420"/><line x1="60" y1="720" x2="740" y2="720"/><line x1="60" y1="800" x2="740" y2="800"/></g>
+<text x="60" y="720" font-family="ui-monospace, &#x27;SF Mono&#x27;, &#x27;Cascadia Mono&#x27;, Menlo, Consolas, monospace" font-weight="700" font-size="360" fill="#eafbf1" letter-spacing="-12">0k</text>
+<text x="60" y="120" font-family="system-ui, 'Helvetica Neue', Arial, sans-serif" font-weight="700" font-size="34" fill="#eafbf1">Ledger Mono</text>
+<text x="740" y="120" text-anchor="end" font-family="system-ui, 'Helvetica Neue', Arial, sans-serif" font-weight="500" font-size="34" fill="#eafbf1">2022</text>
+<text x="60" y="910" font-family="system-ui, 'Helvetica Neue', Arial, sans-serif" font-weight="500" font-size="26" fill="#eafbf1" fill-opacity=".85">ascender · x-height · baseline · descender</text>
+</svg>

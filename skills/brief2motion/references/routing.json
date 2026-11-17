@@ -1,0 +1,610 @@
+{
+  "version": 1,
+  "note": "Read by scripts/route.mjs. Each signal is a regular expression (case-insensitive) with a weight. The stack with the highest total wins; ties go to the stack listed first. Edit this file to teach the router a new phrase, then run tests/route.test.mjs.",
+  "stacks": [
+    {
+      "id": "particles",
+      "name": "Canvas/WebGL particles (the dust engine)",
+      "ref": "stacks/particles.md",
+      "template": "templates/site/",
+      "example": "copper-no-7",
+      "why": "The brief wants dots or dust that form a picture, a face, a logo or a word. That is the built-in engine: config only, no new code.",
+      "signals": [
+        [
+          "\\b(dust|particles?|dots?|specks?|stipple|halftone|pointillis\\w*)\\b[^.]{0,60}\\b(form|forms|forming|become|becomes|turn|turns|assemble\\w*|make up|made of|rise|morph\\w*)",
+          6
+        ],
+        [
+          "\\b(made|built|drawn|formed) (out )?of (dust|dots|particles|sand|flour|stars)",
+          6
+        ],
+        [
+          "\\bhalftone (portrait|face|photo)",
+          6
+        ],
+        [
+          "\\b(face|portrait|logo|product|word)\\b[^.]{0,40}\\b(from|out of|in) (dust|dots|particles|sand)",
+          6
+        ],
+        [
+          "\\bparticle (face|portrait|logo|text)",
+          5
+        ],
+        [
+          "\\bstipple",
+          4
+        ],
+        [
+          "\\b(form|forms|formed|forming|rise|rises|rising|appear|appears|built|assembl\\w+)\\b[^.]{0,20}\\b(from|out of|of) (the same |a cloud of |fine )?(dust|dots|particles|sand|specks)",
+          6
+        ]
+      ]
+    },
+    {
+      "id": "r3f",
+      "name": "React Three Fiber and drei",
+      "ref": "stacks/three.md",
+      "template": null,
+      "example": "halden-one",
+      "why": "The brief wants real 3D inside a React or Next.js project, so the scene should be components (React Three Fiber) with drei helpers, built by the project's bundler.",
+      "requires": "react",
+      "signals": [
+        [
+          "\\b(3d|three\\.?js|webgl|glb|gltf|turntable|product viewer|configurator|exploded view|shader)\\b",
+          5
+        ],
+        [
+          "\\b(react three fiber|r3f|drei)\\b",
+          8
+        ],
+        [
+          "\\b(rotate|spin|turn)\\w*\\b[^.]{0,30}\\b(model|product|object)",
+          3
+        ]
+      ]
+    },
+    {
+      "id": "three",
+      "name": "three.js",
+      "ref": "stacks/three.md",
+      "template": null,
+      "example": "halden-one",
+      "why": "The brief wants a real 3D object or scene: something to turn, light and look around. Plain three.js needs no build step and is the lightest way to get there.",
+      "signals": [
+        [
+          "\\b(3d|three\\.?js|webgl)\\b",
+          4
+        ],
+        [
+          "\\b(turntable|product viewer|configurator|exploded view|360|orbit)\\b",
+          5
+        ],
+        [
+          "\\b(glb|gltf|3d model|shader|postprocessing|bloom)\\b",
+          5
+        ],
+        [
+          "\\b(rotate|rotates|spin|spins|turn it|turns)\\b[^.]{0,30}\\b(model|product|object|round|around)",
+          3
+        ],
+        [
+          "\\b(materials?|colourways?|colorways?)\\b[^.]{0,40}\\b(3d|model|product)",
+          2
+        ]
+      ]
+    },
+    {
+      "id": "motion-react",
+      "name": "Motion for React",
+      "ref": "stacks/motion.md",
+      "template": null,
+      "example": "mise",
+      "why": "The project is React or Next.js and the motion belongs to the interface: layout changes, lists, presence, drag, springs. Motion for React expresses those as props on components.",
+      "requires": "react",
+      "signals": [
+        [
+          "\\b(framer motion|motion for react|motion/react|layout animation|animatepresence|layoutid)\\b",
+          8
+        ],
+        [
+          "\\b(micro-?interactions?|interface|ui|component|dashboard|app|tabs?|list|drag|reorder|toggle|modal|menu|drawer|accordion)\\b",
+          3
+        ],
+        [
+          "\\b(spring|springy|bouncy)\\b",
+          2
+        ],
+        [
+          "\\b(animat\\w+|motion|transition\\w*)\\b",
+          1
+        ]
+      ]
+    },
+    {
+      "id": "gsap",
+      "name": "GSAP with ScrollTrigger and Lenis",
+      "ref": "stacks/gsap.md",
+      "template": null,
+      "example": "tidewater",
+      "why": "The brief describes a sequence tied to scrolling: pinned sections, scrubbed timelines, sideways galleries or a picture sequence. GSAP timelines with ScrollTrigger are the dependable tool for that, with Lenis for smooth scroll.",
+      "signals": [
+        [
+          "\\b(scrollytelling|scroll[- ]?story|scroll[- ]driven|scroll[- ]telling|as (you|i|they) scroll|when (you|i|they) scroll|on scroll)\\b",
+          4
+        ],
+        [
+          "\\b(pin|pinned|pins|sticky scene|scrub\\w*|horizontal scroll|sideways|image sequence|frame sequence|parallax)\\b",
+          5
+        ],
+        [
+          "\\b(gsap|scrolltrigger|lenis|smooth scroll\\w*)\\b",
+          8
+        ],
+        [
+          "\\b(timeline|choreograph\\w*|sequence[ds]?)\\b",
+          2
+        ],
+        [
+          "\\b(chapters?|story|journey)\\b",
+          1
+        ]
+      ]
+    },
+    {
+      "id": "view-transitions",
+      "name": "View Transitions API",
+      "ref": "stacks/view-transitions.md",
+      "template": null,
+      "example": "halvorsen",
+      "why": "The brief is about moving between pages or states: a thumbnail that grows into the next page, a grid that reorders. The browser's View Transitions API does this with almost no script and falls back to an ordinary page change.",
+      "signals": [
+        [
+          "\\b(page transitions?|view transitions?|between pages|page to page|route transitions?|shared element)\\b",
+          8
+        ],
+        [
+          "\\b(multi-?page|several pages|portfolio|case stud(y|ies)|gallery|blog)\\b",
+          2
+        ],
+        [
+          "\\b(morphs?|grows?|expands?|carries)\\b[^.]{0,40}\\b(into|to) the (next|detail|project|new) page",
+          6
+        ],
+        [
+          "\\b(filter|sort|reorder)\\w*\\b[^.]{0,30}\\b(grid|cards|list)",
+          3
+        ]
+      ]
+    },
+    {
+      "id": "players",
+      "name": "Lottie and Rive players",
+      "ref": "stacks/svg-players.md",
+      "template": null,
+      "example": "sprout",
+      "why": "The animation already exists as a file from a designer (a Lottie JSON or a Rive file), or the brief wants character-style illustration that is easier to author in a tool than in code. The page's job is to load and play it well.",
+      "signals": [
+        [
+          "\\b(lottie|bodymovin|dotlottie|rive|\\.riv|after effects)\\b",
+          8
+        ],
+        [
+          "\\b(animated (icons?|illustrations?|mascot|character|stickers?))\\b",
+          4
+        ],
+        [
+          "\\bstate machine\\b",
+          4
+        ]
+      ]
+    },
+    {
+      "id": "svg",
+      "name": "SVG and CSS animation",
+      "ref": "stacks/svg-players.md",
+      "template": null,
+      "example": "keeling",
+      "why": "The brief is about lines, shapes, icons or charts that draw and change. SVG with the Web Animations API or CSS does that sharply at any size, with no library, or with D3 for scales when there is data.",
+      "signals": [
+        [
+          "\\b(svg|line[- ]draw\\w*|draws? itself|path animation|stroke|hand-?drawn line|morph\\w*)\\b",
+          5
+        ],
+        [
+          "\\b(charts?|graphs?|data (story|viz|visuali[sz]ation)|statistics|stats|numbers?|infographic|counter|count up|d3)\\b",
+          4
+        ],
+        [
+          "\\b(illustration|icon|logo)\\b[^.]{0,30}\\b(draw|animate|move)\\w*",
+          3
+        ],
+        [
+          "\\b(map|diagram|timeline of)\\b",
+          1
+        ]
+      ]
+    },
+    {
+      "id": "motion",
+      "name": "Motion (vanilla JavaScript)",
+      "ref": "stacks/motion.md",
+      "template": null,
+      "example": "relay",
+      "why": "The brief is led by type and interface feel on a plain page: headlines that set themselves, springs, scroll-linked values. Motion's small JavaScript API does that with hardware-accelerated animations and no framework.",
+      "signals": [
+        [
+          "\\b(kinetic (type|typography|text)|type animation|text animation|split text|word by word|letter by letter|headline animat\\w+|marquee)\\b",
+          6
+        ],
+        [
+          "\\b(springs?|springy|bouncy|physics-?based)\\b",
+          3
+        ],
+        [
+          "\\b(landing page|saas|hero)\\b",
+          1
+        ],
+        [
+          "\\bmotion\\.dev\\b",
+          8
+        ]
+      ]
+    },
+    {
+      "id": "vanilla",
+      "name": "Plain CSS and JavaScript (the kit)",
+      "ref": "stacks/vanilla.md",
+      "template": null,
+      "example": "sprout",
+      "why": "Nothing in the brief needs a library. CSS transitions, the Web Animations API, IntersectionObserver and native scroll-driven animation cover it, with the kit's helpers for the parts that are easy to get wrong. This is the default: it is the lightest and has nothing to break.",
+      "signals": [
+        [
+          "\\b(no (library|libraries|framework|build|dependencies)|vanilla|plain (html|css|javascript|js)|lightweight|fast|static site)\\b",
+          4
+        ],
+        [
+          "\\b(subtle|simple|small|gentle|light touch|hover|reveal|fade)\\b",
+          2
+        ],
+        [
+          "\\b(animat\\w+|motion|move|moves|moving|alive)\\b",
+          1
+        ]
+      ]
+    }
+  ],
+  "frameworks": [
+    {
+      "id": "react",
+      "signals": [
+        "\\breact\\b",
+        "\\bnext\\.?js\\b",
+        "\\bremix\\b",
+        "\\bgatsby\\b",
+        "\\btsx\\b",
+        "\\bjsx\\b",
+        "\\bvite \\+ react\\b"
+      ]
+    },
+    {
+      "id": "none",
+      "signals": [
+        "\\bno build\\b",
+        "\\bplain html\\b",
+        "\\bstatic (site|page|html)\\b",
+        "\\bvanilla\\b",
+        "\\bno framework\\b"
+      ]
+    }
+  ],
+  "supporting": [
+    {
+      "id": "kinetic-type",
+      "ref": "stacks/kinetic-type.md",
+      "why": "the brief has a headline or words that move",
+      "signals": [
+        "\\b(kinetic|headline|word by word|letter by letter|split text|type animation|text animation|marquee|typograph\\w+)\\b"
+      ]
+    },
+    {
+      "id": "scroll-story",
+      "ref": "stacks/scroll-story.md",
+      "why": "something is tied to the scroll position",
+      "signals": [
+        "\\b(scroll\\w*|parallax|pin|pinned|scrub\\w*|chapters?)\\b"
+      ]
+    },
+    {
+      "id": "view-transitions",
+      "ref": "stacks/view-transitions.md",
+      "why": "the site has more than one page or view",
+      "signals": [
+        "\\b(pages|multi-?page|portfolio|case stud(y|ies)|page transitions?|between pages)\\b"
+      ]
+    },
+    {
+      "id": "wasm",
+      "ref": "stacks/wasm.md",
+      "why": "the brief describes heavy computation per frame",
+      "signals": [
+        "\\b(wasm|webassembly|rust|fluid sim\\w*|physics sim\\w*|millions? of|cloth|n-?body|image processing|video processing|codec)\\b"
+      ]
+    }
+  ],
+  "audiences": [
+    {
+      "match": [
+        "\\b(headphones?|speaker|radio|earbuds|gadget|device|wearable|smartphone|laptop|camera|e-?bike|electric car|automotive|hardware|appliance|console|turntable)\\b"
+      ],
+      "styles": [
+        "minimalism",
+        "dark-first",
+        "editorial"
+      ],
+      "why": "hardware sells on the object itself: a quiet page, one large product, little else"
+    },
+    {
+      "match": [
+        "\\b(bank\\w*|financ\\w*|fintech|insur\\w*|legal|law firm|accounting|invest\\w*|pension)\\b"
+      ],
+      "styles": [
+        "swiss",
+        "minimalism",
+        "flat"
+      ],
+      "why": "money and law need trust and fast scanning: a strict grid, high contrast and almost no decoration"
+    },
+    {
+      "match": [
+        "\\b(health\\w*|medical|clinic|hospital|pharma\\w*|patient|therapy|care home)\\b"
+      ],
+      "styles": [
+        "minimalism",
+        "flat",
+        "material"
+      ],
+      "why": "health audiences include people who are stressed or have low vision: calm, plain and high contrast"
+    },
+    {
+      "match": [
+        "\\b(kids?|children|toddlers?|school|classroom|learning app|education|toy)\\b"
+      ],
+      "styles": [
+        "claymorphism",
+        "memphis",
+        "neubrutalism"
+      ],
+      "why": "a young audience responds to soft, toy-like shapes and bright colour"
+    },
+    {
+      "match": [
+        "\\b(developer|devtool|dev tool|api|sdk|cli|open source|infrastructure|database|observability|terminal)\\b"
+      ],
+      "styles": [
+        "dark-first",
+        "swiss",
+        "neubrutalism"
+      ],
+      "why": "developers work in dark editors and want density and directness; a dark default is expected here"
+    },
+    {
+      "match": [
+        "\\b(ai|machine learning|llm|model|agent)\\b[^.]{0,40}\\b(product|platform|startup|tool|company)",
+        "\\bai (product|platform|startup|tool|company)\\b"
+      ],
+      "styles": [
+        "aurora",
+        "dark-first",
+        "minimalism"
+      ],
+      "why": "an abstract product with no photo to show: soft gradients carry the mood while plain type carries the claim"
+    },
+    {
+      "match": [
+        "\\b(luxury|premium|jewel\\w+|watch(es)?|perfume|fragrance|hotel|spa|fine dining|couture|champagne)\\b"
+      ],
+      "styles": [
+        "editorial",
+        "art-deco",
+        "minimalism"
+      ],
+      "why": "luxury reads through restraint, large serif type and a lot of space"
+    },
+    {
+      "match": [
+        "\\b(music|festival|band|dj|club|record label|nightlife|concert)\\b"
+      ],
+      "styles": [
+        "maximalism",
+        "synthwave",
+        "duotone"
+      ],
+      "why": "music brands sell energy: dense colour, big type and treated photography"
+    },
+    {
+      "match": [
+        "\\b(game|gaming|esports|arcade|streamer)\\b"
+      ],
+      "styles": [
+        "cyberpunk",
+        "synthwave",
+        "glitch"
+      ],
+      "why": "gaming audiences expect a dark, lit, high-energy look"
+    },
+    {
+      "match": [
+        "\\b(fashion|streetwear|apparel|sneakers?|beauty|cosmetics)\\b"
+      ],
+      "styles": [
+        "editorial",
+        "maximalism",
+        "y2k"
+      ],
+      "why": "fashion follows magazine layout, or pushes against it on purpose"
+    },
+    {
+      "match": [
+        "\\b(creator|indie|maker|newsletter|side project|community|zine)\\b"
+      ],
+      "styles": [
+        "neubrutalism",
+        "memphis",
+        "grain"
+      ],
+      "why": "independent products win by having a voice: bold outlines and flat colour are quick to recognise"
+    },
+    {
+      "match": [
+        "\\b(magazine|publication|journalis\\w+|newsroom|long-?form|essay|report|case study|annual report)\\b"
+      ],
+      "styles": [
+        "editorial",
+        "swiss",
+        "grain"
+      ],
+      "why": "reading comes first: a type scale, a measure and a grid"
+    },
+    {
+      "match": [
+        "\\b(portfolio|studio|agency|architect\\w*|designer|photograph\\w+)\\b"
+      ],
+      "styles": [
+        "swiss",
+        "editorial",
+        "minimalism"
+      ],
+      "why": "the work is the content: a quiet grid keeps attention on it"
+    },
+    {
+      "match": [
+        "\\b(food|restaurant|bakery|coffee|cafe|brewery|farm|craft|handmade|ceramics|pottery)\\b"
+      ],
+      "styles": [
+        "grain",
+        "editorial",
+        "duotone"
+      ],
+      "why": "craft and food want warmth and a printed, tactile feel"
+    },
+    {
+      "match": [
+        "\\b(saas|b2b|productivity|project management|crm|analytics|platform)\\b"
+      ],
+      "styles": [
+        "bento",
+        "minimalism",
+        "flat"
+      ],
+      "why": "a product with several features to show at a glance: tiles, one accent and plain type"
+    },
+    {
+      "match": [
+        "\\b(photo|video|camera|streaming|media player|gallery app)\\b"
+      ],
+      "styles": [
+        "liquid-glass",
+        "glassmorphism",
+        "dark-first"
+      ],
+      "why": "when the content is pictures, controls should float lightly above it"
+    },
+    {
+      "match": [
+        "\\b(logistics|supply chain|infrastructure|network|cloud|warehouse|iot|payments? flow)\\b"
+      ],
+      "styles": [
+        "isometric",
+        "flat",
+        "swiss"
+      ],
+      "why": "systems are easier to explain as small models seen from above"
+    },
+    {
+      "match": [
+        "\\b(android|google play|pixel)\\b"
+      ],
+      "styles": [
+        "material"
+      ],
+      "why": "an Android product should feel native to its platform"
+    }
+  ],
+  "moods": [
+    {
+      "match": [
+        "\\b(calm|quiet|serene|understated|restrained|elegant)\\b"
+      ],
+      "styles": [
+        "minimalism",
+        "editorial"
+      ],
+      "why": "the brief asks for calm"
+    },
+    {
+      "match": [
+        "\\b(playful|fun|friendly|cute|cheerful|joyful|whimsical)\\b"
+      ],
+      "styles": [
+        "claymorphism",
+        "memphis",
+        "neubrutalism"
+      ],
+      "why": "the brief asks for play"
+    },
+    {
+      "match": [
+        "\\b(bold|loud|brash|punchy|striking|statement)\\b"
+      ],
+      "styles": [
+        "neubrutalism",
+        "maximalism"
+      ],
+      "why": "the brief asks for loud"
+    },
+    {
+      "match": [
+        "\\b(futuristic|sci-?fi|tech-?noir|high-?tech)\\b"
+      ],
+      "styles": [
+        "cyberpunk",
+        "aurora",
+        "dark-first"
+      ],
+      "why": "the brief asks for a future look"
+    },
+    {
+      "match": [
+        "\\b(retro|nostalgi\\w+|vintage|throwback|old-?school)\\b"
+      ],
+      "styles": [
+        "y2k",
+        "synthwave",
+        "memphis",
+        "vaporwave"
+      ],
+      "why": "the brief asks for a past decade"
+    },
+    {
+      "match": [
+        "\\b(warm|tactile|handmade|organic|natural|earthy)\\b"
+      ],
+      "styles": [
+        "grain",
+        "editorial"
+      ],
+      "why": "the brief asks for warmth"
+    },
+    {
+      "match": [
+        "\\b(trustworthy|serious|professional|corporate|credible)\\b"
+      ],
+      "styles": [
+        "swiss",
+        "flat",
+        "minimalism"
+      ],
+      "why": "the brief asks for trust"
+    }
+  ]
+}

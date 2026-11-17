@@ -1,0 +1,5 @@
+background: radial-gradient(circle at 20% 110%, #9be15d 0 30%, transparent 55%), radial-gradient(circle at 75% 15%, rgb(255 255 255 / .9) 0 8%, transparent 26%), linear-gradient(180deg, #4fb7ff, #bfe9ff 60%, #e8fbff);
+.s-card, .s-nav { box-shadow: var(--shadow); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.s-btn { border-radius: 999px; border: 1px solid #0d5fa3; background: linear-gradient(180deg, #7fd0ff 0%, #2f9be8 48%, #1178cf 52%, #3aa7f0 100%); box-shadow: inset 0 1px 0 rgb(255 255 255 / .8), 0 3px 8px rgb(10 80 140 / .4); text-shadow: 0 1px 1px rgb(0 40 90 / .6); transition: filter .2s; }
+.s-btn:hover { filter: brightness(1.1); }
+.s-btn-2 { background: linear-gradient(180deg, #d9ffa8 0%, #8fdc3f 48%, #63bf16 52%, #9be15d 100%); color: #12380a; border-color: #3f8a0c; text-shadow: 0 1px 0 rgb(255 255 255 / .6); }

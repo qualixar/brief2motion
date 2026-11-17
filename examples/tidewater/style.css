@@ -1,0 +1,85 @@
+/* Tidewater: scroll-story example. Deep slate water, salt white, one rust accent. Serif display, plain sans text. */
+:root {
+  --sea: #16212c; --sea-2: #22313f; --salt: #f3f1ec; --salt-2: #c4ccd4; --rust: #e0703c; --rust-ink: #a8491f; --ink: #16212c; --ink-2: #4b5967; --line: #3a4a5a;
+  --focus: #e0703c; --focus-halo: rgb(22 33 44 / .9);
+  --display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --text: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --pad: clamp(20px, 5.5vw, 88px);
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--sea); color: var(--salt); font: 400 clamp(16px, .45vw + 14.5px, 19px)/1.6 var(--text); overflow-x: clip; }
+h1, h2, h3, p, ul, ol, figure { margin: 0; padding: 0; }
+a { color: inherit; text-underline-offset: 4px; }
+
+.nav { position: fixed; inset: 0 0 auto 0; z-index: 40; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px var(--pad); background: rgb(22 33 44 / .94); border-bottom: 1px solid var(--line); }
+.brand { font: italic 600 clamp(19px, 2vw, 24px)/1 var(--display); text-decoration: none; padding: 10px 0; }
+.brand span { font: 600 11px/1 var(--text); letter-spacing: .16em; text-transform: uppercase; color: var(--salt-2); margin-left: 8px; }
+.nav nav { display: flex; gap: clamp(14px, 2.6vw, 32px); }
+.nav nav a { text-decoration: none; font-weight: 600; font-size: 15px; padding: 10px 0; }
+.nav nav a:hover { text-decoration: underline; }
+@media (max-width: 600px) { .brand span { display: none; } .nav nav { gap: 14px; } .nav nav a { font-size: 14px; } }
+@media (max-width: 400px) { .nav { gap: 8px; } .brand { font-size: 17px; } .nav nav { gap: 9px; } .nav nav a { font-size: 12.5px; } }
+
+.hero { position: relative; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; gap: clamp(16px, 2.6vh, 28px); padding: 120px var(--pad) clamp(110px, 20vh, 190px); }
+.hero-place { font: 600 12.5px/1.4 var(--text); letter-spacing: .14em; text-transform: uppercase; color: var(--salt-2); }
+h1 { font: 500 clamp(3.1rem, 11.5vw, 11rem)/.92 var(--display); letter-spacing: -.035em; text-wrap: balance; max-width: 9ch; }
+.hero-sub { max-width: 44ch; font-size: clamp(17px, 1vw + 13px, 22px); color: var(--salt-2); }
+.tideline { position: absolute; left: 0; right: 0; bottom: clamp(30px, 7vh, 70px); width: 100%; height: clamp(40px, 8vh, 80px); }
+.tideline path { fill: none; stroke: var(--rust); stroke-width: 2.5; vector-effect: non-scaling-stroke; }
+
+.read { padding: clamp(80px, 18vh, 220px) var(--pad); }
+.read p { font: 500 clamp(1.6rem, 4.3vw, 4rem)/1.18 var(--display); letter-spacing: -.02em; max-width: 24ch; text-wrap: pretty; }
+.read .w { opacity: var(--w, 1); }
+
+/* pinned sequence */
+.seq { background: var(--sea-2); }
+.seq-pin { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: center; gap: clamp(20px, 5vw, 80px); padding: clamp(72px, 12vh, 120px) var(--pad); min-height: 100vh; min-height: 100svh; }
+.seq-media { position: relative; aspect-ratio: 960 / 600; border-radius: 6px; overflow: hidden; background: #111b25; }
+.seq-media canvas, .seq-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.seq-media canvas { display: none; }
+.seq-live .seq-media canvas { display: block; }
+.seq-live .seq-media img { display: none; }
+.seq-copy h2, .year h2, .tide h2, .closer h2 { font: 500 clamp(2rem, 4.6vw, 4.2rem)/1.02 var(--display); letter-spacing: -.025em; text-wrap: balance; }
+.seq-steps { list-style: none; margin-top: clamp(18px, 3.5vh, 36px); display: grid; gap: 4px; counter-reset: s; }
+.seq-steps li { counter-increment: s; padding: 14px 0 14px 18px; border-left: 2px solid var(--line); opacity: var(--o, 1); transition: border-color .3s; }
+.seq-steps li.is-on { border-left-color: var(--rust); }
+.seq-steps h3 { font: 600 clamp(1.15rem, 1.5vw, 1.45rem)/1.2 var(--display); }
+.seq-steps h3::before { content: counter(s) ". "; color: var(--rust); }
+.seq-steps p { margin-top: 4px; color: var(--salt-2); max-width: 38ch; font-size: .96em; }
+.seq-bar { margin-top: 22px; height: 2px; background: var(--line); max-width: 340px; }
+.seq-bar i { display: block; height: 100%; background: var(--rust); transform-origin: left; transform: scaleX(var(--p, 1)); }
+@media (max-width: 860px) {
+  .seq-pin { grid-template-columns: minmax(0, 1fr); align-content: center; gap: 18px; padding-top: 76px; padding-bottom: 28px; }
+  .seq-steps { margin-top: 10px; } .seq-steps li { padding: 8px 0 8px 14px; } .seq-steps p { font-size: 14.5px; line-height: 1.45; } .seq-bar { margin-top: 12px; }
+}
+@media (max-width: 860px) and (max-height: 700px) { .seq-media { aspect-ratio: 960 / 420; } }
+
+/* the year: a row of cards. Native sideways scroll by default; pinned and scroll-driven on wide screens with motion on. */
+.year { background: var(--salt); color: var(--ink); --focus: #16212c; --focus-halo: rgb(243 241 236 / .9); }
+.year-pin { padding: clamp(64px, 11vh, 120px) 0 clamp(56px, 9vh, 100px); overflow: hidden; }
+.year h2 { padding: 0 var(--pad); }
+.year-track { list-style: none; display: flex; gap: clamp(14px, 2vw, 28px); margin-top: clamp(26px, 5vh, 56px); padding: 4px var(--pad) 18px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: var(--pad); -webkit-overflow-scrolling: touch; }
+.year-track li { flex: 0 0 min(78vw, 400px); scroll-snap-align: start; padding: clamp(18px, 2vw, 28px); border: 1.5px solid var(--ink); border-radius: 4px; background: #fbfaf7; display: grid; gap: 10px; align-content: start; min-height: clamp(280px, 44vh, 400px); }
+.year-track .num { font: italic 500 clamp(3.4rem, 7vw, 6rem)/.9 var(--display); color: var(--rust-ink); letter-spacing: -.03em; }
+.year-track h3 { font: 600 clamp(1.25rem, 1.7vw, 1.6rem)/1.15 var(--display); margin-top: auto; }
+.year-track p { color: var(--ink-2); font-size: .95em; }
+.year-wide .year-pin { display: flex; flex-direction: column; justify-content: center; min-height: 100vh; }
+.year-wide .year-track { overflow: visible; scroll-snap-type: none; width: max-content; will-change: transform; }
+
+/* tide chart */
+.tide { padding: clamp(72px, 14vh, 160px) var(--pad); }
+.tide figure { margin-top: clamp(24px, 5vh, 56px); }
+.tide svg { width: 100%; height: auto; overflow: visible; }
+.tide .axis { stroke: var(--line); stroke-width: 2; }
+.tide .sluice { stroke: var(--salt-2); stroke-width: 1.5; stroke-dasharray: 6 8; }
+.tide .lbl { fill: var(--salt-2); font: 600 22px var(--text); }
+.tide .curve { fill: none; stroke: var(--salt); stroke-width: 4; stroke-linecap: round; }
+.tide .marks circle { fill: var(--rust); transform-box: fill-box; transform-origin: center; }
+.tide figcaption { margin-top: 16px; color: var(--salt-2); max-width: 60ch; font-size: .92em; }
+@media (max-width: 600px) { .tide .lbl { font-size: 34px; } .tide .curve { stroke-width: 6; } .tide .marks circle { r: 11px; } }
+
+.closer { padding: clamp(72px, 14vh, 170px) var(--pad); background: var(--salt); color: var(--ink); display: grid; gap: 20px; --focus: #16212c; --focus-halo: rgb(243 241 236 / .9); }
+.closer p { max-width: 54ch; color: var(--ink-2); }
+.closer a { color: var(--rust-ink); font-weight: 600; }
+.foot { padding: 26px var(--pad); color: var(--salt-2); font-size: 15px; border-top: 1px solid var(--line); }
+.foot a { color: var(--salt); }

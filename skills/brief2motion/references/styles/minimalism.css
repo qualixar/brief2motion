@@ -1,0 +1,7 @@
+.s-title { font-weight: 500; }
+.s-nav { padding-inline: 0; }
+.s-card { border-top: 1px solid #d9d9d4; border-radius: 0; padding-inline: 0; }
+.s-btn { transition: opacity .2s; }
+.s-btn:hover { opacity: .8; }
+.s-btn-2 { background: none; color: #161616; text-decoration: underline; text-underline-offset: 5px; padding-inline: 4px; }
+.s-field input { border-width: 0 0 1px; border-radius: 0; background: none; padding-inline: 0; }

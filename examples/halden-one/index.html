@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Halden One · a table radio with one dial</title>
+  <meta name="description" content="Halden One is a made-up table radio, built as a brief2motion example of a product launch page: a 3D turntable in three.js that turns, opens into an exploded view and changes colour as you scroll.">
+  <meta property="og:title" content="Halden One · a table radio with one dial">
+  <meta property="og:description" content="A brief2motion example: a three.js product turntable with a scroll-driven exploded view and colourways.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#d5dae0">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+  <script type="importmap">
+    { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.min.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.187.0/examples/jsm/"
+    } }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="nav">
+    <a class="brand" href="#top">Halden</a>
+    <nav aria-label="Main">
+      <a href="#inside">Inside</a>
+      <a href="#colours">Colours</a>
+      <a href="#spec">Specification</a>
+      <a class="btn" href="#reserve">Reserve</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- The scene is a tall section. With JavaScript and WebGL its stage sticks to the screen while the four
+         chapters scroll past; without them it is four plain blocks of text under a still picture. -->
+    <section class="scene" id="top" aria-label="Halden One, shown in four steps">
+      <div class="stage">
+        <canvas data-webgl aria-hidden="true"></canvas>
+        <img class="poster" data-fallback src="assets/poster.webp" width="1600" height="1000" alt="Halden One: a cobalt blue enamel table radio with a round bone-coloured speaker grille, a brass tuning dial and a leather carrying strap.">
+        <ul class="hotspots" aria-hidden="true">
+          <li data-spot="cone">Paper speaker cone</li>
+          <li data-spot="board">One circuit board</li>
+          <li data-spot="cells">Four AA cells</li>
+          <li data-spot="shell">Enamelled steel shell</li>
+        </ul>
+      </div>
+      <div class="chapters">
+        <article class="chapter" data-chapter="0">
+          <p class="kicker">Halden One</p>
+          <h1>A radio with one dial and no screen.</h1>
+          <p>FM and DAB+, a three-inch paper cone, four AA cells. You turn it on, you turn it up, you find a station. That is the whole interface.</p>
+          <p class="actions"><a class="btn" href="#reserve">Reserve one</a> <a class="link" href="#spec">Read the specification</a></p>
+        </article>
+        <article class="chapter" data-chapter="1" id="dial">
+          <h2>The dial is the display</h2>
+          <p>A brass knob moves a needle across a printed scale behind glass. There is nothing to pair, update or charge, and you can read it from across the room.</p>
+        </article>
+        <article class="chapter" data-chapter="2" id="inside">
+          <h2>Built to be opened</h2>
+          <p>Four screws hold the back. Behind it are one board, one speaker and a battery sled, each held by a plug, so any part can be swapped at a kitchen table.</p>
+        </article>
+        <article class="chapter" data-chapter="3" id="colours">
+          <h2>Four enamels</h2>
+          <p>The shell is pressed steel with a vitreous enamel coat, the same finish as a cast-iron pot. Pick one and turn it round.</p>
+          <div class="swatches" role="group" aria-label="Enamel colour">
+            <button type="button" data-colour="#1d44c4" aria-pressed="true"><span style="background:#1d44c4"></span>Cobalt</button>
+            <button type="button" data-colour="#cf4a17" aria-pressed="false"><span style="background:#cf4a17"></span>Persimmon</button>
+            <button type="button" data-colour="#2c2f34" aria-pressed="false"><span style="background:#2c2f34"></span>Graphite</button>
+            <button type="button" data-colour="#e9e2d2" aria-pressed="false"><span style="background:#e9e2d2"></span>Bone</button>
+          </div>
+          <label class="turn"><span>Turn the radio</span><input type="range" min="-180" max="180" value="0" step="1" aria-label="Turn the radio, in degrees"></label>
+        </article>
+      </div>
+    </section>
+
+    <section class="spec" id="spec" aria-labelledby="spec-title">
+      <h2 id="spec-title">Specification</h2>
+      <table>
+        <tbody>
+          <tr><th scope="row">Bands</th><td>FM 87.5 to 108 MHz, DAB+</td></tr>
+          <tr><th scope="row">Speaker</th><td>76 mm paper cone, 5 W</td></tr>
+          <tr><th scope="row">Power</th><td>4 AA cells or USB-C, 5 V</td></tr>
+          <tr><th scope="row">Shell</th><td>Pressed steel, vitreous enamel</td></tr>
+          <tr><th scope="row">Size</th><td>320 by 200 by 120 mm</td></tr>
+          <tr><th scope="row">Weight</th><td>1.4 kg without cells</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="reserve" id="reserve" aria-labelledby="reserve-title">
+      <h2 id="reserve-title">Halden One is not real.</h2>
+      <p>It is a made-up product for a brief2motion example. The radio on this page is not a photo or a downloaded model: it is about forty shapes built in code and lit in your browser with three.js.</p>
+      <p><a class="btn" href="#top">Back to the top</a></p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>Built with <a href="https://github.com/qualixar/brief2motion">brief2motion</a> and <a href="https://threejs.org">three.js</a> (MIT). No model files, no photographs.</p>
+  </footer>
+  <script type="module" src="main.js"></script>
+</body>
+</html>

@@ -1,10 +1,14 @@
+<p align="center">
+  <img src="assets/banner.png" alt="brief2motion: write a brief, get a website that moves" width="100%">
+</p>
+
 <h1 align="center">brief2motion</h1>
 
-<p align="center"><b>Web motion for Claude Code and Codex. Write a plain brief, get a web page that moves, checked in a real browser before you see it.</b><br>dust that turns into a photo, logo or word · halftone portraits · a paper plane across the page · scenes that play as you scroll</p>
+<p align="center"><b>The website animation skill for Claude Code and Codex. Write a plain brief, get a website with professional motion (GSAP scroll animation, three.js 3D, kinetic type, page transitions), checked in a real browser before you see it.</b><br>scroll stories · 3D product pages · kinetic type · page transitions · data stories · interface motion · particles that form a face · 32 visual styles</p>
 
 <p align="center">
   <a href="https://github.com/qualixar/brief2motion/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/qualixar/brief2motion?style=flat&color=FF5A1F"></a>
-  <img alt="Version 0.2.0" src="https://img.shields.io/badge/version-0.2.0-FF5A1F">
+  <img alt="Version 1.0.0" src="https://img.shields.io/badge/version-1.0.0-FF5A1F">
   <a href="https://github.com/qualixar/brief2motion/actions/workflows/test.yml"><img alt="Tests" src="https://github.com/qualixar/brief2motion/actions/workflows/test.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="MIT licence" src="https://img.shields.io/badge/licence-MIT-16130F"></a>
   <img alt="Node 22 or newer" src="https://img.shields.io/badge/node-22%2B-16130F">
@@ -13,33 +17,49 @@
 </p>
 
 <p align="center">
+  <a href="#watch-it">Watch it</a> ·
   <a href="#quick-start">Quick start</a> ·
   <a href="#what-it-makes">What it makes</a> ·
-  <a href="#what-it-checks">What it checks</a> ·
-  <a href="#how-it-works">How it works</a> ·
-  <a href="#example-copper-no-7">Example</a> ·
+  <a href="#the-stacks-it-chooses-from">Stacks</a> ·
+  <a href="#the-style-system">Styles</a> ·
+  <a href="#what-it-checks">Checks</a> ·
+  <a href="#examples">Examples</a> ·
   <a href="#write-a-brief">Write a brief</a> ·
-  <a href="#troubleshooting">Troubleshooting</a> ·
+  <a href="https://qualixar.com/learn/guides/brief2motion-guide">Free 53-page guide</a> ·
   <a href="#faq">FAQ</a>
 </p>
 
 <p align="center">
-  <img src="assets/faces-demo.webp" alt="Dust drifting, then forming three halftone portraits one after another" width="100%">
+  <img src="assets/examples/halden-one.webp" alt="A product page for a blue enamel table radio. As the page scrolls, the 3D radio turns, the camera moves in on the brass dial, the radio comes apart into labelled layers, and four colour buttons appear." width="100%">
 </p>
 
-<p align="center"><b>One page, three faces.</b> The dust forms a portrait made of round dots, bursts, and re-forms as the next one. This is the effect on a real page, rendered live in the browser with three.js.</p>
+<p align="center"><b>One brief, one page.</b> This is <a href="examples/halden-one/">Halden One</a>, built from <a href="examples/halden-one/BRIEF.md">this brief</a>: a radio made of about forty shapes in three.js, with no model file and no photo. It turns, opens into an exploded view and changes colour as you scroll. Its <a href="examples/halden-one/site-report.json">report</a> shows 27 of 27 checks passed, including a still picture for browsers without WebGL and cuts instead of travel for visitors with reduced motion.</p>
+
+<p align="center"><b>▶ brief2motion in 84 seconds:</b> one product photo and a brief become a website whose dust forms the bottle, then nine more sites in nine different motion stacks.</p>
+
+https://github.com/user-attachments/assets/8b780cc9-e70f-4c7c-b3ac-7fdb56ede3ff
+
+<h2 id="watch-it" align="center">Watch the full tutorial</h2>
+
+<p align="center">
+  <a href="https://youtu.be/fI3a3oDvLE4"><img src="assets/video-thumbnail.jpg" alt="Watch the video: Claude Code Motion Graphics, make a film AND a website" width="720"></a>
+</p>
+
+<p align="center">
+  <b><a href="https://youtu.be/fI3a3oDvLE4">▶ Claude Code Motion Graphics: Make a Film AND a Website</a></b> (YouTube, English and Hindi audio) &nbsp;·&nbsp; <b><a href="https://qualixar.com/learn/guides/brief2motion-guide">Free 53-page learning guide</a></b> &nbsp;·&nbsp; <b><a href="https://github.com/qualixar/brief2mp4">brief2mp4, the video sister skill</a></b>
+</p>
 
 | You give it | You get back |
 |---|---|
-| A plain brief: what moves, the words on the page, a photo or logo if you have one, and what "done" means. | A `site/` folder with a working page, a `REPORT.md` that goes through your brief line by line with the number or screenshot behind each line, and an `http://localhost` address to open it. |
+| A plain brief: what the site is for, what should move, the words on the page, pictures if you have them, and what "done" means. | A `site/` folder with a working site, a `REPORT.md` that goes through your brief line by line with the number or screenshot behind each line, and an `http://localhost` address to open it. |
 
-brief2motion is a free, MIT-licensed agent skill. The agent writes a short spec with a checkable "done when" list, copies a starter page, fills in `config.js` from your brief, starts a local preview server, then measures the page in a real Chrome: frame time on desktop and on an emulated phone, page weight, console errors, and what a visitor sees with reduced motion on or without WebGL. If a check fails it fixes the page and measures again. Everything runs on your own machine.
-
-Scope, stated plainly. It does four things: particle dust that assembles into a photo, a logo or a word; halftone (round dot) portraits; a flight path across the page (a paper plane or any object); and scroll-driven scenes with a pinned hero. Around that it writes the rest of a landing page (nav, headline, chapters, details, steps, call to action, footer). It is not a general animation tool, a page builder or a video editor.
+brief2motion is a free, MIT-licensed agent skill. From your brief the agent picks a motion stack and a visual style and tells you why, writes a short spec with a checkable "done when" list, builds the site, starts a local preview, then measures it in a real Chrome: frame time on desktop and on an emulated phone, layout at three widths, keyboard focus, text contrast, and what a visitor sees with reduced motion, without WebGL and without JavaScript. If a check fails it fixes the page and measures again. Everything runs on your own machine.
 
 <p align="center">
-  <img src="assets/product-demo.jpg" alt="A perfume bottle formed from dust on a landing page, with the headline Bottled from a single copper still" width="720">
+  <img src="assets/architecture.png" alt="How brief2motion works: 1 route the brief to a stack and a style, 2 write SPEC.md, 3 build the site, 4 check it in a real Chrome, 5 fix what fails and measure again, 6 deliver a localhost link and REPORT.md. Below: the stacks it chooses from." width="100%">
 </p>
+
+<p align="center">⭐ <b>Free and MIT. If brief2motion builds a page you keep, <a href="https://github.com/qualixar/brief2motion">star the repo</a>.</b> It is the only signal I get that it worked for you, and it is how other Claude Code and Codex users find it.</p>
 
 ## Quick start
 
@@ -49,6 +69,8 @@ Scope, stated plainly. It does four things: particle dust that assembles into a 
 /plugin marketplace add qualixar/brief2mp4
 /plugin install brief2motion@brief2mp4
 ```
+
+**Already use brief2mp4?** From brief2mp4 0.4.0, installing or updating brief2mp4 installs brief2motion too, because brief2mp4 lists it as a dependency. Run `/plugin install brief2mp4@brief2mp4` (or `/reload-plugins` after an update) and both skills are there.
 
 If you do not use brief2mp4, add this repo as its own marketplace instead: `/plugin marketplace add qualixar/brief2motion`, then `/plugin install brief2motion@brief2motion`.
 
@@ -60,19 +82,19 @@ If you do not use brief2mp4, add this repo as its own marketplace instead: `/plu
 
 Start a new session after installing so the app loads the skill. Check the machine at any time with `bash skills/brief2motion/scripts/doctor.sh`. It prints `ok` or the exact install command for each tool.
 
-**Then make a page.** In a folder for the project, ask in your own words:
+**Then make a site.** In a folder for the project, ask in your own words:
 
 ```
-Make my product rise out of dust on my landing page. A paper plane flies across when I scroll.
-[attach product.jpg]
-```
-
-```
-Turn my photo into a halftone portrait made of dots, in colour, then morph it into my logo.
+Build a launch page for our table radio. A 3D model of it that turns as I scroll,
+opens up to show the parts, then lets me pick a colour. Headline: "A radio with one dial and no screen."
 ```
 
 ```
-A hero for my bakery site: the word "Crumb" forms from flour dust, calm, no scroll.
+Tell the story of how we make sea salt as you scroll: a pinned scene where a crystal grows, then the year in six cards.
+```
+
+```
+A neubrutalism landing page for my newsletter tool. The headline sets itself word by word. No frameworks.
 ```
 
 When it says it is done, it gives you a link such as `http://localhost:8421/`. Open that address in your browser. To start the preview yourself:
@@ -81,7 +103,7 @@ When it says it is done, it gives you a link such as `http://localhost:8421/`. O
 python3 skills/brief2motion/scripts/serve.py site     # or: node skills/brief2motion/scripts/serve.mjs site
 ```
 
-**Do not open `site/index.html` by double-clicking it.** Browsers refuse to load JavaScript modules from a `file://` address, so you would see a blank page. The preview server is a few lines of standard-library code that serves the folder on `127.0.0.1` only, with caching off so every reload shows your latest edit. To publish, upload the `site/` folder to any static host.
+**Do not open `site/index.html` by double-clicking it.** Browsers refuse to load JavaScript modules from a `file://` address, so you would see a blank page. The preview server is a few lines of standard-library code that serves the folder on `127.0.0.1` only. To publish, upload the `site/` folder to any static host.
 
 When the page is up, send one follow-up:
 
@@ -95,75 +117,149 @@ That makes the agent go back to your original brief line by line, show the evide
 |---|---|---|---|---|
 | Node.js 22+ | everything | `brew install node` | `winget install -e --id OpenJS.NodeJS.LTS` | [nodesource setup_22.x](https://github.com/nodesource/distributions) |
 | Chrome or Chromium | the checks (a real browser with WebGL) | `brew install --cask google-chrome` | `winget install -e --id Google.Chrome` | `sudo apt install chromium`, or `npx playwright@1.65.1 install chromium` |
-| playwright-core 1.65.1 | drives the browser for the checks | downloaded once on the first check into `~/.cache/brief2motion/deps` (about 14 MB on disk, install scripts off); the doctor shows whether it is there | same | same |
+| playwright-core 1.65.1 | drives the browser for the checks | downloaded once on the first check into `~/.cache/brief2motion/deps` (about 14 MB, install scripts off) | same | same |
 | Python 3 | the preview server (optional; `serve.mjs` does the same with Node) | preinstalled or `brew install python` | `winget install -e --id Python.Python.3.12` | `sudo apt install python3` |
-| ffmpeg | turning the page into an MP4 (optional) | `brew install ffmpeg` | `winget install -e --id Gyan.FFmpeg` | `sudo apt install ffmpeg` |
-| brief2mp4 | finishing and checking that MP4 (optional) | see [brief2mp4](https://github.com/qualixar/brief2mp4) | same | same |
-| macOS 14+ and Xcode command line tools | removing a photo's background on your machine (optional) | `xcode-select --install` | not available; ask for a photo on a plain background | not available; same |
+| ffmpeg | a short film of the page (optional) | `brew install ffmpeg` | `winget install -e --id Gyan.FFmpeg` | `sudo apt install ffmpeg` |
+| brief2mp4 | finishing that film as a checked MP4 (optional) | see [brief2mp4](https://github.com/qualixar/brief2mp4) | same | same |
 
-The checker looks for a browser in this order: the path in `BRIEF2MOTION_CHROME`, Google Chrome, `chromium` or `google-chrome` on your PATH, then Playwright's own Chromium. Development and every run recorded here were on macOS; the Windows and Linux paths are written but not run by the author.
+Development and every run recorded here were on macOS with Chrome 157. The Windows and Linux paths are written but not run by the author.
 
 ## What it makes
 
-| Block | What the skill does with it | Set in `config.js` |
-|---|---|---|
-| **Assemble** | Dust drifts as a slow galaxy, then forms an image or words, and can burst and re-form as up to four shapes, in any order you list (`sequence`), with a caption card per step. `halftone` makes round dots on a grid sized by how dark the picture is (best for faces); the default stipple is dense and organic (best for products and logos). `colour: 'photo'` gives each dot the colour of the picture under it. | `assemble.targets`, `sequence`, `captions`, `colour`, `points` |
-| **Flight** | A paper plane, or any object, travels along a path across the hero, leaving a fading trail. | `flight.path`, `trigger` (`scroll` or `time`) |
-| **Scroll** | The hero pins while the scene plays as you scroll, with smooth scrolling (Lenis). Or it runs on a timer with no scroll at all. | `scroll.length`, or `scroll: null` |
-| **The page around it** | Nav, headline, chapters with pictures, an optional collection grid, details, process steps, call to action and footer, all written from your brief. Add `?play` to the address to run the whole scene on its own, which is useful for screen recording. | the `page` block |
+| Kind of site | What the skill does for it | Stack | Example |
+|---|---|---|---|
+| **Product launch with a 3D object** | a turntable you can drag, scroll poses, an exploded view with labels, colourways, a still picture when WebGL is off | three.js (React Three Fiber in React projects) | [halden-one](examples/halden-one/) |
+| **Scroll story for a brand** | pinned scenes, a picture sequence scrubbed by scroll, a sideways gallery, text that reads itself | GSAP, ScrollTrigger, Lenis | [tidewater](examples/tidewater/) |
+| **Type-led landing page** | a headline that sets word by word, highlight wipes, rows of words that slide with the scroll, springs | Motion | [relay](examples/relay/) |
+| **Portfolio with page transitions** | a thumbnail that grows into the next page and back, a grid that glides when filtered | View Transitions API | [halvorsen](examples/halvorsen/) |
+| **Data story** | one chart that redraws as you read, counters, a table and sources for every number | SVG, D3 scales | [keeling](examples/keeling/) |
+| **App interface** | shared layout tabs, drag to reorder (and from the keyboard), items that travel between lists, numbers on springs | React, Motion for React | [mise](examples/mise/) |
+| **Illustrated landing page** | an SVG drawing that draws and grows, Lottie icons that play only on screen, native CSS scroll-driven animation | plain CSS and JavaScript, lottie-web | [sprout](examples/sprout/) |
+| **Particles that form a picture** | dust that assembles into a product, a logo, a face or a word, and re-forms as up to four shapes | the built-in dust engine | [copper-no-7](examples/copper-no-7/) |
 
-Photos of people work best front-facing, calm, from the shoulders up. On a Mac with macOS 14 or newer the skill removes the background on your machine (Apple's subject detection; nothing is uploaded).
+Each example is a complete site with the brief it was built from, the motion plan at the top of its script, and the report from its passing check. Run any of them: `python3 skills/brief2motion/scripts/serve.py examples/tidewater`.
+
+<table>
+<tr>
+<td width="50%"><a href="examples/tidewater/"><img src="assets/examples/tidewater.webp" alt="Tidewater: a dark slate page. A salt crystal made of white cubes grows as the page scrolls, then cards for six months slide sideways." width="100%"></a><br><b>tidewater</b> · scroll story · GSAP</td>
+<td width="50%"><a href="examples/relay/"><img src="assets/examples/relay.webp" alt="Relay: a heavy headline sets word by word with an amber highlight, then three rows of giant words slide in opposite directions." width="100%"></a><br><b>relay</b> · kinetic type · Motion</td>
+</tr>
+<tr>
+<td><a href="examples/halvorsen/"><img src="assets/examples/halvorsen.webp" alt="Halvorsen: a grid of four coloured type specimen posters; one grows into a full project page." width="100%"></a><br><b>halvorsen</b> · page transitions · View Transitions API</td>
+<td><a href="examples/keeling/"><img src="assets/examples/keeling.webp" alt="Keeling: a red line chart of carbon dioxide draws from 1959 to 2025 beside the text, then turns into bars." width="100%"></a><br><b>keeling</b> · data story · SVG and D3 scales</td>
+</tr>
+<tr>
+<td><a href="examples/mise/"><img src="assets/examples/mise.webp" alt="Mise: a meal planner card on a lilac page, with tabs, a list of dinners and a shopping list." width="100%"></a><br><b>mise</b> · interface motion · React and Motion</td>
+<td><a href="examples/sprout/"><img src="assets/examples/sprout.webp" alt="Sprout: a yellow page where a green plant grows in a terracotta pot, then five pots fill with water." width="100%"></a><br><b>sprout</b> · SVG, Lottie, CSS scroll animation</td>
+</tr>
+<tr>
+<td><a href="examples/copper-no-7/"><img src="assets/examples/copper-no-7.webp" alt="Copper No. 7: dust drifts, then forms a perfume bottle beside the headline." width="100%"></a><br><b>copper-no-7</b> · particles · the dust engine</td>
+<td><a href="examples/style-atlas/"><img src="assets/examples/style-atlas.webp" alt="Style atlas: the same small page fragment shown in many visual styles, one after another." width="100%"></a><br><b>style-atlas</b> · 28 styles on one page</td>
+</tr>
+</table>
+
+<p align="center">
+  <img src="assets/faces-demo.webp" alt="Dust drifting, then forming three halftone portraits one after another" width="100%">
+</p>
+
+<p align="center">The dust engine from version 0.1: one page, three faces made of round dots. It is still here, and it is now one stack of several.</p>
+
+## The stacks it chooses from
+
+`scripts/route.mjs` reads the brief and proposes a stack, quoting the words that led there. The agent confirms or overrules it in `SPEC.md`. The rule is the lightest stack that does the job.
+
+| Stack | Right when the brief wants | Loaded as | Reference |
+|---|---|---|---|
+| Plain CSS and JavaScript, with the kit | reveals, hovers, a pinned scene, counters, line drawing: nothing that needs a library. **The default.** | nothing | [vanilla.md](skills/brief2motion/references/stacks/vanilla.md) |
+| GSAP, ScrollTrigger, Lenis | choreography tied to scroll: pins, scrubbing, sideways travel, picture sequences | script tags, pinned, integrity hashes | [gsap.md](skills/brief2motion/references/stacks/gsap.md) |
+| Motion | kinetic type, springs, scroll-linked values on a plain page | ES module | [motion.md](skills/brief2motion/references/stacks/motion.md) |
+| Motion for React | interface motion in a React or Next.js app: layout, presence, drag | the project's bundler | [motion.md](skills/brief2motion/references/stacks/motion.md) |
+| three.js | a 3D object or scene, shaders, post-processing | ES module, after the text is on screen | [three.md](skills/brief2motion/references/stacks/three.md) |
+| React Three Fiber and drei | the same, inside a React project | the project's bundler | [three.md](skills/brief2motion/references/stacks/three.md) |
+| The dust engine | particles that form a picture or a word | a template; config only | [particles.md](skills/brief2motion/references/stacks/particles.md) |
+| View Transitions API | page-to-page transitions, grids that rearrange | CSS, a few lines of script | [view-transitions.md](skills/brief2motion/references/stacks/view-transitions.md) |
+| SVG, with D3 for scales | lines, icons and charts that draw | nothing, or two small modules | [svg-players.md](skills/brief2motion/references/stacks/svg-players.md) |
+| Lottie and Rive | an animation file from a designer | loaded when the animation nears the screen | [svg-players.md](skills/brief2motion/references/stacks/svg-players.md) |
+
+Cross-cutting references: [kinetic-type.md](skills/brief2motion/references/stacks/kinetic-type.md), [scroll-story.md](skills/brief2motion/references/stacks/scroll-story.md), [accessibility.md](skills/brief2motion/references/accessibility.md), [performance.md](skills/brief2motion/references/performance.md), [design-fundamentals.md](skills/brief2motion/references/design-fundamentals.md), and a short note on when WebAssembly helps ([wasm.md](skills/brief2motion/references/stacks/wasm.md)).
+
+Every stack shares one small kit of tested helpers in [`skills/brief2motion/kit/`](skills/brief2motion/kit/): the reduced-motion switch, frame loops that stop when hidden, scroll progress, accessible split text, counters, SVG line drawing, a picture-sequence scrubber, view-transition helpers, a three.js stage and Lottie and Rive loaders. No dependencies, about 30 KB of source.
+
+## The style system
+
+Web motion sits on a design, so the skill knows the major visual styles. [`references/styles.md`](skills/brief2motion/references/styles.md) indexes 32 of them, each checked against a published source, each with its own page: what it is, signature rules, tokens, tested CSS, the motion that fits, its accessibility traps and when to choose it.
+
+| Family | Styles |
+|---|---|
+| Surface | neubrutalism, web brutalism, glassmorphism, Liquid Glass-inspired, neumorphism, claymorphism, skeuomorphism, flat design, Material Design 3 |
+| Layout and type | Swiss / International Typographic Style, minimalism, maximalism, bento grid, editorial |
+| Retro and themed | Y2K, Frutiger Aero, vaporwave, synthwave, Memphis, Corporate Memphis, Art Deco, cyberpunk, glitch |
+| Treatments | aurora / mesh gradient, grain, duotone, dark-mode-first, isometric |
+| Motion-led approaches | kinetic typography, scroll-driven storytelling, 3D / immersive WebGL, micro-interactions |
+
+The 28 looks are live on one page, [`examples/style-atlas/`](examples/style-atlas/): the same small product fragment in every style, so they can be compared and measured. The atlas, the 32 reference pages and the router all come from one data file, so they cannot drift apart.
+
+The router picks a style from what the brief says about the product, the audience and the mood, and says why. A brief for a bank gets Swiss; one for a children's app gets claymorphism; one that names glassmorphism gets glassmorphism. A brand's own colours and type always replace a style's tokens. Names that are not real styles are listed as such: "spectromorphism", for one, does not exist as a design style.
 
 ## What it checks
 
+`check_site.mjs` runs these on every page, in a real Chrome:
+
 | Check | Must be |
 |---|---|
-| Desktop, 1440 x 900 | p95 frame time 20 ms or less (smooth at 60 fps) |
-| Emulated phone, 390 x 844 touch screen, processor slowed 4x | p95 frame time 40 ms or less |
-| Dots drawn | desktop draws every dot; the phone run keeps at least 60%. A page cannot pass by quietly drawing less. |
-| Page weight from your project, desktop and phone run | 1.5 MiB or less each |
+| Desktop, 1440 x 900, idle and scrolling | p95 frame time 20 ms or less |
+| Emulated phone, 390 x 844, touch, processor slowed 4x | p95 frame time 40 ms or less |
+| Layout at 1440, 390 and 320 px wide | no sideways scroll at any scroll position |
+| Tap targets on the phone | 24 px or more (WCAG 2.5.8) |
+| Reduced motion switched on | the page reports it, nothing keeps animating, two screenshots 0.7 s apart are identical, every heading and paragraph is visible, normal scrolling works |
+| Browser without WebGL | the headline is readable and a still stands in for each WebGL canvas |
+| JavaScript off | the page still reads |
+| Text contrast | WCAG AA (4.5:1, or 3:1 for large text), with see-through panels blended before measuring |
+| Keyboard | every stop has a visible focus ring and is on screen |
+| Basics | one `<h1>`, `lang`, a real title and description, zoom allowed, `alt` text, a `<main>` and a skip link |
+| Page weight from your project | 1.5 MiB or less per page |
 | Third-party requests | only `cdn.jsdelivr.net` |
-| Console errors, all four runs | none |
-| Visitor has reduced motion switched on | the finished shape is on the canvas, still there after a resize, and the headline is readable |
-| Browser without WebGL | a still image of the finished shape, with the headline readable over it |
+| Console errors, every run | none |
 
-If a check fails, the skill fixes the page and checks again. It never relaxes a budget to pass. The phone run is an emulated phone: this machine's graphics chip with the processor slowed down. On a machine with no GPU, such as a basic virtual machine, the frame numbers say nothing about real devices.
+If a check fails, the skill fixes the page and checks again. It never relaxes a budget to pass. The phone run is an emulated phone: this machine's graphics chip with the processor slowed down. On a machine with no GPU, pass `--no-perf`; the frame numbers there say nothing about real devices. Text over pictures, gradients and canvas has no single background, so it is not measured: the agent looks at the screenshots, and so should you.
 
-## How it works
+Three test layers back this up: unit tests for the router, the kit and the measuring code; a real-browser smoke test per stack that proves each documented pattern does what it says (the poster really morphs between pages, keyboard reorder really moves the row, the canvas really changes with scroll); and the full check on every example.
 
-1. **Spec.** Before any code the agent writes `SPEC.md`: what moves, the shapes in order, the look, every word on the page, and a "done when" list with one checkable line per requirement.
-2. **Build.** It copies `skills/brief2motion/templates/site/` to `site/` and edits only `config.js` (all copy and motion settings), the title and description in `index.html`, and colours in `style.css`. The engine files are not touched.
-3. **Self-check.** `check_motion.mjs` serves the page, measures it in a real browser and writes `motion-report.json` and screenshots. The agent looks at the screenshots against each "done when" line.
-4. **Fix.** Lower the dot count, shrink the pictures, shorten the scroll, measure again.
-5. **Deliver.** It starts the preview server and hands you the `http://localhost` link, plus `REPORT.md` with the evidence, the credits and the licence notice.
+## Examples
 
-| The page needs | Library | Licence | How it loads |
-|---|---|---|---|
-| 3D particles | [three.js](https://github.com/mrdoob/three.js) r187 | MIT | CDN, pinned |
-| Timelines, scroll pinning, the plane's path | [GSAP](https://gsap.com) 3.15.0 with ScrollTrigger and MotionPath | GSAP standard licence (free, AI-written code allowed) | CDN, pinned, integrity hash |
-| Smooth scrolling | [Lenis](https://github.com/darkroomengineering/lenis) 1.3.27 | MIT | CDN, pinned, integrity hash |
+Nine folders in [`examples/`](examples/), each with `BRIEF.md`, the site, and `site-report.json` from its passing check on an Apple M-series laptop with Chrome 157:
 
-The page text renders first from `config.js`; three.js loads after it. If the CDN is blocked or the browser has no WebGL, the visitor still gets the words and a still image, never a blank page. The page uses system fonts, so no request goes to a font service.
+| Example | Stack | Checks |
+|---|---|---|
+| [halden-one](examples/halden-one/) | three.js | 27 of 27 |
+| [tidewater](examples/tidewater/) | GSAP, ScrollTrigger, Lenis | 27 of 27 |
+| [relay](examples/relay/) | Motion | 27 of 27 |
+| [halvorsen](examples/halvorsen/) | View Transitions API, five pages | all pages pass |
+| [keeling](examples/keeling/) | SVG, D3 scales, NOAA data | 27 of 27 |
+| [mise](examples/mise/) | React, Motion for React | 27 of 27 |
+| [sprout](examples/sprout/) | CSS and JavaScript, Lottie | 27 of 27 |
+| [copper-no-7](examples/copper-no-7/) | the dust engine | 27 of 27, plus the dust engine's own check |
+| [style-atlas](examples/style-atlas/) | CSS | 27 of 27 |
 
-## Example: Copper No. 7
-
-[`examples/copper-no-7/`](examples/copper-no-7/) is a finished page for a made-up perfume, built from one brief: the bottle forms from dust, cardamom, rose and amber pour in one after another and return to the bottle as you scroll, and a paper plane flies across. It runs the template engine unchanged; only `config.js` and the pictures are its own. Serve it with `python3 skills/brief2motion/scripts/serve.py examples/copper-no-7`.
-
-[`examples/copper-no-7/motion-report.json`](examples/copper-no-7/motion-report.json) is the report from its passing check on an Apple M-series laptop with Chrome 157: p95 frame time 16.7 ms on desktop and 16.8 ms on the emulated phone, every dot drawn, 0.35 MiB of project files on desktop and 0.43 MiB on the phone run, no console errors. [`CREDITS.md`](examples/copper-no-7/CREDITS.md) says how each picture was made.
+Every product in the examples is made up, and each page says so. The one page with real numbers, `keeling`, takes them from NOAA's published file and links to it.
 
 ## Write a brief
 
 The agent guesses less when the brief says more. A brief that works well has these parts:
 
 ```markdown
-What moves: my product bottle forms from dust on load. When I scroll, three spice shapes pour into it one after another, then it is the bottle again. A paper plane flies across.
-Words on the page, exactly: headline "Bottled from a single copper still." / button "Reserve a bottle".
-Images: product.jpg (white background), three spice photos.
-Look: light, paper and ink, one burnt-orange accent.
-Done when: the bottle is recognisable at the end of the scroll, p95 frame time is 20 ms or less on desktop, the page is under 1.5 MiB, and it still reads without WebGL.
+What it is: a launch page for Halden One, a table radio with one dial and no screen.
+What moves: a 3D turntable of the radio that I can drag. As I scroll: the whole radio, a close-up of the dial,
+an exploded view with the parts labelled, then a colour picker with four enamels.
+Words on the page, exactly: headline "A radio with one dial and no screen." Button "Reserve one".
+Images: none yet. Build the radio in code.
+Look: a pale studio backdrop like product photography. The enamel is the only colour.
+Stack: plain HTML, no build step.
+Done when: the exploded view shows four labelled parts, there is a still picture when WebGL is off,
+reduced motion cuts between poses, and p95 frame time is 20 ms or less on desktop.
 ```
 
-The "done when" lines matter most, because they are what the checks measure. [`references/brief-words.md`](skills/brief2motion/references/brief-words.md) maps common brief phrases ("made of dust", "turns into", "calm", "when I scroll") to settings.
+The "done when" lines matter most, because they are what the checks measure. Say what the product is and who it is for, and the router can choose a style; name a style or a library, and it uses that. [`references/brief-words.md`](skills/brief2motion/references/brief-words.md) maps common brief phrases to stacks and settings, and the [guide](docs/guide/brief2motion-guide.pdf) goes through brief writing, every stack and every style in detail.
 
 ## Troubleshooting
 
@@ -171,75 +267,88 @@ The "done when" lines matter most, because they are what the checks measure. [`r
 
 **The preview says the port is busy.** The server tries the next 20 ports by itself and prints the one it used. Pass `--port 9000` to choose.
 
-**`check_motion` says it could not start a browser.** It lists every browser it tried. Install Chrome, or run `npx playwright@1.65.1 install chromium`, or set `BRIEF2MOTION_CHROME` to the path of any Chrome or Chromium.
+**The checker says it could not start a browser.** It lists every browser it tried. Install Chrome, or run `npx playwright@1.65.1 install chromium`, or set `BRIEF2MOTION_CHROME` to the path of any Chrome or Chromium.
 
-**The first check downloads something.** That is `playwright-core` 1.65.1, about 14 MB on disk, into `~/.cache/brief2motion/deps`, with install scripts off. `bash skills/brief2motion/scripts/doctor.sh` shows whether it is already there. To fetch it yourself: `npm i --no-save --ignore-scripts --prefix ~/.cache/brief2motion/deps playwright-core@1.65.1`.
+**"The page never set data-motion."** The page did not report its motion state. Call `signal('ready')`, `signal('reduced')` or `signal('static')` from `kit/motion-core.js` when setup is done.
 
-**The frame-time check fails.** Lower `points.desktop` or `points.mobile` in `config.js`, shorten `scroll.length`, or crop the pictures tighter. If every number is slow, check the machine has a real GPU.
+**The frame-time check fails.** Read [performance.md](skills/brief2motion/references/performance.md). Usual causes: animating layout properties, an uncapped pixel ratio on a 3D canvas, a loop that keeps running off screen. If every number is slow, check the machine has a real GPU, or pass `--no-perf`.
 
-**The weight check fails.** Chapter pictures should be about 1200 px wide WebP or JPG with a 720 px copy in `srcset`, collection pictures 600 px wide, shape pictures 512 px.
+**The reduced-motion check fails.** Something still moves, or some text never becomes visible. [accessibility.md](skills/brief2motion/references/accessibility.md) lists how each library honours the setting.
 
-**A portrait does not look like the person.** Use a calm, front-facing photo from the shoulders up on a plain background, with `style: 'halftone'` and `mask: 'oval'`. Three-quarter profiles and busy backgrounds do not read.
+**The weight check fails.** Pictures should be about 1200 px wide WebP with a 720 px copy in `srcset`; a picture sequence about 960 px wide at quality 60 to 70.
 
-**`cutout.swift` fails.** It needs macOS 14 or newer and the Xcode command line tools (`xcode-select --install`). Otherwise ask for a photo on a plain background.
+**A dust portrait does not look like the person.** Use a calm, front-facing photo from the shoulders up on a plain background, with `style: 'halftone'` and `mask: 'oval'`.
 
 ## FAQ
+
+**How do I make website animations with Claude Code?** Install brief2motion, then describe the site in plain words: what it is for, what should move, the exact words. The skill picks the motion stack and a visual style, builds the site, checks it in Chrome and gives you a `localhost` link. The [quick start](#quick-start) has three briefs you can paste.
+
+**Is there a GSAP or three.js skill for Claude Code?** brief2motion covers both, and eight more: GSAP with ScrollTrigger and Lenis for scroll animation, three.js and React Three Fiber for 3D, Motion, the View Transitions API, SVG and D3, Lottie, Rive, native CSS scroll-driven animation and its own particle engine. Each has a reference file with tested patterns in [`references/stacks/`](skills/brief2motion/references/stacks/).
+
+**How is it different from Anthropic's frontend-design skill?** frontend-design guides how a page looks. brief2motion is about how it moves: it routes the brief to a motion stack, ships tested animation helpers, and measures frame time, layout, focus, contrast and reduced motion in a real browser before it says done. They work well together.
+
+**Which visual styles does it know?** 32, from neubrutalism, glassmorphism, neumorphism and claymorphism to Swiss, bento, Y2K, vaporwave, Art Deco and cyberpunk, each with design tokens, the motion that suits it, its accessibility pitfalls and sources. See the [style system](#the-style-system).
 
 **Does it cost anything?** The skill is free and MIT licensed. The agent runs on your own Claude Code or Codex plan, and the checks run on your machine.
 
 **Does it work in Codex?** The repo carries a Codex plugin manifest and marketplace file, and the skill is plain scripts and files that Codex can run. The author built and checked it from Claude Code and has not recorded a Codex run, so treat Codex as untested and open an issue if something breaks.
 
-**Does it upload my files anywhere?** No. Your photos, the page, the checks and the report stay in your project folder. The page loads three.js, GSAP and Lenis from `cdn.jsdelivr.net` when a visitor opens it, and the first check downloads `playwright-core` from npm once.
+**Does it upload my files anywhere?** No. Your pictures, the site, the checks and the report stay in your project folder. A built page loads its libraries from `cdn.jsdelivr.net` when a visitor opens it, and the first check downloads `playwright-core` from npm once.
 
-**Will it work on a phone?** The page is built for one, and the check measures an emulated phone: a 390 x 844 touch screen with the processor slowed 4x. On narrow screens the shape moves above the headline and shrinks, and fewer dots are drawn. An emulated phone is not a real one, so look at it on yours.
+**Which frameworks does it support?** A plain static site with no build step is the default and the best tested. For React and Next.js projects the references cover Motion for React and React Three Fiber, and the examples include a React page; those stacks should be built by your project's own bundler. Vue, Svelte and Astro projects can use everything that is not React-specific.
 
-**What do visitors with reduced motion or without WebGL see?** With reduced motion switched on, the finished shape is drawn once and nothing moves. Without WebGL, or if anything fails at run time, they get a still image of the finished shape and the full page text.
+**Is the motion accessible?** Every page has a reduced-motion branch that the checker verifies, keyboard paths for anything draggable, focus rings, and content in the HTML. That is a floor, not an audit: test with a screen reader and real users before you rely on it.
 
-**Can I use the scripts without an agent?** Yes. Copy `skills/brief2motion/templates/site/` to a folder, edit `config.js`, then `python3 skills/brief2motion/scripts/serve.py <folder>` to preview and `node skills/brief2motion/scripts/check_motion.mjs <folder> --make-fallback` to measure.
+**Will it work on a real phone?** The check measures an emulated phone, which is this machine's graphics chip with the processor slowed 4x. It catches layout and most performance problems. It is not a real device, so look at the page on yours.
 
-**Can it make a video of the page?** Yes. `bash skills/brief2motion/scripts/to_video.sh site final.mp4 --seconds 12` records the hands-free `?play` run frame by frame (add `--mode scroll` for a scroll-through). The dust runs on a virtual clock, so two runs give the same frames. If [brief2mp4](https://github.com/qualixar/brief2mp4) is installed it finishes and checks the file; otherwise ffmpeg encodes it directly.
+**Can I use the scripts without an agent?** Yes. `node skills/brief2motion/scripts/route.mjs BRIEF.md` suggests a stack and style, `check_site.mjs <folder>` measures any static site that reports its motion state, and `capture_site.mjs <folder> --out media --film` takes pictures and a short film of it.
+
+**Can it make a video of the page?** `capture_site.mjs --film` makes a short loop of a scroll-through (the pictures in this README were made that way). For the dust engine, `to_video.sh` records a frame-exact run and hands it to [brief2mp4](https://github.com/qualixar/brief2mp4) when installed.
 
 **How do I update or remove it?** Claude Code: `claude plugin update brief2motion@brief2mp4` or `claude plugin uninstall brief2motion@brief2mp4` (use `@brief2motion` if you added this repo as its own marketplace). Codex: `codex plugin marketplace upgrade` or `codex plugin remove brief2motion@brief2motion`. By hand: delete the folder you copied.
 
 ## What is inside
 
 ```
-.claude-plugin/                    Claude Code plugin manifest and marketplace entry
-.codex-plugin/, .agents/plugins/   Codex plugin manifest and marketplace file
+.claude-plugin/, .codex-plugin/, .agents/plugins/   plugin manifests and marketplace files
 skills/brief2motion/
-  SKILL.md                         the loop the agent follows
-  references/                      brief-words.md (brief phrases to settings), licences.md
-  scripts/                         doctor.sh, serve.py, serve.mjs, check_motion.mjs, capture_frames.mjs,
-                                   to_video.sh, cutout.swift, _common.mjs
-  templates/                       SPEC.md and site/, the starter page that runs with no images
-examples/copper-no-7/              a finished page for a made-up perfume, with its credits and passing report
-tests/run_checks.sh                fast repo checks (syntax, versions, template and example in sync, integrity hashes, privacy)
-RESOURCES.md                       49 open repos for motion work, each with its licence in plain words
-CHANGELOG.md                       what changed in each release
+  SKILL.md                    the loop the agent follows: route, spec, build, check, fix, deliver
+  kit/                        shared helpers every site copies: motion-core, split-text, reveal, counter, svg-draw,
+                              image-sequence, view-transitions, three-stage, players, kit.css
+  references/
+    stacks/                   one file per stack, with patterns taken from the tested examples
+    styles.md, styles/        the style system: an index and one page per style (generated from styles.json)
+    design-fundamentals.md, accessibility.md, performance.md, brief-words.md, licences.md, routing.json
+  scripts/                    route.mjs, check_site.mjs, check_motion.mjs, capture_site.mjs, build_styles.mjs,
+                              serve.py, serve.mjs, doctor.sh, to_video.sh, capture_frames.mjs, cutout.swift
+  templates/                  SPEC.md and site/, the dust engine starter
+examples/                     nine complete sites, each with its brief and its passing report
+tests/                        unit tests, per-stack browser smoke tests, repo checks, the example checker
+docs/guide/                   the learning guide: editable HTML, CSS and Python source, and the built PDF
+RESOURCES.md, NOTICE          the repositories this was learned from, with licences
+CHANGELOG.md                  what changed in each release
 ```
 
 ## Part of a small family
 
-[brief2mp4](https://github.com/qualixar/brief2mp4) turns a written brief into a finished, checked MP4. brief2motion turns a brief into live web motion. Use brief2motion when the motion should live on a website, and brief2mp4 when you want a video file. brief2motion can hand its page to brief2mp4 when you want a video of it too. If you already use brief2mp4, this skill installs from its marketplace: `/plugin install brief2motion@brief2mp4`.
+[brief2mp4](https://github.com/qualixar/brief2mp4) turns a written brief into a finished, checked MP4, with 30 animation art forms from claymation to anime. brief2motion turns a brief into a live website. Use brief2motion when the motion should live on a site, and brief2mp4 when you want a video file. Installing brief2mp4 (0.4.0 or later) installs brief2motion with it, so one command gives you both.
 
 ## Contributing
 
-Made something with it? Open an issue with the brief and a screenshot; the useful ones get added to the examples with your name on them. A page that failed a check is the most useful bug report: include the brief and `motion-report.json`. Code changes are welcome; run `bash tests/run_checks.sh` first. Releases are listed in [CHANGELOG.md](CHANGELOG.md).
-
-## Star history
-
-<a href="https://star-history.com/#qualixar/brief2motion&Date"><img alt="Star history chart for qualixar/brief2motion" src="https://api.star-history.com/svg?repos=qualixar/brief2motion&type=Date" width="600"></a>
+Made something with it? Open an issue with the brief and a screenshot; the useful ones get added to the examples with your name on them. A page that failed a check is the most useful bug report: include the brief and `site-report.json`. Code changes are welcome; run `bash tests/run_checks.sh`, `node --test tests/*.test.mjs` and, with Chrome installed, `node tests/browser/smoke.mjs` first. To add a style, add an entry to `references/styles.json` with its sources and a CSS file beside it, then run `scripts/build_styles.mjs`. Releases are listed in [CHANGELOG.md](CHANGELOG.md).
 
 ## Licence and credits
 
-brief2motion is MIT. It loads three.js (MIT), GSAP 3.15.0 (free under GSAP's standard licence, which allows AI-written GSAP code) and Lenis (MIT) from a CDN at pinned versions, with integrity hashes on the script tags, and bundles none of them. The skill writes a licence notice into every project it makes. [RESOURCES.md](RESOURCES.md) lists 49 open repos for motion work, each with its licence in plain words; a few are reference-only. [`skills/brief2motion/references/licences.md`](skills/brief2motion/references/licences.md) explains each licence and what it means for you.
+brief2motion is MIT. Sites it builds load three.js, Lenis, Motion, React, lottie-web, the Rive runtime (all MIT), htm (Apache-2.0), D3 modules (ISC) and GSAP (free under GSAP's own "no charge" licence, which allows AI-written GSAP code) from a CDN at pinned versions, and bundle none of them. No code from another project is copied into this repository. [RESOURCES.md](RESOURCES.md) lists the repositories the skill was learned from, each with its licence and what was taken from it; [NOTICE](NOTICE) carries the attributions; [`references/licences.md`](skills/brief2motion/references/licences.md) explains each licence and what it means for you.
 
-**Inspiration.** The particle-face idea was inspired by Thomas Cullen's [faces playground](https://playground.thomascullen.io/faces). brief2motion is written from scratch and shares no code, images or data with it.
+**Inspiration.** The particle-face idea was inspired by Thomas Cullen's [faces playground](https://playground.thomascullen.io/faces). The design guidance in `SKILL.md` and `design-fundamentals.md` draws on Anthropic's [frontend-design skill](https://github.com/anthropics/skills) (Apache-2.0), in our own words.
 
-**Images.** Use only images you own or may reuse. The portraits in the faces demo above are the author's own photo and two Wikimedia Commons photos under CC BY 2.0. Each was cropped, resized and rendered as dots; the originals are unchanged on Commons.
+**Data.** The carbon dioxide numbers in `examples/keeling` are NOAA's annual means for Mauna Loa: Dr. Xin Lan, NOAA/GML ([gml.noaa.gov/ccgg/trends](https://gml.noaa.gov/ccgg/trends/)) and Dr. Ralph Keeling, Scripps Institution of Oceanography ([scrippsco2.ucsd.edu](https://scrippsco2.ucsd.edu/)).
+
+**Images.** The portraits in the faces demo are the author's own photo and two Wikimedia Commons photos under CC BY 2.0. Each was cropped, resized and rendered as dots; the originals are unchanged on Commons.
 - [Dario Amodei in 2023.jpg](https://commons.wikimedia.org/wiki/File:Dario_Amodei_in_2023.jpg) by UK Prime Minister, licensed [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/).
 - [Sam Altman TechCrunch SF 2019 Day 2 Oct 3 (cropped) (cropped).jpg](https://commons.wikimedia.org/wiki/File:Sam_Altman_TechCrunch_SF_2019_Day_2_Oct_3_(cropped)_(cropped).jpg) by TechCrunch, licensed [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/).
 
-They appear only as a demo of the effect. Nothing here suggests either person uses or endorses this project. The perfume pictures in the other demo image and in `examples/copper-no-7/` are generated images of made-up products; see its [CREDITS.md](examples/copper-no-7/CREDITS.md).
+They appear only as a demo of the effect. Nothing here suggests either person uses or endorses this project. The perfume pictures in `examples/copper-no-7/` are generated images of made-up products; see its [CREDITS.md](examples/copper-no-7/CREDITS.md). Every other picture in the examples is drawn by code in this repository.
 
 Made by [Varun Pratap Bhardwaj](https://github.com/qualixar). If a page it made is on your site, a star on the repo is the thank-you that helps most.

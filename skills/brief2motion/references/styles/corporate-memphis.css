@@ -1,0 +1,6 @@
+.s-card { box-shadow: var(--shadow); position: relative; overflow: hidden; }
+.s-card::after { content: ""; position: absolute; right: -30px; bottom: -40px; width: 130px; height: 130px; border-radius: 46% 54% 60% 40% / 50% 44% 56% 50%; background: #ffb86b; }   /* the blob */
+.s-card > * { position: relative; z-index: 1; }
+.s-btn { border-radius: 999px; transition: transform .2s ease, box-shadow .2s ease; }
+.s-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgb(91 108 255 / .35); }
+.s-btn-2 { background: #e7eaff; color: #1f2552; }

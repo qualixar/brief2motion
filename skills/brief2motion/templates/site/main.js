@@ -18,6 +18,7 @@ function showFallback(mode, error) {
   if (img.dataset.src) img.src = img.dataset.src;   // only no-WebGL visitors download it
   hero.classList.add('no-webgl');
   window.__motion = { stats: { mode, ...(error ? { error: String(error) } : {}) } };
+  root.dataset.motion = 'static';   // the state every brief2motion page reports: ready, reduced or static
 }
 
 // Scroll-linked run: a pinned hero; scrolling drives the burst between shapes and the plane.
@@ -79,7 +80,7 @@ async function start() {
   const scene = await createAssemble(hero.querySelector('canvas'), { ...cfg.assemble, ink: cfg.colors.ink });
   teardown.push(() => scene.destroy());
   window.__motion.destroy = () => teardown.splice(0).reverse().forEach((f) => f());
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { scene.progress = 1; return; }   // no plane, no scroll motion
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { scene.progress = 1; root.dataset.motion = 'reduced'; return; }   // no plane, no scroll motion
 
   teardown.push(sequenceCaptions(hero, cfg.assemble.captions));
   const flight = cfg.flight ? createFlight(document.querySelector(cfg.flight.section || '#hero'), cfg.flight) : null;
@@ -87,6 +88,7 @@ async function start() {
   // ?play = hands-free timed run (for screen recording); otherwise scroll drives it when configured
   const play = new URLSearchParams(location.search).has('play');
   teardown.push(cfg.scroll && !play ? scrollRun(gsap, scene, flight, hero) : timedRun(gsap, scene, flight));
+  root.dataset.motion = 'ready';
 }
 
 start().catch((err) => {

@@ -14,15 +14,15 @@
   <script type="importmap">
     { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js" } }
   </script>
-  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly" crossorigin="anonymous"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" integrity="sha384-wl5TeDVvOWt30Pbf8aSo2ZrzsOjddu3avOBvHe+p+OhJt9gP6w9YXmDkN5DK2/dF" crossorigin="anonymous"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/MotionPathPlugin.min.js" integrity="sha384-YAP0gHFFPxr8wOSUhn4e+TuP5bfNLSK+i4tU3G9qh+IDMZRxsjxzPkb+sg037k23" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js" integrity="sha384-3vCAhD+a3BOliP3QqjQINn6ZWiZxoqu0WFxX5ZQZgqekDZuSb1mJBrrLMmu94H8f" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js" integrity="sha384-H2WL1iy/jKQQ7MTHU2hskZKNHTYWWD/KgKE1vCNnaWY8An2ESTh23KN/fTp8XS3j" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/MotionPathPlugin.min.js" integrity="sha384-0PduWGnsKRJBzpu9A/sXL5KEIA1ukwvw/hQ0ygysO756Lfz8NyWKvPuWuwVjdJFX" crossorigin="anonymous"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js" integrity="sha384-R18XzqnxvVLEF+BYfhpmDx30v7eP83fAckyfoRzK7/Uf6nGqufcmsk0eAKo7S3RU" crossorigin="anonymous"></script>
 </head>
 <body id="top">
   <section id="hero">
-    <canvas role="img"></canvas>
-    <img class="fallback" data-src="assets/fallback.png" alt="">
+    <canvas role="img" data-webgl></canvas>
+    <img class="fallback" data-fallback data-src="assets/fallback.png" alt="">
     <div class="hero-copy"></div>
   </section>
   <main>

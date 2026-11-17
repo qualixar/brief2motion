@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>three.js model and post-processing fixture · brief2motion tests</title>
+  <meta name="description" content="A test page for the patterns in references/stacks/three.md: a glTF model loaded with GLTFLoader, a custom shader material, and a bloom pass through EffectComposer.">
+  <style>html, body { height: 100%; margin: 0; background: #10131a; } canvas { width: 100%; height: 100%; display: block; }</style>
+  <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.min.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.187.0/examples/jsm/" } }
+  </script>
+</head>
+<body>
+  <canvas data-webgl></canvas>
+  <script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
+    import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+    import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+    import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+    import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+    import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+    const canvas = document.querySelector('canvas');
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer.setPixelRatio(Math.min(2, devicePixelRatio)); renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(35, canvas.clientWidth / canvas.clientHeight, 0.1, 50);
+    camera.position.set(0, 0.8, 5);
+    const pmrem = new THREE.PMREMGenerator(renderer); scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+
+    // 1. a model file: made here with GLTFExporter so the test needs no asset, then loaded the way any .glb is
+    const source = new THREE.Mesh(new THREE.TorusKnotGeometry(0.7, 0.24, 160, 24), new THREE.MeshStandardMaterial({ color: '#c9871f', metalness: 1, roughness: 0.3 }));
+    const glb = await new Promise((ok, no) => new GLTFExporter().parse(source, ok, no, { binary: true }));
+    const url = URL.createObjectURL(new Blob([glb], { type: 'model/gltf-binary' }));
+    const gltf = await new GLTFLoader().loadAsync(url);
+    const model = gltf.scene; model.position.x = -1.1; scene.add(model);
+    window.__loaded = { meshes: 0 }; model.traverse((o) => { if (o.isMesh) window.__loaded.meshes++; });
+
+    // 2. a custom shader material: time-driven stripes, in linear colour, converted by the output pass
+    const shader = new THREE.ShaderMaterial({
+      uniforms: { uTime: { value: 0 }, uColor: { value: new THREE.Color('#33c9ff') } },
+      vertexShader: 'varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+      fragmentShader: 'uniform float uTime; uniform vec3 uColor; varying vec2 vUv; void main() { float s = smoothstep(0.45, 0.55, fract(vUv.y * 8.0 + uTime * 0.2)); gl_FragColor = vec4(uColor * (0.25 + 2.2 * s), 1.0); }',
+    });
+    const orb = new THREE.Mesh(new THREE.SphereGeometry(0.8, 48, 32), shader); orb.position.x = 1.1; scene.add(orb);
+
+    // 3. post-processing: render, bloom the bright parts, then tone-map and convert colour once at the end
+    const composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
+    composer.addPass(new UnrealBloomPass(new THREE.Vector2(canvas.clientWidth, canvas.clientHeight), 0.6, 0.5, 0.85));
+    composer.addPass(new OutputPass());
+
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const timer = new THREE.Timer();
+    const frame = (now) => { timer.update(now); const t = timer.getElapsed(); shader.uniforms.uTime.value = t; model.rotation.y = t * 0.5; composer.render(); if (!still) requestAnimationFrame(frame); };
+    requestAnimationFrame(frame);
+    document.documentElement.dataset.motion = still ? 'reduced' : 'ready';
+  </script>
+</body>
+</html>

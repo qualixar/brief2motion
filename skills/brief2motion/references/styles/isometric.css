@@ -1,0 +1,12 @@
+.s-card { box-shadow: var(--shadow); position: relative; }
+/* a small isometric cube made of three skewed faces: top, left, right */
+.s-stat { position: relative; padding-left: 86px; min-height: 78px; display: grid; align-content: center; }
+.s-stat::before, .s-stat::after { content: ""; position: absolute; left: 6px; top: 26px; width: 32px; height: 36px; }
+.s-stat::before { background: #4f5bd5; transform: skewY(30deg); }
+.s-stat::after { left: 38px; background: #2f3aa8; transform: skewY(-30deg); }
+.s-label { position: relative; }
+.s-label::before { content: ""; position: absolute; left: 6px; top: 26px; width: 64px; height: 37px; background: #9aa5ff; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); transform: translateY(-9px); transition: transform .3s cubic-bezier(.3, 1.5, .5, 1); }
+.s-card:hover .s-label::before { transform: translateY(-17px); }   /* the lid lifts */
+.s-btn { transition: transform .2s, box-shadow .2s; box-shadow: 0 6px 0 #2f3aa8; }
+.s-btn:hover { transform: translateY(2px); box-shadow: 0 4px 0 #2f3aa8; }
+.s-btn-2 { background: #fff; color: #1b2559; box-shadow: 0 6px 0 #c7cdf5; }
