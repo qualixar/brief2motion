@@ -58,7 +58,7 @@ if [[ -n "$URL" ]]; then
   [[ "$(curl -s -o /dev/null -w '%{http_code}' "$URL")" == 200 ]] && ok "serve.py serves index.html at $URL" || bad "serve.py index.html"
   curl -sI "${URL}main.js" | grep -qi 'content-type: text/javascript' && ok "serve.py sends main.js as JavaScript" || bad "serve.py main.js content type"
   [[ "$(curl -s -o /dev/null -w '%{http_code}' "${URL}nope.txt")" == 404 ]] && ok "serve.py returns 404 for a missing file" || bad "serve.py 404"
-else bad "serve.py did not print its address"; fi
+else bad "serve.py did not print its address"; echo "--- serve.py log:"; cat "$LOG"; echo "--- ps:"; ps -p "$SRV" -o pid,stat,command || true; fi
 kill "$SRV" 2>/dev/null; wait "$SRV" 2>/dev/null; rm -f "$LOG"
 
 echo; [[ $FAILS == 0 ]] && echo "ALL CHECKS PASSED" || echo "$FAILS CHECK(S) FAILED"
