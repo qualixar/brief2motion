@@ -1,0 +1,71 @@
+/* Keeling: data story example. A printed-report look: off-white, graphite, one red for the measurement itself. */
+:root {
+  --page: #fbfbf8; --ink: #1b1e22; --ink-2: #555b63; --rule: #d3d6da; --red: #c4271d; --red-soft: #f3d9d5; --card: #ffffff;
+  --focus: #1b1e22; --focus-halo: rgb(251 251 248 / .95);
+  --serif: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --pad: clamp(20px, 5vw, 72px);
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 400 clamp(17px, .4vw + 15.5px, 20px)/1.6 var(--serif); }
+h1, h2, p, figure { margin: 0; }
+a { color: var(--ink); text-underline-offset: 3px; }
+
+.mast { display: flex; justify-content: space-between; align-items: center; padding: 16px var(--pad); border-bottom: 2px solid var(--ink); font: 600 14px/1 var(--sans); }
+.mast a { text-decoration: none; padding: 10px 0; }
+.mast-name { letter-spacing: .02em; }
+.mast-link { text-decoration: underline !important; }
+
+.lede { padding: clamp(48px, 10vh, 120px) var(--pad) clamp(40px, 8vh, 90px); max-width: 1100px; }
+.dateline { font: 600 13.5px/1.4 var(--sans); color: var(--ink-2); margin-bottom: 22px; }
+h1 { font: 400 clamp(2.1rem, 5.2vw, 4.6rem)/1.06 var(--serif); letter-spacing: -.02em; text-wrap: balance; }
+.standfirst { margin-top: 26px; max-width: 46ch; font-size: clamp(18px, .8vw + 15px, 23px); color: var(--ink-2); }
+
+/* story: text on the left, the chart pinned on the right */
+.story { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 0 clamp(24px, 5vw, 80px); padding: 0 var(--pad); border-top: 1px solid var(--rule); }
+.chart { grid-column: 2; grid-row: 1; position: sticky; top: 0; align-self: start; height: 100vh; height: 100svh; display: flex; flex-direction: column; justify-content: center; gap: 10px; padding: 20px 0; }
+.chart svg { width: 100%; height: auto; max-height: 70vh; overflow: visible; display: block; }
+.chart figcaption { font: 400 13px/1.45 var(--sans); color: var(--ink-2); max-width: 60ch; }
+.readout { display: flex; align-items: baseline; gap: 14px; font-family: var(--sans); font-variant-numeric: tabular-nums; min-height: 1.3em; }
+.readout-year { font-weight: 600; color: var(--ink-2); font-size: clamp(15px, 1.2vw, 18px); }
+.readout-value { font-size: clamp(15px, 1.2vw, 18px); color: var(--ink-2); }
+.readout-value b { font-weight: 700; font-size: clamp(2rem, 4.4vw, 3.6rem); letter-spacing: -.03em; color: var(--red); line-height: 1; }
+.steps { grid-column: 1; grid-row: 1; padding: 22vh 0 30vh; }
+.step { min-height: 78vh; display: flex; flex-direction: column; justify-content: center; gap: 14px; max-width: 30rem; opacity: var(--dim, 1); transition: opacity .35s ease; }
+.step h2 { font: 700 clamp(1.4rem, 2.3vw, 2.1rem)/1.15 var(--sans); letter-spacing: -.02em; }
+.step strong { font-family: var(--sans); font-weight: 700; font-variant-numeric: tabular-nums; }
+.js-story .step:not(.is-active) { --dim: .45; }
+@media (prefers-reduced-motion: reduce) { .js-story .step:not(.is-active) { --dim: 1; } }
+@media (max-width: 860px) {
+  .story { display: block; padding: 0; }
+  .chart { height: auto; z-index: 5; background: var(--page); padding: 10px var(--pad) 10px; border-bottom: 1px solid var(--rule); gap: 4px; }
+  .chart svg { max-height: 38vh; max-height: 38svh; }
+  .chart figcaption { display: none; }
+  .readout-value b { font-size: 1.9rem; }
+  .steps { padding: 6vh var(--pad) 10vh; }
+  .step { min-height: 62vh; justify-content: flex-end; padding-bottom: 6vh; }
+}
+
+/* chart parts (drawn by main.js) */
+.grid line { stroke: var(--rule); stroke-width: 1; }
+.grid text, .axis-x text, .bar-labels text, .bar-values text { font: 500 15px var(--sans); fill: var(--ink-2); font-variant-numeric: tabular-nums; }
+.axis-x line { stroke: var(--ink); stroke-width: 1.5; }
+.line { fill: none; stroke: var(--red); stroke-width: 3.5; stroke-linejoin: round; stroke-linecap: round; }
+.area { fill: var(--red-soft); opacity: .55; }
+.dot { fill: var(--red); stroke: var(--page); stroke-width: 3; }
+.threshold line { stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 3 5; }
+.threshold text { font: 700 15px var(--sans); fill: var(--ink); }
+.bars rect { fill: var(--red); }
+.bar-values text { font-weight: 700; fill: var(--ink); }
+.plot-line, .plot-bars { transition: opacity .5s ease; }
+@media (max-width: 860px) { .grid text, .axis-x text, .bar-labels text, .bar-values text, .threshold text { font-size: 21px; } .line { stroke-width: 5; } }
+
+.data { padding: clamp(56px, 10vh, 120px) var(--pad); border-top: 2px solid var(--ink); display: grid; gap: 18px; max-width: 900px; }
+.data h2 { font: 700 clamp(1.5rem, 2.6vw, 2.2rem)/1.1 var(--sans); letter-spacing: -.02em; }
+.data p { color: var(--ink-2); max-width: 64ch; }
+summary { cursor: pointer; font: 600 16px/1.4 var(--sans); padding: 12px 0; }
+.table-wrap { max-height: 360px; overflow: auto; border: 1px solid var(--rule); margin-top: 8px; }
+table { border-collapse: collapse; width: 100%; font: 400 15px/1.3 var(--sans); font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 7px 14px; border-bottom: 1px solid var(--rule); }
+thead th { position: sticky; top: 0; background: var(--card); }
+.foot { padding: 24px var(--pad); border-top: 1px solid var(--rule); font: 400 14.5px/1.5 var(--sans); color: var(--ink-2); }
