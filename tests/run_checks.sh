@@ -51,8 +51,8 @@ else ok "privacy scan clean"; fi
 grep -q $'\xe2\x80\x94' README.md && bad "README.md contains an em dash" || ok "README.md has no em dash"
 
 # 6. the preview server serves modules with a JavaScript type, and a missing file is a 404
-LOG="$(mktemp)"; python3 $S/scripts/serve.py $E --port 0 >"$LOG" 2>&1 & SRV=$!
-for _ in 1 2 3 4 5 6 7 8 9 10; do grep -q "Open " "$LOG" && break; sleep 0.3; done
+LOG="$(mktemp)"; python3 -u $S/scripts/serve.py $E --port 0 >"$LOG" 2>&1 & SRV=$!
+for _ in $(seq 1 50); do grep -q "Open " "$LOG" && break; sleep 0.3; done
 URL="$(sed -n 's/^Open  *//p' "$LOG" | head -1)"
 if [[ -n "$URL" ]]; then
   [[ "$(curl -s -o /dev/null -w '%{http_code}' "$URL")" == 200 ]] && ok "serve.py serves index.html at $URL" || bad "serve.py index.html"
