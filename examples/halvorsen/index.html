@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Noor Halvorsen · type designer</title>
+  <meta name="description" content="Portfolio of Noor Halvorsen, a made-up type designer. A brief2motion example of page transitions: each poster grows into the next page using the View Transitions API, with no animation library.">
+  <meta property="og:title" content="Noor Halvorsen · type designer">
+  <meta property="og:description" content="Portfolio of Noor Halvorsen, a made-up type designer. A brief2motion example of page transitions: each poster grows into the next page using the View Transitions API, with no animation library.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#f1f0ec">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+  <!-- blocking="render": the page is not painted until this script has run, so it can name the shared poster before the transition starts -->
+  <script type="module" blocking="render" src="site.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="nav">
+    <a class="brand" href="index.html">Noor Halvorsen</a>
+    <nav aria-label="Main"><a href="index.html#work">Work</a><a href="index.html#about">About</a></nav>
+  </header>
+  <main id="main">
+    <section class="intro">
+      <h1>Typefaces for timetables, cookbooks and anything else people read in a hurry.</h1>
+      <p>Four families, drawn between 2022 and 2025. Pick one and its poster carries you into the page.</p>
+    </section>
+    <section class="work" id="work" aria-labelledby="work-title">
+      <div class="work-head">
+        <h2 id="work-title">Work</h2>
+        <div class="filters" role="group" aria-label="Show">
+          <button type="button" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" data-filter="Serif" aria-pressed="false">Serif</button>
+          <button type="button" data-filter="Sans" aria-pressed="false">Sans</button>
+          <button type="button" data-filter="Display" aria-pressed="false">Display</button>
+          <button type="button" data-filter="Mono" aria-pressed="false">Mono</button>
+          <button type="button" data-sort aria-pressed="false">Newest first</button>
+        </div>
+      </div>
+      <ul class="grid">
+        <li class="card" data-kind="Serif" style="view-transition-name: card-ember; --c: #c93a14">
+          <a href="work/ember.html">
+            <img data-vt="ember" src="assets/poster-ember.svg" width="800" height="1000" alt="Specimen poster for Ember Serif: the letters Rg on a coloured field.">
+            <span class="card-name">Ember Serif</span><span class="card-meta">Serif · 2024</span>
+          </a>
+        </li>
+        <li class="card" data-kind="Sans" style="view-transition-name: card-quay; --c: #1a39c9">
+          <a href="work/quay.html">
+            <img data-vt="quay" src="assets/poster-quay.svg" width="800" height="1000" alt="Specimen poster for Quay Grotesk: the letters Qa on a coloured field.">
+            <span class="card-name">Quay Grotesk</span><span class="card-meta">Sans · 2023</span>
+          </a>
+        </li>
+        <li class="card" data-kind="Display" style="view-transition-name: card-moth; --c: #4d2378">
+          <a href="work/moth.html">
+            <img data-vt="moth" src="assets/poster-moth.svg" width="800" height="1000" alt="Specimen poster for Moth Display: the letters Mo on a coloured field.">
+            <span class="card-name">Moth Display</span><span class="card-meta">Display · 2025</span>
+          </a>
+        </li>
+        <li class="card" data-kind="Mono" style="view-transition-name: card-ledger; --c: #17603a">
+          <a href="work/ledger.html">
+            <img data-vt="ledger" src="assets/poster-ledger.svg" width="800" height="1000" alt="Specimen poster for Ledger Mono: the letters 0k on a coloured field.">
+            <span class="card-name">Ledger Mono</span><span class="card-meta">Mono · 2022</span>
+          </a>
+        </li>
+      </ul>
+      <p class="filter-status sr-only" role="status" aria-live="polite"></p>
+    </section>
+    <section class="about" id="about" aria-labelledby="about-title">
+      <h2 id="about-title">About</h2>
+      <p>Noor draws type for print and signage from a small studio above a ferry terminal. Commissions start with a paragraph of real text from the client, set badly, and a conversation about why it is hard to read.</p>
+      <p>Noor is not a real person. The posters are SVG files written by hand for this example, set in whatever fonts your device already has.</p>
+    </section>
+  </main>
+  <footer class="foot"><p>Noor Halvorsen and these typefaces are made up. A <a href="https://github.com/qualixar/brief2motion">brief2motion</a> example of page transitions with the View Transitions API; no animation library.</p></footer>
+</body>
+</html>
