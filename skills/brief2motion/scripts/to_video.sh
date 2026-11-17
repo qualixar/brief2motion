@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# to_video.sh: record a deterministic scroll-through of a brief2motion site as an MP4.
-#   to_video.sh <site-dir> <out.mp4> [--seconds 12] [--size 1920x1080] [--fps 60]
-# Frames come from capture_frames.mjs (Playwright, scroll position set per frame). Then:
+# to_video.sh: record a brief2motion site as an MP4, frame by frame.
+#   to_video.sh <site-dir> <out.mp4> [--seconds 12] [--size 1920x1080] [--fps 60] [--mode play|scroll]
+# --mode play (default) records the hands-free ?play timeline; --mode scroll records a scroll-through.
+# Frames come from capture_frames.mjs (Playwright, scene stepped per frame on a virtual clock). Then:
 #   - if brief2mp4's finish.sh / check_delivery.sh are installed, they finish and verify the file;
 #   - otherwise ffmpeg encodes H.264 yuv420p directly (and this script says so).
 # Search order for brief2mp4: $BRIEF2MP4_SCRIPTS, ~/.claude/skills/brief2mp4, ~/.codex/skills/brief2mp4,
@@ -9,17 +10,22 @@
 set -euo pipefail
 
 SITE="${1:-}"; OUT="${2:-}"
-[[ -n "$SITE" && -n "$OUT" && "$SITE" != -* ]] || { sed -n '2,9p' "$0"; exit 2; }
+[[ -n "$SITE" && -n "$OUT" && "$SITE" != -* ]] || { sed -n '2,9p' "$0" | sed 's/^# \{0,1\}//'; exit 2; }
 shift 2
-SECS=12 SIZE=1920x1080 FPS=60
+SECS=12 SIZE=1920x1080 FPS=60 MODE=play
+need() { [[ $# -ge 2 ]] || { echo "to_video.sh: $1 needs a value" >&2; exit 2; }; }
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --seconds) SECS="$2"; shift 2 ;;
-    --size) SIZE="$2"; shift 2 ;;
-    --fps) FPS="$2"; shift 2 ;;
+    --seconds) need "$@"; SECS="$2"; shift 2 ;;
+    --size) need "$@"; SIZE="$2"; shift 2 ;;
+    --fps) need "$@"; FPS="$2"; shift 2 ;;
+    --mode) need "$@"; MODE="$2"; shift 2 ;;
     *) echo "to_video.sh: unknown option $1" >&2; exit 2 ;;
   esac
 done
+[[ "$SECS" =~ ^[0-9]+([.][0-9]+)?$ ]] || { echo "to_video.sh: --seconds must be a number, for example 12" >&2; exit 2; }
+[[ "$FPS" =~ ^[0-9]+$ && "$FPS" -ge 1 ]] || { echo "to_video.sh: --fps must be a whole number, for example 30" >&2; exit 2; }
+[[ "$MODE" == play || "$MODE" == scroll ]] || { echo "to_video.sh: --mode must be play or scroll" >&2; exit 2; }
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 [[ -f "$SITE/index.html" ]] || { echo "to_video.sh: no index.html in $SITE" >&2; exit 2; }
 command -v node >/dev/null || { echo "to_video.sh: node not found (bash doctor.sh)" >&2; exit 2; }
@@ -42,8 +48,8 @@ TMP="$(mktemp -d "${TMPDIR:-/tmp}/b2motion-frames.XXXXXX")"
 trap 'rm -rf "$TMP"' EXIT
 mkdir -p "$(dirname "$OUT")"
 
-echo "to_video: capturing frames (${SECS}s at ${FPS} fps, ${SIZE})..."
-node "$HERE/capture_frames.mjs" "$SITE" "$TMP" --seconds "$SECS" --fps "$FPS" --size "$SIZE"
+echo "to_video: capturing frames (${MODE}, ${SECS}s at ${FPS} fps, ${SIZE})..."
+node "$HERE/capture_frames.mjs" "$SITE" "$TMP" --seconds "$SECS" --fps "$FPS" --size "$SIZE" --mode "$MODE"
 
 if [[ -n "$B2M" ]]; then
   echo "to_video: finishing with brief2mp4 ($B2M)"
@@ -54,6 +60,6 @@ else
   ffmpeg -v error -y -framerate "$FPS" -i "$TMP/%04d.png" \
     -vf "scale=${W}:${H}:force_original_aspect_ratio=decrease,pad=${W}:${H}:(ow-iw)/2:(oh-ih)/2,format=yuv420p" \
     -c:v libx264 -preset slow -crf 18 -profile:v high -movflags +faststart "$OUT" \
-    || { echo "to_video: if the frame pattern failed (more than 9999 frames), use fewer seconds or fps" >&2; exit 1; }
+    || { echo "to_video: ffmpeg failed. If the video is longer than 9999 frames, use fewer seconds or a lower fps." >&2; exit 1; }
   echo "to_video: wrote $OUT"
 fi

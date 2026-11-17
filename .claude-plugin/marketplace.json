@@ -12,7 +12,7 @@
       "name": "brief2motion",
       "source": "./",
       "description": "Turn a plain brief into live, measured web motion: dust that forms your product, face or logo, a paper plane across the page, scroll scenes. Sibling of brief2mp4.",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "author": {
         "name": "Varun Pratap Bhardwaj"
       },

@@ -1,5 +1,5 @@
+// brief2motion shared helpers: load playwright-core (pinned, installed on demand), start a browser and serve a folder.
 import os from 'node:os';
-// brief2motion shared helpers: load playwright-core (pinned, installed on demand) and serve a folder.
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -13,32 +13,62 @@ export const HERE = path.dirname(fileURLToPath(import.meta.url));
 const DEPS = process.env.BRIEF2MOTION_DEPS || path.join(os.homedir(), '.cache', 'brief2motion', 'deps');
 export const PW_VERSION = '1.65.1';
 
+// Windows needs npm.cmd and a shell to start it; elsewhere plain npm.
+const NPM = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+
 export async function loadPlaywright() {
-  try { return await import('playwright-core'); } catch { /* fall through to the local copy */ }
+  // Only the pinned copy in DEPS is used: a stray playwright-core from some parent folder could be any version.
   const entry = path.join(DEPS, 'node_modules', 'playwright-core', 'index.mjs');
-  if (!fs.existsSync(entry)) {
-    console.error(`playwright-core not found. Installing playwright-core@${PW_VERSION} into ${DEPS} (one time)...`);
+  let have = null;
+  try { have = JSON.parse(fs.readFileSync(path.join(DEPS, 'node_modules', 'playwright-core', 'package.json'), 'utf8')).version; } catch { /* not installed */ }
+  if (have !== PW_VERSION || !fs.existsSync(entry)) {
+    console.error(`playwright-core ${PW_VERSION} is not installed${have ? ` (found ${have})` : ''}. Installing it into ${DEPS} (one time, about 14 MB on disk; install scripts are not run).`);
     try {
       fs.mkdirSync(DEPS, { recursive: true });
-      execFileSync('npm', ['i', '--no-save', '--no-audit', '--no-fund', '--prefix', DEPS, `playwright-core@${PW_VERSION}`],
-        { stdio: ['ignore', 'inherit', 'inherit'] });
+      const prefix = process.platform === 'win32' ? `"${DEPS}"` : DEPS;   // a shell joins the arguments on Windows
+      execFileSync(NPM, ['i', '--no-save', '--no-audit', '--no-fund', '--ignore-scripts', '--prefix', prefix, `playwright-core@${PW_VERSION}`],
+        { stdio: ['ignore', 'inherit', 'inherit'], shell: process.platform === 'win32' });
     } catch (e) {
-      console.error(`Could not install playwright-core. Run by hand:\n  npm i --no-save --prefix "${DEPS}" playwright-core@${PW_VERSION}`);
+      console.error(`Could not install playwright-core. Run by hand:\n  npm i --no-save --ignore-scripts --prefix "${DEPS}" playwright-core@${PW_VERSION}`);
       process.exit(2);
     }
   }
   return await import(pathToFileURL(entry).href);
 }
 
-export async function launchChrome(pw, args = []) {
-  try {
-    return await pw.chromium.launch({ channel: 'chrome', headless: true, args });
-  } catch (e) {
-    console.error('Could not start Google Chrome through Playwright.');
-    console.error('Fix: install Chrome (https://www.google.com/chrome) or run:  npx playwright install chromium');
-    console.error(String(e.message || e).split('\n')[0]);
-    process.exit(2);
+// Browsers found on PATH by name (no `which` needed, so it works on Windows too).
+function onPath(names) {
+  const exts = process.platform === 'win32' ? ['.exe', '.cmd', ''] : [''];
+  const found = [];
+  for (const dir of (process.env.PATH || '').split(path.delimiter)) {
+    for (const n of names) for (const x of exts) {
+      const f = path.join(dir, n + x);
+      try { if (fs.statSync(f).isFile()) found.push(f); } catch { /* not here */ }
+    }
   }
+  return found;
+}
+
+// Start a Chromium-family browser. Order: BRIEF2MOTION_CHROME (a path), Google Chrome, chromium /
+// google-chrome on PATH, then the Chromium that `npx playwright@PW_VERSION install chromium` downloads.
+export async function launchChrome(pw, args = []) {
+  const tries = [];
+  if (process.env.BRIEF2MOTION_CHROME) tries.push({ label: `BRIEF2MOTION_CHROME=${process.env.BRIEF2MOTION_CHROME}`, opts: { executablePath: process.env.BRIEF2MOTION_CHROME } });
+  tries.push({ label: 'Google Chrome', opts: { channel: 'chrome' } });
+  for (const f of onPath(['chromium', 'chromium-browser', 'google-chrome', 'google-chrome-stable'])) tries.push({ label: f, opts: { executablePath: f } });
+  tries.push({ label: "Playwright's own Chromium", opts: {} });
+  const why = [];
+  for (const t of tries) {
+    try {
+      const b = await pw.chromium.launch({ headless: true, args, ...t.opts });
+      if (process.env.BRIEF2MOTION_VERBOSE) console.error(`browser: ${t.label}`);
+      return b;
+    } catch (e) { why.push(`  ${t.label}: ${String(e.message || e).split('\n')[0]}`); }
+  }
+  console.error('Could not start a browser. Tried, in order:\n' + why.join('\n'));
+  console.error(`Fix: install Google Chrome (https://www.google.com/chrome), or run: npx playwright@${PW_VERSION} install chromium`);
+  console.error('You can also point BRIEF2MOTION_CHROME at any Chrome or Chromium executable.');
+  process.exit(2);
 }
 
 const MIME = {
@@ -49,7 +79,7 @@ const MIME = {
 };
 
 // Static server on a free localhost port. Returns { url, close }.
-export function serveDir(dir) {
+export function serveDir(dir, port = 0) {
   const root = path.resolve(dir);
   const server = http.createServer((req, res) => {
     try {
@@ -64,10 +94,11 @@ export function serveDir(dir) {
       res.end(body);
     } catch (e) { res.writeHead(500).end(String(e)); }
   });
-  return new Promise((ok) => {
-    server.listen(0, '127.0.0.1', () => {
-      const { port } = server.address();
-      ok({ url: `http://127.0.0.1:${port}/`, origin: `http://127.0.0.1:${port}`, close: () => new Promise((r) => server.close(r)) });
+  return new Promise((ok, fail) => {
+    server.once('error', fail);   // for example EADDRINUSE: the caller can try another port
+    server.listen(port, '127.0.0.1', () => {
+      const { port: p } = server.address();
+      ok({ url: `http://127.0.0.1:${p}/`, origin: `http://127.0.0.1:${p}`, port: p, close: () => new Promise((r) => server.close(r)) });
     });
   });
 }

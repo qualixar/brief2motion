@@ -1,0 +1,405 @@
+{
+  "site": "http://localhost:8421",
+  "when": "2026-11-17T10:11:06.729Z",
+  "budgets": {
+    "desktopP95": 20,
+    "mobileP95": 40,
+    "localBytes": 1572864,
+    "consoleErrors": 0,
+    "mobileKeepShare": 0.6
+  },
+  "chrome": "157.0.8103.79",
+  "runs": {
+    "desktop": {
+      "name": "desktop",
+      "ok": true,
+      "mode": "webgl2",
+      "lenis": true,
+      "framesBeforeScroll": 151,
+      "scrollable": 9808,
+      "rafSamples": 319,
+      "fps": 59.9,
+      "medianMs": 16.7,
+      "p95Ms": 16.7,
+      "maxMs": 16.8,
+      "drawn": 60000,
+      "minDrawn": 60000,
+      "total": 60000,
+      "shed": 0,
+      "restored": 0,
+      "frames": 344,
+      "budgetP95": 20,
+      "p95Pass": true,
+      "shots": [
+        "shots/desktop-00.png",
+        "shots/desktop-25.png",
+        "shots/desktop-50.png",
+        "shots/desktop-75.png",
+        "shots/desktop-100.png"
+      ],
+      "consoleErrors": [],
+      "weight": {
+        "localBytes": 370411,
+        "cdnBytes": 381068,
+        "localFiles": [
+          [
+            "/",
+            2452
+          ],
+          [
+            "/style.css",
+            17223
+          ],
+          [
+            "/main.js",
+            5529
+          ],
+          [
+            "/config.js",
+            6434
+          ],
+          [
+            "/validate.js",
+            2005
+          ],
+          [
+            "/page.js",
+            9630
+          ],
+          [
+            "/flight.js",
+            2260
+          ],
+          [
+            "/assemble.js",
+            24794
+          ],
+          [
+            "/assets/notes-1-720.webp",
+            21233
+          ],
+          [
+            "/assets/notes-2-720.webp",
+            22901
+          ],
+          [
+            "/assets/shape-cardamom.jpg",
+            26418
+          ],
+          [
+            "/assets/product.jpg",
+            87250
+          ],
+          [
+            "/assets/shape-rose.jpg",
+            28794
+          ],
+          [
+            "/assets/shape-amber.jpg",
+            40870
+          ],
+          [
+            "/assets/notes-3-720.webp",
+            25343
+          ],
+          [
+            "/assets/collection-1.webp",
+            15277
+          ],
+          [
+            "/assets/collection-3.webp",
+            15527
+          ],
+          [
+            "/assets/collection-2.webp",
+            16471
+          ]
+        ],
+        "cdnFiles": [
+          [
+            "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/MotionPathPlugin.min.js",
+            10870
+          ],
+          [
+            "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js",
+            29707
+          ],
+          [
+            "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js",
+            18725
+          ],
+          [
+            "https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js",
+            5941
+          ],
+          [
+            "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js",
+            103730
+          ],
+          [
+            "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.core.js",
+            212095
+          ]
+        ]
+      }
+    },
+    "mobile": {
+      "name": "mobile",
+      "ok": true,
+      "mode": "webgl2",
+      "lenis": true,
+      "framesBeforeScroll": 151,
+      "scrollable": 10822,
+      "rafSamples": 318,
+      "fps": 59.9,
+      "medianMs": 16.7,
+      "p95Ms": 16.8,
+      "maxMs": 16.8,
+      "drawn": 25000,
+      "minDrawn": 25000,
+      "total": 25000,
+      "shed": 0,
+      "restored": 0,
+      "frames": 315,
+      "budgetP95": 40,
+      "p95Pass": true,
+      "shots": [
+        "shots/mobile-00.png",
+        "shots/mobile-25.png",
+        "shots/mobile-50.png",
+        "shots/mobile-75.png",
+        "shots/mobile-100.png"
+      ],
+      "consoleErrors": [],
+      "weight": {
+        "localBytes": 452817,
+        "cdnBytes": 381073,
+        "localFiles": [
+          [
+            "/",
+            2452
+          ],
+          [
+            "/style.css",
+            17223
+          ],
+          [
+            "/main.js",
+            5529
+          ],
+          [
+            "/config.js",
+            6434
+          ],
+          [
+            "/validate.js",
+            2005
+          ],
+          [
+            "/page.js",
+            9630
+          ],
+          [
+            "/flight.js",
+            2260
+          ],
+          [
+            "/assemble.js",
+            24794
+          ],
+          [
+            "/assets/notes-1-1200.webp",
+            42335
+          ],
+          [
+            "/assets/notes-2-1200.webp",
+            52307
+          ],
+          [
+            "/assets/shape-cardamom.jpg",
+            26418
+          ],
+          [
+            "/assets/shape-rose.jpg",
+            28794
+          ],
+          [
+            "/assets/shape-amber.jpg",
+            40870
+          ],
+          [
+            "/assets/product.jpg",
+            87250
+          ],
+          [
+            "/assets/notes-3-1200.webp",
+            57241
+          ],
+          [
+            "/assets/collection-1.webp",
+            15277
+          ],
+          [
+            "/assets/collection-2.webp",
+            16471
+          ],
+          [
+            "/assets/collection-3.webp",
+            15527
+          ]
+        ],
+        "cdnFiles": [
+          [
+            "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js",
+            30123
+          ],
+          [
+            "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js",
+            18728
+          ],
+          [
+            "https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js",
+            5947
+          ],
+          [
+            "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/MotionPathPlugin.min.js",
+            10457
+          ],
+          [
+            "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js",
+            103724
+          ],
+          [
+            "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.core.js",
+            212094
+          ]
+        ]
+      }
+    },
+    "reduced": {
+      "mode": "reduced-motion",
+      "p": 1,
+      "canvasInk": 154293,
+      "canvasInkAfterResize": 118977,
+      "headline": {
+        "found": true,
+        "opacity": 1,
+        "visible": true
+      },
+      "shot": "shots/reduced.png",
+      "consoleErrors": []
+    },
+    "noWebgl": {
+      "noWebgl": true,
+      "mode": "fallback-image",
+      "naturalWidth": 1440,
+      "visible": true,
+      "headline": {
+        "found": true,
+        "opacity": 1,
+        "visible": true
+      },
+      "fallbackOnDisk": true,
+      "shot": "shots/no-webgl.png",
+      "consoleErrors": []
+    }
+  },
+  "thirdPartyHosts": [
+    "cdn.jsdelivr.net"
+  ],
+  "consoleErrors": {
+    "desktop": [],
+    "mobile": [],
+    "reduced": [],
+    "noWebgl": []
+  },
+  "warnings": [],
+  "checks": [
+    {
+      "name": "reduced motion: finished shape on the canvas",
+      "pass": true,
+      "detail": "mode=reduced-motion, uProgress=1, canvas ink px=154293"
+    },
+    {
+      "name": "reduced motion: shape survives a resize",
+      "pass": true,
+      "detail": "canvas ink px after resize=118977"
+    },
+    {
+      "name": "reduced motion: headline readable",
+      "pass": true,
+      "detail": "h1 found=true, visible=true, opacity=1"
+    },
+    {
+      "name": "WebGL disabled shows fallback",
+      "pass": true,
+      "detail": "hero.no-webgl=true, mode=fallback-image, img visible=true, naturalWidth=1440"
+    },
+    {
+      "name": "WebGL disabled: headline readable",
+      "pass": true,
+      "detail": "h1 found=true, visible=true, opacity=1, nav bars=1"
+    },
+    {
+      "name": "desktop mode is webgl2",
+      "pass": true,
+      "detail": "mode=webgl2"
+    },
+    {
+      "name": "desktop frames reached 120",
+      "pass": true,
+      "detail": "frames=344"
+    },
+    {
+      "name": "desktop p95 frame <= 20 ms",
+      "pass": true,
+      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms"
+    },
+    {
+      "name": "mobile mode is webgl2",
+      "pass": true,
+      "detail": "mode=webgl2"
+    },
+    {
+      "name": "mobile frames reached 120",
+      "pass": true,
+      "detail": "frames=315"
+    },
+    {
+      "name": "mobile p95 frame <= 40 ms",
+      "pass": true,
+      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=16.8 ms"
+    },
+    {
+      "name": "desktop draws every dot (shed = 0)",
+      "pass": true,
+      "detail": "drawn 60000/60000, lowest 60000, shed events 0, restored 0"
+    },
+    {
+      "name": "mobile keeps at least 60% of its dots",
+      "pass": true,
+      "detail": "drawn 25000/25000, lowest 25000 (100%), shed events 0, restored 0"
+    },
+    {
+      "name": "desktop page weight <= 1.5 MiB",
+      "pass": true,
+      "detail": "local 0.35 MiB, CDN 0.36 MiB"
+    },
+    {
+      "name": "mobile page weight <= 1.5 MiB",
+      "pass": true,
+      "detail": "local 0.43 MiB, CDN 0.36 MiB"
+    },
+    {
+      "name": "third-party requests only to cdn.jsdelivr.net",
+      "pass": true,
+      "detail": "cdn.jsdelivr.net"
+    },
+    {
+      "name": "console errors = 0 (all four runs)",
+      "pass": true,
+      "detail": "none"
+    }
+  ],
+  "pass": true
+}

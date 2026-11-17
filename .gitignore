@@ -2,4 +2,8 @@ node_modules/
 .deps/
 .DS_Store
 check/
+check-out/
+*.bak*
 *.log
+__pycache__/
+*.pyc
