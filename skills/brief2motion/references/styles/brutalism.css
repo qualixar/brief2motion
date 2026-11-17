@@ -1,0 +1,6 @@
+.s-title { text-transform: none; }
+.s-nav { border-width: 0 0 1px; padding-inline: 0; }
+.s-links a { color: #0000ee; text-decoration: underline; }
+.s-btn { font-family: Courier, monospace; border-radius: 0; }
+.s-btn:hover { background: #000; color: #fff; }
+.s-card { border-style: dashed; }

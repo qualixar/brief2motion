@@ -1,0 +1,10 @@
+background: radial-gradient(#1b1b1b 1.6px, transparent 2px) 0 0 / 18px 18px, #fff7e8;
+.s-title { background: #fff7e8; display: inline; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.s-text { background: #fff7e8; }
+.s-card { box-shadow: var(--shadow); position: relative; }
+.s-card::after { content: ""; position: absolute; right: -16px; top: -18px; width: 44px; height: 44px; background: #ff5a8a; border: 3px solid #1b1b1b; border-radius: 50%; }
+.s-card::before { content: ""; position: absolute; left: -14px; bottom: -14px; width: 0; height: 0; border: 20px solid transparent; border-bottom-color: #19c39a; transform: rotate(-18deg); }
+.s-btn { box-shadow: 4px 4px 0 #1b1b1b; transition: transform .15s; }
+.s-btn:hover { transform: rotate(-2deg) translateY(-2px); }
+.s-btn-2 { background: #ffcc00; color: #1b1b1b; }
+.s-nav { background: #fff; }

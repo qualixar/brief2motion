@@ -1,0 +1,9 @@
+.s-card { border: 0; border-radius: 12px; box-shadow: var(--shadow); }
+.s-btn { border-radius: 9999px; position: relative; overflow: hidden; transition: box-shadow .2s cubic-bezier(.2, 0, 0, 1); }
+.s-btn::after { content: ""; position: absolute; inset: 0; background: currentColor; opacity: 0; transition: opacity .15s cubic-bezier(.2, 0, 0, 1); }   /* the state layer */
+.s-btn:hover::after { opacity: .08; }
+.s-btn:active::after { opacity: .12; }
+.s-btn:hover { box-shadow: var(--shadow); }
+.s-btn-2 { background: #e8def8; color: #1d192b; }
+.s-field input { border-radius: 4px; border: 1px solid #79747e; }
+.s-nav { border: 0; background: #f3edf7; border-radius: 28px; }

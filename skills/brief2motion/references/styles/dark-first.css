@@ -1,0 +1,7 @@
+color-scheme: dark;
+.s-card { background: #171a21; }
+.s-btn { transition: background-color .15s; }
+.s-btn:hover { background: #a5d7ff; }
+.s-btn-2 { background: #1f242e; color: #e7e9ee; border: 1px solid #323846; }
+.s-field input { background: #0f1115; color: #e7e9ee; border-color: #49505f; }
+.s-stat { color: #7cc4ff; }

@@ -143,15 +143,23 @@ const TEXT_PROBE = () => {
     const cs = getComputedStyle(el), r = el.getBoundingClientRect();
     if (cs.display === 'none' || r.width < 2 || r.height < 2 || r.bottom < 0 || r.top > vh || r.right < 0 || r.left > vw) continue;
     if (cs.clipPath && /inset\(50%\)/.test(cs.clipPath)) continue;
-    let opacity = 1, hidden = cs.visibility === 'hidden', bg = null, unknownBg = false;
+    // background: every colour layer from the text outwards, until a solid one. A see-through panel is only as
+    // dark or light as what is behind it, so the layers are blended later; a picture or gradient in the stack
+    // means there is no single colour to measure.
+    let opacity = 1, hidden = cs.visibility === 'hidden', unknownBg = false, solid = false; const layers = [];
     for (let a = el; a; a = a.parentElement) {
       const s = getComputedStyle(a);
       opacity *= Number(s.opacity);
-      if (!bg && !unknownBg) {
-        if (s.backgroundImage && s.backgroundImage !== 'none') unknownBg = true;
-        else if (s.backgroundColor && !/rgba?\(0, 0, 0, 0\)|transparent/.test(s.backgroundColor)) bg = s.backgroundColor;
-      }
+      if (solid || unknownBg) continue;
+      if (s.backgroundImage && s.backgroundImage !== 'none') { unknownBg = true; continue; }
+      if (s.backdropFilter && s.backdropFilter !== 'none') { unknownBg = true; continue; }
+      const c = s.backgroundColor;
+      if (!c || /rgba?\(0, 0, 0, 0\)|transparent/.test(c)) continue;
+      layers.push(c);
+      const m = c.match(/rgba?\(([^)]+)\)/); const parts = m ? m[1].split(/[\s,/]+/).filter(Boolean) : [];
+      if (parts.length < 4 || parseFloat(parts[3]) >= 1) solid = true;
     }
+    const bg = layers.length ? layers : null;
     // text drawn over a picture, video or canvas has no single background colour: not measured here, look at the screenshots
     const under = document.elementsFromPoint(Math.min(vw - 1, Math.max(0, r.left + r.width / 2)), Math.min(vh - 1, Math.max(0, r.top + r.height / 2)));
     const overMedia = under.some((u) => u !== el && !el.contains(u) && /^(CANVAS|IMG|VIDEO|PICTURE|svg)$/.test(u.tagName) && getComputedStyle(u).visibility !== 'hidden' && Number(getComputedStyle(u).opacity) > 0.05);
@@ -318,10 +326,13 @@ try {
           if (t.block) { const key = `${t.tag}.${t.cls} "${t.text}"`; best.set(key, Math.max(best.get(key) ?? 0, t.hidden ? 0 : t.opacity)); }
           if (t.hidden) continue;
           if (t.unknownBg || t.opacity < 0.99) { skipped++; continue; }
-          const fg = parseColor(t.color), bgc = parseColor(t.bg || 'rgb(255, 255, 255)'); if (!fg || !bgc) { skipped++; continue; }
+          // blend the background layers from the page (white) up to the one nearest the text
+          let bgc = { r: 255, g: 255, b: 255, a: 1 }, bad = false;
+          for (const layer of [...(t.bg || [])].reverse()) { const c = parseColor(layer); if (!c) { bad = true; break; } bgc = blend(c, bgc); }
+          const fg = parseColor(t.color); if (!fg || bad) { skipped++; continue; }
           const ratio = contrastRatio(blend(fg, bgc), bgc); measured++;
           const large = t.size >= 24 || (t.size >= 18.66 && t.weight >= 700);
-          if (ratio < (large ? BUDGET.contrastLarge : BUDGET.contrast) - 0.05) low.add(`${t.tag}.${t.cls} "${t.text}" ${ratio.toFixed(2)}:1 (${t.color} on ${t.bg || 'white'})`);
+          if (ratio < (large ? BUDGET.contrastLarge : BUDGET.contrast) - 0.05) low.add(`${t.tag}.${t.cls} "${t.text}" ${ratio.toFixed(2)}:1 (${t.color} on ${(t.bg || ['white']).join(' over ')})`);
         }
       }, { stops });
       const dim = [...best].filter(([, o]) => o < 0.99).map(([k, o]) => `${k} best opacity ${o}`);

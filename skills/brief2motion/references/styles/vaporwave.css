@@ -1,0 +1,8 @@
+background: linear-gradient(180deg, #ffb3ec 0%, #c8b6ff 50%, #9be7ff 100%);
+.s-title { text-transform: uppercase; font-style: italic; text-shadow: 3px 3px 0 #9be7ff; }
+.s-card { box-shadow: var(--shadow); border-top-width: 22px; position: relative; }                 /* an old window: a thick title bar */
+.s-card::before { content: "×"; position: absolute; top: -22px; right: 6px; color: #fdf2ff; font: 700 16px/22px system-ui, sans-serif; }
+.s-btn { border: 2px solid #3a1d6e; box-shadow: inset -2px -2px 0 rgb(0 0 0 / .25), inset 2px 2px 0 rgb(255 255 255 / .6); transition: filter .2s; }
+.s-btn:hover { filter: hue-rotate(40deg); }
+.s-btn-2 { background: #fdf2ff; color: #3a1d6e; }
+.s-nav { letter-spacing: .16em; text-transform: uppercase; font-size: .78em; }

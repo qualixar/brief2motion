@@ -1,0 +1,1822 @@
+{
+ "version": 1,
+ "checked": "2026-11-17",
+ "families": {
+  "surface": "Surface styles",
+  "layout": "Layout and type styles",
+  "retro": "Retro and themed styles",
+  "treatment": "Visual treatments",
+  "approach": "Motion-led approaches"
+ },
+ "styles": [
+  {
+   "id": "neubrutalism",
+   "name": "Neubrutalism",
+   "aliases": [
+    "neobrutalism",
+    "neo-brutalism"
+   ],
+   "family": "surface",
+   "what": "Thick black outlines, hard offset shadows with no blur, and two or three loud flat colours. Raw like brutalism, but tidy and friendly.",
+   "origin": "An evolution of web brutalism that mixes its rawness with 1990s graphic design; described by Nielsen Norman Group in 2025.",
+   "tokens": {
+    "bg": "#fff6d6",
+    "surface": "#ffffff",
+    "fg": "#111111",
+    "muted": "#3a3a3a",
+    "accent": "#ff5c8a",
+    "accentFg": "#111111",
+    "border": "3px solid #111111",
+    "radius": "10px",
+    "shadow": "5px 5px 0 #111111",
+    "fontDisplay": "\"Helvetica Neue\", \"Arial Nova\", Arial, system-ui, sans-serif",
+    "fontText": "\"Helvetica Neue\", \"Arial Nova\", Arial, system-ui, sans-serif",
+    "weightDisplay": "800",
+    "tracking": "-0.02em"
+   },
+   "rules": [
+    "Borders 2 to 4 px, solid, usually black",
+    "Shadow is one solid colour, offset about 4 px, blur 0",
+    "Two or three saturated fills on a pale ground",
+    "Headlines about twice the body size, neutral sans for body text",
+    "Padding 24 to 32 px so dense shapes can breathe"
+   ],
+   "motion": "Fast and physical: a button moves by its shadow offset on hover and lands on press (100 to 200 ms). Marquee strips and stickers tilted a degree or two suit it. No soft fades.",
+   "a11y": [
+    "Loud colour pairs still have to pass contrast: yellow with cyan does not",
+    "Condensed or decorative faces hurt paragraphs; keep body text plain",
+    "Every control needs its border, or it stops looking pressable"
+   ],
+   "choose": [
+    "Creator tools, indie products, developer tools, events, consumer brands that want a voice"
+   ],
+   "avoid": [
+    "Banking, healthcare, dense enterprise screens"
+   ],
+   "keywords": [
+    "brutal",
+    "neubrutal",
+    "neobrutal",
+    "bold",
+    "loud",
+    "playful",
+    "indie",
+    "creator",
+    "gumroad",
+    "sticker",
+    "zine",
+    "quirky"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://www.nngroup.com/articles/neobrutalism/",
+    "https://github.com/ekmas/neobrutalism-components"
+   ],
+   "note": "",
+   "specimen": true
+  },
+  {
+   "id": "brutalism",
+   "name": "Web brutalism",
+   "aliases": [
+    "brutalist web design"
+   ],
+   "family": "surface",
+   "what": "The unstyled look on purpose: default fonts, visible structure, blue links, no decoration. A statement against polish.",
+   "origin": "A mid-2010s reaction to the light, optimistic mainstream web, collected at brutalistwebsites.com.",
+   "tokens": {
+    "bg": "#ffffff",
+    "surface": "#ffffff",
+    "fg": "#000000",
+    "muted": "#000000",
+    "accent": "#0000ee",
+    "accentFg": "#ffffff",
+    "border": "1px solid #000000",
+    "radius": "0px",
+    "shadow": "none",
+    "fontDisplay": "Times, \"Times New Roman\", serif",
+    "fontText": "Times, \"Times New Roman\", serif",
+    "weightDisplay": "700",
+    "tracking": "0"
+   },
+   "rules": [
+    "Browser defaults kept: serif text, underlined blue links",
+    "No rounded corners, no shadows, no gradients",
+    "Structure shown, not hidden: borders, tables, raw lists"
+   ],
+   "motion": "None, or an instant state change. Motion would contradict the point.",
+   "a11y": [
+    "It is naturally readable when the defaults are kept",
+    "Do not remove focus outlines to look raw"
+   ],
+   "choose": [
+    "Art, architecture and design studios, manifestos, personal sites"
+   ],
+   "avoid": [
+    "Anything that has to sell or convert"
+   ],
+   "keywords": [
+    "brutalist",
+    "raw",
+    "unstyled",
+    "anti-design",
+    "manifesto",
+    "default"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://brutalistwebsites.com/",
+    "https://www.nngroup.com/articles/neobrutalism/"
+   ],
+   "note": "",
+   "specimen": true
+  },
+  {
+   "id": "glassmorphism",
+   "name": "Glassmorphism",
+   "aliases": [],
+   "family": "surface",
+   "what": "Frosted panels: a see-through fill, a blur of whatever is behind, a thin light edge and a soft shadow, floating over a colourful background.",
+   "origin": "Named and popularised around 2020 to 2021; assessed by Nielsen Norman Group in 2024.",
+   "tokens": {
+    "bg": "#3b2a8c",
+    "surface": "rgb(34 20 110 / .42)",
+    "fg": "#ffffff",
+    "muted": "#e9e6ff",
+    "accent": "#ffffff",
+    "accentFg": "#2a1d6b",
+    "border": "1px solid rgb(255 255 255 / .45)",
+    "radius": "20px",
+    "shadow": "0 12px 40px rgb(10 5 50 / .35)",
+    "fontDisplay": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "fontText": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "weightDisplay": "700",
+    "tracking": "-0.02em"
+   },
+   "rules": [
+    "Fill about 15 to 40% opaque; a dark tint keeps white text readable when a bright shape drifts behind it",
+    "backdrop-filter: blur of about 10 to 25 px (NN/g shows 25 px keeping edges readable; 100 px turns the background to mush)",
+    "A 1 px light border and a soft drop shadow to lift the panel",
+    "Needs something colourful behind it, or there is nothing to frost"
+   ],
+   "motion": "Slow drift of the shapes behind the glass, and a small lift on hover. Keep the blur radius fixed: animating blur is expensive.",
+   "a11y": [
+    "Text over a see-through panel has uneven contrast: test against the lightest and darkest thing that can sit behind it",
+    "Give a solid fallback for prefers-reduced-transparency (experimental) and prefers-contrast: more",
+    "An ancestor with opacity, filter, mask or clip-path limits what the blur can see"
+   ],
+   "choose": [
+    "Navigation bars, overlays and cards over pictures or gradients"
+   ],
+   "avoid": [
+    "Long reading text, data tables, low-end devices"
+   ],
+   "keywords": [
+    "glass",
+    "frosted",
+    "blur",
+    "translucent",
+    "frost",
+    "see-through",
+    "macos",
+    "vision"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://www.nngroup.com/articles/glassmorphism/",
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter"
+   ],
+   "note": "",
+   "specimen": true
+  },
+  {
+   "id": "liquid-glass",
+   "name": "Liquid Glass-inspired",
+   "aliases": [
+    "Apple Liquid Glass"
+   ],
+   "family": "surface",
+   "what": "Glass that behaves like a lens: controls float in a thin clear layer above the content, pick up its colour, and have a bright rim. On the web this is an imitation, not an Apple API.",
+   "origin": "Apple introduced Liquid Glass in June 2025 for iOS 26 and macOS Tahoe 26. Its guidelines keep it for controls and navigation, never the content layer.",
+   "tokens": {
+    "bg": "#0f2a4a",
+    "surface": "rgb(255 255 255 / .12)",
+    "fg": "#ffffff",
+    "muted": "#dfeaf7",
+    "accent": "#ffffff",
+    "accentFg": "#0f2a4a",
+    "border": "1px solid rgb(255 255 255 / .55)",
+    "radius": "28px",
+    "shadow": "0 10px 30px rgb(0 10 30 / .35), inset 0 1px 0 rgb(255 255 255 / .7), inset 0 -8px 16px rgb(255 255 255 / .08)",
+    "fontDisplay": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "fontText": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "weightDisplay": "600",
+    "tracking": "-0.02em"
+   },
+   "rules": [
+    "Glass only on the floating layer: bars, buttons, sheets",
+    "Clearer than frosted glass: light blur, strong saturation, a bright top rim and an inner glow",
+    "Pill and capsule shapes",
+    "Over bright content, add a dark dimming layer (Apple suggests 35%)"
+   ],
+   "motion": "Springy scale on press, and controls that merge or split. Keep it to the control layer.",
+   "a11y": [
+    "Legibility was the main complaint about the real thing: check text on glass against busy content",
+    "Honour reduced transparency and increased contrast with a solid fill",
+    "Do not call a web imitation \"Apple Liquid Glass\""
+   ],
+   "choose": [
+    "Media and photo products, Apple-platform companions, floating toolbars"
+   ],
+   "avoid": [
+    "Text-heavy pages, anything where the glass would sit on the content itself"
+   ],
+   "keywords": [
+    "liquid glass",
+    "apple",
+    "ios 26",
+    "visionos",
+    "lens",
+    "refraction",
+    "floating toolbar"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://www.apple.com/newsroom/2025/06/apple-introduces-a-delightful-and-elegant-new-software-design/",
+    "https://developer.apple.com/design/human-interface-guidelines/materials"
+   ],
+   "note": "",
+   "specimen": true
+  },
+  {
+   "id": "neumorphism",
+   "name": "Neumorphism (soft UI)",
+   "aliases": [
+    "soft UI",
+    "neomorphism"
+   ],
+   "family": "surface",
+   "what": "Shapes pushed out of, or pressed into, a surface of the same colour, drawn only with one light shadow and one dark shadow.",
+   "origin": "The name was coined in 2019 (\"neo\" plus \"skeuomorphism\") after a Dribbble banking concept by Alexander Plyuto; it faded by 2021 over accessibility.",
+   "tokens": {
+    "bg": "#e3e7ee",
+    "surface": "#e3e7ee",
+    "fg": "#2b3445",
+    "muted": "#4d5a70",
+    "accent": "#3d5afe",
+    "accentFg": "#ffffff",
+    "border": "1px solid transparent",
+    "radius": "18px",
+    "shadow": "8px 8px 18px #b9c0cd, -8px -8px 18px #ffffff",
+    "fontDisplay": "ui-rounded, \"SF Pro Rounded\", \"Arial Rounded MT Bold\", system-ui, sans-serif",
+    "fontText": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "weightDisplay": "700",
+    "tracking": "-0.02em"
+   },
+   "rules": [
+    "Element and background share one colour",
+    "Two shadows: light towards the top left, dark towards the bottom right, about 8 px offset and 16 px blur",
+    "Pressed state swaps to inset shadows",
+    "Pastel, low-contrast palette"
+   ],
+   "motion": "A press swaps the raised shadow for an inset one in about 150 to 250 ms.",
+   "a11y": [
+    "Its defining trait is low contrast: control edges fail WCAG 1.4.11 (3:1) unless you add a border or a strong icon",
+    "Raised and pressed states look alike to many people",
+    "Keep text itself at 4.5:1"
+   ],
+   "choose": [
+    "A few decorative controls: a music player, a smart-home dial"
+   ],
+   "avoid": [
+    "Forms, data-heavy apps, anything that must be scanned quickly"
+   ],
+   "keywords": [
+    "neumorphic",
+    "soft ui",
+    "soft shadow",
+    "embossed",
+    "extruded",
+    "pillowy"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Neumorphism",
+    "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html"
+   ],
+   "note": "",
+   "specimen": true
+  },
+  {
+   "id": "claymorphism",
+   "name": "Claymorphism",
+   "aliases": [],
+   "family": "surface",
+   "what": "Inflated, toy-like shapes: very round corners, two inner shadows that model the form, and one big soft coloured shadow underneath.",
+   "origin": "Named by designer Michal Malewicz in 2021 as a friendlier successor to neumorphism.",
+   "tokens": {
+    "bg": "#f1e9ff",
+    "surface": "#ffffff",
+    "fg": "#32215c",
+    "muted": "#5b4a85",
+    "accent": "#7c3aed",
+    "accentFg": "#ffffff",
+    "border": "0 solid transparent",
+    "radius": "32px",
+    "shadow": "0 30px 50px -10px rgb(139 92 246 / .45), inset 0 -8px 16px rgb(139 92 246 / .22), inset 0 8px 14px rgb(255 255 255 / .9)",
+    "fontDisplay": "ui-rounded, \"SF Pro Rounded\", \"Arial Rounded MT Bold\", system-ui, sans-serif",
+    "fontText": "ui-rounded, \"SF Pro Rounded\", \"Arial Rounded MT Bold\", system-ui, sans-serif",
+    "weightDisplay": "800",
+    "tracking": "-0.02em"
+   },
+   "rules": [
+    "Corner radius about 30 px or more",
+    "Two inner shadows (light on top, darker below) plus one large outer shadow tinted with the shape colour",
+    "Strong, cheerful accent colours on a pale ground"
+   ],
+   "motion": "Squash and stretch on a spring: a button flattens slightly on hover and bounces on press.",
+   "a11y": [
+    "Needs strong accents and real contrast to avoid the neumorphism trap",
+    "In dark mode the fill cannot be black or the shadows vanish"
+   ],
+   "choose": [
+    "Children and education products, playful consumer apps, onboarding screens"
+   ],
+   "avoid": [
+    "Finance, legal, anything that should feel sober"
+   ],
+   "keywords": [
+    "clay",
+    "claymorphic",
+    "inflated",
+    "puffy",
+    "toy",
+    "kids",
+    "cute",
+    "bubbly",
+    "friendly 3d"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://hype4.academy/articles/design/claymorphism-in-user-interfaces",
+    "https://hype4.academy/articles/coding/how-to-create-claymorphism-using-css"
+   ],
+   "note": "",
+   "specimen": true
+  },
+  {
+   "id": "skeuomorphism",
+   "name": "Skeuomorphism",
+   "aliases": [
+    "realism"
+   ],
+   "family": "surface",
+   "what": "Controls drawn like the physical things they stand for: metal knobs, leather, paper, switches with real lighting.",
+   "origin": "Common in interfaces since the 1980s; Apple moved away from it with iOS 7 in 2013.",
+   "tokens": {
+    "bg": "#2a2622",
+    "surface": "#3a342e",
+    "fg": "#f3ead9",
+    "muted": "#cbbfa8",
+    "accent": "#e0a23b",
+    "accentFg": "#2a1c05",
+    "border": "1px solid #14110e",
+    "radius": "10px",
+    "shadow": "0 10px 22px rgb(0 0 0 / .55), inset 0 1px 0 rgb(255 255 255 / .12)",
+    "fontDisplay": "\"Iowan Old Style\", \"Palatino Linotype\", Palatino, Georgia, serif",
+    "fontText": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "weightDisplay": "700",
+    "tracking": "-0.02em"
+   },
+   "rules": [
+    "Gradients that imitate a light from above",
+    "Bevels: a light top edge and a dark bottom edge",
+    "Material textures and real-world metaphors",
+    "Pressed states that actually move down"
+   ],
+   "motion": "Mechanical: a key travels 2 to 3 px and returns, a switch slides, a dial turns. Short and with no bounce unless the object has one.",
+   "a11y": [
+    "The metaphor gives strong affordance, which flat design lost",
+    "Texture behind text lowers contrast: check it",
+    "Ornament must not hide state"
+   ],
+   "choose": [
+    "Audio tools and instruments, games, products where a physical metaphor teaches the use"
+   ],
+   "avoid": [
+    "Content sites, large design systems that must scale"
+   ],
+   "keywords": [
+    "skeuomorphic",
+    "realistic",
+    "knob",
+    "leather",
+    "metal",
+    "analog",
+    "instrument",
+    "hardware"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Skeuomorph",
+    "https://en.wikipedia.org/wiki/Flat_design"
+   ],
+   "note": "",
+   "specimen": true
+  },
+  {
+   "id": "flat",
+   "name": "Flat design",
+   "aliases": [],
+   "family": "surface",
+   "what": "No depth at all: solid fills, clear type, simple icons, strong colour. Nothing pretends to be an object.",
+   "origin": "Rooted in Swiss style; reached interfaces with Zune (2006), Windows Phone 7 (2010) and iOS 7 (2013).",
+   "tokens": {
+    "bg": "#f4f7fa",
+    "surface": "#ffffff",
+    "fg": "#1c2733",
+    "muted": "#4a5868",
+    "accent": "#0b6bcb",
+    "accentFg": "#ffffff",
+    "border": "0 solid transparent",
+    "radius": "4px",
+    "shadow": "none",
+    "fontDisplay": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "fontText": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "weightDisplay": "700",
+    "tracking": "-0.02em"
+   },
+   "rules": [
+    "Solid colour, no gradients, no shadows",
+    "Simple geometric icons and plenty of space",
+    "Hierarchy from size, weight and colour only"
+   ],
+   "motion": "Colour and opacity changes of 100 to 200 ms. Movement is rare and short.",
+   "a11y": [
+    "With no depth cues, clickable things can look like labels: keep underlines, borders or fills on every control",
+    "A Nielsen Norman Group study is often cited for flat interfaces being slower to use for that reason"
+   ],
+   "choose": [
+    "Marketing sites, dashboards, documentation, anything that must load fast"
+   ],
+   "avoid": [
+    "Products that rely on a physical metaphor"
+   ],
+   "keywords": [
+    "flat",
+    "clean",
+    "simple",
+    "metro",
+    "solid colour"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Flat_design"
+   ],
+   "note": "",
+   "specimen": true
+  },
+  {
+   "id": "material",
+   "name": "Material Design 3",
+   "aliases": [
+    "Material You",
+    "Material 3 Expressive"
+   ],
+   "family": "surface",
+   "what": "Google's system: tonal colour roles from one seed colour, surfaces at a few elevation levels, generous rounding and a defined motion scale.",
+   "origin": "Announced in 2014; Material You (Material 3) in 2021; Material 3 Expressive in 2025.",
+   "tokens": {
+    "bg": "#fef7ff",
+    "surface": "#f3edf7",
+    "fg": "#1d1b20",
+    "muted": "#49454f",
+    "accent": "#6750a4",
+    "accentFg": "#ffffff",
+    "border": "1px solid #cac4d0",
+    "radius": "12px",
+    "shadow": "0 1px 2px rgb(0 0 0 / .3), 0 1px 3px 1px rgb(0 0 0 / .15)",
+    "fontDisplay": "Roboto, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "fontText": "Roboto, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "weightDisplay": "500",
+    "tracking": "0"
+   },
+   "rules": [
+    "Colour roles (primary, on-primary, surface, on-surface) generated from a seed colour",
+    "Corner tokens: 4, 12, 16, 28 px and full",
+    "Motion tokens: durations from 50 to 1000 ms in steps, standard easing cubic-bezier(.2, 0, 0, 1)",
+    "State layers: a tint of the content colour at 8% on hover and 12% on press"
+   ],
+   "motion": "Use the scale: 100 to 200 ms for small changes, 300 to 500 ms for larger ones, with the standard easing. Expressive adds springs.",
+   "a11y": [
+    "Colour roles are designed in contrast pairs: use on-colours with their own background",
+    "Google's own research found Expressive designs were found faster, but dropping familiar patterns hurt usability"
+   ],
+   "choose": [
+    "Android and Google-ecosystem products, utility apps, teams that want a ready system"
+   ],
+   "avoid": [
+    "Brands that must not look like an Android app"
+   ],
+   "keywords": [
+    "material",
+    "material you",
+    "android",
+    "google",
+    "m3",
+    "md3"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Material_Design",
+    "https://github.com/material-components/material-web",
+    "https://design.google/library/expressive-material-design-google-research"
+   ],
+   "note": "",
+   "specimen": true
+  },
+  {
+   "id": "swiss",
+   "name": "Swiss / International Typographic Style",
+   "aliases": [
+    "International Style"
+   ],
+   "family": "layout",
+   "what": "A strict grid, one grotesque typeface, flush-left text and lots of white space. The layout is the decoration.",
+   "origin": "Switzerland, 1950s and 60s: Josef Müller-Brockmann, Armin Hofmann, Emil Ruder. Helvetica dates from 1957.",
+   "tokens": {
+    "bg": "#ffffff",
+    "surface": "#ffffff",
+    "fg": "#0a0a0a",
+    "muted": "#3d3d3d",
+    "accent": "#e30613",
+    "accentFg": "#ffffff",
+    "border": "0 solid transparent",
+    "radius": "0px",
+    "shadow": "none",
+    "fontDisplay": "\"Helvetica Neue\", \"Arial Nova\", Arial, system-ui, sans-serif",
+    "fontText": "\"Helvetica Neue\", \"Arial Nova\", Arial, system-ui, sans-serif",
+    "weightDisplay": "700",
+    "tracking": "-0.035em"
+   },
+   "rules": [
+    "A modular or 12-column grid, visibly obeyed",
+    "One sans-serif family in two or three sizes",
+    "Flush left, ragged right; asymmetric balance",
+    "Black and white plus one accent"
+   ],
+   "motion": "Sparse and exact: text wipes along the grid, a rule that draws, one clean page-load sequence.",
+   "a11y": [
+    "A naturally accessible style: high contrast, clear hierarchy",
+    "Keep line length to roughly 45 to 90 characters"
+   ],
+   "choose": [
+    "Editorial sites, portfolios, B2B, culture, anything led by text"
+   ],
+   "avoid": [
+    "Brands that want warmth or playfulness"
+   ],
+   "keywords": [
+    "swiss",
+    "international",
+    "helvetica",
+    "grid",
+    "typographic",
+    "modernist",
+    "bauhaus",
+    "clean",
+    "architect"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Swiss_Style_(design)",
+    "https://practicaltypography.com/line-length.html"
+   ],
+   "note": "",
+   "specimen": true
+  },
+  {
+   "id": "minimalism",
+   "name": "Minimalism",
+   "aliases": [],
+   "family": "layout",
+   "what": "As few elements as the job allows: one idea per screen, wide margins, one accent, and nothing ornamental.",
+   "origin": "From the 1960s art movement; \"less is more\" (Mies van der Rohe) and \"less but better\" (Dieter Rams).",
+   "tokens": {
+    "bg": "#fafaf8",
+    "surface": "#fafaf8",
+    "fg": "#161616",
+    "muted": "#5c5c5c",
+    "accent": "#161616",
+    "accentFg": "#fafaf8",
+    "border": "0 solid transparent",
+    "radius": "2px",
+    "shadow": "none",
+    "fontDisplay": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "fontText": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "weightDisplay": "500",
+    "tracking": "-0.03em"
+   },
+   "rules": [
+    "One accent colour or none",
+    "Large margins; white space does the grouping",
+    "One or two type sizes above body",
+    "Remove an element before adding one"
+   ],
+   "motion": "Almost none: opacity and position changes of 150 to 300 ms that explain a change of state.",
+   "a11y": [
+    "Do not remove affordances along with decoration: links and fields still need to look like links and fields",
+    "Thin grey text on white fails contrast quickly"
+   ],
+   "choose": [
+    "Premium products, portfolios, focused tools, any brief that says calm"
+   ],
+   "avoid": [
+    "Products that must show a lot at once"
+   ],
+   "keywords": [
+    "minimal",
+    "minimalist",
+    "calm",
+    "quiet",
+    "simple",
+    "whitespace",
+    "premium",
+    "elegant",
+    "understated"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Minimalism",
+    "https://www.nngroup.com/articles/homepage-design-principles/"
+   ],
+   "note": "",
+   "specimen": true
+  },
+  {
+   "id": "maximalism",
+   "name": "Maximalism",
+   "aliases": [],
+   "family": "layout",
+   "what": "More is more: clashing colour, layered pattern, several typefaces, everything large and overlapping, held together by repetition.",
+   "origin": "A long-standing reaction to minimalism across art, music and interiors; on the web it shows up as dense, collaged pages.",
+   "tokens": {
+    "bg": "#ff4f1a",
+    "surface": "#ffe94a",
+    "fg": "#1a0f3c",
+    "muted": "#1a0f3c",
+    "accent": "#1a0f3c",
+    "accentFg": "#ffe94a",
+    "border": "3px solid #1a0f3c",
+    "radius": "0px",
+    "shadow": "8px 8px 0 #0e7a4d",
+    "fontDisplay": "Didot, \"Bodoni 72\", \"Bodoni MT\", \"Playfair Display\", Georgia, serif",
+    "fontText": "\"Helvetica Neue\", \"Arial Nova\", Arial, system-ui, sans-serif",
+    "weightDisplay": "700",
+    "tracking": "-0.03em"
+   },
+   "rules": [
+    "Several saturated colours at once, plus pattern",
+    "Mixed typefaces and sizes on purpose",
+    "Overlap, rotation and collage",
+    "One repeated device (a border, a colour) to keep it from falling apart"
+   ],
+   "motion": "Busy but ordered: things tilt, bounce and trade places; marquees run. Pick one thing to move most.",
+   "a11y": [
+    "Text needs its own solid backing when the page behind is patterned",
+    "Order in the markup still has to make sense to a screen reader",
+    "Loops need a pause control or reduced-motion handling"
+   ],
+   "choose": [
+    "Fashion, music, festivals, youth brands, campaigns"
+   ],
+   "avoid": [
+    "Tools, checkouts, anything people use while stressed"
+   ],
+   "keywords": [
+    "maximal",
+    "maximalist",
+    "more is more",
+    "collage",
+    "eclectic",
+    "loud",
+    "festival",
+    "fashion"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Maximalism"
+   ],
+   "note": "Documented as an aesthetic in art and design; no single source defines it for the web.",
+   "specimen": true
+  },
+  {
+   "id": "bento",
+   "name": "Bento grid",
+   "aliases": [],
+   "family": "layout",
+   "what": "A grid of rounded tiles of different sizes, like a lunch box. Each tile holds one feature, and bigger tiles matter more.",
+   "origin": "Named after the Japanese lunch box; popular since Apple product pages around 2023, with Windows Metro tiles as an earlier relative.",
+   "tokens": {
+    "bg": "#f2f3f5",
+    "surface": "#ffffff",
+    "fg": "#15171a",
+    "muted": "#565c66",
+    "accent": "#15171a",
+    "accentFg": "#ffffff",
+    "border": "0 solid transparent",
+    "radius": "22px",
+    "shadow": "0 1px 2px rgb(0 0 0 / .06)",
+    "fontDisplay": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "fontText": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "weightDisplay": "650",
+    "tracking": "-0.03em"
+   },
+   "rules": [
+    "CSS Grid with tiles spanning different numbers of columns and rows",
+    "One consistent gap and one corner radius",
+    "One idea per tile; size shows importance",
+    "Collapses to a single column on phones"
+   ],
+   "motion": "Tiles scale a little on hover or play one small loop each. Stagger their entrance once, at most.",
+   "a11y": [
+    "Visual order and DOM order drift apart easily: check the reading and tab order",
+    "Do not hide the main message in a small tile"
+   ],
+   "choose": [
+    "Feature overviews, product pages, dashboards, portfolios"
+   ],
+   "avoid": [
+    "Arguments that have to be read in order"
+   ],
+   "keywords": [
+    "bento",
+    "tiles",
+    "feature grid",
+    "apple style",
+    "dashboard",
+    "cards grid"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://webdesignerdepot.com/what-is-the-bento-ui-trend-and-how-can-you-get-started",
+    "https://www.freecodecamp.org/news/bento-grids-in-web-design/"
+   ],
+   "note": "",
+   "specimen": true
+  },
+  {
+   "id": "editorial",
+   "name": "Editorial / magazine",
+   "aliases": [],
+   "family": "layout",
+   "what": "A printed page on screen: a serif headline, a standfirst, columns, pull quotes, captions and rules. Typography carries the page.",
+   "origin": "Carried over from print magazines and newspapers; on the web it sits close to Swiss style.",
+   "tokens": {
+    "bg": "#f7f4ee",
+    "surface": "#f7f4ee",
+    "fg": "#1b1a17",
+    "muted": "#4f4b43",
+    "accent": "#9b1c1c",
+    "accentFg": "#ffffff",
+    "border": "0 solid transparent",
+    "radius": "0px",
+    "shadow": "none",
+    "fontDisplay": "Didot, \"Bodoni 72\", \"Bodoni MT\", \"Playfair Display\", Georgia, serif",
+    "fontText": "\"Iowan Old Style\", \"Palatino Linotype\", Palatino, Georgia, serif",
+    "weightDisplay": "400",
+    "tracking": "-0.02em"
+   },
+   "rules": [
+    "A display serif for headlines with a readable text serif or sans",
+    "Columns, rules, drop caps, pull quotes and captions",
+    "A clear type scale with big jumps",
+    "Images cropped with intent, text allowed to overlap them"
+   ],
+   "motion": "Quiet: a headline that sets line by line, images that reveal with a mask, captions that fade. Scroll-driven chapters suit long pieces.",
+   "a11y": [
+    "Keep measure near 45 to 90 characters and line height near 1.5",
+    "High-contrast display serifs get too thin at small sizes"
+   ],
+   "choose": [
+    "Publications, long-form stories, luxury and culture brands, case studies"
+   ],
+   "avoid": [
+    "Dense apps and tools"
+   ],
+   "keywords": [
+    "editorial",
+    "magazine",
+    "newspaper",
+    "long-form",
+    "serif",
+    "article",
+    "journal",
+    "luxury",
+    "story"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Swiss_Style_(design)",
+    "https://practicaltypography.com/line-length.html"
+   ],
+   "note": "A print tradition; no single source defines it as a web style.",
+   "specimen": true
+  },
+  {
+   "id": "y2k",
+   "name": "Y2K",
+   "aliases": [],
+   "family": "retro",
+   "what": "The late-1990s vision of the future: chrome, bubbly rounded type, translucent plastic, lime and hot pink, shiny gradients.",
+   "origin": "The look of roughly 1997 to 2004, revived in the 2020s.",
+   "tokens": {
+    "bg": "#d8f0ff",
+    "surface": "rgb(255 255 255 / .7)",
+    "fg": "#141a66",
+    "muted": "#273199",
+    "accent": "#ff2fa0",
+    "accentFg": "#ffffff",
+    "border": "2px solid #141a66",
+    "radius": "26px",
+    "shadow": "0 6px 0 #141a66",
+    "fontDisplay": "ui-rounded, \"SF Pro Rounded\", \"Arial Rounded MT Bold\", system-ui, sans-serif",
+    "fontText": "ui-rounded, \"SF Pro Rounded\", \"Arial Rounded MT Bold\", system-ui, sans-serif",
+    "weightDisplay": "900",
+    "tracking": "-0.01em"
+   },
+   "rules": [
+    "Lime, orange and hot pink with white and chrome",
+    "Chunky rounded lettering, often outlined",
+    "Glossy gradients with a hard white highlight",
+    "Translucent plastic and bubbles"
+   ],
+   "motion": "Bouncy and toy-like: buttons click down, stars spin, things wobble on hover.",
+   "a11y": [
+    "Gradient-filled text needs a readable fallback colour and enough contrast at its lightest point",
+    "Sparkle and spin loops need reduced-motion handling"
+   ],
+   "choose": [
+    "Fashion, music, youth brands, nostalgia campaigns"
+   ],
+   "avoid": [
+    "Serious or long-lived product interfaces"
+   ],
+   "keywords": [
+    "y2k",
+    "2000s",
+    "millennium",
+    "chrome",
+    "bubbly",
+    "nostalgia",
+    "gen z"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Y2K_aesthetic"
+   ],
+   "note": "",
+   "specimen": true
+  },
+  {
+   "id": "frutiger-aero",
+   "name": "Frutiger Aero",
+   "aliases": [],
+   "family": "retro",
+   "what": "Glossy optimism from the Windows Vista era: sky blues and grass greens, water drops, bokeh, glassy rounded buttons.",
+   "origin": "Roughly 2004 to 2013. Named in 2018 after the Frutiger typeface and Windows Aero.",
+   "tokens": {
+    "bg": "#bfe9ff",
+    "surface": "rgb(255 255 255 / .75)",
+    "fg": "#07304f",
+    "muted": "#1b4d73",
+    "accent": "#1e8fe0",
+    "accentFg": "#ffffff",
+    "border": "1px solid rgb(255 255 255 / .9)",
+    "radius": "14px",
+    "shadow": "0 8px 20px rgb(10 80 140 / .3)",
+    "fontDisplay": "\"Frutiger\", \"Segoe UI\", \"Myriad Pro\", system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "fontText": "\"Segoe UI\", system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "weightDisplay": "600",
+    "tracking": "0"
+   },
+   "rules": [
+    "Bright blue, green and white",
+    "Gloss: a hard highlight across the top half of buttons",
+    "Nature imagery, water and bokeh circles",
+    "Translucent rounded panels"
+   ],
+   "motion": "Smooth and glossy: gentle glows, bubbles rising, soft fades of 200 to 400 ms.",
+   "a11y": [
+    "Text over sky gradients and bokeh needs a panel behind it",
+    "Gloss highlights can cut contrast across button labels"
+   ],
+   "choose": [
+    "Nostalgia projects, climate and wellness brands that want an optimistic tone"
+   ],
+   "avoid": [
+    "Anything that must look current and neutral"
+   ],
+   "keywords": [
+    "frutiger aero",
+    "aero",
+    "vista",
+    "glossy",
+    "bokeh",
+    "windows 7",
+    "skeuo glossy"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Frutiger_Aero"
+   ],
+   "note": "",
+   "specimen": true
+  },
+  {
+   "id": "vaporwave",
+   "name": "Vaporwave",
+   "aliases": [],
+   "family": "retro",
+   "what": "An ironic remix of 1990s computing and mall culture: pastel pink and cyan, marble busts, old window chrome, wide-spaced text.",
+   "origin": "Grew out of an internet music scene in 2011 and 2012.",
+   "tokens": {
+    "bg": "#ffd1f2",
+    "surface": "#fdf2ff",
+    "fg": "#3a1d6e",
+    "muted": "#4f3290",
+    "accent": "#3a1d6e",
+    "accentFg": "#fdf2ff",
+    "border": "2px solid #3a1d6e",
+    "radius": "0px",
+    "shadow": "6px 6px 0 rgb(58 29 110 / .35)",
+    "fontDisplay": "\"Times New Roman\", Times, serif",
+    "fontText": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "weightDisplay": "400",
+    "tracking": "0.12em"
+   },
+   "rules": [
+    "Pastel pink, lilac and cyan gradients",
+    "Serif or system type with wide letter-spacing, often uppercase",
+    "Old operating-system window frames, grids, statues, palm trees",
+    "A little VHS damage"
+   ],
+   "motion": "Slow and dreamy: drifting gradients, a hue shift on hover, a scan line that passes now and then.",
+   "a11y": [
+    "Pastel on pastel fails contrast: keep text dark",
+    "Wide-spaced uppercase text is tiring in paragraphs; use it for labels only"
+   ],
+   "choose": [
+    "Music, art and culture projects, merch, ironic campaigns"
+   ],
+   "avoid": [
+    "Mainstream commerce and tools"
+   ],
+   "keywords": [
+    "vaporwave",
+    "aesthetic",
+    "pastel",
+    "windows 95",
+    "retro web",
+    "mall",
+    "lo-fi"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Vaporwave"
+   ],
+   "note": "",
+   "specimen": true
+  },
+  {
+   "id": "synthwave",
+   "name": "Synthwave / retrowave",
+   "aliases": [
+    "retrowave",
+    "outrun"
+   ],
+   "family": "retro",
+   "what": "A neon 1980s: a magenta sun, a perspective grid running to the horizon, chrome type, purple night sky.",
+   "origin": "A music and visual genre from the mid-2000s built on 1980s film and game imagery; also called retrowave or outrun.",
+   "tokens": {
+    "bg": "#150a33",
+    "surface": "rgb(30 12 70 / .85)",
+    "fg": "#ffe9ff",
+    "muted": "#d7c4ff",
+    "accent": "#ff2bd6",
+    "accentFg": "#150a33",
+    "border": "1px solid #ff2bd6",
+    "radius": "6px",
+    "shadow": "0 0 0 1px #ff2bd6, 0 0 22px rgb(255 43 214 / .55)",
+    "fontDisplay": "Futura, \"Century Gothic\", \"Avenir Next\", \"Trebuchet MS\", sans-serif",
+    "fontText": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "weightDisplay": "800",
+    "tracking": "0.02em"
+   },
+   "rules": [
+    "Magenta, cyan and orange on deep purple",
+    "A grid floor in perspective and a striped sun",
+    "Chrome or gradient display type, italic and uppercase",
+    "Glow on everything that is lit"
+   ],
+   "motion": "The grid scrolls towards the viewer, glows pulse slowly, titles slide in with a streak.",
+   "a11y": [
+    "Glow does not add contrast: the text colour itself has to pass",
+    "A moving grid is a vestibular trigger: stop it for reduced motion",
+    "Thin neon text is hard to read"
+   ],
+   "choose": [
+    "Games, music, events, retro-tech products"
+   ],
+   "avoid": [
+    "Calm or corporate brands"
+   ],
+   "keywords": [
+    "synthwave",
+    "retrowave",
+    "outrun",
+    "80s",
+    "neon grid",
+    "arcade",
+    "retro futur"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Synthwave"
+   ],
+   "note": "",
+   "specimen": true
+  },
+  {
+   "id": "memphis",
+   "name": "Memphis",
+   "aliases": [],
+   "family": "retro",
+   "what": "Squiggles, triangles, dots and terrazzo in clashing primaries and pastels, scattered at angles. Loud, geometric and cheerful.",
+   "origin": "The Memphis Group, an Italian design collective led by Ettore Sottsass, 1980 to 1987.",
+   "tokens": {
+    "bg": "#fff7e8",
+    "surface": "#ffffff",
+    "fg": "#1b1b1b",
+    "muted": "#3d3d3d",
+    "accent": "#2b5cff",
+    "accentFg": "#ffffff",
+    "border": "3px solid #1b1b1b",
+    "radius": "0px",
+    "shadow": "7px 7px 0 #ffcc00",
+    "fontDisplay": "Futura, \"Century Gothic\", \"Avenir Next\", \"Trebuchet MS\", sans-serif",
+    "fontText": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "weightDisplay": "800",
+    "tracking": "-0.01em"
+   },
+   "rules": [
+    "Primary colours with pink, mint and yellow, plus black outlines",
+    "Loose geometric shapes: circles, triangles, squiggles",
+    "Patterns: dots, stripes, terrazzo",
+    "Asymmetry and tilt"
+   ],
+   "motion": "Shapes drift, rotate and bounce at different speeds; hover gives a quick tilt.",
+   "a11y": [
+    "Keep patterns away from text or put a solid panel behind it",
+    "Decorative shapes should be hidden from assistive technology"
+   ],
+   "choose": [
+    "Events, education, playful consumer brands, posters"
+   ],
+   "avoid": [
+    "Sober or premium products"
+   ],
+   "keywords": [
+    "memphis",
+    "80s",
+    "squiggle",
+    "geometric",
+    "postmodern",
+    "terrazzo",
+    "confetti"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Memphis_Group"
+   ],
+   "note": "",
+   "specimen": true
+  },
+  {
+   "id": "corporate-memphis",
+   "name": "Corporate Memphis",
+   "aliases": [
+    "Alegria",
+    "flat illustration"
+   ],
+   "family": "retro",
+   "what": "The flat tech-company illustration style: friendly figures with long limbs and small heads in bright, flat colours.",
+   "origin": "Named by Mike Merrill; the best-known version, Alegria, was made for Facebook by the agency Buck in 2017.",
+   "tokens": {
+    "bg": "#f6f8ff",
+    "surface": "#ffffff",
+    "fg": "#1f2552",
+    "muted": "#4a5082",
+    "accent": "#4353e8",
+    "accentFg": "#ffffff",
+    "border": "0 solid transparent",
+    "radius": "16px",
+    "shadow": "0 12px 30px rgb(60 70 160 / .14)",
+    "fontDisplay": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "fontText": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "weightDisplay": "700",
+    "tracking": "-0.02em"
+   },
+   "rules": [
+    "Flat bright fills, no outlines",
+    "Blobs and simple figures as decoration",
+    "Rounded cards with soft shadows",
+    "A friendly geometric sans"
+   ],
+   "motion": "Gentle floating of illustrations, soft slide-ups of 300 to 400 ms.",
+   "a11y": [
+    "Illustrations of people need alt text that says what they show, or should be marked decorative",
+    "By 2023 the style was widely seen as generic: use it knowingly"
+   ],
+   "choose": [
+    "Internal tools, onboarding, explainers where friendliness matters more than distinction"
+   ],
+   "avoid": [
+    "Brands that need to stand apart"
+   ],
+   "keywords": [
+    "corporate memphis",
+    "alegria",
+    "flat illustration",
+    "friendly",
+    "startup",
+    "blob people",
+    "saas illustration"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Corporate_Memphis"
+   ],
+   "note": "",
+   "specimen": true
+  },
+  {
+   "id": "art-deco",
+   "name": "Art Deco",
+   "aliases": [],
+   "family": "retro",
+   "what": "Symmetry, stepped forms, sunbursts and fine gold lines on black or navy, with tall elegant capitals.",
+   "origin": "France, 1910s; named after the 1925 Paris exhibition of decorative arts.",
+   "tokens": {
+    "bg": "#0d1420",
+    "surface": "#111b2b",
+    "fg": "#f1e3c0",
+    "muted": "#c9b98e",
+    "accent": "#d4af37",
+    "accentFg": "#0d1420",
+    "border": "1px solid #d4af37",
+    "radius": "0px",
+    "shadow": "none",
+    "fontDisplay": "Didot, \"Bodoni 72\", \"Bodoni MT\", \"Playfair Display\", Georgia, serif",
+    "fontText": "\"Iowan Old Style\", \"Palatino Linotype\", Palatino, Georgia, serif",
+    "weightDisplay": "400",
+    "tracking": "0.14em"
+   },
+   "rules": [
+    "Black or navy with gold, sometimes emerald or burgundy",
+    "Strict symmetry and centred layouts",
+    "Stepped shapes, chevrons, fans and sunbursts",
+    "Tall, widely spaced capitals"
+   ],
+   "motion": "Stately: lines that draw outward from the centre, fans that open, slow fades of 400 to 600 ms.",
+   "a11y": [
+    "Gold on black passes easily, gold on white does not",
+    "Wide-spaced capitals are for headings only"
+   ],
+   "choose": [
+    "Hotels, bars, jewellery, events, heritage brands"
+   ],
+   "avoid": [
+    "Casual, technical or youthful products"
+   ],
+   "keywords": [
+    "art deco",
+    "deco",
+    "gatsby",
+    "1920s",
+    "gold",
+    "luxury",
+    "hotel",
+    "jazz age"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Art_Deco"
+   ],
+   "note": "",
+   "specimen": true
+  },
+  {
+   "id": "cyberpunk",
+   "name": "Cyberpunk / neon",
+   "aliases": [],
+   "family": "retro",
+   "what": "A dark city at night: black panels, acid yellow and cyan neon, clipped corners, warning labels and terminal type.",
+   "origin": "From 1980s science fiction; Blade Runner (1982) set the visual template.",
+   "tokens": {
+    "bg": "#07080c",
+    "surface": "#0e1119",
+    "fg": "#e8f6ff",
+    "muted": "#9fb6c8",
+    "accent": "#f9f002",
+    "accentFg": "#07080c",
+    "border": "1px solid #00e5ff",
+    "radius": "0px",
+    "shadow": "0 0 0 1px rgb(0 229 255 / .4), 0 0 24px rgb(0 229 255 / .25)",
+    "fontDisplay": "ui-monospace, \"SF Mono\", \"Cascadia Mono\", Menlo, Consolas, monospace",
+    "fontText": "ui-monospace, \"SF Mono\", \"Cascadia Mono\", Menlo, Consolas, monospace",
+    "weightDisplay": "700",
+    "tracking": "0.02em"
+   },
+   "rules": [
+    "Near-black background with one or two neon colours",
+    "Cut corners, thin lines, hazard stripes, small technical labels",
+    "Monospace or condensed type",
+    "Glow made from stacked shadows"
+   ],
+   "motion": "Sharp and electric: flicker on entry (once), scan lines, quick clipped wipes of 100 to 200 ms.",
+   "a11y": [
+    "Flashing must stay under three times a second (WCAG 2.3.1) and loops need a stop",
+    "Glow is not contrast; thin neon text fails",
+    "Default dark is a choice: say why in the brief"
+   ],
+   "choose": [
+    "Games, security and developer tools, music, hardware"
+   ],
+   "avoid": [
+    "General audiences reading at length"
+   ],
+   "keywords": [
+    "cyberpunk",
+    "neon",
+    "hacker",
+    "terminal",
+    "dystopia",
+    "night city",
+    "futuristic",
+    "gaming"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Cyberpunk",
+    "https://www.nngroup.com/articles/dark-mode/"
+   ],
+   "note": "",
+   "specimen": true
+  },
+  {
+   "id": "glitch",
+   "name": "Glitch",
+   "aliases": [],
+   "family": "retro",
+   "what": "Deliberate digital damage: colour channels that split apart, slices that jump sideways, torn scan lines.",
+   "origin": "From glitch art and 1990s net.art, where broken data became the image.",
+   "tokens": {
+    "bg": "#0b0b0f",
+    "surface": "#15151c",
+    "fg": "#f5f5f7",
+    "muted": "#b9b9c6",
+    "accent": "#ff2d55",
+    "accentFg": "#0b0b0f",
+    "border": "1px solid #f5f5f7",
+    "radius": "0px",
+    "shadow": "none",
+    "fontDisplay": "\"Helvetica Neue\", \"Arial Nova\", Arial, system-ui, sans-serif",
+    "fontText": "ui-monospace, \"SF Mono\", \"Cascadia Mono\", Menlo, Consolas, monospace",
+    "weightDisplay": "900",
+    "tracking": "-0.02em"
+   },
+   "rules": [
+    "Red and cyan copies of the text offset by a pixel or two",
+    "Horizontal slices displaced with clip-path",
+    "Stepped timing, not smooth easing",
+    "Used on one element, not the whole page"
+   ],
+   "motion": "Short bursts of 200 to 400 ms with stepped easing, then stillness. Triggered by hover, entry or an error state.",
+   "a11y": [
+    "Keep bursts rare and under three flashes a second (WCAG 2.3.1)",
+    "Never glitch body text or controls people are trying to use",
+    "Turn it off for reduced motion"
+   ],
+   "choose": [
+    "Music, games, art, error pages, launch teasers"
+   ],
+   "avoid": [
+    "Reading-heavy pages, anxious contexts such as payments"
+   ],
+   "keywords": [
+    "glitch",
+    "distorted",
+    "broken",
+    "rgb split",
+    "datamosh",
+    "vhs",
+    "corrupt"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Glitch_art"
+   ],
+   "note": "",
+   "specimen": true
+  },
+  {
+   "id": "aurora",
+   "name": "Aurora / mesh gradient",
+   "aliases": [
+    "gradient mesh"
+   ],
+   "family": "treatment",
+   "what": "Large, soft, blurred fields of colour that blend into each other like northern lights, usually behind plain text.",
+   "origin": "A descriptive label from the 2020s, not a movement. CSS has no true mesh gradient, so it is built from blurred blobs.",
+   "tokens": {
+    "bg": "#0b1026",
+    "surface": "rgb(255 255 255 / .08)",
+    "fg": "#ffffff",
+    "muted": "#d9defa",
+    "accent": "#ffffff",
+    "accentFg": "#0b1026",
+    "border": "1px solid rgb(255 255 255 / .2)",
+    "radius": "18px",
+    "shadow": "none",
+    "fontDisplay": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "fontText": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "weightDisplay": "650",
+    "tracking": "-0.03em"
+   },
+   "rules": [
+    "Two to four large radial gradients, heavily blurred",
+    "A dark or very pale base so the colours glow",
+    "Plain type and few elements on top",
+    "A little grain on top hides banding"
+   ],
+   "motion": "Very slow drift: 15 to 30 seconds per cycle, transform only. It should be barely noticeable.",
+   "a11y": [
+    "Contrast changes as the colours move: test text against the brightest blob",
+    "Stop the drift for reduced motion",
+    "Animate transform, never the blur radius or gradient stops, on large areas"
+   ],
+   "choose": [
+    "AI and developer products, landing page heroes, anything abstract with no photo to show"
+   ],
+   "avoid": [
+    "Pages where a product picture would say more"
+   ],
+   "keywords": [
+    "aurora",
+    "gradient",
+    "mesh",
+    "glow",
+    "northern lights",
+    "ai",
+    "ambient",
+    "stripe"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/@property",
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix"
+   ],
+   "note": "A trend label, not a documented movement.",
+   "specimen": true
+  },
+  {
+   "id": "grain",
+   "name": "Grain / noise texture",
+   "aliases": [],
+   "family": "treatment",
+   "what": "A fine speckle over flat colour or gradients, like film grain or cheap print. It removes the plastic look and hides banding.",
+   "origin": "A print and film artefact, reproduced on the web with an SVG noise filter.",
+   "tokens": {
+    "bg": "#e9dcc9",
+    "surface": "#f4eadb",
+    "fg": "#2a2118",
+    "muted": "#5a4a3a",
+    "accent": "#b4431f",
+    "accentFg": "#fff5ea",
+    "border": "0 solid transparent",
+    "radius": "6px",
+    "shadow": "none",
+    "fontDisplay": "\"Iowan Old Style\", \"Palatino Linotype\", Palatino, Georgia, serif",
+    "fontText": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "weightDisplay": "600",
+    "tracking": "-0.02em"
+   },
+   "rules": [
+    "SVG feTurbulence, type fractalNoise, baseFrequency about 0.7 to 1",
+    "Overlay at low opacity with multiply or overlay blending",
+    "A small repeating tile (stitchTiles) and never a live full-screen filter",
+    "Works best over gradients and muted, printed-looking palettes"
+   ],
+   "motion": "The grain itself stays still. If it must flicker, step it at a few frames a second on a small layer.",
+   "a11y": [
+    "Grain lowers text contrast slightly: keep it behind text or very faint",
+    "Animated noise is tiring and costly: default to still"
+   ],
+   "choose": [
+    "Craft, food, fashion, editorial, any brand that wants a printed or analogue feel"
+   ],
+   "avoid": [
+    "Crisp, clinical product interfaces"
+   ],
+   "keywords": [
+    "grain",
+    "noise",
+    "texture",
+    "film",
+    "paper",
+    "analog",
+    "printed",
+    "risograph",
+    "tactile"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/feTurbulence"
+   ],
+   "note": "",
+   "specimen": true
+  },
+  {
+   "id": "duotone",
+   "name": "Duotone",
+   "aliases": [],
+   "family": "treatment",
+   "what": "Every picture mapped to just two colours, a dark and a light, so mixed photography looks like one set.",
+   "origin": "A printing technique: a halftone made with two inks.",
+   "tokens": {
+    "bg": "#1a1147",
+    "surface": "#241a5e",
+    "fg": "#ffffff",
+    "muted": "#d9d3ff",
+    "accent": "#ff5a5f",
+    "accentFg": "#1a1147",
+    "border": "0 solid transparent",
+    "radius": "8px",
+    "shadow": "none",
+    "fontDisplay": "\"Helvetica Neue\", \"Arial Nova\", Arial, system-ui, sans-serif",
+    "fontText": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "weightDisplay": "800",
+    "tracking": "-0.03em"
+   },
+   "rules": [
+    "Convert the image to greyscale first",
+    "Map shadows to one colour and highlights to another (multiply for the dark, lighten or screen for the light, or an SVG feComponentTransfer)",
+    "Use the same pair across the whole site",
+    "Pick a pair with strong lightness contrast"
+   ],
+   "motion": "Cross-fade between two colour pairs on hover or scroll; otherwise still.",
+   "a11y": [
+    "Text over a duotone photo needs a scrim or a solid panel",
+    "Check the pair itself for colour-blind confusion: lightness contrast matters more than hue"
+   ],
+   "choose": [
+    "Sites with mixed or weak photography, music and events, campaigns with one strong brand colour"
+   ],
+   "avoid": [
+    "Products where true colour matters, such as food or fashion detail"
+   ],
+   "keywords": [
+    "duotone",
+    "two colour",
+    "spotify",
+    "tinted photo",
+    "two-tone"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Duotone",
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode"
+   ],
+   "note": "",
+   "specimen": true
+  },
+  {
+   "id": "dark-first",
+   "name": "Dark-mode-first",
+   "aliases": [
+    "dark UI"
+   ],
+   "family": "treatment",
+   "what": "The dark theme is the designed default: near-black surfaces in a few elevation steps, soft white text, one bright accent.",
+   "origin": "A practice, not a movement. Research from Nielsen Norman Group says light mode reads better for most people, so a dark default needs a reason.",
+   "tokens": {
+    "bg": "#0f1115",
+    "surface": "#171a21",
+    "fg": "#e7e9ee",
+    "muted": "#a6adbb",
+    "accent": "#7cc4ff",
+    "accentFg": "#0b1a2b",
+    "border": "1px solid #262b36",
+    "radius": "10px",
+    "shadow": "none",
+    "fontDisplay": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "fontText": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "weightDisplay": "650",
+    "tracking": "-0.02em"
+   },
+   "rules": [
+    "Background near black, not pure black; text off-white, not pure white",
+    "Depth from lighter surfaces, not from shadows",
+    "Accent colours less saturated than on white",
+    "Ship a light theme too, switched by prefers-color-scheme"
+   ],
+   "motion": "The same as the light theme. Glows and gradients read stronger on dark, so use less.",
+   "a11y": [
+    "Light mode performs better for most people in most conditions: offer both and respect the system setting",
+    "Pure white text on pure black causes halation for some readers",
+    "Borders need 3:1 against the surface to be seen"
+   ],
+   "choose": [
+    "Developer tools, media and video, games, dashboards used in dim rooms"
+   ],
+   "avoid": [
+    "Long-form reading for a general audience, unless a light theme is one click away"
+   ],
+   "keywords": [
+    "dark",
+    "dark mode",
+    "night",
+    "black",
+    "developer",
+    "terminal",
+    "linear",
+    "vercel"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://www.nngroup.com/articles/dark-mode/"
+   ],
+   "note": "",
+   "specimen": true
+  },
+  {
+   "id": "isometric",
+   "name": "Isometric",
+   "aliases": [],
+   "family": "treatment",
+   "what": "Objects drawn as if seen from above at an angle with no perspective, so parallel lines never meet. Reads as a tidy little model world.",
+   "origin": "A technical drawing projection; familiar from games, which usually use a 2:1 pixel ratio.",
+   "tokens": {
+    "bg": "#eef2ff",
+    "surface": "#ffffff",
+    "fg": "#1b2559",
+    "muted": "#4a5596",
+    "accent": "#4f5bd5",
+    "accentFg": "#ffffff",
+    "border": "0 solid transparent",
+    "radius": "12px",
+    "shadow": "0 14px 30px rgb(40 50 130 / .18)",
+    "fontDisplay": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "fontText": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "weightDisplay": "700",
+    "tracking": "-0.02em"
+   },
+   "rules": [
+    "Three visible faces per object: top lightest, one side mid, one side darkest",
+    "True isometric uses 30° to the horizontal; pixel-friendly art uses a 2:1 slope",
+    "One light direction for every object",
+    "Flat colours; depth comes from the three tones"
+   ],
+   "motion": "Parts lift, stack and slide along the three axes. Layers separating vertically explain how a product is built.",
+   "a11y": [
+    "Isometric scenes are illustrations: describe what they show in text",
+    "Small isometric labels get hard to read at an angle; keep text flat"
+   ],
+   "choose": [
+    "Explaining systems, infrastructure, logistics, fintech flows, feature diagrams"
+   ],
+   "avoid": [
+    "Emotional or lifestyle brands"
+   ],
+   "keywords": [
+    "isometric",
+    "iso",
+    "3d illustration",
+    "diagram",
+    "infrastructure",
+    "blocks",
+    "city"
+   ],
+   "stack": "vanilla",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Isometric_video_game_graphics"
+   ],
+   "note": "",
+   "specimen": true
+  },
+  {
+   "id": "kinetic-type",
+   "name": "Kinetic typography",
+   "aliases": [],
+   "family": "approach",
+   "what": "The words are the animation: letters, words and lines move, stretch and take turns, so reading and watching become one thing.",
+   "origin": "",
+   "tokens": {},
+   "rules": [
+    "Split text into lines, words or characters and stagger them",
+    "One typeface, very large",
+    "Movement follows the reading order",
+    "Keep the real sentence available to screen readers"
+   ],
+   "motion": "A set headline on load (0.6 to 1.2 s), then words that react to scroll. Stagger 30 to 60 ms per word.",
+   "a11y": [
+    "Split text must stay one sentence for assistive technology",
+    "Text that never stops moving needs a pause, or must end within 5 seconds (WCAG 2.2.2)"
+   ],
+   "choose": [
+    "SaaS and product launches with a strong line and no picture, agencies, manifestos"
+   ],
+   "avoid": [
+    "Pages where the message is in a picture or a demo"
+   ],
+   "keywords": [
+    "kinetic",
+    "typography",
+    "type animation",
+    "moving text",
+    "headline animation",
+    "word by word",
+    "split text",
+    "marquee"
+   ],
+   "stack": "motion",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Kinetic_typography"
+   ],
+   "note": "",
+   "specimen": false,
+   "example": "relay"
+  },
+  {
+   "id": "scroll-story",
+   "name": "Scroll-driven storytelling",
+   "aliases": [],
+   "family": "approach",
+   "what": "The page is a sequence: sections pin, pictures scrub and charts redraw as the reader scrolls, so the scroll bar becomes the timeline.",
+   "origin": "",
+   "tokens": {},
+   "rules": [
+    "Pin a scene and drive it with scroll progress",
+    "One change per step",
+    "Text beside the picture, never hidden behind the effect",
+    "Everything still readable as a plain page"
+   ],
+   "motion": "Scrubbed, not timed: the reader sets the speed. Smooth scroll is optional and must not fight the trackpad.",
+   "a11y": [
+    "Parallax and zooms can cause nausea: reduce to cuts for reduced motion",
+    "Pinned sections must not trap keyboard users",
+    "A 2013 Purdue study found parallax did not improve the experience by itself"
+   ],
+   "choose": [
+    "Brand stories, product explainers, journalism, annual reports, data stories"
+   ],
+   "avoid": [
+    "Task pages people visit to get something done"
+   ],
+   "keywords": [
+    "scroll",
+    "scrollytelling",
+    "parallax",
+    "story",
+    "pinned",
+    "as you scroll",
+    "chapters",
+    "journey",
+    "timeline"
+   ],
+   "stack": "gsap",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Parallax_scrolling",
+    "https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions.html"
+   ],
+   "note": "",
+   "specimen": false,
+   "example": "tidewater"
+  },
+  {
+   "id": "immersive-3d",
+   "name": "3D / immersive WebGL",
+   "aliases": [],
+   "family": "approach",
+   "what": "A real-time 3D scene is the page: a product you can turn, a world the camera moves through, particles that form a shape.",
+   "origin": "",
+   "tokens": {},
+   "rules": [
+    "One hero object, well lit, beats a busy scene",
+    "Camera moves tied to scroll or pointer",
+    "A still picture for no-WebGL and for reduced motion",
+    "Pixel ratio capped at 2 and the loop paused off screen"
+   ],
+   "motion": "Slow, weighty camera moves with damping. Idle motion of a few degrees keeps the scene alive.",
+   "a11y": [
+    "The canvas is invisible to assistive technology: the same content must exist as text",
+    "Large rotations and zooms should become cuts for reduced motion",
+    "Give controls a keyboard path (a slider, buttons)"
+   ],
+   "choose": [
+    "Product launches, hardware, automotive, games, portfolios of 3D work"
+   ],
+   "avoid": [
+    "Content pages, slow devices, anything that must load in a second"
+   ],
+   "keywords": [
+    "3d",
+    "webgl",
+    "three.js",
+    "product viewer",
+    "turntable",
+    "configurator",
+    "immersive",
+    "model",
+    "rotate",
+    "particles",
+    "dust"
+   ],
+   "stack": "three",
+   "sources": [
+    "https://github.com/mrdoob/three.js",
+    "https://web.dev/articles/vitals"
+   ],
+   "note": "",
+   "specimen": false,
+   "example": "halden-one"
+  },
+  {
+   "id": "micro-interactions",
+   "name": "Micro-interactions",
+   "aliases": [],
+   "family": "approach",
+   "what": "Small animated answers to what a person just did: a toggle that slides, a row that makes room, a number that settles.",
+   "origin": "",
+   "tokens": {},
+   "rules": [
+    "Each one has a trigger and feedback",
+    "Feedback within about 100 ms; most transitions 200 to 300 ms",
+    "Entering slightly slower than leaving",
+    "Springs for things people drag, so they can be interrupted"
+   ],
+   "motion": "Only in response to input. If nothing was pressed, nothing moves.",
+   "a11y": [
+    "State must also be shown without motion (text, icon, colour)",
+    "Drag needs a keyboard alternative",
+    "Announce results to screen readers with a live region"
+   ],
+   "choose": [
+    "Apps, dashboards, forms, checkouts, any interface used every day"
+   ],
+   "avoid": [
+    "Nothing: every interface benefits, in moderation"
+   ],
+   "keywords": [
+    "micro-interaction",
+    "interaction",
+    "hover",
+    "toggle",
+    "drag",
+    "reorder",
+    "app",
+    "dashboard",
+    "ui animation",
+    "react",
+    "component"
+   ],
+   "stack": "motion-react",
+   "sources": [
+    "https://www.nngroup.com/articles/microinteractions/",
+    "https://www.nngroup.com/articles/animation-duration/"
+   ],
+   "note": "",
+   "specimen": false,
+   "example": "mise"
+  }
+ ],
+ "techniques": [
+  {
+   "id": "organic-shapes",
+   "name": "Organic / blob shapes",
+   "what": "Soft, irregular shapes made with an eight-value border-radius, an SVG path or clip-path. A tool used inside other styles (claymorphism, Corporate Memphis), not a documented style of its own."
+  },
+  {
+   "id": "monochrome",
+   "name": "Monochrome",
+   "what": "One hue in several tints and shades. A palette decision used inside Swiss, minimal or dark-first work, not a style of its own."
+  }
+ ],
+ "notReal": [
+  {
+   "name": "Spectromorphism",
+   "verdict": "Not a design style. No design source uses it; the nearest real word, spectromorphology, is a term from electroacoustic music. If a brief asks for it, ask whether neumorphism, skeuomorphism or glassmorphism was meant."
+  }
+ ]
+}

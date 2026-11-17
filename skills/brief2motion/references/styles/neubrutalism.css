@@ -1,0 +1,6 @@
+.s-card, .s-btn, .s-field input, .s-nav { box-shadow: var(--shadow); }
+.s-btn { transition: transform .12s ease, box-shadow .12s ease; }
+.s-btn:hover { transform: translate(2px, 2px); box-shadow: 3px 3px 0 #111; }
+.s-btn:active { transform: translate(5px, 5px); box-shadow: 0 0 0 #111; }   /* the button presses into its own shadow */
+.s-btn-2 { background: #7df9c0; }
+.s-stat { background: #ffe14d; padding: 0 .2em; border: var(--border); display: inline-block; transform: rotate(-2deg); }

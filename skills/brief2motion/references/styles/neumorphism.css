@@ -1,0 +1,6 @@
+.s-card, .s-nav, .s-btn-2 { box-shadow: var(--shadow); }
+.s-btn-2 { background: var(--bg); color: var(--fg); border-color: #8f9bb0; }   /* the outline is the accessible part: shadows alone do not reach 3:1 */
+.s-btn-2:active, .s-field input { box-shadow: inset 5px 5px 10px #b9c0cd, inset -5px -5px 10px #ffffff; }
+.s-btn { box-shadow: 6px 6px 14px #b9c0cd, -6px -6px 14px #ffffff; transition: box-shadow .18s ease, transform .18s ease; }
+.s-btn:active { transform: scale(.98); box-shadow: 2px 2px 5px #b9c0cd, -2px -2px 5px #ffffff; }
+.s-field input { background: var(--bg); border-color: #8f9bb0; }
