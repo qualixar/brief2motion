@@ -1,7 +1,7 @@
 {
   "name": "brief2motion",
-  "version": "0.2.0",
-  "description": "Turn a plain brief into live, measured web motion: dust that forms your product, face or logo, a paper plane across the page, scroll scenes. Sibling of brief2mp4.",
+  "version": "1.0.0",
+  "description": "Turn a plain brief into a website with professional motion, checked in a real browser: scroll stories, 3D product pages, kinetic type, page transitions, data stories, interface motion, particles, and 32 visual styles. Sibling of brief2mp4.",
   "author": {
     "name": "Varun Pratap Bhardwaj",
     "url": "https://github.com/qualixar"
@@ -11,12 +11,19 @@
   "license": "MIT",
   "keywords": [
     "web-motion",
-    "motion-graphics",
-    "particles",
-    "threejs",
+    "web-animation",
     "gsap",
+    "scrolltrigger",
+    "threejs",
+    "react-three-fiber",
+    "framer-motion",
+    "view-transitions",
     "scrollytelling",
-    "animation",
+    "kinetic-typography",
+    "particles",
+    "lottie",
+    "design-styles",
+    "accessibility",
     "agent-skills",
     "text-to-web"
   ]

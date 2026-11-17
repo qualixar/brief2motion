@@ -28,5 +28,24 @@ jobs:
           python-version: "3.12"
       - name: Doctor
         run: bash skills/brief2motion/scripts/doctor.sh
+      - name: Unit tests (router, kit, measuring code, style data)
+        run: node --test tests/*.test.mjs
       - name: Repo checks
         run: bash tests/run_checks.sh
+
+  # Real-browser checks. Hosted runners have no GPU, so frame-time budgets are skipped (--no-perf) and this job
+  # does not block a merge: it reports. The same checks run with budgets on a developer machine before a release.
+  browser-checks:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - name: Install Chromium for the checker
+        run: npx --yes playwright@1.65.1 install --with-deps chromium
+      - name: Site check on every example (no frame budgets)
+        run: bash tests/check_examples.sh --no-perf
+      - name: One smoke test per stack
+        run: node tests/browser/smoke.mjs

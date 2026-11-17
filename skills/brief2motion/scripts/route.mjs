@@ -118,7 +118,7 @@ export function report(r) {
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const args = process.argv.slice(2), file = args.find((a) => !a.startsWith('--'));
-  if (!file || args.includes('--help') || args.includes('-h')) { console.log('usage: node route.mjs <BRIEF.md | -> [--json]\n  Suggests a motion stack and a visual style for a brief, with reasons. "-" reads the brief from standard input.'); process.exit(file ? 0 : 2); }
+  if (!file || args.includes('--help') || args.includes('-h')) { console.log('usage: node route.mjs <BRIEF.md | -> [--json]\n  Suggests a motion stack and a visual style for a brief, with reasons. "-" reads the brief from standard input.'); process.exit(args.includes('--help') || args.includes('-h') ? 0 : 2); }
   let brief;
   try { brief = fs.readFileSync(file === '-' ? 0 : file, 'utf8'); } catch (e) { console.error(`route.mjs: cannot read ${file}: ${e.message}`); process.exit(2); }
   if (!brief.trim()) { console.error('route.mjs: the brief is empty'); process.exit(2); }

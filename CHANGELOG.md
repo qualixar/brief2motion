@@ -2,6 +2,38 @@
 
 All notable changes to brief2motion. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses [Semantic Versioning](https://semver.org/).
 
+## [1.0.0] - 2026-11-18
+
+brief2motion grows from one effect (dust that forms a picture) into a skill for web motion in general. It reads the brief, picks the stack and the style, and checks the result the same way whatever it built.
+
+### Added
+- **A router.** `scripts/route.mjs` reads a brief and proposes a motion stack and a visual style, quoting the words that led there. Rules live in `references/routing.json`.
+- **Ten stack references** in `references/stacks/`: plain CSS and JavaScript, GSAP with ScrollTrigger and Lenis, Motion (vanilla and React), three.js and React Three Fiber, the dust engine, SVG with Lottie and Rive, the View Transitions API, kinetic type, scroll storytelling, and a note on WebAssembly. Their code comes from the tested examples.
+- **A style system.** 32 visual styles and approaches, each checked against a published source, each with tokens, tested CSS, the motion that fits, accessibility traps and when to choose it. One data file (`references/styles.json`) generates the index, the 32 pages and a live atlas.
+- **Design, accessibility and performance references** that apply to every site: hierarchy, type, spacing, contrast, breakpoints, Core Web Vitals, motion principles, landing page structure.
+- **A shared kit** (`kit/`, no dependencies): reduced-motion switch and state signal, frame loops that stop when hidden, scroll progress, accessible split text, reveals, counters, SVG line drawing, a picture-sequence scrubber, view-transition helpers, a three.js stage, Lottie and Rive loaders, and a CSS accessibility floor.
+- **Eight new examples**, each a complete site with its brief and passing report: `halden-one` (three.js product turntable), `tidewater` (GSAP scroll story), `relay` (kinetic type with Motion), `halvorsen` (multi-page portfolio with view transitions), `keeling` (data story on NOAA's CO2 record), `mise` (React and Motion for React), `sprout` (SVG, Lottie, native scroll-driven CSS), `style-atlas` (28 styles live).
+- **`check_site.mjs`**, a checker for any site: frame time on desktop and an emulated phone, sideways scroll at three widths, tap targets, reduced motion (state, running animations, stillness, visible text, scrolling), no WebGL, no JavaScript, text contrast with see-through panels blended, keyboard focus, page basics, weight, third-party hosts and console errors. `--pages` checks several pages; `--no-perf` skips frame budgets on machines with no GPU.
+- **`capture_site.mjs`**: screenshots, a contact sheet and a short film of any site.
+- **Tests.** 43 unit tests (router, kit, measuring code, style data), a real-browser smoke test per stack, test pages for React Three Fiber, Rive and a three.js model and post-processing pipeline, and `tests/check_examples.sh`.
+- **A learning guide** as a PDF with editable HTML, CSS and Python source in `docs/guide/`.
+- A logo, a banner and an architecture diagram with their sources in `docs/diagrams/`; `NOTICE`; a study section in `RESOURCES.md` covering 43 repositories.
+
+### Changed
+- `SKILL.md` now runs route, spec, build, check, fix, deliver, and the spec template has a design plan and a motion plan.
+- The dust engine template reports its motion state like every other page (`<html data-motion>`), marks its canvas and fallback for the general checker, and loads GSAP 3.15.1.
+- README rewritten around what the skill makes now.
+
+### Fixed
+- Template: the brand link in the nav was 20 px tall, under the 24 px tap-target minimum.
+- Template: with reduced motion on, the nav's background still faded for 1.1 s when the page scrolled. CSS transitions and animations are now cut for reduced motion.
+- Both were found by running the new checker on the old example.
+
+### Notes
+- Tested on macOS with Chrome 157. Windows, Linux, real phones and Codex are not verified.
+- React stacks (Motion for React, React Three Fiber) should be built by the project's bundler. The React example and the test page run from CDN modules to stay build-free, which depends on pinned versions.
+- `brief2mp4`'s marketplace file still lists brief2motion at 0.1.0. Bump that entry in the same release.
+
 ## [0.2.0] - 2026-11-17
 
 ### Fixed
