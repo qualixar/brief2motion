@@ -82,6 +82,8 @@ What every page has, whatever the stack (the checker tests each one):
 - A motion plan as a comment at the top of the script, matching SPEC.md.
 - Nothing wider than a 320 px screen, and tap targets of at least 24 px.
 
+Tuning by hand (optional, dev only): `kit/tune.js` opens a Tweakpane panel for easing, duration, stagger and colour when the address ends in `?tune`, and "Copy values" gives the numbers back as JSON to paste into the code. Wrap the loader line between `/* tune:start */` and `/* tune:end */`. It is never part of the shipped page: before step 4 run `node <this skill's folder>/scripts/strip_tune.mjs site`, which removes `kit/tune.js` and every marked block, and `check_site.mjs` fails a page that still has either. Examples do not carry `tune.js`; copy it from `kit/` when you want it.
+
 Images: only ones the user owns or that carry a licence allowing reuse. Put the credit in `site/CREDITS.md` and in REPORT.md. Prefer drawing in code (SVG, canvas, three.js primitives) to borrowing. Size pictures for the 1.5 MiB budget.
 
 ## 4. Check (do not skip)
@@ -106,6 +108,7 @@ For a site with several pages add `--pages about.html,work/a.html`. For the dust
 | Basics | one `<h1>`, `lang`, real title and description, zoom allowed, `alt` text, `<main>` and a skip link |
 | Page weight from the project, per page | 1.5 MiB or less |
 | Third-party requests | `cdn.jsdelivr.net` only |
+| Dev tuning panel | not in the shipped page: no `kit/tune.js`, no tune block, no Tweakpane request |
 | Console errors, every run | 0 |
 
 The frame numbers only mean something on a machine with a real GPU; elsewhere pass `--no-perf`. Then open the screenshots in `check/shots/` and look at them against every **Done when** line and against the design plan. A checker cannot see that a layout is dull, that text sits on a busy picture, or that the hero says nothing. Text over pictures, gradients and canvas is not measured for contrast: look at it.
