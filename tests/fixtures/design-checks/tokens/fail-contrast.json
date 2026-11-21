@@ -1,0 +1,140 @@
+{
+  "$description": "Failing fixture: body text is a light grey on the light canvas (about 2.3:1).",
+  "primitive": {
+    "color": {
+      "$type": "color",
+      "paper": {
+        "$value": "#faf7f0"
+      },
+      "ink": {
+        "$value": "#1c2230"
+      },
+      "ink-soft": {
+        "$value": "#a7adbd"
+      },
+      "night": {
+        "$value": "#141824"
+      },
+      "mist": {
+        "$value": "#e6e9f2"
+      },
+      "violet": {
+        "$value": "#4b3fbf"
+      },
+      "violet-light": {
+        "$value": "#b9b0ff"
+      }
+    },
+    "space": {
+      "$type": "dimension",
+      "1": {
+        "$value": "4px"
+      },
+      "2": {
+        "$value": "8px"
+      },
+      "3": {
+        "$value": "16px"
+      }
+    },
+    "font": {
+      "family": {
+        "$type": "fontFamily",
+        "body": {
+          "$value": [
+            "Inter",
+            "system-ui",
+            "sans-serif"
+          ]
+        }
+      },
+      "size": {
+        "$type": "dimension",
+        "body": {
+          "$value": "clamp(1rem, 0.95rem + 0.25vw, 1.125rem)"
+        }
+      }
+    },
+    "motion": {
+      "ease": {
+        "$type": "cubicBezier",
+        "out": {
+          "$value": [
+            0.2,
+            0.8,
+            0.2,
+            1
+          ]
+        }
+      }
+    }
+  },
+  "semantic": {
+    "light": {
+      "color": {
+        "$type": "color",
+        "canvas": {
+          "$value": "{primitive.color.paper}"
+        },
+        "text": {
+          "$value": "{primitive.color.ink}"
+        },
+        "text-soft": {
+          "$value": "{primitive.color.ink-soft}"
+        },
+        "action": {
+          "$value": "{primitive.color.violet}"
+        },
+        "on-action": {
+          "$value": "{primitive.color.paper}"
+        }
+      }
+    },
+    "dark": {
+      "color": {
+        "$type": "color",
+        "canvas": {
+          "$value": "{primitive.color.night}"
+        },
+        "text": {
+          "$value": "{primitive.color.mist}"
+        },
+        "text-soft": {
+          "$value": "{primitive.color.violet-light}"
+        },
+        "action": {
+          "$value": "{primitive.color.violet-light}"
+        },
+        "on-action": {
+          "$value": "{primitive.color.night}"
+        }
+      }
+    }
+  },
+  "$extensions": {
+    "brief2motion": {
+      "pairs": [
+        {
+          "fg": "color.text",
+          "bg": "color.canvas",
+          "kind": "text"
+        },
+        {
+          "fg": "color.text-soft",
+          "bg": "color.canvas",
+          "kind": "text"
+        },
+        {
+          "fg": "color.on-action",
+          "bg": "color.action",
+          "kind": "text"
+        },
+        {
+          "fg": "color.action",
+          "bg": "color.canvas",
+          "kind": "ui"
+        }
+      ]
+    }
+  }
+}
