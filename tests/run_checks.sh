@@ -64,8 +64,10 @@ if curl -fsI --max-time 8 https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min
   [[ -n "$tp_url" && "$got" == "$tp_sri" ]] && ok "SRI matches Tweakpane in kit/tune.js" || bad "SRI wrong for the Tweakpane file in kit/tune.js"
 else echo "skip  SRI check (cdn.jsdelivr.net not reachable)"; fi
 
-# 4c. every link in the curated reference page answers (network; bot checks that stop scripts but not people are allowed)
-if curl -fsI --max-time 8 https://developer.mozilla.org/ >/dev/null 2>&1; then
+# 4c. every link in the curated reference page answers (network; bot checks that stop scripts but not people are allowed).
+# Opt-in (B2M_CHECK_LINKS=1), run before every release: 130+ outside sites must not turn CI red on unrelated changes.
+if [[ "${B2M_CHECK_LINKS:-0}" != 1 ]]; then echo "skip  link check (set B2M_CHECK_LINKS=1; run before a release)"
+elif curl -fsI --max-time 8 https://developer.mozilla.org/ >/dev/null 2>&1; then
   step "web-references.md: no dead links (check_links.mjs)" node $S/scripts/check_links.mjs $S/references/web-references.md
 else echo "skip  link check (network not reachable)"; fi
 
