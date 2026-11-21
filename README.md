@@ -151,6 +151,7 @@ The two skills hand work to each other: brief2motion films its own page with `ca
 | **App interface** | shared layout tabs, drag to reorder (and from the keyboard), items that travel between lists, numbers on springs | React, Motion for React | [mise](examples/mise/) |
 | **Illustrated landing page** | an SVG drawing that draws and grows, Lottie icons that play only on screen, native CSS scroll-driven animation | plain CSS and JavaScript, lottie-web | [sprout](examples/sprout/) |
 | **Particles that form a picture** | dust that assembles into a product, a logo, a face or a word, and re-forms as up to four shapes | the built-in dust engine | [copper-no-7](examples/copper-no-7/) |
+| **A whole site that must convert (site mode)** | discovery, content and claims, routes, wireframes, tokens, design, then layout, accessibility, journey and meta checks, with a report per check | plain CSS and JavaScript | [larkspur](examples/larkspur/) |
 
 Each example is a complete site with the brief it was built from, the motion plan at the top of its script, and the report from its passing check. Run any of them: `python3 skills/brief2motion/scripts/serve.py examples/tidewater`.
 
@@ -238,11 +239,26 @@ The router picks a style from what the brief says about the product, the audienc
 
 If a check fails, the skill fixes the page and checks again. It never relaxes a budget to pass. The phone run is an emulated phone: this machine's graphics chip with the processor slowed down. On a machine with no GPU, pass `--no-perf`; the frame numbers there say nothing about real devices. Text over pictures, gradients and canvas has no single background, so it is not measured: the agent looks at the screenshots, and so should you.
 
+### Site mode: a whole site, or a page that must convert
+
+For a brief that asks for several pages, or for one page whose job is to get a visitor to do something, the skill first writes one short file per stage (`DISCOVERY.md`, `CONTENT.md`, `routes.json`, phone-first wireframes, `tokens.json`, `DESIGN.md`, `MOTION.md`; copies are in `skills/brief2motion/templates/site-mode/`), then builds, then runs checks beside `check_site.mjs`. Every record lands in `check/qa.json` as PASS, FAIL, REVIEW (a person must look) or PENDING (no evidence yet, such as a sign-up that ends at a fixture).
+
+| Script | What it checks |
+|---|---|
+| `check_plan.mjs` | every route reachable from home, no orphans or duplicates; every visitor task maps to a route and an action; every claim has a source or is marked DRAFTED, and drafted proof (reviews, ratings, logos) fails; every asset has a rights record; wireframes carry the primary action |
+| `build_tokens.mjs` | `tokens.json` to `site/tokens.css`: rejects missing references and alias cycles, and fails any declared text pair below WCAG AA in light or dark |
+| `check_layout.mjs` | at 320, 390, 768 and 1440 px: no overflow, no clipped text, no text or action overlap, targets of 24 px or more (44 for the primary action on a phone), 45 to 75 characters a line, focus never covered by sticky UI |
+| `check_a11y.mjs` | axe-core on every route and declared state, light and dark, plus a Tab walk to the primary action |
+| `check_journeys.mjs` | the journeys in `journeys.json`, written by role and name, on a phone and a desktop width |
+| `check_meta.mjs` | title, description, canonical, share image size, robots, `sitemap.xml` |
+
+Each checker is tested against a passing and a failing fixture in `tests/fixtures/design-checks/`. Automation covers part of the job: `references/design-review.md` is the rubric for the second reader, and [`examples/larkspur`](examples/larkspur/) shows the whole path on a made-up product.
+
 Three test layers back this up: unit tests for the router, the kit and the measuring code; a real-browser smoke test per stack that proves each documented pattern does what it says (the poster really morphs between pages, keyboard reorder really moves the row, the canvas really changes with scroll); and the full check on every example.
 
 ## Examples
 
-Nine folders in [`examples/`](examples/), each with `BRIEF.md`, the site, and `site-report.json` from its passing check on an Apple M-series laptop with Chrome 157:
+Ten folders in [`examples/`](examples/), each with `BRIEF.md`, the site, and `site-report.json` from its passing check on an Apple M-series laptop with Chrome 157:
 
 | Example | Stack | Checks |
 |---|---|---|
@@ -340,7 +356,7 @@ skills/brief2motion/
                               serve.py, serve.mjs, doctor.sh, to_video.sh, capture_frames.mjs, cutout.swift,
                               strip_tune.mjs, check_links.mjs
   templates/                  SPEC.md and site/, the dust engine starter
-examples/                     nine complete sites, each with its brief and its passing report
+examples/                     ten complete sites, each with its brief and its passing report
 tests/                        unit tests, per-stack browser smoke tests, repo checks, the example checker
 docs/guide/                   the learning guide: editable HTML, CSS and Python source, and the built PDF
 RESOURCES.md, NOTICE          the repositories this was learned from, with licences
@@ -372,6 +388,7 @@ brief2motion is MIT. Sites it builds load three.js, Lenis, Motion, React, lottie
 | [d3-scale and d3-shape](https://d3js.org/) | the D3 authors | ISC |
 | [Tweakpane](https://tweakpane.github.io/docs/), the dev-only `?tune` panel, never shipped | cocopon | MIT |
 | [playwright-core](https://playwright.dev/), downloaded for the checks | Microsoft | Apache-2.0 |
+| [axe-core](https://github.com/dequelabs/axe-core) 4.14.1, fetched from cdn.jsdelivr.net by `check_a11y.mjs` at check time, hash-checked, never in a built site | Deque Systems | MPL-2.0 |
 | [LYGIA](https://lygia.xyz/) and [Depth Anything V2 Small](https://huggingface.co/onnx-community/depth-anything-v2-small), optional, never bundled | Patricio Gonzalez Vivo; the Depth Anything authors | Prosperity Public License 3.0 or Patron License; Apache-2.0 |
 
 The full table, with where each is used and what each licence means for you, is in [`references/licences.md`](skills/brief2motion/references/licences.md). The sites linked in [`references/web-references.md`](skills/brief2motion/references/web-references.md) (galleries, component libraries, documentation) are for study; nothing is copied from them, and the page records each site's stated terms.

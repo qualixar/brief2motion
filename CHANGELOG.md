@@ -2,6 +2,17 @@
 
 All notable changes to brief2motion. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+- **Site mode**: design before motion, for a whole site or a page that must convert. One short file per stage (`DISCOVERY.md`, `CONTENT.md`, `routes.json`, wireframes, `tokens.json`, `DESIGN.md`, `MOTION.md`) with filled-in copies in `templates/site-mode/`, and a "Site mode" section in `SKILL.md`.
+- `build_tokens.mjs` (design tokens to CSS, rejecting missing references, cycles and contrast below AA), `build_sitemap.mjs`, and the checkers `check_plan.mjs`, `check_layout.mjs`, `check_a11y.mjs` (axe-core 4.14.1, MPL-2.0, fetched at check time with an integrity hash, never part of a site), `check_journeys.mjs` and `check_meta.mjs`. Results are PASS, FAIL, REVIEW or PENDING records in `check/qa.json`. Each has a passing and a failing fixture in `tests/fixtures/design-checks/`.
+- `references/page-blueprints.md`, `references/design-review.md`, and sections 10 to 15 of `design-fundamentals.md` (type, measure, colour roles, images, responsive sweep, forms and states, in numbers).
+- `examples/larkspur`: a three-page SaaS launch site for a made-up product, built through every stage, with its stage files, `qa.json` and `site-report.json`.
+
+### Changed
+- The layout and tap-target probes moved from `check_site.mjs` into `scripts/_probes.mjs` (same code). A radio button or checkbox with a label is now measured by its label, which takes the click.
+
 ## [1.0.0] - 2026-11-18
 
 brief2motion grows from one effect (dust that forms a picture) into a skill for web motion in general. It reads the brief, picks the stack and the style, and checks the result the same way whatever it built.

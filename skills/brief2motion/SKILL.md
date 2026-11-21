@@ -1,6 +1,6 @@
 ---
 name: brief2motion
-description: Turn a plain brief into a website with professional motion, measured in a real browser. Use when asked to build or animate a website, landing page, product launch page, portfolio, scroll story or data story; to add a hero animation, scroll animation, scrollytelling, parallax, page transitions, kinetic typography, micro-interactions, a 3D product viewer or turntable, particles or dust that form a product, logo, face or words, SVG or Lottie or Rive animation; to pick a visual style such as neubrutalism, glassmorphism, neumorphism, claymorphism, bento, Swiss or minimal; or to "make my site feel alive". Chooses the motion stack (plain CSS and JavaScript, GSAP with ScrollTrigger and Lenis, Motion for vanilla or React, three.js or React Three Fiber, the View Transitions API, SVG, Lottie, Rive) and the style from the brief and says why, builds the page, serves it at a localhost address, then checks frame rate, phone layout, reduced motion, keyboard focus, contrast, no-WebGL and no-JavaScript fallbacks, fixes what fails, and can hand the page to brief2mp4 to become a video.
+description: Turn a plain brief into a website with professional motion, measured in a real browser. Use when asked to build or animate a website, landing page, product launch page, portfolio, scroll story or data story; to add a hero animation, scroll animation, scrollytelling, parallax, page transitions, kinetic typography, micro-interactions, a 3D product viewer or turntable, particles or dust that form a product, logo, face or words, SVG or Lottie or Rive animation; to pick a visual style such as neubrutalism, glassmorphism, neumorphism, claymorphism, bento, Swiss or minimal; or to "make my site feel alive"; or to design a whole site or a page that must convert (site mode: discovery, content, routes, wireframes, tokens, design, then layout, accessibility, journey and meta checks). Chooses the motion stack (plain CSS and JavaScript, GSAP with ScrollTrigger and Lenis, Motion for vanilla or React, three.js or React Three Fiber, the View Transitions API, SVG, Lottie, Rive) and the style from the brief and says why, builds the page, serves it at a localhost address, then checks frame rate, phone layout, reduced motion, keyboard focus, contrast, no-WebGL and no-JavaScript fallbacks, fixes what fails, and can hand the page to brief2mp4 to become a video.
 ---
 
 # brief2motion 1.0.0
@@ -139,6 +139,28 @@ node <this skill's folder>/scripts/capture_site.mjs site --out media            
 bash <this skill's folder>/scripts/to_video.sh site final.mp4 --seconds 12              # the dust engine's frame-exact capture
 ```
 
+## Site mode: a whole site, or a page that must convert
+
+Use it when the brief asks for a site with several pages, or for one page whose job is to get a visitor to do something (sign up, buy, book, register). It puts the work a studio does first in front of steps 1 to 6: design before motion. Every stage writes one short file that a person and an agent can both read; `templates/site-mode/` holds a filled-in copy of each (README there has the commands), and `examples/larkspur/` is a SaaS site built through all of it.
+
+| Stage | File | Checked by |
+|---|---|---|
+| 1. Discovery: visitors, their tasks, the owner's goal and how it is observed, constraints, open questions with the assumption taken | `DISCOVERY.md` | `check_plan.mjs` |
+| 2. Content: every word per route; each claim has an ID and a source, or is marked DRAFTED | `CONTENT.md` | `check_plan.mjs` |
+| 3. Routes: id, path, parent, template, title, description, primary action, states, links | `routes.json`, `SITEMAP.md` (`build_sitemap.mjs`) | `check_plan.mjs`, `check_meta.mjs` |
+| 4. Wireframes: phone-first grey boxes with real copy and a reachable primary action | `wireframes/<template>.html` | `check_layout.mjs --wireframes` |
+| 5. Tokens: primitives, light and dark roles, text pairs | `tokens.json` -> `site/tokens.css` (`build_tokens.mjs`) | the same script: references, cycles, AA contrast |
+| 6. Visual design: one idea from the subject, type, grid, colour, imagery, the one memorable thing; then the router and `SPEC.md` as before | `DESIGN.md`, `ASSETS.json` | `check_plan.mjs` (rights records) |
+| 7. Motion: per movement its intent, trigger, states, interruption, reduced form, pattern page | `MOTION.md` | `check_site.mjs` |
+| 8. Build: semantic HTML first, motion on top, with steps 3 to 5 above | `site/` | everything |
+| 9. Checks and a second reader | `journeys.json`, `check/qa.json`, `REVIEW.md` | `check_layout`, `check_a11y`, `check_journeys`, `check_meta`, `check_site` |
+
+Rules: the brief's own facts are the only facts (no invented reviews, logos, customers or numbers: `check_plan` fails a drafted claim that looks like proof and sends a drafted figure to review); phone first; states (empty, loading, error, success) are declared in `routes.json` and each one is loaded by the checkers. Read `references/page-blueprints.md` for the page type, `references/design-review.md` for the second reader, and sections 10 to 15 of `design-fundamentals.md` for the numbers.
+
+Every checker writes records into `check/qa.json`: `PASS` (measured, within threshold), `FAIL` (blocks), `REVIEW` (a person must look) or `PENDING` (no evidence yet: a site not built, a sign-up that ends at a fixture, axe-core offline). Exit 0 means no FAIL. `check_a11y.mjs` fetches axe-core 4.14.1 (MPL-2.0) from cdn.jsdelivr.net when it runs, verifies its hash and injects it into the checker's own page; the site never carries it. A green report does not replace the second reader or a screen-reader pass.
+
+Compress for a small brief: a one-page site keeps one short entry in each file and may skip stages 4 and 7 when the page has no template choice and no motion; a site with several page types writes one entry per route or template. Never skip 1 to 3 and 9: without them nothing says what the page is for or whether it worked.
+
 ## Licences in one paragraph
 
-This skill's code is MIT. Sites it builds load libraries from a CDN at pinned versions and bundle none of them: three.js, Lenis, Motion, React, lottie-web, the Rive runtime and htm are MIT or Apache-2.0; D3 is ISC; Tweakpane (the dev-only `?tune` panel, never shipped) is MIT; GSAP 3.15.1 is free under GSAP's own "no charge" licence, which allows commercial use and AI-written GSAP code but not use inside no-code animation builders that compete with Webflow. Pages use system fonts and send no request to a font service. `references/licences.md` has the detail and the notice to write into each project.
+This skill's code is MIT. Sites it builds load libraries from a CDN at pinned versions and bundle none of them: three.js, Lenis, Motion, React, lottie-web, the Rive runtime and htm are MIT or Apache-2.0; D3 is ISC; Tweakpane (the dev-only `?tune` panel, never shipped) is MIT; axe-core (fetched by `check_a11y.mjs` at check time, never part of a page) is MPL-2.0; GSAP 3.15.1 is free under GSAP's own "no charge" licence, which allows commercial use and AI-written GSAP code but not use inside no-code animation builders that compete with Webflow. Pages use system fonts and send no request to a font service. `references/licences.md` has the detail and the notice to write into each project.

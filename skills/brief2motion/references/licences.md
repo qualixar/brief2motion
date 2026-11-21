@@ -1,6 +1,6 @@
 # Licences: what brief2motion bundles, loads and offers
 
-Checked on 16 Nov 2026; the GSAP terms were read again on 17 Nov 2026, and the table of loaded libraries was brought up to version 1.0.0 the same day. Tweakpane and the credits table (section 4) were added on 22 Nov 2026, with the link check of `web-references.md`. This is a plain guide, not legal advice.
+Checked on 16 Nov 2026; the GSAP terms were read again on 17 Nov 2026, and the table of loaded libraries was brought up to version 1.0.0 the same day. Tweakpane and the credits table (section 4) were added on 22 Nov 2026, with the link check of `web-references.md`; axe-core was added the same day with site mode. This is a plain guide, not legal advice.
 
 brief2motion has three kinds of code. Keep them apart.
 
@@ -62,8 +62,11 @@ Name, who makes it, where to find it, its licence, and where the skill uses it. 
 | d3-scale, d3-shape | the D3 authors | <https://d3js.org/> | ISC | chart maths in the data-story example |
 | Tweakpane | cocopon | <https://tweakpane.github.io/docs/> | MIT | dev-only tuning panel, `kit/tune.js` |
 | playwright-core | Microsoft | <https://playwright.dev/> | Apache-2.0 | drives Chrome for the checks; downloaded on first use, not shipped |
+| axe-core | Deque Systems | <https://github.com/dequelabs/axe-core> | MPL-2.0 | `check_a11y.mjs` (site mode): fetched at check time from cdn.jsdelivr.net at 4.14.1, verified against a SHA-384 hash, injected into the checker's page; never in a built site or this repository |
 | LYGIA | Patricio Gonzalez Vivo | <https://lygia.xyz/> | Prosperity Public License 3.0 or Patron License | optional shader library, never bundled |
 | Depth Anything V2 Small | the Depth Anything authors, via onnx-community | <https://huggingface.co/onnx-community/depth-anything-v2-small> | Apache-2.0 | optional photo-to-depth model |
+
+**axe-core and the Mozilla Public License.** axe-core is a development-time checker, like playwright-core. `check_a11y.mjs` downloads one pinned, hash-verified file into the checker's cache folder (`~/.cache/brief2motion/deps/axe-core/`) and evaluates it in a page the checker opened itself. We do not modify it, copy any of it into this repository, or put it in a site, so the MPL's file-level obligations (publish changes to MPL files) are not triggered and the project stays MIT. Offline with nothing cached, the axe results are PENDING and the check says so. If you ship axe-core with a product of your own, keep its licence header and read the MPL-2.0 text: <https://www.mozilla.org/MPL/2.0/>.
 
 **Sites linked for study.** `web-references.md` links award galleries, component libraries, platform documentation and canonical demos. They are there to be looked at. The skill copies nothing from them, and the page records each site's stated terms or says that none were found.
 
