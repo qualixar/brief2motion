@@ -51,6 +51,14 @@ export function route(brief, { routing = load('routing.json'), styles = load('st
   const supporting = routing.supporting.map((s) => ({ id: s.id, ref: s.ref, why: s.why, matched: s.signals.flatMap((src) => hits(text, src)) }))
     .filter((s) => s.matched.length && s.ref !== primary.ref);
 
+  // ---- patterns: the recipe pages in references/patterns/ that match the brief's motion words ----
+  const patterns = (routing.patterns || []).map((p, order) => {
+    const matched = []; let score = 0;
+    for (const [src, weight] of p.signals) { const h = hits(stackText, src); if (h.length) { score += weight; matched.push(...h); } }
+    return { id: p.id, name: p.name, ref: p.ref, stack: p.stack, why: p.why, score, matched: [...new Set(matched)].slice(0, 4), order };
+  }).filter((p) => p.score >= 4).sort((a, b) => b.score - a.score || a.order - b.order).slice(0, 4)
+    .map(({ order, ...rest }) => rest);
+
   // ---- style ----
   const styleScore = new Map(); const styleWhy = new Map();
   const strong = new Set();   // styles backed by more than one stray word: a name, an audience or a mood
@@ -77,12 +85,12 @@ export function route(brief, { routing = load('routing.json'), styles = load('st
       alternatives: looks.slice(1, 3).map((x) => ({ id: x.id, name: x.style.name })) }
     : { id: null, name: null, confidence: 'none', why: ['the brief gives no product type, audience or mood words the table knows'], ref: 'styles.md', avoid: [], a11y: [], alternatives: [] };
 
-  const read = ['design-fundamentals.md', primary.ref, ...supporting.map((s) => s.ref), style.ref, 'accessibility.md', 'performance.md'];
+  const read = ['design-fundamentals.md', 'motion-doctrine.md', primary.ref, ...supporting.map((s) => s.ref), ...patterns.map((p) => p.ref), ...(patterns.length ? ['web-references.md'] : []), style.ref, 'accessibility.md', 'performance.md'];
   return {
     framework,
     stack: { id: primary.id, name: primary.name, score: primary.score, matched: primary.matched.slice(0, 6), why: primary.why, ref: primary.ref, example: primary.example, template: primary.template },
     alsoConsider: alsoStacks.map((s) => ({ id: s.id, name: s.name, matched: s.matched.slice(0, 4), ref: s.ref })),
-    supporting, style,
+    supporting, patterns, style,
     approach: approaches[0] ? { id: approaches[0].id, name: approaches[0].style.name, example: approaches[0].style.example } : null,
     read: [...new Set(read)],
     cautions: [
@@ -102,6 +110,7 @@ export function report(r) {
   L.push(`  read: references/${r.stack.ref}   study: examples/${r.stack.example}/${r.stack.template ? `   start from: ${r.stack.template}` : ''}`);
   for (const a of r.alsoConsider) L.push(`Also fits: ${a.name} (${a.matched.map((m) => `"${m}"`).join(', ')}): references/${a.ref}`);
   for (const s of r.supporting) L.push(`Also read: references/${s.ref}, because ${s.why}`);
+  for (const p of r.patterns) L.push(`Pattern: ${p.name} (${p.stack}): references/${p.ref}, because ${p.why} (the brief says ${p.matched.map((m) => `"${m}"`).join(', ')})`);
   if (r.style.id) {
     L.push(`Style: ${r.style.name} (${r.style.confidence === 'named' ? 'named in the brief' : 'inferred'})`);
     for (const w of r.style.why) L.push(`  why: ${w}`);

@@ -83,3 +83,57 @@ test('the command line reads a file, standard input and rejects an empty brief',
   assert.match(execFileSync('node', [cli, '-'], { input: 'particles that form my logo', encoding: 'utf8' }), /dust engine/);
   assert.throws(() => execFileSync('node', [cli, '-'], { input: '   ', encoding: 'utf8', stdio: 'pipe' }));
 });
+
+// ---- patterns: the recipe pages in references/patterns/ ----
+const ROUTING = JSON.parse(fs.readFileSync(new URL('../skills/brief2motion/references/routing.json', import.meta.url), 'utf8'));
+const PATTERN_FILES = fs.readdirSync(new URL('../skills/brief2motion/references/patterns/', import.meta.url)).filter((f) => f.endsWith('.md') && f !== 'README.md').map((f) => f.replace(/\.md$/, ''));
+
+test('every pattern page has a routing entry and every routing entry has a page', () => {
+  assert.deepEqual(ROUTING.patterns.map((p) => p.id).sort(), [...PATTERN_FILES].sort());
+  assert.ok(PATTERN_FILES.length >= 20 && PATTERN_FILES.length <= 30, `${PATTERN_FILES.length} patterns`);
+  const stackIds = new Set(ROUTING.stacks.map((s) => s.id));
+  for (const p of ROUTING.patterns) {
+    assert.equal(p.ref, `patterns/${p.id}.md`);
+    assert.ok(stackIds.has(p.stack), `${p.id}: stack ${p.stack}`);
+    assert.ok(p.examples.length >= 2, `${p.id} has example phrases`);
+    for (const [src, w] of p.signals) { assert.doesNotThrow(() => new RegExp(src, 'gi'), `${p.id}: ${src}`); assert.ok(w >= 1); }
+  }
+});
+for (const p of ROUTING.patterns) {
+  test(`pattern ${p.id}: its example phrases route to it`, () => {
+    for (const phrase of p.examples) {
+      const r = route(phrase);
+      const got = r.patterns.map((x) => x.id);
+      assert.ok(got.includes(p.id), `"${phrase}" gave [${got.join(', ')}], wanted ${p.id}`);
+      assert.ok(r.read.includes(p.ref) && r.read.includes('web-references.md') && r.read.includes('motion-doctrine.md'));
+      assert.ok(r.patterns.length <= 4);
+    }
+  });
+}
+test('a vague brief and a plain brief get no pattern, and a fallback phrase is not a 3D request', () => {
+  assert.deepEqual(route('make it pop').patterns, []);
+  assert.deepEqual(route('A calm page for our bakery with our opening hours and a map.').patterns, []);
+  assert.ok(!route('It must still read without WebGL and with JavaScript off.').patterns.some((p) => p.id === 'product-3d-scroll'));
+});
+test('one loose word does not pull in an unrelated pattern', () => {
+  const ids = route('A bakery page. Sort of cosy, with a slider for the loaf size picker.').patterns.map((p) => p.id);
+  assert.ok(!ids.includes('layout-reorder'), `"sort of" is not a sort control: ${ids}`);
+});
+test('the report names each pattern with its page and the words that led there', () => {
+  const text = report(route('Stats that count up when they scroll into view, and a marquee of partner names.'));
+  assert.match(text, /Pattern: Number counter \(vanilla\): references\/patterns\/number-counter\.md/);
+  assert.match(text, /Pattern: Marquee/); assert.match(text, /the brief says "stats that count"/);
+  assert.match(text, /references\/web-references\.md/);
+});
+test('the examples keep their stack when patterns are added', () => {
+  for (const [name, stack] of Object.entries(EXPECT)) {
+    const r = route(brief(name));
+    assert.equal(r.stack.id, stack, name);
+    assert.ok(r.patterns.length <= 4);
+  }
+});
+test('the command line prints patterns in JSON', () => {
+  const cli = new URL('../skills/brief2motion/scripts/route.mjs', import.meta.url).pathname;
+  const json = JSON.parse(execFileSync('node', [cli, '-', '--json'], { input: 'A horizontal scroll section for the timeline.', encoding: 'utf8' }));
+  assert.equal(json.patterns[0].id, 'horizontal-scroll'); assert.equal(json.patterns[0].ref, 'patterns/horizontal-scroll.md');
+});
