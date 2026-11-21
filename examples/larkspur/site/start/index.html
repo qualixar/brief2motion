@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Start your free Larkspur trial</title>
+  <meta name="description" content="The trial form for a made-up product. It is a demonstration fixture: it checks your entry, shows a thank-you, and sends and stores nothing at all.">
+  <link rel="canonical" href="https://larkspur.example/start/">
+  <meta property="og:title" content="Start your free Larkspur trial">
+  <meta property="og:description" content="The trial form for a made-up product. It is a demonstration fixture: it checks your entry, shows a thank-you, and sends and stores nothing at all.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://larkspur.example/start/">
+  <meta property="og:image" content="https://larkspur.example/assets/og.png">
+  <meta property="og:image:alt" content="Larkspur, a made-up shared inbox: the words One inbox, one owner for every message on a paper-coloured card with a violet bar.">
+  <meta name="theme-color" content="#f6f1e7">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/kit/kit.css">
+  <link rel="stylesheet" href="/tokens.css">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/">Larkspur</a>
+      <nav aria-label="Main">
+        <a class="nav-link" href="/pricing/">Pricing</a>
+        <a class="btn btn-small" href="/start/">Try free</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap" style="padding-block: var(--space-8)">
+      <div class="flow">
+        <h1 class="page-title">Start your free trial</h1>
+        <p>14 days, no card. We only need a work email. This is a demo form: it sends nothing and stores nothing.</p>
+      </div>
+      <div class="form-card">
+        <div id="error-summary" class="error-summary" role="alert" tabindex="-1" hidden></div>
+        <form id="trial-form" action="/start/" method="get">
+          <div class="field">
+            <label for="email">Work email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <fieldset>
+            <legend>Which plan do you want to try first?</legend>
+            <label class="radio"><input type="radio" name="plan" value="team" checked> Team (US$12 per person a month)</label>
+            <label class="radio"><input type="radio" name="plan" value="studio"> Studio (US$24 per person a month)</label>
+          </fieldset>
+          <button class="btn" type="submit">Start trial</button>
+        </form>
+      </div>
+      <div id="result" role="status" tabindex="-1"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Larkspur is a made-up product for a brief2motion example. Names, prices and features are invented for the demonstration. No email is sent and nothing you enter is stored.</p>
+      <nav aria-label="Footer"><a href="/pricing/">Pricing</a><a href="/start/">Start a trial</a></nav>
+    </div>
+  </footer>
+  <script type="module" src="/main.js"></script>
+</body>
+</html>

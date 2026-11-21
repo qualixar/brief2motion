@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wireframe: form</title>
+<style>
+  /* grey boxes: layout only, no brand styling */
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; font: 1rem/1.5 system-ui, sans-serif; color: #222; background: #fff; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 16px; }
+  .skip-link { position: absolute; left: 8px; top: -64px; padding: 12px; background: #222; color: #fff; } .skip-link:focus { top: 8px; }
+  header.bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid #999; }
+  nav a, .btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 2px solid #222; color: #222; text-decoration: none; }
+  nav { display: flex; gap: 8px; } a.brand { border: 0; padding: 0; font-weight: 700; }
+  h1 { font-size: 2rem; line-height: 1.15; margin: 24px 0 8px; } h2 { margin: 32px 0 8px; }
+  p { max-width: 50ch; margin: 0 0 12px; }
+  .art { background: #ddd; border: 1px dashed #888; min-height: 220px; display: grid; place-items: center; margin: 16px 0; }
+  .grid { display: grid; gap: 16px; } .box { background: #eee; border: 1px dashed #888; padding: 12px; }
+  table { border-collapse: collapse; width: 100%; } th, td { border: 1px solid #999; padding: 8px; text-align: left; }
+  label { display: block; margin-top: 16px; } input[type=email] { display: block; width: 100%; max-width: 360px; min-height: 44px; font: inherit; padding: 0 10px; }
+  fieldset { margin: 16px 0; border: 1px solid #999; } fieldset label { display: flex; gap: 8px; align-items: center; min-height: 44px; margin: 0; }
+  button { min-height: 44px; font: inherit; padding: 0 20px; border: 2px solid #222; background: #fff; }
+  @media (min-width: 800px) { .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; } .cols { grid-template-columns: repeat(3, 1fr); } .two { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="bar"><a class="brand" href="/">Larkspur</a><nav aria-label="Main"><a href="/pricing/">Pricing</a><a href="/start/">Try free</a></nav></header>
+  <main id="main">
+    <h1>Start your free trial</h1>
+    <p>14 days, no card. We only need a work email. This is a demo form: it sends nothing and stores nothing.</p>
+    <form action="/start/">
+      <label for="email">Work email</label>
+      <input id="email" name="email" type="email" autocomplete="email">
+      <fieldset><legend>Which plan do you want to try first?</legend>
+        <label><input type="radio" name="plan" value="team" checked> Team (US$12 per person a month)</label>
+        <label><input type="radio" name="plan" value="studio"> Studio (US$24 per person a month)</label>
+      </fieldset>
+      <button type="submit">Start trial</button>
+    </form>
+  </main>
+</div>
+</body>
+</html>

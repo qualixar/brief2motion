@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Larkspur: one shared inbox, one owner for every message</title>
+  <meta name="description" content="Larkspur is a made-up shared inbox for teams of two to ten, built to demonstrate brief2motion site mode. Mail lands in one place; each message has one owner.">
+  <link rel="canonical" href="https://larkspur.example/">
+  <meta property="og:title" content="Larkspur: one shared inbox, one owner for every message">
+  <meta property="og:description" content="Larkspur is a made-up shared inbox for teams of two to ten, built to demonstrate brief2motion site mode. Mail lands in one place; each message has one owner.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://larkspur.example/">
+  <meta property="og:image" content="https://larkspur.example/assets/og.png">
+  <meta property="og:image:alt" content="Larkspur, a made-up shared inbox: the words One inbox, one owner for every message on a paper-coloured card with a violet bar.">
+  <meta name="theme-color" content="#f6f1e7">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/kit/kit.css">
+  <link rel="stylesheet" href="/tokens.css">
+  <link rel="stylesheet" href="/style.css">
+  <script>
+    /* motion allowed: start the drawing at its first frame; main.js plays it. With no script, or reduced motion, the drawing stays finished. */
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.dataset.stage = 'pre';
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/">Larkspur</a>
+      <nav aria-label="Main">
+        <a class="nav-link" href="/pricing/">Pricing</a>
+        <a class="btn btn-small" href="/start/">Try free</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap hero">
+      <div class="flow">
+        <h1>One inbox. One owner for every message.</h1>
+        <p>Larkspur is a shared inbox for teams of two to ten people. Mail to your team address lands in one place, and every message belongs to one person until it is answered.</p>
+        <div class="actions">
+          <a class="btn" href="/start/">Start free trial</a>
+          <a class="btn btn-quiet" href="/pricing/">See pricing</a>
+        </div>
+        <p class="fineprint">14 days free, no card needed. Larkspur is a made-up product, used to demonstrate brief2motion: nothing on this site is real.</p>
+      </div>
+      <figure class="tray-fig">
+        <div class="tray" role="img" aria-label="Illustration with sample data: a team inbox with three messages, each showing who has it. A new message arrives and a teammate claims it.">
+          <div class="tray-head" aria-hidden="true"><span>Team inbox</span><span class="tag">Sample data</span></div>
+          <ul class="rows" aria-hidden="true">
+            <li class="row row-new"><span><b>Question about an invoice</b><span class="preview">Could you send the March invoice again?</span></span><span class="chip"><span class="chip-from">Unassigned</span><span class="chip-to">Ari has this</span></span></li>
+            <li class="row"><span><b>Can I change my plan?</b><span class="preview">We are growing and need more inboxes.</span></span><span class="chip"><span class="chip-own">Jo has this</span></span></li>
+            <li class="row"><span><b>Login link not arriving</b><span class="preview">I asked for a link twice and nothing came.</span></span><span class="chip"><span class="chip-own">Sam has this</span></span></li>
+          </ul>
+        </div>
+        <figcaption>Sample data: an invented message arrives and a teammate claims it.</figcaption>
+      </figure>
+    </div>
+
+    <section aria-labelledby="how">
+      <div class="wrap">
+        <h2 id="how">How a message moves through Larkspur</h2>
+        <ol class="steps">
+          <li><h3>It arrives</h3><p>Mail sent to your team address lands in the shared inbox. Nobody has to forward anything.</p></li>
+          <li><h3>Someone claims it</h3><p>One person takes the message, and its owner shows on the row, so nobody starts a second reply.</p></li>
+          <li><h3>The team sees who has it</h3><p>The inbox lists every message with its owner, so &ldquo;who answered that?&rdquo; has an answer.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section aria-labelledby="more">
+      <div class="wrap">
+        <h2 id="more">What else is in it</h2>
+        <div class="cols-2">
+          <div><h3>Internal notes</h3><p>Leave a note on a message for your team. Notes stay inside the team and are never sent to the sender.</p></div>
+          <div><h3>Saved replies</h3><p>Keep the answers you give often, and insert one into a reply.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="plans">
+      <div class="wrap">
+        <h2 id="plans">Two plans</h2>
+        <div class="plans-mini">
+          <div class="plan-mini"><h3>Team</h3><p class="price">US$12 <span class="small quiet">per person a month</span></p><p>Up to 5 inboxes and 30 days of history.</p></div>
+          <div class="plan-mini"><h3>Studio</h3><p class="price">US$24 <span class="small quiet">per person a month</span></p><p>Unlimited inboxes and full history.</p></div>
+        </div>
+        <p style="margin-top: var(--space-5)"><a href="/pricing/">Compare the plans</a></p>
+      </div>
+    </section>
+
+    <section aria-labelledby="faq">
+      <div class="wrap">
+        <h2 id="faq">Questions</h2>
+        <div class="faq">
+          <details><summary>Do I need a card to try Larkspur?</summary><p>No. The trial lasts 14 days and needs no card.</p></details>
+          <details><summary>Can I cancel?</summary><p>Yes, at any time. Plans are billed monthly.</p></details>
+          <details><summary>How big a team is it for?</summary><p>Teams of two to ten people.</p></details>
+          <details><summary>Is Larkspur a real product?</summary><p>No. It is made up, to demonstrate brief2motion&rsquo;s site mode. The prices, plans and features are invented, no email is sent and nothing you type is stored.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <div class="band">
+      <div class="wrap flow">
+        <h2>Try Larkspur free for 14 days.</h2>
+        <a class="btn" href="/start/">Start free trial</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Larkspur is a made-up product for a brief2motion example. Names, prices and features are invented for the demonstration. No email is sent and nothing you enter is stored.</p>
+      <nav aria-label="Footer"><a href="/pricing/">Pricing</a><a href="/start/">Start a trial</a></nav>
+    </div>
+  </footer>
+  <script type="module" src="/main.js"></script>
+</body>
+</html>

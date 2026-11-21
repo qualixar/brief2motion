@@ -1,0 +1,748 @@
+{
+  "tool": "check_site",
+  "site": "site",
+  "when": "2026-11-21T21:14:40.603Z",
+  "budgets": {
+    "desktopP95": 20,
+    "mobileP95": 40,
+    "localBytes": 1572864,
+    "tapTarget": 24,
+    "contrast": 4.5,
+    "contrastLarge": 3
+  },
+  "perfMeasured": true,
+  "chrome": "158.0.8127.36",
+  "pages": {
+    "index.html": {
+      "state": "ready",
+      "desktop": {
+        "samples": 499,
+        "medianMs": 16.7,
+        "p95Ms": 16.8,
+        "maxMs": 16.8,
+        "fps": 59.9
+      },
+      "shots": [
+        "shots/index-desktop-0.png",
+        "shots/index-desktop-1.png",
+        "shots/index-desktop-2.png",
+        "shots/index-desktop-3.png",
+        "shots/index-desktop-4.png",
+        "shots/index-desktop-5.png",
+        "shots/index-phone-0.png",
+        "shots/index-phone-2.png",
+        "shots/index-phone-4.png"
+      ],
+      "basics": {
+        "h1": 1,
+        "lang": "en",
+        "title": "Larkspur: one shared inbox, one owner for every message",
+        "description": "Larkspur is a made-up shared inbox for teams of two to ten, built to demonstrate brief2motion site mode. Mail lands in one place; each message has one owner.",
+        "viewport": "width=device-width, initial-scale=1",
+        "imgsNoAlt": [],
+        "skip": true,
+        "main": true,
+        "webglCanvases": 0
+      },
+      "focus": [
+        {
+          "what": "a.skip-link \"Skip to content\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.brand \"Larkspur\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.nav-link \"Pricing\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.btn \"Try free\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.btn \"Start free trial\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.btn \"See pricing\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"Compare the plans\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "summary \"Do I need a card to \"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "summary \"Can I cancel?\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "summary \"How big a team is it\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "summary \"Is Larkspur a real p\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.btn \"Start free trial\"",
+          "ring": true,
+          "onScreen": true
+        }
+      ],
+      "weightDesktop": {
+        "localBytes": 32339,
+        "cdnBytes": 0
+      },
+      "phone": {
+        "samples": 499,
+        "medianMs": 16.7,
+        "p95Ms": 16.8,
+        "maxMs": 16.8,
+        "fps": 59.9
+      },
+      "weightPhone": {
+        "localBytes": 32339,
+        "cdnBytes": 0
+      },
+      "contrast": {
+        "measured": 126,
+        "notMeasured": 0,
+        "failures": []
+      },
+      "noJs": {
+        "h1Visible": true,
+        "visibleChars": 1849
+      }
+    },
+    "pricing/index.html": {
+      "state": "ready",
+      "desktop": {
+        "samples": 499,
+        "medianMs": 16.7,
+        "p95Ms": 16.7,
+        "maxMs": 16.8,
+        "fps": 59.9
+      },
+      "shots": [
+        "shots/pricing-index-desktop-0.png",
+        "shots/pricing-index-desktop-1.png",
+        "shots/pricing-index-desktop-2.png",
+        "shots/pricing-index-desktop-3.png",
+        "shots/pricing-index-desktop-4.png",
+        "shots/pricing-index-desktop-5.png",
+        "shots/pricing-index-phone-0.png",
+        "shots/pricing-index-phone-2.png",
+        "shots/pricing-index-phone-4.png"
+      ],
+      "basics": {
+        "h1": 1,
+        "lang": "en",
+        "title": "Larkspur pricing: the Team and Studio plans",
+        "description": "Two made-up plans for a made-up shared inbox: Team at US$12 and Studio at US$24 per person a month, billed monthly, with a 14-day free trial.",
+        "viewport": "width=device-width, initial-scale=1",
+        "imgsNoAlt": [],
+        "skip": true,
+        "main": true,
+        "webglCanvases": 0
+      },
+      "focus": [
+        {
+          "what": "a.skip-link \"Skip to content\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.brand \"Larkspur\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.nav-link \"Pricing\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.btn \"Try free\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.btn \"Start Team trial\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.btn \"Start Studio trial\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"Pricing\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"Start a trial\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.skip-link \"Skip to content\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.brand \"Larkspur\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.nav-link \"Pricing\"",
+          "ring": true,
+          "onScreen": true
+        }
+      ],
+      "weightDesktop": {
+        "localBytes": 28829,
+        "cdnBytes": 0
+      },
+      "phone": {
+        "samples": 499,
+        "medianMs": 16.7,
+        "p95Ms": 16.7,
+        "maxMs": 16.8,
+        "fps": 59.9
+      },
+      "weightPhone": {
+        "localBytes": 28829,
+        "cdnBytes": 0
+      },
+      "contrast": {
+        "measured": 187,
+        "notMeasured": 0,
+        "failures": []
+      },
+      "noJs": {
+        "h1Visible": true,
+        "visibleChars": 687
+      }
+    },
+    "start/index.html": {
+      "state": "ready",
+      "desktop": {
+        "samples": 499,
+        "medianMs": 16.7,
+        "p95Ms": 16.8,
+        "maxMs": 16.8,
+        "fps": 59.9
+      },
+      "shots": [
+        "shots/start-index-desktop-0.png",
+        "shots/start-index-phone-0.png",
+        "shots/start-index-phone-2.png",
+        "shots/start-index-phone-4.png"
+      ],
+      "basics": {
+        "h1": 1,
+        "lang": "en",
+        "title": "Start your free Larkspur trial",
+        "description": "The trial form for a made-up product. It is a demonstration fixture: it checks your entry, shows a thank-you, and sends and stores nothing at all.",
+        "viewport": "width=device-width, initial-scale=1",
+        "imgsNoAlt": [],
+        "skip": true,
+        "main": true,
+        "webglCanvases": 0
+      },
+      "focus": [
+        {
+          "what": "a.skip-link \"Skip to content\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.brand \"Larkspur\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.nav-link \"Pricing\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.btn \"Try free\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "input \"\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "input \"\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "button.btn \"Start trial\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"Pricing\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a \"Start a trial\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.skip-link \"Skip to content\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
+          "what": "a.brand \"Larkspur\"",
+          "ring": true,
+          "onScreen": true
+        }
+      ],
+      "weightDesktop": {
+        "localBytes": 28648,
+        "cdnBytes": 0
+      },
+      "phone": {
+        "samples": 499,
+        "medianMs": 16.7,
+        "p95Ms": 16.7,
+        "maxMs": 16.8,
+        "fps": 59.9
+      },
+      "weightPhone": {
+        "localBytes": 28648,
+        "cdnBytes": 0
+      },
+      "contrast": {
+        "measured": 13,
+        "notMeasured": 0,
+        "failures": []
+      },
+      "noJs": {
+        "h1Visible": true,
+        "visibleChars": 489
+      }
+    }
+  },
+  "noWebgl": {
+    "state": "ready",
+    "webgl": 0,
+    "fallbacks": 0,
+    "h1": true
+  },
+  "thirdPartyHosts": [],
+  "consoleErrors": {
+    "index.html desktop": [],
+    "index.html phone": [],
+    "index.html reduced": [],
+    "pricing/index.html desktop": [],
+    "pricing/index.html phone": [],
+    "pricing/index.html reduced": [],
+    "start/index.html desktop": [],
+    "start/index.html phone": [],
+    "start/index.html reduced": [],
+    "index.html no-webgl": []
+  },
+  "checks": [
+    {
+      "name": "[index.html] page signals its motion state",
+      "pass": true,
+      "detail": "<html data-motion=\"ready\">"
+    },
+    {
+      "name": "[index.html] desktop p95 frame <= 20 ms",
+      "pass": true,
+      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+    },
+    {
+      "name": "[index.html] desktop: no sideways scroll",
+      "pass": true,
+      "detail": "6 scroll stops at 1440 px"
+    },
+    {
+      "name": "[index.html] one <h1>",
+      "pass": true,
+      "detail": "1 found"
+    },
+    {
+      "name": "[index.html] <html lang> set",
+      "pass": true,
+      "detail": "en"
+    },
+    {
+      "name": "[index.html] real <title> and description",
+      "pass": true,
+      "detail": "title 55 chars, description 157 chars (need 10 and 50)"
+    },
+    {
+      "name": "[index.html] viewport meta allows zoom",
+      "pass": true,
+      "detail": "width=device-width, initial-scale=1"
+    },
+    {
+      "name": "[index.html] every <img> has alt",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "name": "[index.html] <main> landmark and a skip link",
+      "pass": true,
+      "detail": "main=true, skip link=true"
+    },
+    {
+      "name": "[index.html] keyboard focus is visible",
+      "pass": true,
+      "detail": "12 stops, all ringed and on screen"
+    },
+    {
+      "name": "[index.html] desktop page weight <= 1.5 MiB",
+      "pass": true,
+      "detail": "local 0.03 MiB, CDN 0.00 MiB"
+    },
+    {
+      "name": "[index.html] phone p95 frame <= 40 ms",
+      "pass": true,
+      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+    },
+    {
+      "name": "[index.html] phone: no sideways scroll",
+      "pass": true,
+      "detail": "6 scroll stops at 390 px"
+    },
+    {
+      "name": "[index.html] phone: tap targets >= 24 px",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "name": "[index.html] phone page weight <= 1.5 MiB",
+      "pass": true,
+      "detail": "local 0.03 MiB, CDN 0.00 MiB"
+    },
+    {
+      "name": "[index.html] 320 px wide: no sideways scroll",
+      "pass": true,
+      "detail": "4 scroll stops"
+    },
+    {
+      "name": "[index.html] reduced motion: page says so",
+      "pass": true,
+      "detail": "<html data-motion=\"reduced\"> (want \"reduced\")"
+    },
+    {
+      "name": "[index.html] reduced motion: nothing keeps animating",
+      "pass": true,
+      "detail": "no running animation longer than 250 ms"
+    },
+    {
+      "name": "[index.html] reduced motion: the picture holds still",
+      "pass": true,
+      "detail": "two screenshots 0.7 s apart match at 0%, 50% and 100% scroll"
+    },
+    {
+      "name": "[index.html] reduced motion: all text visible",
+      "pass": true,
+      "detail": "30 headings and paragraphs, each fully visible at some point of the scroll (8 stops)"
+    },
+    {
+      "name": "[index.html] text contrast meets WCAG AA",
+      "pass": true,
+      "detail": "126 text runs measured, 0 over pictures or canvas not measured (look at the screenshots)"
+    },
+    {
+      "name": "[index.html] reduced motion: normal scrolling works",
+      "pass": true,
+      "detail": "asked for 400px, page is at 400px"
+    },
+    {
+      "name": "[index.html] JavaScript off: the page still reads",
+      "pass": true,
+      "detail": "headline visible, 1849 characters of text"
+    },
+    {
+      "name": "[pricing/index.html] page signals its motion state",
+      "pass": true,
+      "detail": "<html data-motion=\"ready\">"
+    },
+    {
+      "name": "[pricing/index.html] desktop p95 frame <= 20 ms",
+      "pass": true,
+      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+    },
+    {
+      "name": "[pricing/index.html] desktop: no sideways scroll",
+      "pass": true,
+      "detail": "6 scroll stops at 1440 px"
+    },
+    {
+      "name": "[pricing/index.html] one <h1>",
+      "pass": true,
+      "detail": "1 found"
+    },
+    {
+      "name": "[pricing/index.html] <html lang> set",
+      "pass": true,
+      "detail": "en"
+    },
+    {
+      "name": "[pricing/index.html] real <title> and description",
+      "pass": true,
+      "detail": "title 43 chars, description 141 chars (need 10 and 50)"
+    },
+    {
+      "name": "[pricing/index.html] viewport meta allows zoom",
+      "pass": true,
+      "detail": "width=device-width, initial-scale=1"
+    },
+    {
+      "name": "[pricing/index.html] every <img> has alt",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "name": "[pricing/index.html] <main> landmark and a skip link",
+      "pass": true,
+      "detail": "main=true, skip link=true"
+    },
+    {
+      "name": "[pricing/index.html] keyboard focus is visible",
+      "pass": true,
+      "detail": "11 stops, all ringed and on screen"
+    },
+    {
+      "name": "[pricing/index.html] desktop page weight <= 1.5 MiB",
+      "pass": true,
+      "detail": "local 0.03 MiB, CDN 0.00 MiB"
+    },
+    {
+      "name": "[pricing/index.html] phone p95 frame <= 40 ms",
+      "pass": true,
+      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+    },
+    {
+      "name": "[pricing/index.html] phone: no sideways scroll",
+      "pass": true,
+      "detail": "6 scroll stops at 390 px"
+    },
+    {
+      "name": "[pricing/index.html] phone: tap targets >= 24 px",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "name": "[pricing/index.html] phone page weight <= 1.5 MiB",
+      "pass": true,
+      "detail": "local 0.03 MiB, CDN 0.00 MiB"
+    },
+    {
+      "name": "[pricing/index.html] 320 px wide: no sideways scroll",
+      "pass": true,
+      "detail": "4 scroll stops"
+    },
+    {
+      "name": "[pricing/index.html] reduced motion: page says so",
+      "pass": true,
+      "detail": "<html data-motion=\"reduced\"> (want \"reduced\")"
+    },
+    {
+      "name": "[pricing/index.html] reduced motion: nothing keeps animating",
+      "pass": true,
+      "detail": "no running animation longer than 250 ms"
+    },
+    {
+      "name": "[pricing/index.html] reduced motion: the picture holds still",
+      "pass": true,
+      "detail": "two screenshots 0.7 s apart match at 0%, 50% and 100% scroll"
+    },
+    {
+      "name": "[pricing/index.html] reduced motion: all text visible",
+      "pass": true,
+      "detail": "17 headings and paragraphs, each fully visible at some point of the scroll (8 stops)"
+    },
+    {
+      "name": "[pricing/index.html] text contrast meets WCAG AA",
+      "pass": true,
+      "detail": "187 text runs measured, 0 over pictures or canvas not measured (look at the screenshots)"
+    },
+    {
+      "name": "[pricing/index.html] reduced motion: normal scrolling works",
+      "pass": true,
+      "detail": "asked for 133px, page is at 133px"
+    },
+    {
+      "name": "[pricing/index.html] JavaScript off: the page still reads",
+      "pass": true,
+      "detail": "headline visible, 687 characters of text"
+    },
+    {
+      "name": "[start/index.html] page signals its motion state",
+      "pass": true,
+      "detail": "<html data-motion=\"ready\">"
+    },
+    {
+      "name": "[start/index.html] desktop p95 frame <= 20 ms",
+      "pass": true,
+      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+    },
+    {
+      "name": "[start/index.html] desktop: no sideways scroll",
+      "pass": true,
+      "detail": "1 scroll stops at 1440 px"
+    },
+    {
+      "name": "[start/index.html] one <h1>",
+      "pass": true,
+      "detail": "1 found"
+    },
+    {
+      "name": "[start/index.html] <html lang> set",
+      "pass": true,
+      "detail": "en"
+    },
+    {
+      "name": "[start/index.html] real <title> and description",
+      "pass": true,
+      "detail": "title 30 chars, description 146 chars (need 10 and 50)"
+    },
+    {
+      "name": "[start/index.html] viewport meta allows zoom",
+      "pass": true,
+      "detail": "width=device-width, initial-scale=1"
+    },
+    {
+      "name": "[start/index.html] every <img> has alt",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "name": "[start/index.html] <main> landmark and a skip link",
+      "pass": true,
+      "detail": "main=true, skip link=true"
+    },
+    {
+      "name": "[start/index.html] keyboard focus is visible",
+      "pass": true,
+      "detail": "11 stops, all ringed and on screen"
+    },
+    {
+      "name": "[start/index.html] desktop page weight <= 1.5 MiB",
+      "pass": true,
+      "detail": "local 0.03 MiB, CDN 0.00 MiB"
+    },
+    {
+      "name": "[start/index.html] phone p95 frame <= 40 ms",
+      "pass": true,
+      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+    },
+    {
+      "name": "[start/index.html] phone: no sideways scroll",
+      "pass": true,
+      "detail": "6 scroll stops at 390 px"
+    },
+    {
+      "name": "[start/index.html] phone: tap targets >= 24 px",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "name": "[start/index.html] phone page weight <= 1.5 MiB",
+      "pass": true,
+      "detail": "local 0.03 MiB, CDN 0.00 MiB"
+    },
+    {
+      "name": "[start/index.html] 320 px wide: no sideways scroll",
+      "pass": true,
+      "detail": "4 scroll stops"
+    },
+    {
+      "name": "[start/index.html] reduced motion: page says so",
+      "pass": true,
+      "detail": "<html data-motion=\"reduced\"> (want \"reduced\")"
+    },
+    {
+      "name": "[start/index.html] reduced motion: nothing keeps animating",
+      "pass": true,
+      "detail": "no running animation longer than 250 ms"
+    },
+    {
+      "name": "[start/index.html] reduced motion: the picture holds still",
+      "pass": true,
+      "detail": "two screenshots 0.7 s apart match at 0%, 50% and 100% scroll"
+    },
+    {
+      "name": "[start/index.html] reduced motion: all text visible",
+      "pass": true,
+      "detail": "3 headings and paragraphs, each fully visible at some point of the scroll (8 stops)"
+    },
+    {
+      "name": "[start/index.html] text contrast meets WCAG AA",
+      "pass": true,
+      "detail": "13 text runs measured, 0 over pictures or canvas not measured (look at the screenshots)"
+    },
+    {
+      "name": "[start/index.html] reduced motion: normal scrolling works",
+      "pass": true,
+      "detail": "asked for 0px, page is at 0px"
+    },
+    {
+      "name": "[start/index.html] JavaScript off: the page still reads",
+      "pass": true,
+      "detail": "headline visible, 489 characters of text"
+    },
+    {
+      "name": "WebGL off: headline readable",
+      "pass": true,
+      "detail": "h1 visible=true, state=ready"
+    },
+    {
+      "name": "WebGL off: a still stands in for each WebGL canvas",
+      "pass": true,
+      "detail": "the page has no canvas[data-webgl]"
+    },
+    {
+      "name": "dev tuning panel is not in the shipped page",
+      "pass": true,
+      "detail": "no kit/tune.js, no tune block, no Tweakpane request"
+    },
+    {
+      "name": "third-party requests only to cdn.jsdelivr.net",
+      "pass": true,
+      "detail": "none"
+    },
+    {
+      "name": "console errors = 0 (every run)",
+      "pass": true,
+      "detail": "none in 10 runs"
+    }
+  ],
+  "pass": true
+}

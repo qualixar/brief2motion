@@ -1,0 +1,16 @@
+{
+  "assets": [
+    {
+      "file": "assets/og.png",
+      "role": "share image (1200 x 630)",
+      "source": "drawn in code: tools/make-og.mjs renders tools/og.html in Chrome",
+      "author": "the brief2motion project",
+      "licence": "MIT (same as the project)",
+      "rights": "owned",
+      "alt": "Larkspur, a made-up shared inbox: the words One inbox, one owner for every message on a paper-coloured card with a violet bar.",
+      "crop": {
+        "wide": "the full 1.91:1 card; the title stays inside the middle 80%"
+      }
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wireframe: landing</title>
+<style>
+  /* grey boxes: layout only, no brand styling */
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; font: 1rem/1.5 system-ui, sans-serif; color: #222; background: #fff; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 16px; }
+  .skip-link { position: absolute; left: 8px; top: -64px; padding: 12px; background: #222; color: #fff; } .skip-link:focus { top: 8px; }
+  header.bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid #999; }
+  nav a, .btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 2px solid #222; color: #222; text-decoration: none; }
+  nav { display: flex; gap: 8px; } a.brand { border: 0; padding: 0; font-weight: 700; }
+  h1 { font-size: 2rem; line-height: 1.15; margin: 24px 0 8px; } h2 { margin: 32px 0 8px; }
+  p { max-width: 50ch; margin: 0 0 12px; }
+  .art { background: #ddd; border: 1px dashed #888; min-height: 220px; display: grid; place-items: center; margin: 16px 0; }
+  .grid { display: grid; gap: 16px; } .box { background: #eee; border: 1px dashed #888; padding: 12px; }
+  table { border-collapse: collapse; width: 100%; } th, td { border: 1px solid #999; padding: 8px; text-align: left; }
+  label { display: block; margin-top: 16px; } input[type=email] { display: block; width: 100%; max-width: 360px; min-height: 44px; font: inherit; padding: 0 10px; }
+  fieldset { margin: 16px 0; border: 1px solid #999; } fieldset label { display: flex; gap: 8px; align-items: center; min-height: 44px; margin: 0; }
+  button { min-height: 44px; font: inherit; padding: 0 20px; border: 2px solid #222; background: #fff; }
+  @media (min-width: 800px) { .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; } .cols { grid-template-columns: repeat(3, 1fr); } .two { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="bar"><a class="brand" href="/">Larkspur</a><nav aria-label="Main"><a href="/pricing/">Pricing</a><a href="/start/">Try free</a></nav></header>
+  <main id="main">
+    <div class="hero">
+      <div>
+        <h1>One inbox. One owner for every message.</h1>
+        <p>Larkspur is a shared inbox for teams of two to ten people. Mail to your team address lands in one place, and every message belongs to one person until it is answered.</p>
+        <p><a class="btn" href="/start/">Start free trial</a> <a class="btn" href="/pricing/">See pricing</a></p>
+        <p>14 days free, no card needed. Larkspur is a made-up product, used to demonstrate brief2motion: nothing on this site is real.</p>
+      </div>
+      <div class="art" role="img" aria-label="Placeholder for the inbox illustration (sample data)">inbox illustration: three message rows, owner on each</div>
+    </div>
+    <h2>How a message moves through Larkspur</h2>
+    <div class="grid cols">
+      <div class="box"><h3>It arrives</h3><p>Mail sent to your team address lands in the shared inbox. Nobody has to forward anything.</p></div>
+      <div class="box"><h3>Someone claims it</h3><p>One person takes the message, and its owner shows on the row, so nobody starts a second reply.</p></div>
+      <div class="box"><h3>The team sees who has it</h3><p>The inbox lists every message with its owner, so "who answered that?" has an answer.</p></div>
+    </div>
+    <h2>What else is in it</h2>
+    <div class="grid two">
+      <div class="box"><h3>Internal notes</h3><p>Leave a note on a message for your team. Notes stay inside the team and are never sent to the sender.</p></div>
+      <div class="box"><h3>Saved replies</h3><p>Keep the answers you give often, and insert one into a reply.</p></div>
+    </div>
+    <h2>Two plans</h2>
+    <p>Team: US$12 per person a month. Studio: US$24 per person a month. <a href="/pricing/">Compare the plans</a></p>
+    <h2>Questions</h2>
+    <div class="box"><p>Do I need a card to try Larkspur? No. The trial lasts 14 days and needs no card.</p></div>
+    <p><a class="btn" href="/start/">Start free trial</a></p>
+  </main>
+</div>
+</body>
+</html>

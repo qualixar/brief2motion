@@ -10,20 +10,21 @@ cd "$(dirname "${BASH_SOURCE[0]}")/.."
 S=skills/brief2motion/scripts
 PERF=(); NAMES=()
 for a in "$@"; do if [[ "$a" == --no-perf ]]; then PERF=(--no-perf); else NAMES+=("$a"); fi; done
-[[ ${#NAMES[@]} -eq 0 ]] && NAMES=(copper-no-7 halden-one tidewater relay halvorsen keeling mise sprout style-atlas)
-pages_for() { case "$1" in halvorsen) echo "work/ember.html,work/quay.html,work/moth.html,work/ledger.html";; *) echo "";; esac; }
+[[ ${#NAMES[@]} -eq 0 ]] && NAMES=(copper-no-7 halden-one tidewater relay halvorsen keeling mise sprout style-atlas larkspur)
+pages_for() { case "$1" in halvorsen) echo "work/ember.html,work/quay.html,work/moth.html,work/ledger.html";; larkspur) echo "pricing/index.html,start/index.html";; *) echo "";; esac; }
 OUT="$(mktemp -d)"; FAILS=0
 for name in "${NAMES[@]}"; do
-  dir="examples/$name"; [[ -f "$dir/index.html" ]] || { echo "FAIL  $name: no such example"; FAILS=$((FAILS + 1)); continue; }
+  dir="examples/$name"; root="$dir"; [[ -f "$dir/routes.json" && -d "$dir/site" ]] && dir="$dir/site"   # a site-mode project keeps its site in site/
+  [[ -f "$dir/index.html" ]] || { echo "FAIL  $name: no such example"; FAILS=$((FAILS + 1)); continue; }
   args=("$dir" --out "$OUT/$name"); p="$(pages_for "$name")"; [[ -n "$p" ]] && args+=(--pages "$p")
   if nice -n 15 node $S/check_site.mjs "${args[@]}" ${PERF[@]+"${PERF[@]}"} >"$OUT/$name.log" 2>&1; then
     echo "PASS  $name  $(grep -o '[0-9]*/[0-9]* checks' "$OUT/$name.log" | tail -1)"
   else
     echo "FAIL  $name"; grep -E '^FAIL|crashed' "$OUT/$name.log" | cut -c1-300; FAILS=$((FAILS + 1))
   fi
-  [[ -f "$OUT/$name/site-report.json" ]] && cp "$OUT/$name/site-report.json" "$dir/site-report.json"
+  [[ -f "$OUT/$name/site-report.json" ]] && cp "$OUT/$name/site-report.json" "$root/site-report.json"
   if [[ "$name" == copper-no-7 && ${#PERF[@]} -eq 0 ]]; then
-    if nice -n 15 node $S/check_motion.mjs "$dir" --out "$OUT/$name-motion" >"$OUT/$name-motion.log" 2>&1; then echo "PASS  $name (dust engine check)"; cp "$OUT/$name-motion/motion-report.json" "$dir/motion-report.json"
+    if nice -n 15 node $S/check_motion.mjs "$dir" --out "$OUT/$name-motion" >"$OUT/$name-motion.log" 2>&1; then echo "PASS  $name (dust engine check)"; cp "$OUT/$name-motion/motion-report.json" "$root/motion-report.json"
     else echo "FAIL  $name (dust engine check)"; grep -E '^FAIL|crashed' "$OUT/$name-motion.log" | cut -c1-300; FAILS=$((FAILS + 1)); fi
   fi
 done

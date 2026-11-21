@@ -1,0 +1,36 @@
+{
+  "site": { "name": "Larkspur", "origin": "https://larkspur.example", "lang": "en" },
+  "routes": [
+    {
+      "id": "home", "path": "/", "parent": null, "template": "landing",
+      "title": "Larkspur: one shared inbox, one owner for every message",
+      "description": "Larkspur is a made-up shared inbox for teams of two to ten, built to demonstrate brief2motion site mode. Mail lands in one place; each message has one owner.",
+      "primaryAction": { "id": "start-trial", "label": "Start free trial", "role": "link" },
+      "actions": [{ "id": "see-pricing", "label": "See pricing" }],
+      "states": [], "links": ["pricing", "start"], "indexable": true
+    },
+    {
+      "id": "pricing", "path": "/pricing/", "parent": "home", "template": "pricing",
+      "title": "Larkspur pricing: the Team and Studio plans",
+      "description": "Two made-up plans for a made-up shared inbox: Team at US$12 and Studio at US$24 per person a month, billed monthly, with a 14-day free trial.",
+      "primaryAction": { "id": "start-team", "label": "Start Team trial", "role": "link" },
+      "actions": [{ "id": "start-studio", "label": "Start Studio trial" }],
+      "states": [], "links": ["start", "home"], "indexable": true
+    },
+    {
+      "id": "start", "path": "/start/", "parent": "home", "template": "form",
+      "title": "Start your free Larkspur trial",
+      "description": "The trial form for a made-up product. It is a demonstration fixture: it checks your entry, shows a thank-you, and sends and stores nothing at all.",
+      "primaryAction": { "id": "submit-trial", "label": "Start trial", "role": "button" },
+      "actions": [],
+      "states": [
+        { "id": "error", "steps": [{ "click": { "role": "button", "name": "Start trial" } }] },
+        { "id": "success", "steps": [
+          { "fill": { "label": "Work email" }, "value": "sam@example.test" },
+          { "click": { "role": "button", "name": "Start trial" } }
+        ] }
+      ],
+      "links": ["home", "pricing"], "indexable": true
+    }
+  ]
+}
