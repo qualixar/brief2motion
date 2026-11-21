@@ -1,0 +1,10 @@
+{
+  "assets": [
+    {
+      "file": "assets/tide.svg", "role": "hero drawing",
+      "source": "drawn in code for this page", "author": "the project", "licence": "MIT (same as the project)",
+      "rights": "owned", "alt": "A drawing of a starfish and a crab on a rock under shallow water.",
+      "crop": { "phone": "square, subject centred", "wide": "4:3, subject right of centre" }
+    }
+  ]
+}
