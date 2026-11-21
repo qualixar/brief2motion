@@ -21,6 +21,8 @@ Two things not to do. Do not use `pathLength="1"`: it draws in a live browser, b
 
 ### Shapes that grow from a point
 
+The overshoot below (`1.4` in the curve) is a playful exception for a plant that grows; a serious page uses a plain `cubic-bezier(.33, 1, .68, 1)` (`motion-doctrine.md`, rule 1).
+
 ```css
 .leaf { transform-box: view-box; transform-origin: 210px 360px; }    /* the point where the leaf meets the stem, in viewBox units */
 ```

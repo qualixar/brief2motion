@@ -4,7 +4,7 @@
 //   scroll  1. the one-sentence paragraph "reads itself": words go from dim to full as they cross the screen
 //           2. the harvest scene pins; your scroll position picks one of 48 pictures of a crystal growing
 //           3. on wide screens the year pins and its cards travel sideways; on phones it is a normal swipe row
-//           4. the tide curve draws as it comes into view, then the high-water dots pop in order
+//           4. the tide curve draws as it comes into view, then the high-water dots appear in order
 // gsap.matchMedia() owns every branch, so motion is set up and torn down when the screen or the setting changes.
 // Reduced motion: nothing is pinned or scrubbed; the last picture of the crystal is shown and every line is drawn.
 import { signal } from './kit/motion-core.js';
@@ -71,7 +71,7 @@ function start() {
     // 4. the tide chart draws once, then the dots
     gsap.timeline({ scrollTrigger: { trigger: '.tide figure', start: 'top 70%', once: true } })
       .from('.tide .curve', { drawSVG: '0%', duration: 2.4, ease: 'power1.inOut' })
-      .from('.tide .marks circle', { scale: 0, duration: 0.5, stagger: 0.18, ease: 'back.out(2.5)' }, 0.5);
+      .from('.tide .marks circle', { scale: 0, autoAlpha: 0, duration: 0.6, stagger: { amount: 0.5 }, ease: 'power3.out' }, 0.5);
 
     signal('ready');
     return () => { gsap.ticker.remove(tick); lenis.destroy(); delete window.__lenis; seq.destroy(); seqEl.classList.remove('seq-live'); read.revert(); };
