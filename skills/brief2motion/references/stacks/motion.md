@@ -37,7 +37,8 @@ animate(words, { opacity: [0, 1], y: ['0.55em', '0em'], rotate: [4, 0] },
 
 ```js
 animate(word, { '--wipe': [0, 1] }, { duration: 0.5, ease: [0.7, 0, 0.2, 1] });     // a highlight that wipes in
-animate(path, { strokeDashoffset: [1, 0] }, { duration: 1.1 });                      // with pathLength="1" on the path
+const len = path.getTotalLength(); path.style.strokeDasharray = len;                  // the svg-draw rule: measured length, never pathLength
+animate(path, { strokeDashoffset: [len, 0] }, { duration: 1.1 });
 animate(dot, { offsetDistance: ['0%', '100%'] }, { duration: 1.1 });                 // dot has offset-path: path("...")
 ```
 

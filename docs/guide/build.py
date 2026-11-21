@@ -339,7 +339,7 @@ section('svg', 'SVG, charts, Lottie and Rive', 'Stacks', lead(
     'Three ways to move illustration. SVG in code is the lightest. Lottie plays an animation exported from After Effects. Rive plays an interactive animation with states.') + two(
     fig('keeling-50.jpg', '`keeling`: the line is revealed by widening a clip, so it always ends exactly on the right year.'),
     fig('sprout-top.jpg', '`sprout`: the stem draws, then seven leaves grow from the points where they meet it.')) + h2('A line that draws itself') + p(
-    'Give the shape `pathLength="1"`. A dash of length 1 then covers it whatever its real length, and progress from 0 to 1 maps straight onto the dash offset.') + h2('Charts') + p(
+    'Measure the real length with `getTotalLength()`, set the dash to it and move the dash offset from that length to 0. Do not use `pathLength="1"` and do not combine a drawn line with `vector-effect: non-scaling-stroke`.') + h2('Charts') + p(
     'Write the SVG yourself and use D3 only for the maths: scales, and the path of a line. A chart needs a text alternative: a label '
     'that states the finding, a caption with the source, and the numbers in a table. Every number in `keeling` comes from one public file, and the page links to it.') + h2('Players') + p(
     'The kit loads a player from the CDN only when the first animation is near the screen, plays it only while visible, and shows one chosen '
@@ -524,7 +524,7 @@ section('recipes', 'Recipes on one page', 'Reference', table(['You want', 'Do th
     ['A section that pins while something plays', 'a tall section with a sticky child and `scrollScene`; or ScrollTrigger with `pin` and `scrub`'],
     ['A picture that follows the scroll', '40 to 60 WebP frames about 960 px wide; `createSequence`; keep the last frame as a plain image'],
     ['A sideways gallery', 'pinned on wide screens with motion on; a swipe row with scroll snap otherwise'],
-    ['A line that draws itself', '`pathLength="1"`, dash 1, animate the offset from 1 to 0'],
+    ['A line that draws itself', 'measured length with `getTotalLength()`, dash = length, animate the offset from length to 0'],
     ['A number that counts up', '`countUp`; the real value stays in the page for screen readers'],
     ['A chart that changes as you read', 'step-triggered states; the paragraph nearest the middle of the screen is active'],
     ['A 3D product to turn', 'the kit stage, a generated environment, drag plus a slider, a still picture as fallback'],
