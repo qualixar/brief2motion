@@ -54,6 +54,7 @@ htm, Apache License 2.0, Copyright Google LLC.
 lottie-web, MIT License, Copyright (c) 2015 Bodymovin.
 Rive web runtime, MIT License, Copyright (c) 2020-2021 Rive.
 d3-scale and d3-shape, ISC License, Copyright 2010-2026 Mike Bostock.
+Tweakpane (development panel only, never shipped), MIT License, Copyright (c) 2016 cocopon.
 React Three Fiber and drei (test page only), MIT License, Copyright (c) Poimandres.
 playwright-core (downloaded by the checker, not shipped), Apache License 2.0, Copyright (c) Microsoft Corporation.
 

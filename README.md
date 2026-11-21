@@ -329,13 +329,16 @@ The "done when" lines matter most, because they are what the checks measure. Say
 skills/brief2motion/
   SKILL.md                    the loop the agent follows: route, spec, build, check, fix, deliver
   kit/                        shared helpers every site copies: motion-core, split-text, reveal, counter, svg-draw,
-                              image-sequence, view-transitions, three-stage, players, kit.css
+                              image-sequence, view-transitions, three-stage, players, kit.css, and tune.js (dev only)
   references/
     stacks/                   one file per stack, with patterns taken from the tested examples
     styles.md, styles/        the style system: an index and one page per style (generated from styles.json)
+    patterns/                 27 motion pattern recipes with sketches, budgets, reduced-motion forms and checks
+    motion-doctrine.md, web-references.md   the timing and easing rules; the verified library of sites to study
     design-fundamentals.md, accessibility.md, performance.md, brief-words.md, licences.md, routing.json
   scripts/                    route.mjs, check_site.mjs, check_motion.mjs, capture_site.mjs, build_styles.mjs,
-                              serve.py, serve.mjs, doctor.sh, to_video.sh, capture_frames.mjs, cutout.swift
+                              serve.py, serve.mjs, doctor.sh, to_video.sh, capture_frames.mjs, cutout.swift,
+                              strip_tune.mjs, check_links.mjs
   templates/                  SPEC.md and site/, the dust engine starter
 examples/                     nine complete sites, each with its brief and its passing report
 tests/                        unit tests, per-stack browser smoke tests, repo checks, the example checker
@@ -355,6 +358,23 @@ Made something with it? Open an issue with the brief and a screenshot; the usefu
 ## Licence and credits
 
 brief2motion is MIT. Sites it builds load three.js, Lenis, Motion, React, lottie-web, the Rive runtime (all MIT), htm (Apache-2.0), D3 modules (ISC) and GSAP (free under GSAP's own "no charge" licence, which allows AI-written GSAP code) from a CDN at pinned versions, and bundle none of them. No code from another project is copied into this repository. [RESOURCES.md](RESOURCES.md) lists the repositories the skill was learned from, each with its licence and what was taken from it; [NOTICE](NOTICE) carries the attributions; [`references/licences.md`](skills/brief2motion/references/licences.md) explains each licence and what it means for you.
+
+**Libraries and tools.** Every tool the skill uses or loads, with who makes it and its licence:
+
+| Tool | By | Licence |
+|---|---|---|
+| [three.js](https://threejs.org/) 0.187.0, [React Three Fiber](https://github.com/pmndrs/react-three-fiber) and [drei](https://github.com/pmndrs/drei) | mrdoob and contributors; Poimandres | MIT |
+| [GSAP](https://gsap.com/) 3.15.1 with ScrollTrigger, SplitText, DrawSVG and MotionPath | GreenSock | GSAP Standard "no charge" licence |
+| [Lenis](https://lenis.dev/) | darkroom.engineering | MIT |
+| [Motion](https://motion.dev/) | Motion | MIT |
+| [React](https://react.dev/) and [htm](https://github.com/developit/htm) | Meta; developit | MIT; Apache-2.0 |
+| [lottie-web](https://github.com/airbnb/lottie-web) and the [Rive runtime](https://github.com/rive-app/rive-wasm) | Airbnb; Rive | MIT |
+| [d3-scale and d3-shape](https://d3js.org/) | the D3 authors | ISC |
+| [Tweakpane](https://tweakpane.github.io/docs/), the dev-only `?tune` panel, never shipped | cocopon | MIT |
+| [playwright-core](https://playwright.dev/), downloaded for the checks | Microsoft | Apache-2.0 |
+| [LYGIA](https://lygia.xyz/) and [Depth Anything V2 Small](https://huggingface.co/onnx-community/depth-anything-v2-small), optional, never bundled | Patricio Gonzalez Vivo; the Depth Anything authors | Prosperity Public License 3.0 or Patron License; Apache-2.0 |
+
+The full table, with where each is used and what each licence means for you, is in [`references/licences.md`](skills/brief2motion/references/licences.md). The sites linked in [`references/web-references.md`](skills/brief2motion/references/web-references.md) (galleries, component libraries, documentation) are for study; nothing is copied from them, and the page records each site's stated terms.
 
 **Inspiration.** The particle-face idea was inspired by Thomas Cullen's [faces playground](https://playground.thomascullen.io/faces). The design guidance in `SKILL.md` and `design-fundamentals.md` draws on Anthropic's [frontend-design skill](https://github.com/anthropics/skills) (Apache-2.0), in our own words.
 
