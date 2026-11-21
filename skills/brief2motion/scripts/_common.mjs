@@ -10,7 +10,7 @@ import zlib from 'node:zlib';
 export const HERE = path.dirname(fileURLToPath(import.meta.url));
 // helper downloads live in the user's cache, never inside the plugin folder (plugin caches may be
 // read-only, and a node_modules there would ship stray files such as other tools' SKILL.md)
-const DEPS = process.env.BRIEF2MOTION_DEPS || path.join(os.homedir(), '.cache', 'brief2motion', 'deps');
+export const DEPS = process.env.BRIEF2MOTION_DEPS || path.join(os.homedir(), '.cache', 'brief2motion', 'deps');
 export const PW_VERSION = '1.65.1';
 
 // Windows needs npm.cmd and a shell to start it; elsewhere plain npm.
@@ -134,4 +134,31 @@ export function inkPixels(buf, darkBelow = 120) {
     cur.copy(prev);
   }
   return { w, h, dark };
+}
+
+// ---- a browser session for the site-mode checkers (check_layout, check_a11y, check_journeys) ----
+
+// Serve a folder (or take a URL), load playwright-core and start Chrome. Returns { base, origin, browser, version, close }.
+// Exits 2 when the browser cannot start, like every other tool here (launchChrome).
+export async function openSite(site, { chromeArgs = [] } = {}) {
+  const isUrl = /^https?:\/\//i.test(site);
+  const server = isUrl ? { url: site.endsWith('/') ? site : `${site}/`, close: async () => {} } : await serveDir(path.resolve(site));
+  const pw = await loadPlaywright();
+  const browser = await launchChrome(pw, chromeArgs);
+  const base = server.url;
+  return { base, origin: new URL(base).origin, browser, version: browser.version(), close: async () => { await browser.close(); await server.close(); } };
+}
+
+// A fresh page in its own context, as a visitor would have it: a viewport, touch for a phone, reduced motion or a dark
+// colour scheme on request. Console errors and uncaught exceptions are collected in `errors`.
+export async function newPage(browser, { viewport, mobile = false, reduced = false, dark = false, js = true } = {}) {
+  const ctx = await browser.newContext({
+    viewport, javaScriptEnabled: js, reducedMotion: reduced ? 'reduce' : 'no-preference', colorScheme: dark ? 'dark' : 'light',
+    ...(mobile ? { deviceScaleFactor: 2, isMobile: true, hasTouch: true } : {}),
+  });
+  const page = await ctx.newPage();
+  const errors = [];
+  page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+  page.on('pageerror', (e) => errors.push(`pageerror: ${e.message}`));
+  return { ctx, page, errors };
 }
