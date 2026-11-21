@@ -1,0 +1,9 @@
+{ "journeys": [ {
+  "id": "start-trial", "task": "T1", "start": "home", "integration": "fixture",
+  "steps": [
+    { "click": { "role": "link", "name": "Start free trial" } },
+    { "fill": { "label": "Work email" }, "value": "ada@example.test" },
+    { "click": { "role": "button", "name": "Start trial" } }
+  ],
+  "expect": [ { "url": "/start/" }, { "role": "status", "contains": "Check your inbox" } ]
+} ] }

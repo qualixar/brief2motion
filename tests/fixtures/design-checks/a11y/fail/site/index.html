@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>A11y fixture (fails)</title>
+<style>
+  body { margin: 0; font: 1rem/1.55 system-ui, sans-serif; color: #1c2230; background: #ffffff; }
+  main { max-width: 50ch; margin: 0 auto; padding: 24px 18px; }
+  .faint { color: #b4b4b4; }
+</style></head>
+<body>
+<main>
+  <h1>An inaccessible page</h1>
+  <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='20'%3E%3Crect width='40' height='20' fill='%234b3fbf'/%3E%3C/svg%3E" width="40" height="20">
+  <p class="faint">This sentence is light grey on white, about 2:1, far below the 4.5:1 that body text needs.</p>
+  <button></button>
+  <input type="email">
+  <p><a href="#form" tabindex="-1">Start the tour</a></p>
+</main>
+</body></html>
