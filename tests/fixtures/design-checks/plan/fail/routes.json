@@ -1,0 +1,72 @@
+{
+  "site": {
+    "name": "Fixture Bakery",
+    "origin": "https://bakery.example",
+    "lang": "en"
+  },
+  "routes": [
+    {
+      "id": "home",
+      "path": "/",
+      "parent": null,
+      "template": "landing",
+      "title": "Fixture Bakery: bread, daily",
+      "description": "A made-up bakery used to test the plan checker.",
+      "primaryAction": {
+        "id": "order",
+        "label": "Order a loaf",
+        "role": "link"
+      },
+      "links": [
+        "contact"
+      ]
+    },
+    {
+      "id": "contact",
+      "path": "/contact/",
+      "parent": "home",
+      "template": "form",
+      "title": "Order a loaf",
+      "description": "A made-up order form.",
+      "primaryAction": {
+        "id": "send",
+        "label": "Send order",
+        "role": "button"
+      },
+      "states": [
+        {
+          "id": "error",
+          "steps": [
+            {
+              "click": {
+                "role": "button",
+                "name": "Send order"
+              }
+            }
+          ]
+        }
+      ],
+      "links": [
+        "home"
+      ]
+    },
+    {
+      "id": "about",
+      "path": "/about/",
+      "parent": "home",
+      "template": "page",
+      "title": "About the bakery",
+      "description": "A made-up about page.",
+      "links": []
+    },
+    {
+      "id": "archive",
+      "path": "/contact/",
+      "parent": "ghost",
+      "template": "page",
+      "title": "Archive",
+      "description": "Duplicate path and a parent that does not exist.",
+      "links": []
+    }
+  ]
+}
