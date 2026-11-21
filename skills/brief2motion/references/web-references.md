@@ -2,7 +2,7 @@
 
 A curated library for website motion. When a brief arrives, find the section that matches its words, open one or two links to see the effect done well, then build it yourself from `patterns/` and the kit. Every link below was fetched on 22 Nov 2026 and answered (HTTP 200 after redirects, or a bot challenge for scripts that a real browser passes; those rows say so). Dead or empty pages were dropped. Links change: if one fails, the section's other links still cover it.
 
-**Study, never copy.** Galleries, component libraries and award sites show what is possible. They are somebody's work. Read how an effect behaves (timing, order, what moves and what stays still), then write your own with the kit. Do not copy code, markup, copy, images, logos or layouts. Where a site states its terms, they are noted. Where the terms were not found or not read, the row says "terms not read" and the rule is study only. Never claim a gallery site's work as inspiration for a client without checking the client is happy to be told.
+**Study, never copy.** Galleries, component libraries and award sites show what is possible. They are somebody's work. Read how an effect behaves (timing, order, what moves and what stays still), then write your own with the kit. Do not copy code, markup, copy, images, logos or layouts. Where a site states its terms, they are noted. Where the terms were not found or not read, the row says "terms not read" and the rule is study only.
 
 The router (`scripts/route.mjs`) prints the pattern pages that match a brief; this page is where each pattern's "Study" links come from. The last column lists brief words that point to a row.
 
