@@ -62,7 +62,7 @@ export function projectFiles(dir, siteDir) {
   const root = path.resolve(dir);
   const site = path.resolve(siteDir || path.join(root, 'site'));
   return {
-    root, site, siteBuilt: fs.existsSync(site) && fs.statSync(site).isDirectory(),
+    root, site, siteBuilt: fs.existsSync(site) && fs.statSync(site).isDirectory() && fs.readdirSync(site).length > 0,   // an empty folder is not a built site
     routes: path.join(root, 'routes.json'), discovery: path.join(root, 'DISCOVERY.md'), content: path.join(root, 'CONTENT.md'),
     assets: path.join(root, 'ASSETS.json'), journeys: path.join(root, 'journeys.json'), tokens: path.join(root, 'tokens.json'),
     wireframes: path.join(root, 'wireframes'), out: path.join(root, 'check'),

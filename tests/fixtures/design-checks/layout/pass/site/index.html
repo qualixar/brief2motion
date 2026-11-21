@@ -8,6 +8,9 @@
   a.btn { display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; background: #4b3fbf; color: #fff; border-radius: 8px; text-decoration: none; font-weight: 600; }
   :focus-visible { outline: 3px solid #1b4dff; outline-offset: 3px; }
   label { display: block; margin-top: 24px; } input { min-height: 44px; width: 100%; box-sizing: border-box; padding: 0 10px; font: inherit; }
+  .cards { display: grid; gap: 16px; } @media (min-width: 700px) { .cards { grid-template-columns: 1fr 1fr 1fr; } }
+  .radio { display: flex; align-items: center; gap: 12px; min-height: 44px; } .radio input { width: 16px; height: 16px; }
+  details { margin-top: 16px; } summary { min-height: 44px; display: flex; align-items: center; }
   .skip { position: absolute; left: 8px; top: -80px; background: #000; color: #fff; padding: 12px; } .skip:focus { top: 8px; }
 </style></head>
 <body>
@@ -16,6 +19,8 @@
   <h1>A page that holds together</h1>
   <p>This paragraph is long enough to wrap onto several lines at every width the checker tries, and it is set in a column no wider than fifty-four zero-widths, so the measure sits inside the band the checker wants. Short lines on a phone are fine. Wide ones on a desktop are not, so the column stops growing.</p>
   <p><a class="btn" href="#form">Start the tour</a></p>
-  <form id="form" action="#" onsubmit="return false"><label for="e">Work email</label><input id="e" type="email" autocomplete="email"></form>
+  <div class="cards"><div><h2>One</h2><p>Short card text that wraps to several short lines in a narrow column on a wide screen.</p></div><div><h2>Two</h2><p>Short card text that wraps to several short lines in a narrow column on a wide screen.</p></div><div><h2>Three</h2><p>Short card text that wraps to several short lines in a narrow column on a wide screen.</p></div></div>
+  <details><summary>A closed question</summary><p>The body of a closed disclosure is not on screen, so it can never overlap the summary above it.</p></details>
+  <form id="form" action="#" onsubmit="return false"><label for="e">Work email</label><input id="e" type="email" autocomplete="email"><label class="radio"><input type="radio" name="p" checked> A radio button sized by its label</label></form>
 </main>
 </body></html>

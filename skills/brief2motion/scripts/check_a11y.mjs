@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // check_a11y.mjs: automated accessibility checks plus a keyboard walk, on every route and declared state.
-//   node check_a11y.mjs <project-dir> [--site <dir>] [--out check] [--widths 390,1440] [--strict] [--json]
+//   node check_a11y.mjs <project-dir> [--site <dir>] [--out check] [--widths 390,1440] [--themes light,dark] [--strict] [--json]
 // axe-core (Deque Systems, MPL-2.0, https://github.com/dequelabs/axe-core) is fetched at CHECK TIME from cdn.jsdelivr.net at a
 // pinned version, verified against a SHA-384 integrity hash, kept in the checker's cache folder and injected into the page the
 // checker opens. The site under test never carries it and never requests it. Offline with nothing cached: the axe results are
@@ -61,15 +61,16 @@ export async function tabToPrimary(page, action, max = 40) {
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const USAGE = 'usage: node check_a11y.mjs <project-dir> [--site <dir>] [--out <dir>] [--widths 390,1440] [--strict] [--json]';
+  const USAGE = 'usage: node check_a11y.mjs <project-dir> [--site <dir>] [--out <dir>] [--widths 390,1440] [--themes light,dark] [--strict] [--json]';
   let args;
-  try { args = parseArgs(process.argv.slice(2), { value: ['site', 'out', 'widths'], flags: ['strict', 'json'] }); } catch (e) { console.error(`${e.message}\n${USAGE}`); process.exit(2); }
+  try { args = parseArgs(process.argv.slice(2), { value: ['site', 'out', 'widths', 'themes'], flags: ['strict', 'json'] }); } catch (e) { console.error(`${e.message}\n${USAGE}`); process.exit(2); }
   if (args.flags.has('help')) { console.log(USAGE); process.exit(0); }
   if (!args.pos[0]) { console.error(USAGE); process.exit(2); }
   const f = projectFiles(args.pos[0], args.opts.site);
   let doc;
   try { doc = loadRoutes(f.routes); } catch (e) { console.error(`check_a11y: ${e.message}`); process.exit(2); }
   if (!f.siteBuilt) { console.error(`check_a11y: no site folder at ${f.site}`); process.exit(2); }
+  const themes = (args.opts.themes || 'light').split(',').map((x) => x.trim()).filter((x) => x === 'light' || x === 'dark');
   const widths = (args.opts.widths || '390,1440').split(',').map(Number).filter(Boolean);
   const axe = await loadAxe();
   if (!axe.ok) console.error(`check_a11y: axe-core skipped: ${axe.reason}. The keyboard walk still runs; run again with a network connection for the axe results.`);
@@ -77,10 +78,10 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const results = [];
   let code = 0;
   try {
-    for (const t of targets(doc.routes)) {
+    for (const theme of themes) for (const t of targets(doc.routes)) {
       for (const w of widths) {
-        const { ctx, page } = await newPage(session.browser, { viewport: { width: w, height: w < 600 ? 844 : 900 }, mobile: w <= 390 });
-        const at = { route: t.route.id, state: t.state?.id ?? null, viewport: `${w}px`, browser: `Chrome ${session.version}`, input: 'keyboard' };
+        const { ctx, page } = await newPage(session.browser, { viewport: { width: w, height: w < 600 ? 844 : 900 }, mobile: w <= 390, dark: theme === 'dark' });
+        const at = { route: t.route.id, state: t.state?.id ?? null, viewport: `${w}px`, browser: `Chrome ${session.version}`, input: 'keyboard', theme };
         try {
           const r = await openTarget(page, session.base, t);
           if (!r.ok) { results.push(result('state.reached', 'FAIL', { ...at, reason: r.error })); continue; }
@@ -105,7 +106,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   writeQa(outDir, 'check_a11y', results, { browser: `Chrome ${session.version}`, axe: axe.ok ? AXE.version : 'not run' });
   if (args.flags.has('json')) console.log(JSON.stringify(results, null, 2));
   else {
-    printResults('brief2motion accessibility check', results, `axe-core ${axe.ok ? AXE.version : '(not run)'}, widths ${widths.join(', ')}  (PASS lines hidden)`, (r) => r.outcome !== 'PASS');
+    printResults('brief2motion accessibility check', results, `axe-core ${axe.ok ? AXE.version : '(not run)'}, widths ${widths.join(', ')}, themes ${themes.join(', ')}  (PASS lines hidden)`, (r) => r.outcome !== 'PASS');
     console.log('Automated checks cover part of WCAG 2.2. Keyboard use by a person and a screen reader pass are still needed.');
   }
   process.exit(passes(results, { strict: args.flags.has('strict') }) ? 0 : 1);

@@ -24,7 +24,9 @@ export const LAYOUT_PROBE = () => {
 export const TAP_PROBE = (min) => {
   const small = [];
   for (const el of document.querySelectorAll('a[href], button, input:not([type=hidden]), select, textarea, [role=button], [tabindex]:not([tabindex="-1"])')) {
-    const cs = getComputedStyle(el), r = el.getBoundingClientRect();
+    const cs = getComputedStyle(el);
+    let r = el.getBoundingClientRect();
+    if (/^(radio|checkbox)$/.test(el.type) && el.labels?.length) r = el.labels[0].getBoundingClientRect();   // the label takes the click, so its box is the target
     if (cs.display === 'none' || cs.visibility === 'hidden' || r.width === 0 || r.height === 0) continue;
     if (el.classList.contains('skip-link')) continue;                       // off screen until focused
     if (el.tagName === 'A' && cs.display === 'inline' && el.closest('p, li, figcaption, small, dd, td')) continue;   // links inside a sentence are exempt (WCAG 2.5.8)
@@ -46,6 +48,8 @@ export const CLIP_PROBE = () => {
     const el = n.parentElement;
     if (!el || seen.has(el)) continue;
     if (el.closest('[aria-hidden="true"], noscript, script, style, svg, .sr-only, .skip-link, [data-allow-clip]')) continue;
+    const dt = el.closest('details');
+    if (dt && !dt.open && !el.closest('summary')) continue;   // the body of a closed disclosure is not shown
     const cs = getComputedStyle(el);
     if (cs.display === 'none' || cs.visibility === 'hidden') continue;
     seen.add(el);
@@ -78,6 +82,8 @@ export const OVERLAP_PROBE = (min) => {
   const name = (el) => `${el.tagName.toLowerCase()}${el.id ? '#' + el.id : ''}${el.classList[0] ? '.' + el.classList[0] : ''} "${(el.textContent || el.getAttribute('aria-label') || '').trim().replace(/\s+/g, ' ').slice(0, 24)}"`;
   const skip = (el) => {
     if (el.closest('[aria-hidden="true"], noscript, script, style, svg, .sr-only, .skip-link, [data-layer]')) return true;
+    const dt = el.closest('details');
+    if (dt && !dt.open && !el.closest('summary')) return true;   // the body of a closed disclosure is not shown
     for (let a = el; a; a = a.parentElement) { const p = getComputedStyle(a).position; if (p === 'fixed' || p === 'sticky') return true; }
     const cs = getComputedStyle(el);
     return cs.display === 'none' || cs.visibility === 'hidden' || Number(cs.opacity) < 0.05;
@@ -120,12 +126,14 @@ export const OVERLAP_PROBE = (min) => {
 
 // Prose lines: for each paragraph (not in nav, header, footer, captions or tables) the number of characters on each
 // rendered line, found by walking the characters and noting where the line changes. Capped at 900 characters a paragraph.
+// `narrow` is true for text inside a grid or a row of columns (a card's text), which is exempt from the short end of the band.
 export const MEASURE_PROBE = () => {
   const out = [];
   for (const el of document.querySelectorAll('main p, main li, main blockquote, article p, p')) {
     if (el.closest('nav, header, footer, figcaption, table, button, [aria-hidden="true"], [data-measure-skip], .sr-only')) continue;
     const cs = getComputedStyle(el);
     if (cs.display === 'none' || cs.visibility === 'hidden') continue;
+    if (el.closest('details:not([open])')) continue;   // the body of a closed disclosure is not shown
     if (out.some((o) => o.el === el)) continue;
     const counts = []; let lineTop = null, count = 0, seen = 0;
     const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
@@ -142,7 +150,13 @@ export const MEASURE_PROBE = () => {
     }
     if (count) counts.push(count);
     const name = `${el.tagName.toLowerCase()}${el.classList[0] ? '.' + el.classList[0] : ''} "${(el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 30)}"`;
-    out.push({ el, name, counts, width: Math.round(el.getBoundingClientRect().width), font: parseFloat(cs.fontSize) });
+    // text in a card grid or a row of columns is deliberately narrow: the short end of the band does not apply to it
+    let narrow = false;
+    for (let a = el.parentElement, d = 0; a && a !== document.body && d < 4 && !narrow; a = a.parentElement, d++) {
+      const s = getComputedStyle(a);
+      narrow = (s.display === 'grid' && s.gridTemplateColumns.trim().split(/\s+/).length > 1) || (s.display === 'flex' && s.flexDirection.startsWith('row') && a.children.length > 1 && s.flexWrap !== 'wrap');
+    }
+    out.push({ el, name, counts, narrow, width: Math.round(el.getBoundingClientRect().width), font: parseFloat(cs.fontSize) });
   }
   return out.map(({ el, ...rest }) => rest);
 };

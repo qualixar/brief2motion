@@ -6,7 +6,7 @@
 //   layout.text-clipped   no line of text cut off by an ancestor that hides overflow                         FAIL (ellipsis truncation: REVIEW)
 //   layout.overlap        text and actions do not collide (more than 1 px on both axes; containment is fine)  FAIL
 //   layout.tap-targets    links, buttons and fields at least 24 x 24 px                                      FAIL (primary action under 44 px on a phone: REVIEW)
-//   layout.line-length    body text runs 45 to 75 characters a line (the short end is only judged from 768)  REVIEW
+//   layout.line-length    body text runs 45 to 75 characters a line (the short end is only judged from 768, and not for text in columns or cards)  REVIEW
 //   layout.focus          Tab through the first 20 stops: none entirely covered or off screen                FAIL (partly covered: REVIEW)
 // With --wireframes the pages are wireframes/<template>.html, results go to wireframes/qa.json and full-page shots to
 // wireframes/shots/ at 390 and 1440. Otherwise shots go to <out>/shots/. Exit 0 when nothing FAILs, 1 on a FAIL, 2 if it cannot run.
@@ -51,7 +51,7 @@ export async function layoutOne(page, route, w) {
   add('layout.tap-targets', small.length ? 'FAIL' : soft ? 'REVIEW' : 'PASS', { measured: primary ?? small.length, threshold: `${MIN_TAP} px minimum, ${PREFER_TAP} preferred for the primary action`, reason: small.length ? `under ${MIN_TAP} px: ${small.slice(0, 4).join('; ')}` : soft ? `the primary action "${route.primaryAction.label}" is ${primary} px tall; ${PREFER_TAP} is easier to hit on a phone` : `every target is at least ${MIN_TAP} px${primary !== null ? `; primary action ${primary} px` : ''}` });
 
   const paras = await page.evaluate(MEASURE_PROBE), odd = [];
-  for (const p of paras) { const n = typicalLineLength(p.counts); if (n !== null && (n > MEASURE.hi || (w >= 768 && n < MEASURE.lo))) odd.push(`${p.name} ${n} characters`); }
+  for (const p of paras) { const n = typicalLineLength(p.counts); if (n !== null && (n > MEASURE.hi || (w >= 768 && !p.narrow && n < MEASURE.lo))) odd.push(`${p.name} ${n} characters`); }
   add('layout.line-length', odd.length ? 'REVIEW' : 'PASS', { measured: odd.length, threshold: `${MEASURE.lo}-${MEASURE.hi} characters`, reason: odd.length ? `outside the band: ${odd.slice(0, 3).join('; ')}` : `${paras.filter((p) => typicalLineLength(p.counts) !== null).length} paragraphs judged, all in the band${w < 768 ? ' (short lines are fine on a phone)' : ''}` });
 
   const bad = [], partly = []; let stops = 0;
@@ -78,12 +78,13 @@ export async function layoutOne(page, route, w) {
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const USAGE = 'usage: node check_layout.mjs <project-dir> [--site <dir>] [--out <dir>] [--widths 320,390,768,1440] [--wireframes] [--all] [--strict] [--json]';
+  const USAGE = 'usage: node check_layout.mjs <project-dir> [--site <dir>] [--out <dir>] [--widths 320,390,768,1440] [--themes light,dark] [--wireframes] [--all] [--strict] [--json]';
   let args;
-  try { args = parseArgs(process.argv.slice(2), { value: ['site', 'out', 'widths'], flags: ['strict', 'json', 'wireframes', 'all'] }); } catch (e) { console.error(`${e.message}\n${USAGE}`); process.exit(2); }
+  try { args = parseArgs(process.argv.slice(2), { value: ['site', 'out', 'widths', 'themes'], flags: ['strict', 'json', 'wireframes', 'all'] }); } catch (e) { console.error(`${e.message}\n${USAGE}`); process.exit(2); }
   if (args.flags.has('help')) { console.log(USAGE); process.exit(0); }
   if (!args.pos[0]) { console.error(USAGE); process.exit(2); }
   const wf = args.flags.has('wireframes'), f = projectFiles(args.pos[0], wf ? path.join(path.resolve(args.pos[0]), 'wireframes') : args.opts.site);
+  const themes = (args.opts.themes || 'light').split(',').map((x) => x.trim()).filter((x) => x === 'light' || x === 'dark');
   const widths = (args.opts.widths || Object.keys(SIZES).join(',')).split(',').map(Number).filter(Boolean);
   let doc;
   try { doc = loadRoutes(f.routes); } catch (e) { console.error(`check_layout: ${e.message}`); process.exit(2); }
@@ -96,15 +97,15 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const results = [];
   let code = 0;
   try {
-    for (const w of widths) {
+    for (const theme of themes) for (const w of widths) {
       for (const t of list) {
-        const { ctx, page } = await newPage(session.browser, { viewport: { width: w, height: SIZES[w] || 900 }, mobile: w <= 390 });
+        const { ctx, page } = await newPage(session.browser, { viewport: { width: w, height: SIZES[w] || 900 }, mobile: w <= 390, dark: theme === 'dark' });
         try {
           const r = await openTarget(page, session.base, t, { waitMotion: !wf });
-          const at = { route: t.route.id, state: t.state?.id ?? null, viewport: `${w}px`, browser: `Chrome ${session.version}` };
+          const at = { route: t.route.id, state: t.state?.id ?? null, viewport: `${w}px`, browser: `Chrome ${session.version}`, theme };
           if (!r.ok) { results.push(result('state.reached', 'FAIL', { ...at, reason: r.error })); continue; }
-          const shot = path.join(shots, `${t.id}-${w}.png`);
-          if (w === 390 || w === 1440) await page.screenshot({ path: shot, fullPage: true });
+          const shot = path.join(shots, `${t.id}-${w}${theme === 'dark' ? '-dark' : ''}.png`);
+          if (w === 390 || w === 1440) { await page.waitForTimeout(1200); await page.screenshot({ path: shot, fullPage: true }); }   // let a load animation finish: the shot shows the resting page
           for (const x of await layoutOne(page, t.route, w)) results.push({ ...x, ...at, input: x.input, evidence: w === 390 || w === 1440 ? path.relative(outDir, shot) : null });
         } finally { await ctx.close(); }
       }
@@ -113,6 +114,6 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   if (code === 2) process.exit(2);
   writeQa(outDir, 'check_layout', results, { browser: `Chrome ${session.version}` });
   if (args.flags.has('json')) console.log(JSON.stringify(results, null, 2));
-  else printResults(`brief2motion layout check${wf ? ' (wireframes)' : ''}`, results, `${doc.routes.length} routes, widths ${widths.join(', ')}${args.flags.has('all') ? '' : '  (PASS lines hidden; --all shows them)'}`, args.flags.has('all') ? null : (r) => r.outcome !== 'PASS');
+  else printResults(`brief2motion layout check${wf ? ' (wireframes)' : ''}`, results, `${doc.routes.length} routes, widths ${widths.join(', ')}, themes ${themes.join(', ')}${args.flags.has('all') ? '' : '  (PASS lines hidden; --all shows them)'}`, args.flags.has('all') ? null : (r) => r.outcome !== 'PASS');
   process.exit(passes(results, { strict: args.flags.has('strict') }) ? 0 : 1);
 }
