@@ -17,7 +17,7 @@ step() { if "${@:2}" >/dev/null 2>&1; then ok "$1"; else bad "$1"; fi; }
 for f in $S/scripts/*.sh tests/*.sh; do step "bash -n $f" bash -n "$f"; done
 for f in $S/scripts/*.mjs $S/kit/*.js $T/*.js $E/config.js tests/*.mjs tests/browser/*.mjs examples/*/*.js examples/*/tools/*.mjs; do step "node --check $f" node --check "$f"; done
 for f in examples/*/tools/*.py; do step "python3 parses $f" python3 -I -c "import ast,sys; ast.parse(open('$f').read())"; done
-for t in check_site capture_site route strip_tune; do step "$t --help exits 0" node $S/scripts/$t.mjs --help; done
+for t in check_site capture_site route strip_tune check_links; do step "$t --help exits 0" node $S/scripts/$t.mjs --help; done
 step "python3 parses serve.py" python3 -I -c "import ast,sys; ast.parse(open('$S/scripts/serve.py').read())"
 step "check_motion --help exits 0" node $S/scripts/check_motion.mjs --help
 if [[ "$(uname -s)" == Darwin ]] && command -v swiftc >/dev/null 2>&1; then step "swiftc -parse cutout.swift" swiftc -parse $S/scripts/cutout.swift; fi
@@ -63,6 +63,11 @@ if curl -fsI --max-time 8 https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min
   got="sha384-$(curl -fsL --max-time 30 "$tp_url" | openssl dgst -sha384 -binary | openssl base64 -A)"
   [[ -n "$tp_url" && "$got" == "$tp_sri" ]] && ok "SRI matches Tweakpane in kit/tune.js" || bad "SRI wrong for the Tweakpane file in kit/tune.js"
 else echo "skip  SRI check (cdn.jsdelivr.net not reachable)"; fi
+
+# 4c. every link in the curated reference page answers (network; bot checks that stop scripts but not people are allowed)
+if curl -fsI --max-time 8 https://developer.mozilla.org/ >/dev/null 2>&1; then
+  step "web-references.md: no dead links (check_links.mjs)" node $S/scripts/check_links.mjs $S/references/web-references.md
+else echo "skip  link check (network not reachable)"; fi
 
 # 5. nothing personal or secret ships (the pattern is split in pieces so this file does not match itself)
 PRIV="varunpra""tap|/Use""rs/|claude-50""1|@gm""ail|BEGIN [A-Z ]*PRIVATE KEY|sk-[A-Za-z0-9]{20,}"
