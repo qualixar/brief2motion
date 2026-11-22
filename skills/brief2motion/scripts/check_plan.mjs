@@ -12,6 +12,7 @@
 //   plan.states-declared    a form, search or checkout route declares the states it can be in
 //   plan.wireframes         each template has a wireframe and the primary action is on it
 //   plan.links-built        (needs site/) every declared link exists in the built page; every internal href lands somewhere
+//   plan.dev-panel          (needs site/) the dev-only ?tune panel (kit/tune.js, tune blocks) is not in the built site
 // Outcomes: PASS, FAIL, REVIEW (a person should look), PENDING (nothing to check yet, such as a site not built).
 // The run's verdict (_design.mjs verdict): FAIL on any FAIL or when nothing was checked (exit 1); INCOMPLETE when
 // something is PENDING (no evidence yet), never printed as PASS (exit 0, 1 with --strict); PASS otherwise (exit 0, 1 with
@@ -21,6 +22,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs, loadRoutes, loadJson, readText, projectFiles, homeOf, routeFile, mdTable, mdSections, wireframeFile, result, writeQa, passes, printResults } from './_design.mjs';
 import { hrefs } from './_html.mjs';
+import { findDevTools } from './strip_tune.mjs';
 
 const PLACEHOLDER = /^(|-|\?|tbd|todo|n\/a|na|none|unknown|\.\.\.|xxx)$/i;
 const SOURCE_FORM = /^(drafted|brief|owner|measured|https?:|doc|spec|file|source|supplied|contract)/i;
@@ -167,6 +169,9 @@ export function planChecks(project) {
       }
       for (const to of r.links) { const t = byId.get(to); if (t && ![...targets].some((p) => p === t.path)) problems.push(`${r.id}: declares a link to ${to} but ${rel(file, f.site)} has none`); }
     }
+    // the dev-only ?tune panel must not ship; check_site finds it too, but a site-mode run may never call check_site
+    const dev = findDevTools(f.site);
+    out.push(result('plan.dev-panel', dev.length ? 'FAIL' : 'PASS', { evidence: rel(f.site, f.root) + '/', measured: dev.length, reason: dev.length ? `the dev-only tuning panel is still in the site: ${dev.slice(0, 4).map((d) => `${d.file} (${d.why})`).join('; ')}. Run strip_tune.mjs site` : 'no tuning panel in the built site' }));
     out.push(result('plan.links-built', problems.length ? 'FAIL' : 'PASS', { evidence: rel(f.site, f.root) + '/', reason: [...new Set(problems)].join('; ') || 'every declared link is in the built pages and no internal link is broken' }));
   }
   return out;

@@ -66,3 +66,10 @@ test('routes.json fields of the wrong type are refused with a message, not a sta
   const s = runChecker('build_sitemap.mjs', [d], { json: false });
   assert.equal(s.status, 2); assert.match(s.stderr, /"links" must be a list/); assert.doesNotMatch(s.stderr, /TypeError|at file:/);
 });
+test('check_plan FAILs a built site that still carries the dev-only tuning panel', () => {
+  const d = copy(['plan', 'pass'], 'tune');
+  assert.equal(one(planChecks(d), 'plan.dev-panel').outcome, 'PASS');
+  fs.mkdirSync(path.join(d, 'site', 'kit'), { recursive: true }); fs.writeFileSync(path.join(d, 'site', 'kit', 'tune.js'), 'export const tune = () => {};');
+  const r = one(planChecks(d), 'plan.dev-panel');
+  assert.equal(r.outcome, 'FAIL'); assert.match(r.reason, /kit\/tune\.js .*strip_tune\.mjs/);
+});

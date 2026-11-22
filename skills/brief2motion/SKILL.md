@@ -1,6 +1,6 @@
 ---
 name: brief2motion
-description: Turn a plain brief into a website with professional motion, measured in a real browser. Use when asked to build or animate a website, landing page, product launch page, portfolio, scroll story or data story; to add a hero animation, scroll animation, scrollytelling, parallax, page transitions, kinetic typography, micro-interactions, a 3D product viewer or turntable, particles or dust that form a product, logo, face or words, SVG or Lottie or Rive animation; to pick a visual style such as neubrutalism, glassmorphism, neumorphism, claymorphism, bento, Swiss or minimal; or to "make my site feel alive"; or to design a whole site or a page that must convert (site mode: discovery, content, routes, wireframes, tokens, design, then layout, accessibility, journey and meta checks). Chooses the motion stack (plain CSS and JavaScript, GSAP with ScrollTrigger and Lenis, Motion for vanilla or React, three.js or React Three Fiber, the View Transitions API, SVG, Lottie, Rive) and the style from the brief and says why, builds the page, serves it at a localhost address, then checks frame rate, phone layout, reduced motion, keyboard focus, contrast, no-WebGL and no-JavaScript fallbacks, fixes what fails, and can hand the page to brief2mp4 to become a video.
+description: Turn a plain brief into a website with professional motion, measured in a real browser. Use to build or animate a website, landing page, portfolio, scroll or data story, or a whole site or page that must convert (site mode: discovery, content, routes, wireframes, tokens, design, then layout, accessibility, journey and meta checks); to add a hero or scroll animation, scrollytelling, parallax, page transitions, kinetic type, micro-interactions, a 3D product viewer, particles or dust that form a logo, face or words, SVG, Lottie or Rive; to pick a style such as neubrutalism, glassmorphism, neumorphism, claymorphism, bento, Swiss or minimal; or to "make my site feel alive". Picks the stack (CSS and JavaScript, GSAP with ScrollTrigger and Lenis, Motion, three.js or React Three Fiber, SVG, Lottie, Rive) and the style with reasons, builds and serves the page, checks frame rate, phone layout, reduced motion, focus, contrast and no-WebGL and no-JS fallbacks, fixes what fails, and can hand it to brief2mp4 for video.
 ---
 
 # brief2motion 1.0.0
@@ -148,14 +148,25 @@ Use it when the brief asks for a site with several pages, or for one page whose 
 | 1. Discovery: visitors, their tasks, the owner's goal and how it is observed, constraints, open questions with the assumption taken | `DISCOVERY.md` | `check_plan.mjs` |
 | 2. Content: every word per route; each claim has an ID and a source, or is marked DRAFTED | `CONTENT.md` | `check_plan.mjs` |
 | 3. Routes: id, path, parent, template, title, description, primary action, states, links | `routes.json`, `SITEMAP.md` (`build_sitemap.mjs`) | `check_plan.mjs`, `check_meta.mjs` |
-| 4. Wireframes: phone-first grey boxes with real copy and a reachable primary action | `wireframes/<template>.html` | `check_layout.mjs --wireframes` |
-| 5. Tokens: primitives, light and dark roles, text pairs | `tokens.json` -> `site/tokens.css` (`build_tokens.mjs`) | the same script: references, cycles, AA contrast |
+| 4. Wireframes: phone-first grey boxes with real copy and a reachable primary action | `wireframes/<template>.html` (`index.html` when there is one template) | `check_layout.mjs --wireframes` (a missing file FAILs) |
+| 5. Tokens: primitives, light and dark roles, text pairs | `tokens.json` -> `site/tokens.css` (`build_tokens.mjs`) | the same script: references, cycles, AA contrast for every text pair declared in `tokens.json` (only declared pairs are measured, so declare every pair the design uses) |
 | 6. Visual design: one idea from the subject, type, grid, colour, imagery, the one memorable thing; then the router and `SPEC.md` as before | `DESIGN.md`, `ASSETS.json` | `check_plan.mjs` (rights records) |
 | 7. Motion: per movement its intent, trigger, states, interruption, reduced form, pattern page | `MOTION.md` | `check_site.mjs` |
 | 8. Build: semantic HTML first, motion on top, with steps 3 to 5 above | `site/` | everything |
 | 9. Checks and a second reader | `journeys.json`, `check/qa.json`, `REVIEW.md` | `check_layout`, `check_a11y`, `check_journeys`, `check_meta`, `check_site` |
 
 Rules: the brief's own facts are the only facts (no invented reviews, logos, customers or numbers: `check_plan` fails a drafted claim that looks like proof and sends a drafted figure to review); phone first; states (empty, loading, error, success) are declared in `routes.json` and each one is loaded by the checkers. Read `references/page-blueprints.md` for the page type, `references/design-review.md` for the second reader, and sections 10 to 15 of `design-fundamentals.md` for the numbers.
+
+The commands, from the project root (`S` is this skill's `scripts` folder; `templates/site-mode/README.md` says what each one reads):
+
+```bash
+node $S/build_sitemap.mjs . && node $S/build_tokens.mjs tokens.json --qa check
+node $S/check_plan.mjs .                  # stages 1 to 4; after the build also links and the dev panel
+node $S/check_layout.mjs . --wireframes   # stage 4
+node $S/check_layout.mjs . --themes light,dark && node $S/check_a11y.mjs . --themes light,dark
+node $S/check_journeys.mjs . && node $S/check_meta.mjs .
+node $S/check_site.mjs site --out check   # motion, fallbacks, weight: site mode does not replace it
+```
 
 Every checker writes records into `check/qa.json`: `PASS` (measured, within threshold), `FAIL` (blocks), `REVIEW` (a person must look) or `PENDING` (no evidence yet: a site not built, a sign-up that ends at a fixture, axe-core offline). Each run ends with `RESULT: PASS`, `FAIL` or `INCOMPLETE`. INCOMPLETE means nothing failed but some checks are PENDING, so it is not a pass: say so, and do not report that stage as checked. Exit 1 means a FAIL (or nothing was checked); exit 0 covers both PASS and INCOMPLETE, so read the RESULT line, or run with `--strict`, which also exits 1 on PENDING and REVIEW. qa.json carries the same `verdict`, `complete: false` while anything is PENDING, and marks records measured on an older build of `site/` as stale. `check_a11y.mjs` fetches axe-core 4.14.1 (MPL-2.0) from cdn.jsdelivr.net when it runs, verifies its hash and injects it into the checker's own page; the site never carries it. A green report does not replace the second reader or a screen-reader pass.
 
