@@ -59,8 +59,8 @@ async function start() {
 
   // 2. the alert travels along the live line to the person on call (CSS motion path, driven by Motion)
   const pulse = $('.route-pulse'), live = $('.route-live');
-  live.setAttribute('pathLength', '1'); live.style.strokeDasharray = '1';
-  animate(live, { strokeDashoffset: [1, 0] }, { duration: 1.1, delay: 1.3, ease: 'easeInOut' });
+  const liveLen = live.getTotalLength(); live.style.strokeDasharray = liveLen;   // the svg-draw rule: measured length
+  animate(live, { strokeDashoffset: [liveLen, 0] }, { duration: 1.1, delay: 1.3, ease: 'easeInOut' });
   animate(pulse, { offsetDistance: ['0%', '100%'], scale: [0.6, 1] }, { duration: 1.1, delay: 1.3, ease: 'easeInOut' });
   animate('.node-b', { scale: [1, 1.08, 1] }, { duration: 0.5, delay: 2.35, type: spring, bounce: 0.5 });
   animate('.node', { opacity: [0, 1] }, { duration: 0.5, delay: stagger(0.08, { startDelay: 1.0 }) });

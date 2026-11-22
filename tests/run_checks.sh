@@ -17,7 +17,7 @@ step() { if "${@:2}" >/dev/null 2>&1; then ok "$1"; else bad "$1"; fi; }
 for f in $S/scripts/*.sh tests/*.sh; do step "bash -n $f" bash -n "$f"; done
 for f in $S/scripts/*.mjs $S/kit/*.js $T/*.js $E/config.js tests/*.mjs tests/browser/*.mjs examples/*/*.js examples/*/tools/*.mjs; do step "node --check $f" node --check "$f"; done
 for f in examples/*/tools/*.py; do step "python3 parses $f" python3 -I -c "import ast,sys; ast.parse(open('$f').read())"; done
-for t in check_site capture_site route; do step "$t --help exits 0" node $S/scripts/$t.mjs --help; done
+for t in check_site capture_site route strip_tune check_links; do step "$t --help exits 0" node $S/scripts/$t.mjs --help; done
 step "python3 parses serve.py" python3 -I -c "import ast,sys; ast.parse(open('$S/scripts/serve.py').read())"
 step "check_motion --help exits 0" node $S/scripts/check_motion.mjs --help
 if [[ "$(uname -s)" == Darwin ]] && command -v swiftc >/dev/null 2>&1; then step "swiftc -parse cutout.swift" swiftc -parse $S/scripts/cutout.swift; fi
@@ -41,7 +41,7 @@ done
 # 3b. every example is complete: the unchanged kit, its brief, a passing report, and a page that reports its motion state
 for d in examples/*/; do
   n="$(basename "$d")"
-  if [[ -d "$d/kit" ]]; then diff -rq "$S/kit" "$d/kit" >/dev/null 2>&1 && ok "example $n carries the unchanged kit" || bad "example $n: kit/ differs from $S/kit"; fi
+  if [[ -d "$d/kit" ]]; then diff -rq -x tune.js "$S/kit" "$d/kit" >/dev/null 2>&1 && ok "example $n carries the unchanged kit" || bad "example $n: kit/ differs from $S/kit"; fi
   [[ -s "$d/BRIEF.md" && -s "$d/README.md" ]] && ok "example $n has BRIEF.md and README.md" || bad "example $n is missing BRIEF.md or README.md"
   python3 -I -c "import json,sys; r=json.load(open('$d/site-report.json')); sys.exit(0 if r['pass'] is True and all(c['pass'] for c in r['checks']) and len(r['checks'])>=27 else 1)" 2>/dev/null && ok "example $n has a passing site-report.json" || bad "example $n: site-report.json is missing or not a pass"
   grep -rqE "signal\(|dataset\.motion" "$d"*.js 2>/dev/null && ok "example $n reports its motion state" || bad "example $n never sets <html data-motion>"
@@ -58,7 +58,18 @@ if curl -fsI --max-time 8 https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min
     got="sha384-$(curl -fsL --max-time 30 "$url" | openssl dgst -sha384 -binary | openssl base64 -A)"
     [[ "$got" == "$sri" ]] && ok "SRI matches $(basename "$url")" || bad "SRI wrong for $url"
   done < <(sed -n 's/.*<script defer src="\([^"]*\)" integrity="\([^"]*\)".*/\1 \2/p' $T/index.html examples/tidewater/index.html | sort -u)
+  # the dev-only tuning panel is pinned with a hash too (kit/tune.js fetches it with integrity checking)
+  tp_url="$(sed -n "s/.*url: '\([^']*\)'.*/\1/p" $S/kit/tune.js | head -1)"; tp_sri="$(sed -n "s/.*integrity: '\([^']*\)'.*/\1/p" $S/kit/tune.js | head -1)"
+  got="sha384-$(curl -fsL --max-time 30 "$tp_url" | openssl dgst -sha384 -binary | openssl base64 -A)"
+  [[ -n "$tp_url" && "$got" == "$tp_sri" ]] && ok "SRI matches Tweakpane in kit/tune.js" || bad "SRI wrong for the Tweakpane file in kit/tune.js"
 else echo "skip  SRI check (cdn.jsdelivr.net not reachable)"; fi
+
+# 4c. every link in the curated reference page answers (network; bot checks that stop scripts but not people are allowed).
+# Opt-in (B2M_CHECK_LINKS=1), run before every release: 130+ outside sites must not turn CI red on unrelated changes.
+if [[ "${B2M_CHECK_LINKS:-0}" != 1 ]]; then echo "skip  link check (set B2M_CHECK_LINKS=1; run before a release)"
+elif curl -fsI --max-time 8 https://developer.mozilla.org/ >/dev/null 2>&1; then
+  step "web-references.md: no dead links (check_links.mjs)" node $S/scripts/check_links.mjs $S/references/web-references.md
+else echo "skip  link check (network not reachable)"; fi
 
 # 5. nothing personal or secret ships (the pattern is split in pieces so this file does not match itself)
 PRIV="varunpra""tap|/Use""rs/|claude-50""1|@gm""ail|BEGIN [A-Z ]*PRIVATE KEY|sk-[A-Za-z0-9]{20,}"

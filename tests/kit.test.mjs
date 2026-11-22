@@ -6,6 +6,7 @@ import { clamp, lerp, invLerp, mapRange, damp, ease, sceneProgress, viewProgress
 import { segment, groupLines } from '../skills/brief2motion/kit/split-text.js';
 import { loadOrder, nearestLoaded, frameAt, fitRect } from '../skills/brief2motion/kit/image-sequence.js';
 import { valueAt, formatNumber } from '../skills/brief2motion/kit/counter.js';
+import { dashOffset } from '../skills/brief2motion/kit/svg-draw.js';
 
 test('clamp, lerp, invLerp, mapRange', () => {
   assert.equal(clamp(1.4), 1); assert.equal(clamp(-2), 0); assert.equal(clamp(7, 0, 10), 7);
@@ -71,4 +72,9 @@ test('counter: value over time and its text', () => {
   assert.equal(formatNumber(1234.5, { decimals: 1, suffix: ' ppm' }), '1,234.5 ppm');
   assert.equal(formatNumber(35.2, { decimals: 1, suffix: '%' }), '35.2%');
   assert.equal(formatNumber(7, { prefix: '$' }), '$7');
+});
+
+test('dashOffset: the measured length minus what is drawn, clamped, never NaN', () => {
+  assert.equal(dashOffset(250, 0), 250); assert.equal(dashOffset(250, 1), 0); assert.equal(dashOffset(250, 0.4), 150);
+  assert.equal(dashOffset(250, 7), 0); assert.equal(dashOffset(250, -3), 250); assert.equal(dashOffset(250, NaN), 250);
 });

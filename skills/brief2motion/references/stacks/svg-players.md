@@ -8,18 +8,20 @@ Worked examples: `examples/sprout/` (an SVG plant that draws and grows, three Lo
 
 ### A line that draws itself
 
-Give the shape `pathLength="1"`. A dash of length 1 then covers it whatever its real length, and progress maps straight onto `stroke-dashoffset`. `kit/svg-draw.js` wraps this.
+One rule, the same in brief2mp4: measure the real length with `getTotalLength()`, set `stroke-dasharray` to it, and move `stroke-dashoffset` from that length to 0. `kit/svg-draw.js` does exactly this.
 
 ```js
 import { prepareDraw, animateDraw, drawTo } from './kit/svg-draw.js';
-const lines = prepareDraw('.stem, .leaf-vein');                 // sets pathLength, dash 1, offset 1 (0 with reduced motion)
+const lines = prepareDraw('.stem, .leaf-vein');                 // measures each shape, dash = its length, offset = length (0 with reduced motion)
 animateDraw(lines, { duration: 1500, stagger: 150 });           // play once, one after another
 drawTo(lines[0], progress);                                     // or drive it from scroll, 0 to 1
 ```
 
-Use `vector-effect: non-scaling-stroke` so the line keeps its width when the SVG is stretched.
+Two things not to do. Do not use `pathLength="1"`: it draws in a live browser, but in a frame-by-frame render (brief2mp4's HyperFrames) it did not draw progressively, and with `vector-effect: non-scaling-stroke` Chrome draws the wrong amount (measured, 22 Nov 2026). Do not put `vector-effect: non-scaling-stroke` on a line you draw: the dash then runs in screen pixels, so the length you measured is wrong. Keep the SVG's aspect ratio (the default `preserveAspectRatio`) and the stroke scales evenly with the drawing; lengths are in the SVG's own units, so no re-measuring is needed after a resize. Measure again only if the path's `d` changes. The one exception is the dust engine's flight trail in `templates/site/flight.js`, which sits in a non-uniformly stretched layer and stays byte-identical.
 
 ### Shapes that grow from a point
+
+The overshoot below (`1.4` in the curve) is a playful exception for a plant that grows; a serious page uses a plain `cubic-bezier(.33, 1, .68, 1)` (`motion-doctrine.md`, rule 1).
 
 ```css
 .leaf { transform-box: view-box; transform-origin: 210px 360px; }    /* the point where the leaf meets the stem, in viewBox units */

@@ -31,6 +31,8 @@ node <this skill's folder>/scripts/route.mjs BRIEF.md
 
 It prints a stack, a style, the phrases in the brief that led there, and the reference files to read. It is a keyword scorer and has never seen the product, so treat it as a first proposal: read the brief again, agree or overrule, and write the choice and the reason in `SPEC.md`. The brief's own words always win. If it names a library, a style or colours, use those.
 
+It also prints **patterns**: recipe pages in `references/patterns/` that match the motion words in the brief (a hero sequence, a marquee, a pinned scene, a magnetic button, a page transition, a 3D product that turns as you scroll, and 21 more; the index is `references/patterns/README.md`). Each pattern says when to use it and when not to, the stack, a minimal sketch written for the kit, its performance and accessibility budget, its reduced-motion form and how the checkers verify it. `references/web-references.md` is the verified library of galleries, component libraries, platform docs and canonical demos to study before you build (study, never copy), and `references/motion-doctrine.md` holds the timing and easing rules every motion plan follows. A pattern is a starting sketch, not a template: rewrite it for the brief's words.
+
 The stacks, and when each is right:
 
 | The brief wants | Stack | Read | Study |
@@ -50,7 +52,7 @@ Use the lightest stack that does the job, and one stack per page where you can. 
 
 The style: `references/styles.md` indexes 32 visual styles and approaches (neubrutalism, glassmorphism, Liquid Glass-inspired, neumorphism, claymorphism, skeuomorphism, flat, Material, Swiss, minimalism, maximalism, bento, editorial, Y2K, Frutiger Aero, vaporwave, synthwave, Memphis, Art Deco, cyberpunk, glitch, aurora, grain, duotone, dark-first, isometric and more). Each has its own page with tokens, tested CSS, the motion that fits, accessibility traps and sources. Open only the page for the style you chose. A style is a starting point: a brand's own colours and type replace its tokens. If the brief asks for a style that is not on the list, check the "names that are not styles" section before inventing one.
 
-Always read, whatever the stack: `references/design-fundamentals.md` (hierarchy, type, space, colour, landing structure, motion principles), `references/accessibility.md` and `references/performance.md`.
+Always read, whatever the stack: `references/design-fundamentals.md` (hierarchy, type, space, colour, landing structure, motion principles), `references/motion-doctrine.md` (smooth over bouncy, vary eases and durations, build and breathe and resolve, enter slower than exit, transitions that mean something, the one SVG-draw rule), `references/accessibility.md` and `references/performance.md`.
 
 ## 2. Spec: write SPEC.md before any code
 
@@ -58,7 +60,7 @@ Copy `templates/SPEC.md` and fill it in:
 
 1. **Stack and style**, with one sentence each on why, from step 1.
 2. **Design plan**: four to six named colours with their contrast pairs checked, the typefaces and their roles, a one-line layout idea, and the one thing on the page that should be memorable. If any part reads like what you would produce for any similar page, change it.
-3. **Motion plan**: three lists. On load, on scroll, on input. Each item says what moves and why. If you cannot say why, cut it. One orchestrated moment beats a fade on every section.
+3. **Motion plan**: three lists. On load, on scroll, on input. Each item says what moves and why, which pattern page it comes from if any, and what it does with reduced motion. If you cannot say why, cut it. One orchestrated moment beats a fade on every section.
 4. **Copy**: every word on the page, exactly as the brief gives it. If the brief gives none, write plain copy from what it says and mark it as drafted. Never invent reviews, ratings, customer names, logos or numbers. Made-up examples say that they are made up.
 5. **Done when**: one checkable line per requirement, each naming the number or screenshot that will prove it.
 
@@ -81,6 +83,8 @@ What every page has, whatever the stack (the checker tests each one):
 - Libraries from `cdn.jsdelivr.net` only, at pinned versions, loaded after the text is on screen. System font stacks unless the brief supplies a font.
 - A motion plan as a comment at the top of the script, matching SPEC.md.
 - Nothing wider than a 320 px screen, and tap targets of at least 24 px.
+
+Tuning by hand (optional, dev only): `kit/tune.js` opens a Tweakpane panel for easing, duration, stagger and colour when the address ends in `?tune`, and "Copy values" gives the numbers back as JSON to paste into the code. Wrap the loader line between `/* tune:start */` and `/* tune:end */`. It is never part of the shipped page: before step 4 run `node <this skill's folder>/scripts/strip_tune.mjs site`, which removes `kit/tune.js` and every marked block, and `check_site.mjs` fails a page that still has either. Examples do not carry `tune.js`; copy it from `kit/` when you want it.
 
 Images: only ones the user owns or that carry a licence allowing reuse. Put the credit in `site/CREDITS.md` and in REPORT.md. Prefer drawing in code (SVG, canvas, three.js primitives) to borrowing. Size pictures for the 1.5 MiB budget.
 
@@ -106,6 +110,7 @@ For a site with several pages add `--pages about.html,work/a.html`. For the dust
 | Basics | one `<h1>`, `lang`, real title and description, zoom allowed, `alt` text, `<main>` and a skip link |
 | Page weight from the project, per page | 1.5 MiB or less |
 | Third-party requests | `cdn.jsdelivr.net` only |
+| Dev tuning panel | not in the shipped page: no `kit/tune.js`, no tune block, no Tweakpane request |
 | Console errors, every run | 0 |
 
 The frame numbers only mean something on a machine with a real GPU; elsewhere pass `--no-perf`. Then open the screenshots in `check/shots/` and look at them against every **Done when** line and against the design plan. A checker cannot see that a layout is dull, that text sits on a busy picture, or that the hero says nothing. Text over pictures, gradients and canvas is not measured for contrast: look at it.
@@ -136,4 +141,4 @@ bash <this skill's folder>/scripts/to_video.sh site final.mp4 --seconds 12      
 
 ## Licences in one paragraph
 
-This skill's code is MIT. Sites it builds load libraries from a CDN at pinned versions and bundle none of them: three.js, Lenis, Motion, React, lottie-web, the Rive runtime and htm are MIT or Apache-2.0; D3 is ISC; GSAP 3.15.1 is free under GSAP's own "no charge" licence, which allows commercial use and AI-written GSAP code but not use inside no-code animation builders that compete with Webflow. Pages use system fonts and send no request to a font service. `references/licences.md` has the detail and the notice to write into each project.
+This skill's code is MIT. Sites it builds load libraries from a CDN at pinned versions and bundle none of them: three.js, Lenis, Motion, React, lottie-web, the Rive runtime and htm are MIT or Apache-2.0; D3 is ISC; Tweakpane (the dev-only `?tune` panel, never shipped) is MIT; GSAP 3.15.1 is free under GSAP's own "no charge" licence, which allows commercial use and AI-written GSAP code but not use inside no-code animation builders that compete with Webflow. Pages use system fonts and send no request to a font service. `references/licences.md` has the detail and the notice to write into each project.

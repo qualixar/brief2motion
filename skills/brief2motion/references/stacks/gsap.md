@@ -2,6 +2,8 @@
 
 Use this for choreography: several things moving in a set order, scenes pinned and scrubbed by scroll, sideways galleries, text that splits and sets. Since 2025 all of GSAP is free, the former bonus plugins included (SplitText, DrawSVG, MorphSVG, Flip, ScrollSmoother). It is free under GSAP's own "no charge" licence, not an open-source one: load it from the CDN or npm, do not copy its files into a repository. `licences.md` has the terms.
 
+Read `references/motion-doctrine.md` for the easing and timing rules every tween below follows.
+
 Worked example: `examples/tidewater/` (pinned image sequence, sideways gallery, SplitText, DrawSVG, Lenis). The dust template (`templates/site/`) uses it for its scroll scene too.
 
 ## Loading (no build step)
@@ -97,13 +99,15 @@ if (wide) {
 
 On phones, and with reduced motion, leave it as a native row: `overflow-x: auto; scroll-snap-type: x mandatory`. Function-based values with `invalidateOnRefresh` recompute after a resize.
 
-### A line that draws once, then dots that pop
+### A line that draws once, then dots that appear
 
 ```js
 gsap.timeline({ scrollTrigger: { trigger: '.tide figure', start: 'top 70%', once: true } })
   .from('.curve', { drawSVG: '0%', duration: 2.4, ease: 'power1.inOut' })
-  .from('.marks circle', { scale: 0, duration: 0.5, stagger: 0.18, ease: 'back.out(2.5)' }, 0.5);
+  .from('.marks circle', { scale: 0, autoAlpha: 0, duration: 0.6, stagger: { amount: 0.5 }, ease: 'power3.out' }, 0.5);
 ```
+
+The dots arrive and settle: `power3.out`, one stagger that sums to half a second whatever the count (`motion-doctrine.md`, rules 1 and 3). Overshoot (`back.out(1.4)`) is for one playful moment a brief asks for, such as a toy or a confetti pop, and is never the default. `drawSVG` measures the path itself; for a line you draw by hand, follow the one SVG rule in `stacks/svg-players.md`.
 
 ### Layout changes (Flip)
 

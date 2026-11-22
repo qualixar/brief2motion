@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Tune panel test page for brief2motion</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A test page: one number is tuned with the dev-only panel that loads when the address has ?tune.">
+  <link rel="stylesheet" href="kit/kit.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <main id="main"><h1>Tune panel</h1><p id="out">duration 0.7</p></main>
+  <script type="module">
+    import { signal } from './kit/motion-core.js';
+    const P = { duration: 0.7, ease: 'power3.out', tint: '#1b4dff' };
+    const show = () => { document.getElementById('out').textContent = `duration ${P.duration} ${P.ease} ${P.tint}`; };
+    window.__changes = [];
+    /* tune:start */
+    if (new URLSearchParams(location.search).has('tune')) {
+      import('./kit/tune.js').then(({ tune }) => tune(P, { duration: { min: 0.2, max: 2 }, ease: { options: ['power3.out', 'expo.out'] } }, { onChange: (p, k) => { window.__changes.push(k); show(); } }).then((r) => { window.__pane = r.pane; }));
+    }
+    /* tune:end */
+    show(); signal('ready');
+  </script>
+</body>
+</html>

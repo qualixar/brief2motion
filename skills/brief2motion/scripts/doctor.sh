@@ -101,7 +101,7 @@ fi
 
 # internet (warn only): the page loads three.js, GSAP, Lenis from cdn.jsdelivr.net
 if command -v curl >/dev/null 2>&1; then
-  if curl -fsI --max-time 8 https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js >/dev/null 2>&1; then row cdn 0 ok "cdn.jsdelivr.net reachable"
+  if curl -fsI --max-time 8 https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js >/dev/null 2>&1; then row cdn 0 ok "cdn.jsdelivr.net reachable"
   else row cdn 0 warn "cdn.jsdelivr.net not reachable. The page loads three.js, GSAP and Lenis from it. Offline, save the pinned files next to the site and point the script tags at them (see references/licences.md)"; fi
 else row cdn 0 warn "curl not found, could not test cdn.jsdelivr.net"; fi
 

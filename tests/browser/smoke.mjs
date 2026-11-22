@@ -164,12 +164,40 @@ const tests = {
     const px = await painted(t.page, 'canvas'); await t.close(); fs.rmSync(dir, { recursive: true, force: true });
     return [px > 500 && t.errors.length === 0, `${px} painted pixels, errors ${t.errors.length}${t.errors.length ? ': ' + t.errors[0].slice(0, 120) : ''}`];
   },
+  // the dev-only tuning panel: absent from a normal load, present with ?tune, edits reach the page, a blocked CDN is harmless
+  async tune() {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'b2m-tune-'));
+    fs.cpSync(path.join(ROOT, 'tests', 'fixtures', 'tune'), dir, { recursive: true }); fs.cpSync(KIT, path.join(dir, 'kit'), { recursive: true });
+    try {
+      const asked = [];
+      const plain = await open(dir); plain.page.on('request', (r) => /tweakpane/.test(r.url()) && asked.push(r.url()));
+      await plain.page.reload(); await sleep(800);
+      const noPane = await plain.page.locator('.tp-rotv').count(); await plain.close();
+      const srv = await serveDir(dir);
+      const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } }); const page = await ctx.newPage(); const errors = [];
+      page.on('pageerror', (e) => errors.push(e.message)); page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
+      await page.goto(srv.url + '?tune'); await page.waitForSelector('.tp-rotv', { timeout: 20000 });
+      const rows = await page.locator('.tp-rotv .tp-lblv').count();
+      const slider = page.locator('.tp-rotv input.tp-txtv_i').first(); await slider.fill('1.5'); await slider.press('Enter'); await sleep(200);
+      const out = await page.locator('#out').textContent(); const changes = await page.evaluate(() => window.__changes.length);
+      await ctx.close();
+      const blocked = await browser.newContext({ viewport: { width: 1280, height: 800 } }); const bp = await blocked.newPage(); const bErrors = []; const warns = [];
+      bp.on('pageerror', (e) => bErrors.push(e.message)); bp.on('console', (m) => m.type() === 'warning' && warns.push(m.text()));
+      await bp.route('**/tweakpane*/**', (r) => r.abort()); await bp.goto(srv.url + '?tune'); await sleep(1500);
+      const stillWorks = (await bp.locator('#out').textContent()) === 'duration 0.7 power3.out #1b4dff' && (await bp.locator('.tp-rotv').count()) === 0;
+      await blocked.close(); await srv.close();
+      return [noPane === 0 && asked.length === 0 && rows >= 3 && changes >= 1 && /duration 1\.5/.test(out) && errors.length === 0 && stillWorks && bErrors.length === 0 && warns.some((w) => /Tweakpane did not load/.test(w)),
+        `normal load: panel ${noPane}, requests ${asked.length}; ?tune: ${rows} rows, ${changes} change(s), page says "${out}", errors ${errors.length}; blocked CDN: page works=${stillWorks}, warned=${warns.length > 0}`];
+    } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+  },
   // the dust engine still reports its state the way every other page does
   async particles() {
     const t = await open(EX('copper-no-7')); await sleep(3500);
-    const r = await t.page.evaluate(() => ({ state: document.documentElement.dataset.motion, mode: window.__motion?.stats?.mode, drawn: window.__motion?.stats?.drawn, total: window.__motion?.stats?.total }));
+    const r = await t.page.evaluate(() => ({ state: document.documentElement.dataset.motion, mode: window.__motion?.stats?.mode, drawn: window.__motion?.stats?.drawn, total: window.__motion?.stats?.total, shed: window.__motion?.stats?.shed }));
     await t.close();
-    return [r.state === 'ready' && r.mode === 'webgl2' && r.drawn === r.total && r.total > 1000 && t.errors.length === 0, `state "${r.state}", mode ${r.mode}, ${r.drawn}/${r.total} dots, errors ${t.errors.length}`];
+    // a slow GPU (CI's software renderer) makes the engine shed dots on purpose; that is the designed response, not a fault
+    const full = r.drawn === r.total || (r.shed > 0 && r.drawn >= r.total * 0.25);
+    return [r.state === 'ready' && r.mode === 'webgl2' && full && r.total > 1000 && t.errors.length === 0, `state "${r.state}", mode ${r.mode}, ${r.drawn}/${r.total} dots, shed ${r.shed}, errors ${t.errors.length}`];
   },
 };
 

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "note": "Read by scripts/route.mjs. Each signal is a regular expression (case-insensitive) with a weight. The stack with the highest total wins; ties go to the stack listed first. Edit this file to teach the router a new phrase, then run tests/route.test.mjs.",
+  "note": "Read by scripts/route.mjs. Each signal is a regular expression (case-insensitive) with a weight. The stack with the highest total wins; ties go to the stack listed first. Edit this file to teach the router a new phrase, then run tests/route.test.mjs. The \"patterns\" list maps motion phrases to the recipe pages in references/patterns/; each pattern carries example phrases that tests/route.test.mjs must route back to it.",
   "stacks": [
     {
       "id": "particles",
@@ -605,6 +605,579 @@
         "minimalism"
       ],
       "why": "the brief asks for trust"
+    }
+  ],
+  "patterns": [
+    {
+      "id": "hero-load-sequence",
+      "name": "Hero load sequence",
+      "ref": "patterns/hero-load-sequence.md",
+      "stack": "vanilla",
+      "why": "the first screen should set itself in an ordered sequence on load",
+      "signals": [
+        [
+          "\\bhero\\b[^.]{0,50}\\b(animat\\w+|sets? itself|reveals?|intro|sequence)",
+          5
+        ],
+        [
+          "\\banimat\\w+ in on (page )?load\\b",
+          5
+        ],
+        [
+          "\\b(hero|intro) (animation|sequence|intro)\\b",
+          5
+        ],
+        [
+          "\\bfirst impression\\b",
+          4
+        ]
+      ],
+      "examples": [
+        "The hero should animate in on load, headline first.",
+        "Hero animation: the headline sets itself, then the button."
+      ]
+    },
+    {
+      "id": "text-line-reveal",
+      "name": "Text line reveal",
+      "ref": "patterns/text-line-reveal.md",
+      "stack": "gsap",
+      "why": "a headline should rise line by line from behind a mask",
+      "signals": [
+        [
+          "\\b(line by line|lines? (rise|rises|reveal|reveals)|masked (text|lines?|headline)|text reveal|headline (rises|reveals?)|rises? from behind|split ?text)\\b",
+          5
+        ],
+        [
+          "\\bkinetic (headline|type|text)\\b",
+          4
+        ]
+      ],
+      "examples": [
+        "The headline rises line by line from behind a mask.",
+        "A masked text reveal for the title."
+      ]
+    },
+    {
+      "id": "word-by-word-read",
+      "name": "Words that read themselves",
+      "ref": "patterns/word-by-word-read.md",
+      "stack": "vanilla",
+      "why": "words light up one by one as the reader scrolls past a statement",
+      "signals": [
+        [
+          "\\bwords?\\b[^.]{0,30}\\b(light|lights|highlight\\w*|fade\\w*)\\b[^.]{0,30}\\b(up|in)?\\b[^.]{0,30}\\bscroll\\w*",
+          5
+        ],
+        [
+          "\\b(reads? itself|scroll[- ]linked text|scroll[- ]reveal\\w* text|text (highlights?|lights up) as (you|i|they) scroll)\\b",
+          5
+        ],
+        [
+          "\\bmanifesto\\b",
+          3
+        ]
+      ],
+      "examples": [
+        "Words light up one by one as you scroll through our manifesto.",
+        "The paragraph reads itself as it crosses the screen."
+      ]
+    },
+    {
+      "id": "mask-reveal",
+      "name": "Mask reveal",
+      "ref": "patterns/mask-reveal.md",
+      "stack": "vanilla",
+      "why": "an image or panel should be uncovered by a moving edge",
+      "signals": [
+        [
+          "\\b(images?|pictures?|photos?|panels?|covers?)\\b[^.]{0,20}\\b(reveal\\w*|wipe\\w*|uncover\\w*)",
+          5
+        ],
+        [
+          "\\b(curtain|wipe reveal|clip[- ]path|mask reveal|masked image|clip reveal|image reveal)\\b",
+          5
+        ]
+      ],
+      "examples": [
+        "Images wipe in like a curtain as they appear.",
+        "An image reveal with a clip-path mask on the covers."
+      ]
+    },
+    {
+      "id": "number-counter",
+      "name": "Number counter",
+      "ref": "patterns/number-counter.md",
+      "stack": "vanilla",
+      "why": "a figure should count up to its real value when it scrolls into view",
+      "signals": [
+        [
+          "\\b(counts? up|counting up|count to|animated (numbers?|stats?|counters?|figures?)|number counters?|odometer|stats? (that )?(count|tick)\\w*)\\b",
+          6
+        ]
+      ],
+      "examples": [
+        "Stats that count up when they scroll into view.",
+        "Animated numbers for the three headline figures."
+      ]
+    },
+    {
+      "id": "marquee",
+      "name": "Marquee",
+      "ref": "patterns/marquee.md",
+      "stack": "vanilla",
+      "why": "a row of words or logos should drift sideways in a loop",
+      "signals": [
+        [
+          "\\b(marquee|ticker (strip|tape)|scrolling (strip|ticker|banner|text|logos?)|logo (wall|strip) that moves|infinite (text|logos?|strip))\\b",
+          6
+        ]
+      ],
+      "examples": [
+        "A marquee of partner names under the hero.",
+        "A scrolling logo strip between sections."
+      ]
+    },
+    {
+      "id": "step-scrollytelling",
+      "name": "Step scrollytelling",
+      "ref": "patterns/step-scrollytelling.md",
+      "stack": "vanilla",
+      "why": "text steps scroll past while one sticky graphic changes state",
+      "signals": [
+        [
+          "\\b(scrollytelling|scroll[- ]?story|scroll[- ]?telling)\\b",
+          4
+        ],
+        [
+          "\\b(data story|chart (that )?(changes|updates)|step[- ]by[- ]step)\\b[^.]{0,40}\\bscroll",
+          5
+        ],
+        [
+          "\\bscroll\\w*\\b[^.]{0,40}\\b(chart (changes|updates)|chart that changes)",
+          5
+        ],
+        [
+          "\\bdata[- ]story\\b",
+          5
+        ]
+      ],
+      "examples": [
+        "A scrollytelling page where the chart changes step by step as you scroll.",
+        "Data story: the chart updates as each paragraph reaches the middle."
+      ]
+    },
+    {
+      "id": "pinned-scene-scrub",
+      "name": "Pinned scene, scrubbed by scroll",
+      "ref": "patterns/pinned-scene-scrub.md",
+      "stack": "vanilla",
+      "why": "one scene stays on screen while scroll progress drives it",
+      "signals": [
+        [
+          "\\b(pinned|pins?|sticky) (scene|section|hero|stage)",
+          5
+        ],
+        [
+          "\\bscrub\\w*",
+          5
+        ],
+        [
+          "\\bscroll[- ]?(driven|linked)\\b",
+          4
+        ],
+        [
+          "\\b(scrollytelling|scroll[- ]?story)\\b",
+          4
+        ]
+      ],
+      "examples": [
+        "A pinned scene that plays as you scroll.",
+        "A scroll-linked animation, scrubbed by the scroll bar."
+      ]
+    },
+    {
+      "id": "horizontal-scroll",
+      "name": "Horizontal scroll section",
+      "ref": "patterns/horizontal-scroll.md",
+      "stack": "gsap",
+      "why": "vertical scrolling should push a row of panels sideways",
+      "signals": [
+        [
+          "\\b(horizontal(ly)? scroll\\w*|scroll(s|ing)? (sideways|horizontally)|sideways (gallery|scroll\\w*|section)|gallery[^.]{0,30}sideways)\\b",
+          6
+        ]
+      ],
+      "examples": [
+        "A horizontal scroll section for the timeline.",
+        "A sideways gallery that scrolls as the page scrolls."
+      ]
+    },
+    {
+      "id": "image-sequence-scrub",
+      "name": "Image sequence scrubbed by scroll",
+      "ref": "patterns/image-sequence-scrub.md",
+      "stack": "vanilla",
+      "why": "a run of pictures should follow the scroll position",
+      "signals": [
+        [
+          "\\b(image|frame|picture) sequences?\\b",
+          6
+        ],
+        [
+          "\\bscrub\\w* (a )?(video|frames?)",
+          6
+        ],
+        [
+          "\\bvideo (that )?(follows|scrubs|plays with)[^.]{0,20}scroll",
+          6
+        ],
+        [
+          "\\b(apple|airpods)[- ]style\\b",
+          5
+        ]
+      ],
+      "examples": [
+        "An image sequence that follows the scroll.",
+        "Scrub a video with the scroll bar, apple-style."
+      ]
+    },
+    {
+      "id": "parallax-depth",
+      "name": "Parallax depth",
+      "ref": "patterns/parallax-depth.md",
+      "stack": "vanilla",
+      "why": "layers should move at different speeds to suggest depth",
+      "signals": [
+        [
+          "\\b(parallax|depth layers|floating layers)\\b",
+          5
+        ],
+        [
+          "\\blayers? (move|moving|drift)\\w* at different speeds",
+          5
+        ]
+      ],
+      "examples": [
+        "Subtle parallax on the hero.",
+        "Floating layers for depth."
+      ]
+    },
+    {
+      "id": "scroll-progress-bar",
+      "name": "Scroll progress bar",
+      "ref": "patterns/scroll-progress-bar.md",
+      "stack": "vanilla",
+      "why": "a thin bar should show how far down the page the reader is",
+      "signals": [
+        [
+          "\\b(progress bar|reading progress|scroll (progress|indicator)|how far (down|along))\\b",
+          6
+        ]
+      ],
+      "examples": [
+        "A reading progress bar at the top of the article.",
+        "A scroll indicator that shows how far down the page I am."
+      ]
+    },
+    {
+      "id": "product-3d-scroll",
+      "name": "3D product that turns as you scroll",
+      "ref": "patterns/product-3d-scroll.md",
+      "stack": "three",
+      "why": "a real 3D object should change pose as the reader scrolls",
+      "signals": [
+        [
+          "\\b(3d (product|model|object)|turntable|exploded view|product viewer|(model|product|object) (turns|rotates|spins))\\b",
+          5
+        ],
+        [
+          "\\b(rotate|spin|turn)s? (the )?(model|product|object)?[^.]{0,30}\\bscroll",
+          5
+        ]
+      ],
+      "examples": [
+        "A 3D product viewer: the headphones turn as I scroll.",
+        "An exploded view of the device."
+      ]
+    },
+    {
+      "id": "shader-background",
+      "name": "Shader background",
+      "ref": "patterns/shader-background.md",
+      "stack": "three",
+      "why": "a full-screen shader should paint a living background",
+      "signals": [
+        [
+          "\\b(shaders?|glsl|animated gradient|gradient mesh|flowing (background|gradient)|liquid (background|gradient)|noise background|generative background|fluid (background|gradient))\\b",
+          5
+        ]
+      ],
+      "examples": [
+        "An animated gradient shader behind the hero.",
+        "A flowing liquid background."
+      ]
+    },
+    {
+      "id": "magnetic-button",
+      "name": "Magnetic button",
+      "ref": "patterns/magnetic-button.md",
+      "stack": "vanilla",
+      "why": "a button should lean toward the pointer",
+      "signals": [
+        [
+          "\\b(magnetic|sticky button)\\b",
+          6
+        ],
+        [
+          "\\bbuttons?\\b[^.]{0,30}\\b(follows?|pulls?|leans?|toward|towards) (the )?(cursor|mouse|pointer)",
+          6
+        ]
+      ],
+      "examples": [
+        "A magnetic call to action button.",
+        "The button leans toward the mouse."
+      ]
+    },
+    {
+      "id": "cursor-follower",
+      "name": "Cursor follower",
+      "ref": "patterns/cursor-follower.md",
+      "stack": "vanilla",
+      "why": "a soft dot or ring should trail the pointer",
+      "signals": [
+        [
+          "\\b(custom cursor|cursor (follower|effect|trail|dot)|trailing (dot|cursor)|follows? (the )?(cursor|mouse|pointer))\\b",
+          6
+        ]
+      ],
+      "examples": [
+        "A custom cursor that trails the mouse.",
+        "A trailing dot that grows over links."
+      ]
+    },
+    {
+      "id": "tilt-spotlight-cards",
+      "name": "Tilt and spotlight cards",
+      "ref": "patterns/tilt-spotlight-cards.md",
+      "stack": "vanilla",
+      "why": "cards should tilt and a light should follow the pointer",
+      "signals": [
+        [
+          "\\b(tilt\\w*|3d hover|hover (glow|light|spotlight)|spotlight|glow (card|follows|that follows)|cards? (that )?(tilt|glow|light up))\\b",
+          5
+        ]
+      ],
+      "examples": [
+        "Feature cards that tilt on hover with a spotlight.",
+        "A glow follows the cursor across each card."
+      ]
+    },
+    {
+      "id": "bento-motion",
+      "name": "Bento grid with motion",
+      "ref": "patterns/bento-motion.md",
+      "stack": "vanilla",
+      "why": "an asymmetric grid of tiles should come in as a group",
+      "signals": [
+        [
+          "\\b(bento|feature grid|tiles? of different sizes|cards of different sizes)\\b",
+          5
+        ]
+      ],
+      "examples": [
+        "A bento grid of features.",
+        "Tiles of different sizes that come in together."
+      ]
+    },
+    {
+      "id": "page-transition",
+      "name": "Page transition",
+      "ref": "patterns/page-transition.md",
+      "stack": "view-transitions",
+      "why": "moving between pages should feel continuous",
+      "signals": [
+        [
+          "\\b(page transitions?|between pages|route transitions?|smooth navigation|fade between pages)\\b",
+          6
+        ]
+      ],
+      "examples": [
+        "Smooth page transitions between the pages.",
+        "A fade between pages when I navigate."
+      ]
+    },
+    {
+      "id": "shared-element-morph",
+      "name": "Shared element morph",
+      "ref": "patterns/shared-element-morph.md",
+      "stack": "view-transitions",
+      "why": "a card should grow into its detail page",
+      "signals": [
+        [
+          "\\b(shared[- ]element|hero morph|case stud(y|ies)? transition)\\b",
+          6
+        ],
+        [
+          "\\b(card|thumbnail|poster|image|photo)s?\\b[^.]{0,20}\\b(grows?|expands?|morphs?|turns? into|opens? into)\\b[^.]{0,30}\\b(page|hero|detail|full)",
+          6
+        ]
+      ],
+      "examples": [
+        "The clicked thumbnail grows into the hero of the case study page.",
+        "A shared element transition from the card to its page."
+      ]
+    },
+    {
+      "id": "layout-reorder",
+      "name": "Layout change: filter, sort, reorder",
+      "ref": "patterns/layout-reorder.md",
+      "stack": "view-transitions",
+      "why": "items should glide to their new places when the layout changes",
+      "signals": [
+        [
+          "\\b(filter\\w*|sort\\w*|re-?order\\w*|rearrang\\w*|shuffl\\w*)\\b[^.]{0,60}\\b(cards?|grid|list|items?|tiles?|gallery)\\b",
+          4
+        ],
+        [
+          "\\b(cards?|grid|list|items?|tiles?)\\b[^.]{0,40}\\b(filter\\w*|sort\\w*|re-?order\\w*|rearrang\\w*|shuffl\\w*)",
+          4
+        ],
+        [
+          "\\b(layout animation|drag to reorder)\\b",
+          5
+        ]
+      ],
+      "examples": [
+        "Filter the project cards by tag and let them rearrange smoothly.",
+        "Sorting the list should reorder the cards with a glide."
+      ]
+    },
+    {
+      "id": "theme-toggle-transition",
+      "name": "Theme toggle transition",
+      "ref": "patterns/theme-toggle-transition.md",
+      "stack": "view-transitions",
+      "why": "the dark and light switch should crossfade, not flash",
+      "signals": [
+        [
+          "\\b(dark mode|dark/light|light and dark|theme (toggle|switch\\w*)|toggle (the )?theme|mode switch|day/night)\\b",
+          5
+        ]
+      ],
+      "examples": [
+        "A dark mode toggle that transitions smoothly.",
+        "A theme switch between light and dark."
+      ]
+    },
+    {
+      "id": "section-colour-shift",
+      "name": "Section colour shift",
+      "ref": "patterns/section-colour-shift.md",
+      "stack": "vanilla",
+      "why": "the page colours should change with each chapter",
+      "signals": [
+        [
+          "\\b(background|colou?r|palette)s? (changes?|shifts?|switch\\w*|fades?)\\b[^.]{0,40}\\b(section|chapter|scroll)",
+          6
+        ],
+        [
+          "\\b(per|each|every) (section|chapter)\\b[^.]{0,30}\\b(colou?r|palette|mood)",
+          6
+        ],
+        [
+          "\\bcolou?r (per|by) (section|chapter)\\b",
+          6
+        ],
+        [
+          "\\b(colou?r|palette|mood)s?\\b[^.]{0,30}\\b(per|for each|for every|by) (section|chapter)\\b",
+          6
+        ]
+      ],
+      "examples": [
+        "The background colour changes as you scroll from chapter to chapter.",
+        "A different palette for each section."
+      ]
+    },
+    {
+      "id": "scroll-snap-carousel",
+      "name": "Scroll-snap carousel",
+      "ref": "patterns/scroll-snap-carousel.md",
+      "stack": "vanilla",
+      "why": "a row of cards should swipe sideways and snap into place",
+      "signals": [
+        [
+          "\\b(carousel|slider|swipe (row|gallery)|snap scroll\\w*|scroll[- ]snap|testimonials? slider)\\b",
+          5
+        ]
+      ],
+      "examples": [
+        "A testimonials carousel that swipes on phones.",
+        "A swipe row of case studies with snap scrolling."
+      ]
+    },
+    {
+      "id": "svg-line-draw",
+      "name": "SVG line drawing",
+      "ref": "patterns/svg-line-draw.md",
+      "stack": "svg",
+      "why": "a line or outline should draw itself",
+      "signals": [
+        [
+          "\\b(draws? (itself|on)|line draws?|draw[- ]on|self[- ]drawing|handwrit\\w+|outline (animation|draws?))\\b",
+          5
+        ],
+        [
+          "\\b(path|route|line|stroke|underline)s?\\b[^.]{0,20}\\b(draw|trace)\\w*",
+          5
+        ]
+      ],
+      "examples": [
+        "The line draws itself as it comes into view.",
+        "A route that traces across the map on scroll."
+      ]
+    },
+    {
+      "id": "lottie-rive-spot",
+      "name": "Lottie or Rive animation spot",
+      "ref": "patterns/lottie-rive-spot.md",
+      "stack": "players",
+      "why": "a designer-made animation should play where it is needed",
+      "signals": [
+        [
+          "\\b(lottie|rive|dotlottie|after effects|bodymovin|animated icons?|interactive (illustration|mascot)|state machine)\\b",
+          5
+        ]
+      ],
+      "examples": [
+        "Three animated icons exported from After Effects as Lottie.",
+        "An interactive mascot built in Rive."
+      ]
+    },
+    {
+      "id": "particles-form",
+      "name": "Dust that forms a picture",
+      "ref": "patterns/particles-form.md",
+      "stack": "particles",
+      "why": "dust or dots should assemble into a product, logo or face",
+      "signals": [
+        [
+          "\\b(dust|particles?|halftone|stipple|pointilli\\w*)\\b[^.]{0,60}\\b(form|forms|become|becomes|assembl\\w+|made of|dissolv\\w+|turn)",
+          5
+        ],
+        [
+          "\\bmade (out )?of (dust|dots|particles)",
+          5
+        ],
+        [
+          "\\b(rises?|appears?|forms?|built|assembl\\w+)\\b[^.]{0,20}\\b(from|out of|of) (the same |a cloud of |fine )?(dust|dots|particles|sand|specks)",
+          5
+        ]
+      ],
+      "examples": [
+        "Particles that form my logo.",
+        "A halftone portrait made of dots."
+      ]
     }
   ]
 }

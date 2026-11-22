@@ -1,6 +1,6 @@
 # Licences: what brief2motion bundles, loads and offers
 
-Checked on 16 Nov 2026; the GSAP terms were read again on 17 Nov 2026, and the table of loaded libraries was brought up to version 1.0.0 the same day. This is a plain guide, not legal advice.
+Checked on 16 Nov 2026; the GSAP terms were read again on 17 Nov 2026, and the table of loaded libraries was brought up to version 1.0.0 the same day. Tweakpane and the credits table (section 4) were added on 22 Nov 2026, with the link check of `web-references.md`. This is a plain guide, not legal advice.
 
 brief2motion has three kinds of code. Keep them apart.
 
@@ -24,6 +24,7 @@ A generated page asks a CDN for these files when a visitor opens it. The version
 | Rive runtime (`@rive-app/canvas-lite`) | 2.51.0 | MIT | Free for any use. The `.riv` files you play have their own licences. |
 | d3-scale, d3-shape | 4.0.2, 3.2.0 | ISC | Free for any use. Keep the notice. |
 | React Three Fiber, drei | 9.8.2, 10.7.9 | MIT | Used only in React projects with a bundler, and in this repo's test page. |
+| Tweakpane | 4.0.5 | MIT | Development only. `kit/tune.js` fetches it, checked against an integrity hash, when the address has `?tune`. `scripts/strip_tune.mjs` removes the loader and the file before delivery and `check_site.mjs` fails a page that still has either, so it is not in a shipped page. Free for any use; keep the copyright notice. |
 
 Source for GSAP terms: https://gsap.com/community/standard-license/ (the page lists "Prohibited Uses" as tools that let users build visual animations without code and compete with Webflow, and says AI-generated GSAP code is not a prohibited use). If your project is that kind of tool, do not use GSAP: the kit and Motion cover most of the same ground.
 
@@ -42,6 +43,29 @@ Code taken from other projects: none is copied into this repository. `NOTICE` at
 | Depth Anything V2 Base and Large | CC-BY-NC-4.0 | Non-commercial. The skill never uses them. Do not swap them in for paid work. |
 
 Two more things to know. react-bits is MIT plus the Commons Clause: use its components inside your own site, never resell or repackage them. Repos with no licence file (for example three-ml-sharp and hologram-particles) are reference only: read them, do not copy their code. The full list is in `RESOURCES.md`.
+
+## 4. Credits: every tool this skill uses or loads
+
+Name, who makes it, where to find it, its licence, and where the skill uses it. Nothing here is copied into this repository. The licence column is what the project's own repository or package states (GSAP: the page quoted above).
+
+| Tool | By | Link | Licence | Where it is used |
+|---|---|---|---|---|
+| three.js | mrdoob and the three.js authors | <https://threejs.org/> | MIT | 3D stacks, `kit/three-stage.js`, pinned at 0.187.0 |
+| React Three Fiber, drei | Poimandres (pmndrs) | <https://github.com/pmndrs/react-three-fiber>, <https://github.com/pmndrs/drei> | MIT | 3D inside React projects |
+| GSAP with ScrollTrigger, SplitText, DrawSVG, MotionPath | GreenSock | <https://gsap.com/> | GSAP Standard "no charge" licence | scroll, text and path choreography, pinned at 3.15.1 |
+| Lenis | darkroom.engineering | <https://lenis.dev/> | MIT | smooth scrolling |
+| Motion | Motion | <https://motion.dev/> | MIT | springs and layout animation, vanilla and React |
+| React, React DOM | Meta | <https://react.dev/> | MIT | React stack examples |
+| htm | developit | <https://github.com/developit/htm> | Apache-2.0 | JSX-free React examples |
+| lottie-web | Airbnb | <https://github.com/airbnb/lottie-web> | MIT | Lottie playback in `kit/players.js` |
+| Rive runtime | Rive | <https://github.com/rive-app/rive-wasm> | MIT | Rive playback in `kit/players.js` |
+| d3-scale, d3-shape | the D3 authors | <https://d3js.org/> | ISC | chart maths in the data-story example |
+| Tweakpane | cocopon | <https://tweakpane.github.io/docs/> | MIT | dev-only tuning panel, `kit/tune.js` |
+| playwright-core | Microsoft | <https://playwright.dev/> | Apache-2.0 | drives Chrome for the checks; downloaded on first use, not shipped |
+| LYGIA | Patricio Gonzalez Vivo | <https://lygia.xyz/> | Prosperity Public License 3.0 or Patron License | optional shader library, never bundled |
+| Depth Anything V2 Small | the Depth Anything authors, via onnx-community | <https://huggingface.co/onnx-community/depth-anything-v2-small> | Apache-2.0 | optional photo-to-depth model |
+
+**Sites linked for study.** `web-references.md` links award galleries, component libraries, platform documentation and canonical demos. They are there to be looked at. The skill copies nothing from them, and the page records each site's stated terms or says that none were found.
 
 ## Template: LICENCES-NOTICE.md (the skill writes this into each user project)
 

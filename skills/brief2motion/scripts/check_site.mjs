@@ -9,6 +9,7 @@
 //   no WebGL      the headline is readable and a still stands in for every WebGL canvas
 //   no JavaScript something readable is on the page
 //   console       no errors in any run; requests only to the page itself and cdn.jsdelivr.net
+//   dev tools     the ?tune panel (kit/tune.js, Tweakpane) is not in the shipped page: no file, no request
 //   weight        files served from the project, per page: 1.5 MiB or less
 //   basics        one <h1>, lang, title, description, viewport, alt text, text contrast (WCAG AA), visible focus ring
 // The page must set <html data-motion="ready | reduced | static"> when its motion is set up (kit/motion-core.js signal()).
@@ -18,6 +19,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { loadPlaywright, launchChrome, serveDir, HERE } from './_common.mjs';
 import { percentile, contrastRatio, parseColor, blend, verdict } from './_measure.mjs';
+import { findDevTools } from './strip_tune.mjs';
 
 export const BUDGET = { desktopP95: 20, mobileP95: 40, localBytes: 1.5 * 1024 * 1024, tapTarget: 24, contrast: 4.5, contrastLarge: 3 };
 const MIB = 1024 * 1024;
@@ -51,7 +53,9 @@ const SAMPLER = `
   (function loop(t) { const r = window.__raf; if (r.on && r.last) r.times.push(t - r.last); r.last = t; requestAnimationFrame(loop); })(0);
 `;
 
+const devRequests = new Set();   // any request for the dev-only tuning panel during a normal load
 function watch(page, cdp, acc, origin) {
+  page.on('request', (r) => { if (/tweakpane|\/kit\/tune\.js/i.test(r.url())) devRequests.add(r.url().replace(origin, '')); });
   page.on('console', (m) => { if (m.type() === 'error') acc.errors.push(`${m.text()}${m.location().url ? ' @ ' + m.location().url.replace(origin, '') : ''}`); });
   page.on('pageerror', (e) => acc.errors.push(`pageerror: ${e.message}`));
   page.on('requestfailed', (r) => { const why = r.failure()?.errorText || ''; if (!/ERR_ABORTED/.test(why)) acc.errors.push(`requestfailed: ${r.url().replace(origin, '')} (${why})`); });
@@ -382,6 +386,9 @@ try {
     await ctx.close(); await b2.close();
   }
 
+  const devFiles = siteDir ? findDevTools(siteDir).map((f) => f.file) : [];
+  check('dev tuning panel is not in the shipped page', devFiles.length === 0 && devRequests.size === 0,
+    devFiles.length || devRequests.size ? [...devFiles.map((f) => `${f} still in the folder (run strip_tune.mjs)`), ...[...devRequests].map((u) => `requested ${u}`)].join('; ') : 'no kit/tune.js, no tune block, no Tweakpane request');
   report.thirdPartyHosts = [...hosts];
   check('third-party requests only to cdn.jsdelivr.net', [...hosts].every((h) => h === 'cdn.jsdelivr.net'), hosts.size ? [...hosts].join(', ') : 'none');
   report.consoleErrors = allErrors;

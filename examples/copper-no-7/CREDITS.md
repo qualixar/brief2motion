@@ -16,4 +16,4 @@ None of the pictures was made from another person's photo, and image metadata is
 
 ## Code and fonts
 
-The engine files next to `config.js` are the brief2motion template, MIT. three.js (MIT), GSAP 3.15.0 (GSAP standard licence) and Lenis (MIT) load from cdn.jsdelivr.net at pinned versions and are not copied here. The page uses system fonts, so there is no font file to credit.
+The engine files next to `config.js` are the brief2motion template, MIT. three.js (MIT), GSAP 3.15.1 (GSAP standard licence) and Lenis (MIT) load from cdn.jsdelivr.net at pinned versions and are not copied here. The page uses system fonts, so there is no font file to credit.
