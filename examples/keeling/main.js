@@ -105,7 +105,8 @@ async function start() {
     steps.forEach((s, i) => { const r = s.getBoundingClientRect(); const d = Math.abs((r.top + r.bottom) / 2 - mark); if (d < bestD) { bestD = d; best = i; } });
     go(best);
   });
-  $$('[data-count]').forEach((n) => countUp(n, { duration: 1400 }));
+  // the kit keeps the real number in a hidden first span; naming it .sr-only lets a layout check tell it from cut-off text
+  $$('[data-count]').forEach((n) => { countUp(n, { duration: 1400 }); n.firstElementChild?.classList.add('sr-only'); });
   signal(still ? 'reduced' : 'ready');
 }
 start();
