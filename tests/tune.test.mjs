@@ -53,6 +53,10 @@ test('stripTune removes JS and HTML blocks and nothing else', () => {
 test('hasTune sees a marker or a Tweakpane reference, not a plain word', () => {
   assert.equal(hasTune(PAGE_JS), true); assert.equal(hasTune('import "https://x/tweakpane.js"'), true);
   assert.equal(hasTune('const tune = 3'), false);
+  assert.equal(hasTune('<p>The tuning panel used Tweakpane (MIT), see <a href="https://tweakpane.github.io/docs/">its docs</a>.</p>'), false, 'naming it in a credits page is fine');
+  assert.equal(hasTune("import { Pane } from 'tweakpane';"), true);
+  assert.equal(hasTune('<script src="https://cdn.jsdelivr.net/npm/tweakpane@4.0.5/dist/tweakpane.min.js"></script>'), true);
+  assert.equal(hasTune("await import('/vendor/tweakpane-4.js')"), true);
 });
 
 test('findDevTools and stripSite clean a site folder and leave the rest alone', () => {
