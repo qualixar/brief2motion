@@ -62,7 +62,10 @@ python3 -I -c "import json,sys; q=json.load(open('examples/larkspur/qa.json')); 
 
 # 3c. generated files are current, and the unit tests pass
 step "style pages and atlas are current (build_styles.mjs --check)" node $S/scripts/build_styles.mjs --check
-if node --test tests/*.test.mjs >/dev/null 2>&1; then ok "unit tests pass (node --test tests/*.test.mjs)"; else bad "unit tests fail: run node --test tests/*.test.mjs"; fi
+# the unit tests: a failure prints the failing tests and their errors; in CI a skipped test is a failure (tests/run_unit.sh)
+if [[ "${B2M_UNIT_TESTS_RAN:-0}" == 1 ]]; then echo "skip  unit tests (B2M_UNIT_TESTS_RAN=1: CI ran tests/run_unit.sh in the step before)"
+elif out="$(bash tests/run_unit.sh --quiet)"; then ok "$(echo "$out" | tail -1)"
+else bad "$(echo "$out" | tail -1)"; echo "$out" | head -170; fi
 for f in $S/references/stacks/*.md $S/references/*.md; do [[ -s "$f" ]] || bad "$f is empty"; done
 
 # 4. integrity hashes on the CDN scripts are right (network; skipped when offline)

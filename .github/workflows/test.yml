@@ -28,10 +28,29 @@ jobs:
           python-version: "3.12"
       - name: Doctor
         run: bash skills/brief2motion/scripts/doctor.sh
-      - name: Unit tests (router, kit, measuring code, style data)
-        run: node --test tests/*.test.mjs
+      - name: Unit tests (router, kit, measuring code, style data, the site-mode checkers in Chrome)
+        run: bash tests/run_unit.sh
       - name: Repo checks
+        # the unit tests ran in the step above, with their output (a skip there fails too); this step does not run them again
+        env:
+          B2M_UNIT_TESTS_RAN: "1"
         run: bash tests/run_checks.sh
+
+  # Windows: the unit tests only (run_checks.sh is a bash script for macOS and Linux). It reports and does not block a
+  # merge yet: nothing has been verified on Windows before, and the first runs show what breaks there.
+  unit-tests-windows:
+    runs-on: windows-latest
+    continue-on-error: true
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - name: Unit tests
+        run: node --test tests/*.test.mjs
 
   # Real-browser checks. Hosted runners have no GPU, so frame-time budgets are skipped (--no-perf) and this job
   # does not block a merge: it reports. The same checks run with budgets on a developer machine before a release.
