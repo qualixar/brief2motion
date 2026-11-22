@@ -1,6 +1,6 @@
 # Hero load sequence
 
-The first screen sets itself in a short, ordered sequence: headline first, then the supporting line, the action and the product picture. It is the one orchestrated moment most pages need.
+The first screen sets itself in a short, ordered sequence: headline first, then the supporting line, the action and the product picture. Most pages need this one planned entrance and little else.
 
 **Use when:** the brief says the hero should "animate in", "set itself", "feel alive on load", or a launch page needs a first impression.
 **Not when:** the page must be readable at once (a pricing or docs page), or the sequence would delay the main action by more than about a second. Never put the hero behind a loader.

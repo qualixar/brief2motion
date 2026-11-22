@@ -26,7 +26,7 @@ Score each line **good**, **review** (looks wrong, cannot tell) or **fix**, with
 | Alignment and rhythm | Edges that almost line up; inconsistent gaps between sections; cards of different heights in one row; things that belong together but sit apart, or the reverse |
 | Coherence | One idea carried through (the visual thesis in `DESIGN.md`); a second style appearing halfway down; icons from different families; two competing accent colours |
 | Asset authenticity | Pictures that do not show the thing the text claims; generic stock; invented people, logos, reviews or numbers presented as real; the rights record in `ASSETS.json` matching what is on screen; fictional content marked as fictional |
-| Motion intent | Each movement says what it is for (`MOTION.md`); one orchestrated moment, not a fade on every section; nothing moves while you are trying to read; the page still makes sense with motion off |
+| Motion intent | Each movement says what it is for (`MOTION.md`); one planned entrance, not the same fade on every section; nothing moves while you are trying to read; the page still makes sense with motion off |
 
 ## Part 3: the three tests
 

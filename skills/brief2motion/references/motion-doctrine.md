@@ -60,7 +60,7 @@ Do not put every entrance into the first quarter and then leave a dead screen. I
 Show each thing when the reader reaches it, not all at once on load. On a page the cue is the scroll position or a step the reader triggers; in a film it is a spoken word. Rules:
 
 - A heading, card or figure animates in when 20 to 30% of it is in the viewport (`inView` and `reveal` in the kit use 0.2 and 0.25).
-- Fewer things, each on its own beat. One orchestrated moment per section beats a fade on every block.
+- Fewer things, each on its own beat. A section gets at most one planned movement; the same fade on every block is noise.
 - Content is visible by default and hidden only once the script runs, so no script and reduced motion both get the finished page (`kit/reveal.js` does this).
 - With reduced motion the cue still works but the change is an opacity or colour change of a fraction of a second, or none.
 

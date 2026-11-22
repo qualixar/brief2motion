@@ -29,7 +29,7 @@ Save the brief as `BRIEF.md`, word for word, then:
 node <this skill's folder>/scripts/route.mjs BRIEF.md
 ```
 
-It prints a stack, a style, the phrases in the brief that led there, and the reference files to read. It is a keyword scorer and has never seen the product, so treat it as a first proposal: read the brief again, agree or overrule, and write the choice and the reason in `SPEC.md`. The brief's own words always win. If it names a library, a style or colours, use those.
+It prints a stack, a style, the phrases in the brief that led there, and the reference files to read. It is a keyword scorer and has never seen the product, so treat it as a first proposal: read the brief again, agree or overrule, and write the choice and the reason in `SPEC.md`. Anything the brief states outright overrides the router: a library, a style or colours it names are used as given.
 
 It also prints **patterns**: recipe pages in `references/patterns/` that match the motion words in the brief (a hero sequence, a marquee, a pinned scene, a magnetic button, a page transition, a 3D product that turns as you scroll, and 21 more; the index is `references/patterns/README.md`). Each pattern says when to use it and when not to, the stack, a minimal sketch written for the kit, its performance and accessibility budget, its reduced-motion form and how the checkers verify it. `references/web-references.md` is the verified library of galleries, component libraries, platform docs and canonical demos to study before you build (study, never copy), and `references/motion-doctrine.md` holds the timing and easing rules every motion plan follows. A pattern is a starting sketch, not a template: rewrite it for the brief's words.
 
@@ -59,8 +59,8 @@ Always read, whatever the stack: `references/design-fundamentals.md` (hierarchy,
 Copy `templates/SPEC.md` and fill it in:
 
 1. **Stack and style**, with one sentence each on why, from step 1.
-2. **Design plan**: four to six named colours with their contrast pairs checked, the typefaces and their roles, a one-line layout idea, and the one thing on the page that should be memorable. If any part reads like what you would produce for any similar page, change it.
-3. **Motion plan**: three lists. On load, on scroll, on input. Each item says what moves and why, which pattern page it comes from if any, and what it does with reduced motion. If you cannot say why, cut it. One orchestrated moment beats a fade on every section.
+2. **Design plan**: a small palette (each colour named, each text pair's contrast checked), which typeface does which job, the layout in one line, and the single element a visitor should remember. Then test each part against the brief: if it would fit a different product just as well, it is a default, so replace it with something this subject suggests.
+3. **Motion plan**: three lists. On load, on scroll, on input. Each item says what moves and why, which pattern page it comes from if any, and what it does with reduced motion. If you cannot say why, cut it. Put the effort into one planned entrance; the same fade repeated on every block is noise.
 4. **Copy**: every word on the page, exactly as the brief gives it. If the brief gives none, write plain copy from what it says and mark it as drafted. Never invent reviews, ratings, customer names, logos or numbers. Made-up examples say that they are made up.
 5. **Done when**: one checkable line per requirement, each naming the number or screenshot that will prove it.
 
@@ -150,7 +150,7 @@ Use it when the brief asks for a site with several pages, or for one page whose 
 | 3. Routes: id, path, parent, template, title, description, primary action, states, links | `routes.json`, `SITEMAP.md` (`build_sitemap.mjs`) | `check_plan.mjs`, `check_meta.mjs` |
 | 4. Wireframes: phone-first grey boxes with real copy and a reachable primary action | `wireframes/<template>.html` (`index.html` when there is one template) | `check_layout.mjs --wireframes` (a missing file FAILs) |
 | 5. Tokens: primitives, light and dark roles, text pairs | `tokens.json` -> `site/tokens.css` (`build_tokens.mjs`) | the same script: references, cycles, AA contrast for every text pair declared in `tokens.json` (only declared pairs are measured, so declare every pair the design uses) |
-| 6. Visual design: one idea from the subject, type, grid, colour, imagery, the one memorable thing; then the router and `SPEC.md` as before | `DESIGN.md`, `ASSETS.json` | `check_plan.mjs` (rights records) |
+| 6. Visual design: one idea from the subject, type, grid, colour, imagery, a single signature element; then the router and `SPEC.md` as before | `DESIGN.md`, `ASSETS.json` | `check_plan.mjs` (rights records) |
 | 7. Motion: per movement its intent, trigger, states, interruption, reduced form, pattern page | `MOTION.md` | `check_site.mjs` |
 | 8. Build: semantic HTML first, motion on top, with steps 3 to 5 above | `site/` | everything |
 | 9. Checks and a second reader | `journeys.json`, `check/qa.json`, `REVIEW.md` | `check_layout`, `check_a11y`, `check_journeys`, `check_meta`, `check_site` |

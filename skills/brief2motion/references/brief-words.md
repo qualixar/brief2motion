@@ -24,7 +24,7 @@ Two tables. The first maps what a brief says to a stack and a reference, for any
 | "bold", "loud" | fast, physical moves of 100 to 200 ms, hard edges; neubrutalism or maximalism |
 | "fast", "works on phones", "accessible" | the default stack, fewer effects, check the phone run twice |
 | "like Apple", "like Stripe", "like Linear" | ask what about it: the glass, the gradient, the scroll scenes, the restraint. Build that quality, never a copy |
-| "make it pop", "feel alive", "modern" | too vague to route: propose one orchestrated moment in SPEC.md and build that |
+| "make it pop", "feel alive", "modern" | too vague to route: propose one planned entrance in SPEC.md and build that |
 
 ## The dust engine: phrase to setting
 
