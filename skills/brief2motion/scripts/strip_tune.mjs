@@ -10,7 +10,8 @@ import { fileURLToPath } from 'node:url';
 
 const BLOCKS = [/[ \t]*\/\*\s*tune:start\s*\*\/[\s\S]*?\/\*\s*tune:end\s*\*\/[ \t]*\r?\n?/g, /[ \t]*<!--\s*tune:start\s*-->[\s\S]*?<!--\s*tune:end\s*-->[ \t]*\r?\n?/g];
 const TEXT = /\.(js|mjs|html|css)$/i;
-const PANEL = /tweakpane/i;
+// a request for Tweakpane's code (a package name with a version, a .js file, an import), not the word in a credits line
+const PANEL = /tweakpane@|tweakpane(\.min)?\.m?js\b|\/npm\/tweakpane\b|from\s*['"][^'"]*tweakpane|import\(\s*['"][^'"]*tweakpane/i;
 
 // Pure, unit-tested: the text with every tune block removed.
 export const stripTune = (text) => BLOCKS.reduce((t, rx) => t.replace(rx, ''), text);

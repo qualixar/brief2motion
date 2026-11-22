@@ -29,7 +29,16 @@ export const TAP_PROBE = (min) => {
     if (/^(radio|checkbox)$/.test(el.type) && el.labels?.length) r = el.labels[0].getBoundingClientRect();   // the label takes the click, so its box is the target
     if (cs.display === 'none' || cs.visibility === 'hidden' || r.width === 0 || r.height === 0) continue;
     if (el.classList.contains('skip-link')) continue;                       // off screen until focused
-    if (el.tagName === 'A' && cs.display === 'inline' && el.closest('p, li, figcaption, small, dd, td')) continue;   // links inside a sentence are exempt (WCAG 2.5.8)
+    if (el.tagName === 'A' && cs.display === 'inline' && !el.closest('nav, [role=navigation], [role=menu], [role=menubar]')) {
+      // a link inside a sentence is exempt (WCAG 2.5.8 inline exception), but only when there is a sentence: its block must
+      // hold words that are not links. A list item that is only a link (a menu, a footer list) is a target like any other.
+      const block = el.closest('p, li, figcaption, small, dd, td');
+      if (block) {
+        let words = block.textContent || '';
+        for (const a of block.querySelectorAll('a')) words = words.replace(a.textContent || '', ' ');
+        if (words.replace(/[\s|·•,;:/()\-–—]+/g, '').length >= 3) continue;
+      }
+    }
     if (Math.min(r.width, r.height) < min - 0.5) small.push(`${el.tagName.toLowerCase()}${el.classList[0] ? '.' + el.classList[0] : ''} "${(el.textContent || el.getAttribute('aria-label') || '').trim().slice(0, 24)}" ${Math.round(r.width)}x${Math.round(r.height)}`);
   }
   return small;
@@ -94,8 +103,10 @@ export const CLIP_PROBE = () => {
 
 // Text and actions that collide. Boxes: each line of visible text (its height limited to its line-height, so tightly set
 // headlines do not collide with themselves) and each link, button and form control. Fixed and sticky elements are left out
-// (a sticky bar is judged by the focus check); so are inline SVG text, data-layer elements (layering on purpose) and
-// pairs where one box sits inside the other (an icon in a button, a link in a sentence). Overlap must exceed `min` px
+// (a sticky bar is judged by the focus check); so are inline SVG text, data-layer elements (layering on purpose), anything
+// whose opacity (multiplied down from its ancestors) is under 0.05, pairs where one element contains the other (an icon in
+// a button, a link in a sentence) and a text box lying inside an action's box (a card-wide link). Two text boxes from
+// unrelated elements always count, even when one lies inside the other. Overlap must exceed `min` px
 // on both axes. Returns the first pairs, with what each one is.
 export const OVERLAP_PROBE = (min) => {
   const items = [];
@@ -106,7 +117,10 @@ export const OVERLAP_PROBE = (min) => {
     if (dt && !dt.open && !el.closest('summary')) return true;   // the body of a closed disclosure is not shown
     for (let a = el; a; a = a.parentElement) { const p = getComputedStyle(a).position; if (p === 'fixed' || p === 'sticky') return true; }
     const cs = getComputedStyle(el);
-    return cs.display === 'none' || cs.visibility === 'hidden' || Number(cs.opacity) < 0.05;
+    if (cs.display === 'none' || cs.visibility === 'hidden') return true;
+    let op = 1;   // opacity multiplies down the tree: text in a transparent slide is not painted, whatever its own opacity
+    for (let a = el; a && op >= 0.05; a = a.parentElement) op *= Number(getComputedStyle(a).opacity);
+    return op < 0.05;
   };
   const sx = scrollX, sy = scrollY;
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
@@ -135,8 +149,10 @@ export const OVERLAP_PROBE = (min) => {
       if (a.el === b.el || a.el.contains(b.el) || b.el.contains(a.el)) continue;
       const w = Math.min(a.right, b.right) - Math.max(a.left, b.left), h = Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top);
       if (w <= min || h <= min) continue;
+      // a box inside another is fine between text and an action (a card-wide link over its text); two runs of text from
+      // unrelated elements painted one inside the other is a collision (two slides left visible at the same spot)
       const inside = (o, p) => p.left >= o.left - 0.5 && p.right <= o.right + 0.5 && p.top >= o.top - 0.5 && p.bottom <= o.bottom + 0.5;
-      if (inside(a, b) || inside(b, a)) continue;
+      if (!(a.kind === 'text' && b.kind === 'text') && (inside(a, b) || inside(b, a))) continue;
       const [na, nb] = [name(a.el), name(b.el)], key = [na, nb].sort().join('|');
       if (!hits.some((x) => x.key === key)) hits.push({ key, kinds: `${a.kind}/${b.kind}`, a: na, b: nb, w: Math.round(w), h: Math.round(h) });
     }

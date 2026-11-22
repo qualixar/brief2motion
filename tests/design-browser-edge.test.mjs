@@ -6,10 +6,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import path from 'node:path';
 import fs from 'node:fs';
-import { FIX, tmp, runChecker, outcomeOf } from './_design_helpers.mjs';
+import { FIX, SCRIPTS, tmp, runChecker, outcomeOf, noBrowser } from './_design_helpers.mjs';
 
 const run = (script, fixture, extra = []) => runChecker(script, [path.join(FIX, ...fixture), '--out', tmp('edge'), ...extra]);
-const noBrowser = (t, r) => { if (r.status === 2) { t.skip(`no browser could start: ${r.stderr.split('\n')[0]}`); return true; } return false; };
 const at = (r, id, w) => (r.results || []).find((x) => x.id === id && x.viewport === `${w}px`);
 const WIDTHS = [320, 390, 768, 1440];
 
@@ -96,7 +95,7 @@ test('check_layout and check_a11y: the tricky but correct page does not fail', (
 // main-module test compared a symlinked path with the real one, so the script did nothing and exited 0.
 test('a checker started through a symlink still runs and still fails a failing page', (t) => {
   const link = path.join(tmp('link'), 'scripts');
-  fs.symlinkSync(path.resolve('skills/brief2motion/scripts'), link);
+  fs.symlinkSync(SCRIPTS, link);
   const r = runChecker(path.join(link, 'check_layout.mjs'), [path.join(FIX, 'layout', 'fail'), '--out', tmp('edge')]);
   if (noBrowser(t, r)) return;
   assert.equal(r.status, 1, 'the failing page must fail when the checker is reached through a link');

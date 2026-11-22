@@ -3,7 +3,8 @@
 //   node check_a11y.mjs <project-dir> [--site <dir>] [--out check] [--widths 390,1440] [--themes light,dark] [--strict] [--json]
 // axe-core (Deque Systems, MPL-2.0, https://github.com/dequelabs/axe-core) is fetched at CHECK TIME from cdn.jsdelivr.net at a
 // pinned version, verified against a SHA-384 integrity hash, kept in the checker's cache folder and injected into the page the
-// checker opens. The site under test never carries it and never requests it. Offline with nothing cached: the axe results are
+// checker opens (evaluated through the DevTools protocol, so a strict Content-Security-Policy on the page does not block it).
+// The site under test never carries it and never requests it. Offline with nothing cached: the axe results are
 // PENDING with a message saying so, and the keyboard walk still runs.
 //   a11y.axe.<rule>       a WCAG 2.0 to 2.2 A or AA rule that failed (FAIL), or that axe could not decide (REVIEW, for example
 //                         contrast over a picture); one result per rule, route, state and width
@@ -11,12 +12,15 @@
 //   a11y.keyboard-primary Tab from the top of the page reaches the route's primary action (routes.json primaryAction) (FAIL if
 //                         it cannot be reached or does not exist; REVIEW past 25 stops)
 // Automation covers part of WCAG. A screen-reader pass and a person's judgement are still needed; the report says so.
+// The run's verdict (_design.mjs verdict): FAIL on any FAIL or when nothing was checked (exit 1); INCOMPLETE when
+// something is PENDING (no evidence yet), never printed as PASS (exit 0, 1 with --strict); PASS otherwise (exit 0, 1 with
+// --strict when anything needs REVIEW). Exit 2 when the tool cannot run.
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { openSite, newPage, DEPS } from './_common.mjs';
-import { parseArgs, loadRoutes, projectFiles, targets, result, writeQa, passes, printResults } from './_design.mjs';
+import { parseArgs, loadRoutes, projectFiles, targets, listOf, result, writeQa, passes, printResults } from './_design.mjs';
 import { openTarget } from './_steps.mjs';
 
 export const AXE = {
@@ -67,11 +71,9 @@ if (process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.rea
   if (args.flags.has('help')) { console.log(USAGE); process.exit(0); }
   if (!args.pos[0]) { console.error(USAGE); process.exit(2); }
   const f = projectFiles(args.pos[0], args.opts.site);
-  let doc;
-  try { doc = loadRoutes(f.routes); } catch (e) { console.error(`check_a11y: ${e.message}`); process.exit(2); }
+  let doc, themes, widths;
+  try { themes = listOf(args.opts.themes, 'light', 'themes'); widths = listOf(args.opts.widths, '390,1440', 'widths'); doc = loadRoutes(f.routes); } catch (e) { console.error(`check_a11y: ${e.message}`); process.exit(2); }
   if (!f.siteBuilt) { console.error(`check_a11y: no site folder at ${f.site}`); process.exit(2); }
-  const themes = (args.opts.themes || 'light').split(',').map((x) => x.trim()).filter((x) => x === 'light' || x === 'dark');
-  const widths = (args.opts.widths || '390,1440').split(',').map(Number).filter(Boolean);
   const axe = await loadAxe();
   if (!axe.ok) console.error(`check_a11y: axe-core skipped: ${axe.reason}. The keyboard walk still runs; run again with a network connection for the axe results.`);
   const session = await openSite(f.site);
@@ -84,10 +86,13 @@ if (process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.rea
         const at = { route: t.route.id, state: t.state?.id ?? null, viewport: `${w}px`, browser: `Chrome ${session.version}`, input: 'keyboard', theme };
         try {
           const r = await openTarget(page, session.base, t);
-          if (!r.ok) { results.push(result('state.reached', 'FAIL', { ...at, reason: r.error })); continue; }
+          if (!r.ok) { results.push(result(r.loaded ? 'state.reached' : 'page.loaded', 'FAIL', { ...at, reason: r.error })); continue; }
           if (!axe.ok) results.push(result('a11y.axe', 'PENDING', { ...at, reason: `axe-core not run: ${axe.reason}` }));
           else {
-            await page.addScriptTag({ content: axe.source });
+            // Evaluated through the DevTools protocol, not as a <script> tag: a page whose Content-Security-Policy forbids
+            // inline scripts would block the tag. The page's own policy stays in force for its own code. The source is the
+            // file whose SHA-384 loadAxe checked.
+            await page.evaluate(axe.source);
             const run = await page.evaluate((tags) => axe.run(document, { runOnly: { type: 'tag', values: tags }, resultTypes: ['violations', 'incomplete', 'passes'] }), AXE.tags);
             for (const v of run.violations) results.push(result(`a11y.axe.${v.id}`, 'FAIL', { ...at, measured: v.nodes.length, threshold: v.tags.filter((x) => /^wcag\d/.test(x)).join(' ') || v.tags[0], evidence: v.nodes[0]?.target?.[0] ?? null, reason: nodesText(v) }));
             for (const v of run.incomplete) results.push(result(`a11y.axe.${v.id}`, 'REVIEW', { ...at, measured: v.nodes.length, threshold: v.tags.filter((x) => /^wcag\d/.test(x)).join(' ') || v.tags[0], evidence: v.nodes[0]?.target?.[0] ?? null, reason: `axe could not decide: ${nodesText(v)}` }));
@@ -103,10 +108,10 @@ if (process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.rea
   } catch (e) { console.error('check_a11y crashed:', (e && e.stack) || e); code = 2; } finally { await session.close(); }
   if (code === 2) process.exit(2);
   const outDir = path.resolve(args.opts.out || f.out);
-  writeQa(outDir, 'check_a11y', results, { browser: `Chrome ${session.version}`, axe: axe.ok ? AXE.version : 'not run' });
+  writeQa(outDir, 'check_a11y', results, { browser: `Chrome ${session.version}`, axe: axe.ok ? AXE.version : 'not run' }, { site: f.site });
   if (args.flags.has('json')) console.log(JSON.stringify(results, null, 2));
   else {
-    printResults('brief2motion accessibility check', results, `axe-core ${axe.ok ? AXE.version : '(not run)'}, widths ${widths.join(', ')}, themes ${themes.join(', ')}  (PASS lines hidden)`, (r) => r.outcome !== 'PASS');
+    printResults('brief2motion accessibility check', results, `axe-core ${axe.ok ? AXE.version : '(not run)'}, widths ${widths.join(', ')}, themes ${themes.join(', ')}  (PASS lines hidden)`, (r) => r.outcome !== 'PASS', { strict: args.flags.has('strict') });
     console.log('Automated checks cover part of WCAG 2.2. Keyboard use by a person and a screen reader pass are still needed.');
   }
   process.exit(passes(results, { strict: args.flags.has('strict') }) ? 0 : 1);

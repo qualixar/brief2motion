@@ -33,7 +33,7 @@ Never invent proof. No made-up reviews, ratings, customer names, logos or number
 - A scale, not a pile of sizes. Tailwind's default steps are a good reference: 0.75, 0.875, 1, 1.125, 1.25, 1.5, 1.875, 2.25, 3, 3.75, 4.5, 6, 8 rem. Pick four or five.
 - Fluid headlines: `font-size: clamp(2.2rem, 6vw, 5.4rem)`. Always give `clamp()` a rem floor, so zooming still works.
 - `text-wrap: balance` on headlines, `text-wrap: pretty` on paragraphs.
-- One family or two. If two, make them clearly different (a serif with a sans).
+- Most pages need a single family; a second earns its place only when it contrasts plainly with the first (a serif with a sans).
 - Use system font stacks unless the brief supplies a font. A web font is a network request, a layout shift and a licence. If you add one, host the file with the site.
 
 ## 4. Space and grid
@@ -79,9 +79,9 @@ What motion does to them, and the fix:
 
 ## 8. Motion principles
 
-- Every animation has a reason: it shows what changed, where something came from, or what to look at. If you cannot name the reason, remove it.
-- One orchestrated moment beats many scattered ones. A single page-load sequence, or a single reveal. A fade-and-slide on every section and a hover effect on every card is the commonest sign of a generated page.
-- Motion that answers input is welcome: opening, expanding, confirming, reordering.
+- Every animation has a job: point the eye, explain a change of state, or show where an element came from or went. No job, no animation.
+- Spend the motion budget on one planned entrance or reveal. When every block fades up as it scrolls in and every card lifts on hover, nothing stands out, and the page looks machine-made.
+- Feedback to a person's own action (a panel that opens, a list that reorders, a saved state) is always worth animating briefly.
 - Durations (NN/g): about 100 ms for direct feedback, 200 to 300 ms for most interface changes, up to 400 ms for large movements; 500 ms and more drags. Things entering can take slightly longer than things leaving (for example 300 ms in, 200 ms out). <https://www.nngroup.com/articles/animation-duration/>
 - Material's scale, if you want named steps: short 50 to 200 ms, medium 250 to 400 ms, long 450 to 600 ms, extra long 700 to 1000 ms. <https://github.com/material-components/material-web>
 - Easing: ease-out for things arriving (`cubic-bezier(.2, .8, .2, 1)`), ease-in for things leaving, ease-in-out for things that travel across the screen. Material's standard curve is `cubic-bezier(.2, 0, 0, 1)`. Linear is for scroll-linked values and continuous rotation only.
@@ -94,8 +94,8 @@ What motion does to them, and the fix:
 ## 9. Words
 
 - Use the brief's words exactly. If it gives none, write plain copy from what it says and mark it as drafted in `REPORT.md`.
-- A button says what happens: "Reserve a bottle", not "Submit".
-- Sentence case. No filler, no slogans in threes.
+- Label a button with its result: "Reserve a bottle" tells a visitor more than "Submit".
+- Write labels and headings in sentence case, cut padding words, and skip three-part slogans.
 - Made-up examples say that they are made up.
 
 ## 10. Type, measure and the grid, in numbers (site mode)

@@ -3,6 +3,7 @@
 // CONTENT.md, ...), a markdown table reader and a small argument reader.
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 
 export const OUTCOMES = ['PASS', 'FAIL', 'REVIEW', 'PENDING'];
 
@@ -18,29 +19,71 @@ export function summarize(results) {
   for (const r of results) n[r.outcome]++;
   return n;
 }
-// Ship decision for a set of results: no FAIL. With strict, no REVIEW either.
-export const passes = (results, { strict = false } = {}) => results.length > 0 && results.every((r) => r.outcome !== 'FAIL' && !(strict && r.outcome === 'REVIEW'));
+// The one rule every site-mode checker follows (SKILL.md says the same):
+//   FAIL        a measurement missed its threshold, or nothing was checked at all             exit 1
+//   INCOMPLETE  nothing FAILed but some checks are PENDING: their evidence does not exist yet   exit 0, or 1 with --strict
+//               (a site not built, axe-core offline, a sign-up that ends at a fixture). It is never printed as PASS.
+//   PASS        every check measured and met its threshold (REVIEW lines still want a person)  exit 0, or 1 with --strict
+//               when anything needs REVIEW
+// Exit 2 means the tool could not run.
+export function verdict(results, { strict = false } = {}) {
+  const n = summarize(results);
+  if (results.length === 0 || n.FAIL) return 'FAIL';
+  if (strict && (n.REVIEW || n.PENDING)) return 'FAIL';
+  return n.PENDING ? 'INCOMPLETE' : 'PASS';
+}
+// Ship decision for the exit code: no FAIL; with strict, no REVIEW and no PENDING either.
+export const passes = (results, { strict = false } = {}) => verdict(results, { strict }) !== 'FAIL';
+
+// A short fingerprint of a folder's files (paths, sizes and contents), so qa.json can tell which records were measured on
+// the site as it is now and which on an earlier build. null when the folder does not exist.
+export function folderHash(dir) {
+  if (!dir || !fs.existsSync(dir) || !fs.statSync(dir).isDirectory()) return null;
+  const h = crypto.createHash('sha256');
+  (function walk(d) {
+    for (const e of fs.readdirSync(d, { withFileTypes: true }).sort((a, b) => (a.name < b.name ? -1 : 1))) {
+      const p = path.join(d, e.name);
+      if (e.isDirectory()) { if (e.name !== 'node_modules' && e.name !== '.git') walk(p); }
+      else if (e.isFile()) { h.update(path.relative(dir, p).split(path.sep).join('/')); h.update('\0'); h.update(fs.readFileSync(p)); h.update('\0'); }
+    }
+  })(dir);
+  return h.digest('hex').slice(0, 16);
+}
 
 // Write (or update) <outDir>/qa.json: the results of one checker replace its earlier ones; other checkers' results stay.
-export function writeQa(outDir, checker, results, env = {}) {
+// Every record carries the time its checker ran and, when `site` is given, a fingerprint of that folder. Records measured
+// on an older build of the same folder are marked stale: they are not evidence about the site as it is now, so the file's
+// verdict is INCOMPLETE until those checkers run again.
+export function writeQa(outDir, checker, results, env = {}, { site = null } = {}) {
   fs.mkdirSync(outDir, { recursive: true });
   const file = path.join(outDir, 'qa.json');
   let doc = { tool: 'brief2motion site mode', results: [] };
   try { doc = JSON.parse(fs.readFileSync(file, 'utf8')); } catch { /* first run */ }
-  const kept = (doc.results || []).filter((r) => r.checker !== checker);
-  const mine = results.map((r) => ({ checker, ...r }));
+  const when = new Date().toISOString(), siteHash = site ? folderHash(site) : null;
+  const kept = (doc.results || []).filter((r) => r.checker !== checker)
+    .map(({ stale, ...r }) => (siteHash && r.siteHash && r.site === path.resolve(site) && r.siteHash !== siteHash ? { ...r, stale: true } : stale ? { ...r, stale } : r));
+  const mine = results.map((r) => ({ checker, when, ...(site ? { site: path.resolve(site), siteHash } : {}), ...r }));
   const all = [...kept, ...mine];
-  const out = { tool: 'brief2motion site mode', when: new Date().toISOString(), environment: { ...(doc.environment || {}), ...env }, summary: summarize(all), pass: passes(all), results: all };
+  const staleCheckers = [...new Set(all.filter((r) => r.stale).map((r) => r.checker))];
+  let v = verdict(all);
+  if (v === 'PASS' && staleCheckers.length) v = 'INCOMPLETE';
+  const out = { tool: 'brief2motion site mode', when, environment: { ...(doc.environment || {}), ...env }, summary: summarize(all), verdict: v, pass: v !== 'FAIL', complete: v === 'PASS', staleCheckers, results: all };
   fs.writeFileSync(file, JSON.stringify(out, null, 2) + '\n');
   return file;
 }
 
-// "--out dir --strict file" -> { pos: ['file'], opts: { out: 'dir' }, flags: Set(['strict']) }
+// "--out dir --strict file" -> { pos: ['file'], opts: { out: 'dir' }, flags: Set(['strict']) }. "--out=dir" works too.
+// A value option with no value (the end of the line, or the next option) is an error, not a silent undefined.
 export function parseArgs(argv, { value = [], flags = [] } = {}) {
   const pos = [], opts = {}, set = new Set();
   for (let i = 0; i < argv.length; i++) {
-    const a = argv[i];
-    if (a.startsWith('--') && value.includes(a.slice(2))) { opts[a.slice(2)] = argv[++i]; }
+    let a = argv[i], inline = null;
+    if (a.startsWith('--') && a.includes('=')) { inline = a.slice(a.indexOf('=') + 1); a = a.slice(0, a.indexOf('=')); }
+    if (a.startsWith('--') && value.includes(a.slice(2))) {
+      const v = inline ?? argv[++i];
+      if (v === undefined || v === '' || (inline === null && v.startsWith('--'))) throw new Error(`${a} needs a value`);
+      opts[a.slice(2)] = v;
+    } else if (inline !== null) throw new Error(`${a} takes no value`);
     else if (a.startsWith('--') && flags.includes(a.slice(2))) set.add(a.slice(2));
     else if (a === '-h') set.add('help');
     else if (a.startsWith('--') && a !== '--help') throw new Error(`unknown option ${a}`);
@@ -48,6 +91,20 @@ export function parseArgs(argv, { value = [], flags = [] } = {}) {
     else pos.push(a);
   }
   return { pos, opts, flags: set };
+}
+// "--widths 390,1440" -> [390, 1440]; "--themes light,dark" -> ['light', 'dark']. A value that cannot be used is an error,
+// so a typo never turns into an empty run that prints nothing.
+export function listOf(text, fallback, kind) {
+  const items = String(text ?? fallback).split(',').map((x) => x.trim()).filter(Boolean);
+  if (!items.length) throw new Error(`--${kind} is empty`);
+  if (kind === 'widths') {
+    const bad = items.filter((x) => !/^\d+$/.test(x) || Number(x) < 200 || Number(x) > 4000);
+    if (bad.length) throw new Error(`--widths takes pixel widths from 200 to 4000, such as 390,1440 (not ${bad.join(', ')})`);
+    return items.map(Number);
+  }
+  const bad = items.filter((x) => x !== 'light' && x !== 'dark');
+  if (bad.length) throw new Error(`--themes takes light, dark or light,dark (not ${bad.join(', ')})`);
+  return items;
 }
 
 export function loadJson(file, label = path.basename(file)) {
@@ -78,8 +135,20 @@ export function targets(routes) {
 export function loadRoutes(file) {
   const doc = loadJson(file, 'routes.json');
   if (!Array.isArray(doc.routes) || doc.routes.length === 0) throw new Error('routes.json: needs a non-empty "routes" array');
+  doc.routes.forEach(checkRoute);
+  if (doc.site !== undefined && (typeof doc.site !== 'object' || doc.site === null || Array.isArray(doc.site))) throw new Error('routes.json: "site" must be an object');
   const routes = doc.routes.map((r) => ({ parent: null, actions: [], states: [], links: [], indexable: true, ...r }));
   return { site: doc.site || {}, routes };
+}
+// The types every checker relies on, so a wrong one is a message here instead of a crash (or nonsense) later.
+function checkRoute(r, i) {
+  if (!r || typeof r !== 'object' || Array.isArray(r)) throw new Error(`routes.json: route ${i + 1} must be an object`);
+  const at = `routes.json: route "${r.id ?? i + 1}"`, isStr = (v) => typeof v === 'string';
+  for (const k of ['id', 'path', 'template', 'title', 'parent']) if (r[k] !== undefined && r[k] !== null && !isStr(r[k])) throw new Error(`${at}: "${k}" must be a string`);
+  if (r.links !== undefined && !(Array.isArray(r.links) && r.links.every(isStr))) throw new Error(`${at}: "links" must be a list of route ids, such as ["pricing"]`);
+  for (const k of ['states', 'actions']) if (r[k] !== undefined && !(Array.isArray(r[k]) && r[k].every((s) => s && typeof s === 'object'))) throw new Error(`${at}: "${k}" must be a list of objects`);
+  if (r.indexable !== undefined && typeof r.indexable !== 'boolean') throw new Error(`${at}: "indexable" must be true or false`);
+  if (r.primaryAction !== undefined && r.primaryAction !== null && !(typeof r.primaryAction === 'object' && isStr(r.primaryAction.label))) throw new Error(`${at}: "primaryAction" must be an object with a "label"`);
 }
 export const homeOf = (routes) => routes.find((r) => r.path === '/') || routes.find((r) => r.id === 'home') || routes[0];
 
@@ -90,6 +159,13 @@ export function routeFile(siteDir, routePath) {
   const tries = routePath.endsWith('/') || rel === '' ? [path.join(rel, 'index.html')] : path.extname(rel) ? [rel] : [`${rel}.html`, path.join(rel, 'index.html')];
   for (const t of tries) { const f = path.join(siteDir, t); if (fs.existsSync(f) && fs.statSync(f).isFile()) return f; }
   return null;
+}
+
+// The wireframe for a template: wireframes/<template>.html, or wireframes/index.html when the site has one template.
+// check_plan and check_layout --wireframes both use this, so the plan never accepts a file the layout check cannot open.
+export function wireframeFile(wfDir, template, routes) {
+  const single = new Set(routes.map((r) => r.template)).size === 1;
+  return [`${template}.html`, single ? 'index.html' : null].filter(Boolean).map((n) => path.join(wfDir, n)).find((p) => fs.existsSync(p) && fs.statSync(p).isFile()) || null;
 }
 
 // ---- markdown pieces the stage files use ----
@@ -123,12 +199,15 @@ export function mdSections(md) {
 }
 
 // Print results the way the other checkers print theirs. `only` limits which lines are listed; the counts cover all of them.
-export function printResults(title, results, extra = '', only = null) {
+// PENDING lines are always listed, whatever `only` says: a check that did not run must never be hidden.
+export function printResults(title, results, extra = '', only = null, { strict = false } = {}) {
   console.log(`\n${title}${extra ? '  ' + extra : ''}\n`);
-  for (const r of only ? results.filter(only) : results) {
+  for (const r of only ? results.filter((x) => x.outcome === 'PENDING' || only(x)) : results) {
     const where = [r.route, r.state, r.viewport].filter(Boolean).join(' ');
     console.log(`${r.outcome.padEnd(7)} ${r.id}${where ? `  [${where}]` : ''}  (${r.reason})`);
   }
-  const n = summarize(results);
-  console.log(`\nRESULT: ${n.FAIL ? 'FAIL' : 'PASS'}   ${n.PASS} pass, ${n.FAIL} fail, ${n.REVIEW} review, ${n.PENDING} pending`);
+  const n = summarize(results), v = verdict(results, { strict });
+  console.log(`\nRESULT: ${v}   ${n.PASS} pass, ${n.FAIL} fail, ${n.REVIEW} review, ${n.PENDING} pending`);
+  if (!results.length) console.log('Nothing was checked, so this is not a pass.');
+  else if (n.PENDING && !n.FAIL) console.log(`${n.PENDING} check${n.PENDING === 1 ? ' has' : 's have'} no evidence yet (PENDING), so this is not a pass.${strict ? '' : ' --strict exits 1 on them.'}`);
 }

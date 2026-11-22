@@ -21,7 +21,7 @@ The router (`scripts/route.mjs`) prints the pattern pages that match a brief; th
 | [GSAP's gallery of sites](https://gsap.com/showcase/) | Sites built with GSAP, so you can tell which effects are scroll, text or pin | Terms not read; each site is its maker's work: study only | GSAP, scroll story, pinned |
 | [Framer gallery](https://www.framer.com/community/gallery/) | Sites built in a no-code tool; see what a non-coder can reach and what looks generic | Terms not read; each site is its maker's work: study only | template, no-code, "made in framer" |
 | [Codrops](https://tympanus.net/codrops/) and its [Creative Hub](https://tympanus.net/codrops/hub/) | Tutorials with demos of scroll, type, WebGL and hover effects, written for developers | Articles are Codrops'. Demo repos carry their own licences (the two read for RESOURCES.md are MIT): check each repo before reuse. (Scripts get HTTP 403; a browser loads it) | tutorial, hover effect, WebGL effect, scroll effect |
-| [The Pudding: how to implement scrollytelling](https://pudding.cool/process/how-to-implement-scrollytelling/) | Six ways to build scroll stories, compared; the reason `patterns/step-scrollytelling.md` is step-triggered by default | Article: read, do not reproduce | scrollytelling, story, data story, chapters |
+| [The Pudding: how to implement scrollytelling](https://pudding.cool/process/how-to-implement-scrollytelling/) | Six ways to build scroll stories, compared, including step triggers and scroll-linked scenes | Article: read, do not reproduce | scrollytelling, story, data story, chapters |
 
 ## 2. Component libraries (read for the pattern, rebuild with the kit)
 
@@ -74,7 +74,7 @@ Use these first. A browser feature costs no library and cannot fail to load.
 | [Theatre.js](https://www.theatrejs.com/) ([repo](https://github.com/theatre-js/theatre)) | A visual timeline editor for tuning camera and object keyframes by hand | Apache-2.0. Last push Aug 2024: stale, use only when a person will tune by hand | keyframes editor, camera path, timeline |
 | [Lottie](https://lottie.airbnb.tech/) ([lottie-web](https://github.com/airbnb/lottie-web)), [dotLottie](https://dotlottie.io/) ([repo](https://github.com/LottieFiles/dotlottie-web)), [LottieFiles](https://lottiefiles.com/), [LottieFiles docs](https://docs.lottiefiles.com/en) | Playing After Effects exports as small vector animations; the dotLottie format and player | Players MIT. Each animation file has its own licence: check before use | Lottie, After Effects, animated icon, JSON animation |
 | [Rive](https://rive.app/) with its [docs](https://rive.app/docs/getting-started/introduction), the [marketplace](https://rive.app/marketplace/) and the [runtime](https://github.com/rive-app/rive-wasm) | Interactive vector animation with state machines (a button that reacts, a character that follows) | Runtime MIT. Each `.riv` file has its own licence | Rive, interactive illustration, state machine, mascot |
-| [Scrollama](https://github.com/russellsamora/scrollama) | The "step nearest a line is active" model for scroll stories | MIT; the kit re-implements the idea in ten lines | scrollytelling, steps |
+| [Scrollama](https://github.com/russellsamora/scrollama) | The "step nearest a line is active" model for scroll stories | MIT; a library, not loaded by the kit | scrollytelling, steps |
 
 ## 5. Shaders
 

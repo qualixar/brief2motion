@@ -17,6 +17,14 @@ test('classify: 2xx ok, 403 and 429 are a bot check, everything else is dead', (
   assert.equal(classify(403), 'challenge'); assert.equal(classify(429), 'challenge');
   for (const s of [301, 404, 410, 500, 525, 0]) assert.equal(classify(s), 'dead', String(s));
 });
+test('classify: a 403 is a bot check only when it shows the signs of one; a plain 403 is forbidden and counts like dead', () => {
+  assert.equal(classify(403, { 'cf-mitigated': 'challenge', server: 'cloudflare' }, '<title>Just a moment...</title>'), 'challenge');
+  assert.equal(classify(403, { server: 'cloudflare' }, 'Bad request'), 'challenge', 'a 403 from a bot-protection edge');
+  assert.equal(classify(403, { server: 'nginx' }, '<title>Access denied</title>'), 'challenge');
+  assert.equal(classify(403, { server: 'nginx' }, '<title>403 Forbidden</title>'), 'forbidden');
+  assert.equal(classify(403, {}, ''), 'forbidden');
+  assert.equal(classify(429, { server: 'nginx' }), 'challenge');
+});
 test('web-references.md: dated, sectioned, every row carries a link, terms and brief words', () => {
   assert.match(REFS, /22 Nov 2026/);
   assert.match(REFS, /Study, never copy/);

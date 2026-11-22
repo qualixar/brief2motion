@@ -1,0 +1,4 @@
+body { margin: 0; font: 1rem/1.55 system-ui, sans-serif; color: #1c2230; background: #faf7f0; }
+main { max-width: 50ch; margin: 0 auto; padding: 24px 18px; }
+a.btn { display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; background: #4b3fbf; color: #fff; border-radius: 8px; text-decoration: none; }
+:focus-visible { outline: 3px solid #1b4dff; outline-offset: 3px; }

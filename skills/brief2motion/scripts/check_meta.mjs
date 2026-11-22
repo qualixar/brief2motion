@@ -8,9 +8,14 @@
 //   meta.og           og:title, og:type, og:image, og:url present and og:url equals the canonical (FAIL); og:description and og:image:alt (REVIEW)
 //   meta.og-image     the og:image is an absolute address, its file is in site/, at least 600 x 315 px (FAIL); about 1.91:1 (REVIEW)
 //   meta.robots       an indexable route has no noindex; a route with "indexable": false has one (FAIL)
-//   meta.robots-txt   robots.txt exists and does not block the whole site (FAIL if it does, REVIEW if missing)
-//   meta.sitemap      more than one route: sitemap.xml lists exactly the indexable routes (FAIL); one route: not needed
-// An image on another host cannot be read from here and is PENDING. Exit 0 when nothing FAILs, 1 on a FAIL, 2 if it cannot run.
+//   meta.robots-txt   robots.txt exists and its group for every crawler (*) does not block the whole site (FAIL if it does,
+//                     REVIEW if missing); a group that blocks one named crawler is fine
+//   meta.sitemap      more than one route: sitemap.xml lists exactly the indexable routes at absolute addresses (FAIL); one
+//                     route: not needed
+// An image on another host cannot be read from here and is PENDING; so is everything when the site is not built yet.
+// The run's verdict (_design.mjs verdict): FAIL on any FAIL or when nothing was checked (exit 1); INCOMPLETE when
+// something is PENDING (no evidence yet), never printed as PASS (exit 0, 1 with --strict); PASS otherwise (exit 0, 1 with
+// --strict when anything needs REVIEW). Exit 2 when the tool cannot run.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -20,6 +25,22 @@ import { imageSize } from './_measure.mjs';
 
 const isAbs = (u) => /^https?:\/\//i.test(u || '');
 const join = (origin, p) => `${String(origin).replace(/\/$/, '')}${p}`;
+
+// Does robots.txt shut every crawler out of the whole site? Only the group whose User-agent lines include "*" counts: a
+// file that lets everyone in and blocks one named crawler (an AI bot, say) is fine. A group is one or more User-agent
+// lines followed by its rules. "Disallow: /" (or "/*") blocks the site unless the same group also has "Allow: /".
+export function robotsBlocksAll(text) {
+  const groups = []; let cur = null, lastWasAgent = false;
+  for (const raw of String(text).split(/\r?\n/)) {
+    const line = raw.replace(/#.*$/, '').trim(), m = line.match(/^([A-Za-z-]+)\s*:\s*(.*)$/);
+    if (!m) continue;
+    const key = m[1].toLowerCase(), val = m[2].trim();
+    if (key === 'user-agent') { if (!lastWasAgent) { cur = { agents: [], rules: [] }; groups.push(cur); } cur.agents.push(val.toLowerCase()); lastWasAgent = true; }
+    else { lastWasAgent = false; if (cur && (key === 'allow' || key === 'disallow')) cur.rules.push([key, val]); }
+  }
+  const rules = groups.filter((g) => g.agents.includes('*')).flatMap((g) => g.rules);
+  return rules.some(([k, v]) => k === 'disallow' && (v === '/' || v === '/*')) && !rules.some(([k, v]) => k === 'allow' && (v === '/' || v === '/*'));
+}
 
 export function metaChecks(project) {
   const f = typeof project === 'string' ? projectFiles(project) : project;
@@ -51,7 +72,7 @@ export function metaChecks(project) {
     else if (!isAbs(img)) out.push(result('meta.og-image', 'FAIL', { ...at, measured: img, reason: `${img} is not an absolute address; previews need https://...` }));
     else if (!origin || !img.startsWith(origin.replace(/\/$/, '') + '/')) out.push(result('meta.og-image', 'PENDING', { ...at, measured: img, reason: 'the image is on another host: open it by hand and check its size' }));
     else {
-      const file2 = path.join(f.site, decodeURIComponent(img.slice(origin.replace(/\/$/, '').length)));
+      const file2 = path.join(f.site, decodeURIComponent(img.slice(origin.replace(/\/$/, '').length).replace(/[?#].*$/, '')));   // og.png?v=2 is the file og.png
       const buf = fs.existsSync(file2) ? fs.readFileSync(file2) : null, size = buf && imageSize(buf);
       if (!buf) out.push(result('meta.og-image', 'FAIL', { ...at, measured: img, reason: `${path.relative(f.site, file2)} is not in the site folder` }));
       else if (!size) out.push(result('meta.og-image', 'FAIL', { ...at, measured: img, reason: 'not a PNG, JPEG, WebP or GIF file (previews need a raster image)' }));
@@ -66,8 +87,8 @@ export function metaChecks(project) {
   }
 
   const rtxt = readText(path.join(f.site, 'robots.txt'));
-  const blocksAll = rtxt !== null && /user-agent:\s*\*[\s\S]*?\n\s*disallow:\s*\/\s*(\n|$)/i.test(rtxt) && routes.some((r) => r.indexable !== false);
-  out.push(result('meta.robots-txt', blocksAll ? 'FAIL' : rtxt === null ? 'REVIEW' : 'PASS', { evidence: 'robots.txt', reason: blocksAll ? 'robots.txt has "Disallow: /" for every crawler' : rtxt === null ? 'no robots.txt (a missing file allows everything; add one that points at the sitemap)' : 'robots.txt does not block the site' }));
+  const blocksAll = rtxt !== null && robotsBlocksAll(rtxt) && routes.some((r) => r.indexable !== false);
+  out.push(result('meta.robots-txt', blocksAll ? 'FAIL' : rtxt === null ? 'REVIEW' : 'PASS', { evidence: 'robots.txt', reason: blocksAll ? 'robots.txt has "Disallow: /" in the group for every crawler (User-agent: *)' : rtxt === null ? 'no robots.txt (a missing file allows everything; add one that points at the sitemap)' : 'robots.txt does not block the site' }));
 
   const indexable = routes.filter((r) => r.indexable !== false);
   const smFile = path.join(f.site, 'sitemap.xml'), sm = readText(smFile);
@@ -76,8 +97,9 @@ export function metaChecks(project) {
   else {
     const locs = [...sm.matchAll(/<loc>\s*([^<]+?)\s*<\/loc>/g)].map((m) => m[1]);
     const wantLocs = indexable.map((r) => join(origin, r.path));
-    const absent = wantLocs.filter((u) => !locs.includes(u)), extra = locs.filter((u) => !wantLocs.includes(u));
-    out.push(result('meta.sitemap', absent.length || extra.length ? 'FAIL' : 'PASS', { evidence: 'sitemap.xml', measured: locs.length, threshold: wantLocs.length, reason: [...(absent.length ? [`missing ${absent.join(', ')}`] : []), ...(extra.length ? [`lists pages that should not be there: ${extra.join(', ')}`] : [])].join('; ') || `${locs.length} addresses, exactly the indexable routes` }));
+    const absent = wantLocs.filter((u) => !locs.includes(u)), extra = locs.filter((u) => !wantLocs.includes(u)), relative = locs.filter((u) => !isAbs(u));
+    if (relative.length || !origin) out.push(result('meta.sitemap', 'FAIL', { evidence: 'sitemap.xml', measured: locs.length, reason: relative.length ? `addresses that are not absolute (the sitemap protocol needs https://...): ${relative.slice(0, 4).join(', ')}` : 'set site.origin in routes.json: a sitemap lists absolute addresses' }));
+    else out.push(result('meta.sitemap', absent.length || extra.length ? 'FAIL' : 'PASS', { evidence: 'sitemap.xml', measured: locs.length, threshold: wantLocs.length, reason: [...(absent.length ? [`missing ${absent.join(', ')}`] : []), ...(extra.length ? [`lists pages that should not be there: ${extra.join(', ')}`] : [])].join('; ') || `${locs.length} addresses, exactly the indexable routes` }));
   }
   return out;
 }
@@ -91,8 +113,8 @@ if (process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.rea
   const f = projectFiles(args.pos[0], args.opts.site);
   let results;
   try { results = metaChecks(f); } catch (e) { console.error(`check_meta: ${e.message}`); process.exit(2); }
-  writeQa(path.resolve(args.opts.out || f.out), 'check_meta', results);
+  writeQa(path.resolve(args.opts.out || f.out), 'check_meta', results, {}, { site: f.site });
   if (args.flags.has('json')) console.log(JSON.stringify(results, null, 2));
-  else printResults('brief2motion meta check', results, f.site);
+  else printResults('brief2motion meta check', results, f.site, null, { strict: args.flags.has('strict') });
   process.exit(passes(results, { strict: args.flags.has('strict') }) ? 0 : 1);
 }

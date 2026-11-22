@@ -97,7 +97,7 @@ async function start() {
     });
   };
 
-  // the active step is the one whose middle is closest to a line 55% down the screen (the scrollama idea, in 10 lines)
+  // the active step is the one whose middle is closest to a line 55% down the screen
   document.documentElement.classList.add('js-story');
   const steps = $$('.step');
   onScroll((vh) => {

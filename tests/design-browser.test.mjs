@@ -1,16 +1,25 @@
 // Site mode, the checkers that drive Chrome: check_layout, check_a11y, check_journeys. Each runs from the command line on its
 // passing fixture (must exit 0) and on its failing one (must exit 1 and name the defects it was built to find). When no
-// browser can start the checker exits 2; the test is then skipped rather than failed.
+// browser can start the checker exits 2 and says so; the test is then skipped. Any other exit 2 is a crash and fails the test.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import { FIX, tmp, runChecker, outcomeOf } from './_design_helpers.mjs';
+import { FIX, tmp, runChecker, outcomeOf, noBrowser } from './_design_helpers.mjs';
 import { AXE, loadAxe } from '../skills/brief2motion/scripts/check_a11y.mjs';
 
 const run = (script, fixture, extra = [], env = {}) => runChecker(script, [path.join(FIX, ...fixture), '--out', tmp('out'), ...extra], { env });
-const noBrowser = (t, r) => { if (r.status === 2) { t.skip(`no browser could start: ${r.stderr.split('\n')[0]}`); return true; } return false; };
 
+test('the harness skips only when no browser could start; a checker that crashes fails the test', () => {
+  const skipped = [];
+  const t = { skip: (m) => skipped.push(m) };
+  assert.equal(noBrowser(t, { status: 0, stderr: '' }), false);
+  assert.equal(noBrowser(t, { status: 1, stderr: '' }), false);
+  assert.equal(noBrowser(t, { status: 2, stderr: 'Could not start a browser. Tried, in order:\n  Google Chrome: not found' }), true);
+  assert.equal(noBrowser(t, { status: 2, stderr: 'Could not install playwright-core. Run by hand:' }), true);
+  assert.equal(skipped.length, 2);
+  assert.throws(() => noBrowser(t, { status: 2, stderr: 'check_layout crashed: TypeError: x is not a function' }), /crashed:\ncheck_layout crashed: TypeError/);
+});
 test('check_layout: the passing page has no failure and nothing to review', (t) => {
   const r = run('check_layout.mjs', ['layout', 'pass']);
   if (noBrowser(t, r)) return;
@@ -59,7 +68,7 @@ test('check_a11y: the failing page fails axe rules (image alt, button name, labe
   for (const id of ['image-alt', 'button-name', 'label', 'color-contrast']) assert.deepEqual(outcomeOf(r.results, `a11y.axe.${id}`), ['FAIL', 'FAIL'], id);
   assert.deepEqual(outcomeOf(r.results, 'a11y.axe'), ['FAIL', 'FAIL'], 'the per-page summary fails too, so a report that shows only summaries still shows the failure');
 });
-test('check_a11y offline: the axe results are PENDING with a message, the keyboard walk still runs, and nothing is blamed on the page', (t) => {
+test('check_a11y offline: the axe results are PENDING, the run is INCOMPLETE (not PASS, and --strict fails), the keyboard walk still runs', (t) => {
   const r = run('check_a11y.mjs', ['a11y', 'pass'], [], { BRIEF2MOTION_OFFLINE: '1', BRIEF2MOTION_AXE_CACHE: tmp('empty') });
   if (noBrowser(t, r)) return;
   assert.equal(r.status, 0);
@@ -67,8 +76,21 @@ test('check_a11y offline: the axe results are PENDING with a message, the keyboa
   assert.match(r.results.find((x) => x.id === 'a11y.axe').reason, /axe-core not run: BRIEF2MOTION_OFFLINE is set/);
   assert.match(r.stderr, /axe-core skipped: .*keyboard walk still runs/);
   assert.deepEqual(outcomeOf(r.results, 'a11y.keyboard-primary'), ['PASS', 'PASS']);
+  const env = { BRIEF2MOTION_OFFLINE: '1', BRIEF2MOTION_AXE_CACHE: tmp('empty') };
+  const text = runChecker('check_a11y.mjs', [path.join(FIX, 'a11y', 'pass'), '--out', tmp('out')], { env, json: false });
+  assert.match(text.stdout, /RESULT: INCOMPLETE/, 'a run where axe did not run is not printed as a pass');
+  assert.doesNotMatch(text.stdout, /RESULT: PASS/);
+  assert.equal(runChecker('check_a11y.mjs', [path.join(FIX, 'a11y', 'pass'), '--out', tmp('out'), '--strict'], { env }).status, 1, '--strict fails when axe did not run');
 });
 
+test('check_a11y runs axe on a page with a strict Content-Security-Policy (no inline scripts allowed)', (t) => {
+  const r = run('check_a11y.mjs', ['a11y', 'csp']);
+  if (noBrowser(t, r)) return;
+  assert.equal(r.status, 0, `${r.stderr.slice(0, 400)} ${JSON.stringify(r.results?.filter((x) => x.outcome !== 'PASS'))}`);
+  if (outcomeOf(r.results, 'a11y.axe').includes('PENDING')) return t.diagnostic('axe-core could not be loaded (offline): axe assertions skipped');
+  assert.deepEqual(outcomeOf(r.results, 'a11y.axe'), ['PASS', 'PASS']);
+  assert.ok(r.results.find((x) => x.id === 'a11y.axe').measured >= 5, 'axe really ran its rules');
+});
 test('loadAxe verifies the pinned hash before it uses or keeps a file', async () => {
   const body = Buffer.from('window.axe = {};');
   const good = { ...AXE, integrity: `sha384-${(await import('node:crypto')).createHash('sha384').update(body).digest('base64')}` };

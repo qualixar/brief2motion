@@ -3,7 +3,7 @@
 //   node build_sitemap.mjs <project-dir> [--check] [--no-xml]
 // SITEMAP.md is generated, never edited by hand: it shows the route tree, what each page is for and where it leads.
 // sitemap.xml lists the indexable routes at their canonical address (routes.json "site.origin" + path); it is written
-// only when the site has more than one route. --check changes nothing and exits 1 when either file is out of date.
+// only when the site has more than one route, and refused (exit 2) when site.origin is missing. --check changes nothing and exits 1 when either file is out of date.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -44,7 +44,10 @@ if (process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.rea
   let doc;
   try { doc = loadRoutes(f.routes); } catch (e) { console.error(e.message); process.exit(2); }
   const want = [[path.join(f.root, 'SITEMAP.md'), sitemapMd(doc)]];
-  if (doc.routes.length > 1 && !args.flags.has('no-xml')) want.push([path.join(f.site, 'sitemap.xml'), sitemapXml(doc)]);
+  if (doc.routes.length > 1 && !args.flags.has('no-xml')) {
+    if (!/^https?:\/\/[^/]/i.test(doc.site.origin || '')) { console.error('build_sitemap: routes.json needs "site": { "origin": "https://..." } to write sitemap.xml (it lists absolute addresses). Add it, or pass --no-xml.'); process.exit(2); }
+    want.push([path.join(f.site, 'sitemap.xml'), sitemapXml(doc)]);
+  }
   let stale = 0;
   for (const [file, text] of want) {
     if (args.flags.has('check')) { if (readText(file) !== text) { stale++; console.error(`out of date: ${file}`); } else console.log(`current: ${file}`); }

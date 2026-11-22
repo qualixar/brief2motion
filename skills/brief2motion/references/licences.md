@@ -30,7 +30,7 @@ Source for GSAP terms: https://gsap.com/community/standard-license/ (the page li
 
 jsDelivr's `+esm` addresses are bundles it generates on request. They cannot carry an integrity hash, and they resolve a package's own dependencies at build time. Pin exact versions, and use them for demos and small pages; a real React project should install from npm and bundle.
 
-Code taken from other projects: none is copied into this repository. `NOTICE` at the repo root lists the projects whose published patterns shaped the kit and the examples, with their licences.
+Code from other projects: none is copied into this repository. `NOTICE` at the repo root lists the software a built site or a checker loads, and the fonts the guide embeds, with their licences.
 
 **Fonts.** The page uses system font stacks (Georgia for headings, the operating system's UI font for text), so no font file is downloaded and no request goes to a font service. If you add a web font, host the file yourself, keep its licence notice (Fraunces and Inter, for example, are under the SIL Open Font Licence 1.1), and add it to the notice below. Loading fonts from a third-party font service sends every visitor's IP address to that service, which in some regions needs consent.
 

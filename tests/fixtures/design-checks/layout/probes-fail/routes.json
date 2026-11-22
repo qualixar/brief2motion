@@ -1,0 +1,2 @@
+{ "site": { "name": "Probe fixture (fails)", "origin": "https://probes.example" },
+  "routes": [ { "id": "home", "path": "/", "template": "landing", "title": "Probe fixture (fails)", "links": [] } ] }

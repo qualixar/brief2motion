@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Probe fixture (passes)</title>
+<style>
+  body { margin: 0; font: 1rem/1.55 system-ui, sans-serif; color: #1c2230; background: #faf7f0; overflow-x: hidden; }
+  main { max-width: 50ch; margin: 0 auto; padding: 24px 18px; }
+  /* a crossfade carousel: the hidden slide's container is transparent, the text inside it has its own opacity of 1 */
+  .stage { position: relative; height: 120px; }
+  .slide { position: absolute; left: 0; right: 0; transition: opacity .3s; }
+  .slide.off { opacity: 0; top: 8px; } .slide.on { opacity: 1; top: 0; }
+  /* a card whose whole area is one link laid over its text (the stretched-link pattern) */
+  .card { position: relative; padding: 16px; border: 1px solid #ccc; margin-top: 24px; }
+  .card a.cover { position: absolute; inset: 0; }
+</style></head>
+<body><main>
+  <div class="stage"><div class="slide on"><p>The visible slide has its own words on a long line.</p></div><div class="slide off" aria-hidden="false"><p>The hidden slide waits for its turn.</p></div></div>
+  <div class="card"><h2>A card</h2><p>The whole card is a link, laid over this text on purpose.</p><a class="cover" href="#card" aria-label="Open the card"></a></div>
+</main></body></html>

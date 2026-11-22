@@ -12,13 +12,17 @@
 //   plan.states-declared    a form, search or checkout route declares the states it can be in
 //   plan.wireframes         each template has a wireframe and the primary action is on it
 //   plan.links-built        (needs site/) every declared link exists in the built page; every internal href lands somewhere
+//   plan.dev-panel          (needs site/) the dev-only ?tune panel (kit/tune.js, tune blocks) is not in the built site
 // Outcomes: PASS, FAIL, REVIEW (a person should look), PENDING (nothing to check yet, such as a site not built).
-// Exit 0 when nothing FAILs (--strict: nothing needs REVIEW either), 1 on a FAIL, 2 when the tool cannot run.
+// The run's verdict (_design.mjs verdict): FAIL on any FAIL or when nothing was checked (exit 1); INCOMPLETE when
+// something is PENDING (no evidence yet), never printed as PASS (exit 0, 1 with --strict); PASS otherwise (exit 0, 1 with
+// --strict when anything needs REVIEW). Exit 2 when the tool cannot run.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { parseArgs, loadRoutes, loadJson, readText, projectFiles, homeOf, routeFile, mdTable, mdSections, result, writeQa, passes, printResults } from './_design.mjs';
+import { parseArgs, loadRoutes, loadJson, readText, projectFiles, homeOf, routeFile, mdTable, mdSections, wireframeFile, result, writeQa, passes, printResults } from './_design.mjs';
 import { hrefs } from './_html.mjs';
+import { findDevTools } from './strip_tune.mjs';
 
 const PLACEHOLDER = /^(|-|\?|tbd|todo|n\/a|na|none|unknown|\.\.\.|xxx)$/i;
 const SOURCE_FORM = /^(drafted|brief|owner|measured|https?:|doc|spec|file|source|supplied|contract)/i;
@@ -27,7 +31,8 @@ const STATE_TEMPLATES = new Set(['form', 'search', 'checkout', 'listing', 'signu
 const IMAGE = /\.(png|jpe?g|webp|gif|avif|svg|mp4|webm)$/i;
 const rel = (p, root) => path.relative(root, p) || '.';
 
-const routePathOf = (href, from) => { try { const u = new URL(href, `http://x${from}`); return u.origin === 'http://x' ? u.pathname : null; } catch { return null; } };
+// An href -> the site path it leads to, decoded ("/menu%20files/" and "/%C3%BCber/" are the folders "menu files" and "über").
+const routePathOf = (href, from) => { try { const u = new URL(href, `http://x${from}`); return u.origin === 'http://x' ? decodeURIComponent(u.pathname) : null; } catch { return null; } };
 
 export function planChecks(project) {
   const f = typeof project === 'string' ? projectFiles(project) : project;
@@ -134,7 +139,7 @@ export function planChecks(project) {
   else {
     const problems = [];
     for (const tpl of new Set(routes.map((r) => r.template))) {
-      const file = [`${tpl}.html`, routes.length === 1 || new Set(routes.map((r) => r.template)).size === 1 ? 'index.html' : null].filter(Boolean).map((n) => path.join(f.wireframes, n)).find((p) => fs.existsSync(p));
+      const file = wireframeFile(f.wireframes, tpl, routes);
       if (!file) { problems.push(`no wireframe for template "${tpl}" (wireframes/${tpl}.html)`); continue; }
       const html = fs.readFileSync(file, 'utf8');
       for (const r of routes.filter((x) => x.template === tpl && x.primaryAction)) {
@@ -164,6 +169,9 @@ export function planChecks(project) {
       }
       for (const to of r.links) { const t = byId.get(to); if (t && ![...targets].some((p) => p === t.path)) problems.push(`${r.id}: declares a link to ${to} but ${rel(file, f.site)} has none`); }
     }
+    // the dev-only ?tune panel must not ship; check_site finds it too, but a site-mode run may never call check_site
+    const dev = findDevTools(f.site);
+    out.push(result('plan.dev-panel', dev.length ? 'FAIL' : 'PASS', { evidence: rel(f.site, f.root) + '/', measured: dev.length, reason: dev.length ? `the dev-only tuning panel is still in the site: ${dev.slice(0, 4).map((d) => `${d.file} (${d.why})`).join('; ')}. Run strip_tune.mjs site` : 'no tuning panel in the built site' }));
     out.push(result('plan.links-built', problems.length ? 'FAIL' : 'PASS', { evidence: rel(f.site, f.root) + '/', reason: [...new Set(problems)].join('; ') || 'every declared link is in the built pages and no internal link is broken' }));
   }
   return out;
@@ -179,8 +187,8 @@ if (process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.rea
   const f = projectFiles(args.pos[0], args.opts.site);
   try { results = planChecks(f); } catch (e) { console.error(`check_plan: ${e.message}`); process.exit(2); }
   const outDir = path.resolve(args.opts.out || f.out);
-  writeQa(outDir, 'check_plan', results);
+  writeQa(outDir, 'check_plan', results, {}, { site: f.siteBuilt ? f.site : null });
   if (args.flags.has('json')) console.log(JSON.stringify(results, null, 2));
-  else printResults('brief2motion plan check', results, f.root);
+  else printResults('brief2motion plan check', results, f.root, null, { strict: args.flags.has('strict') });
   process.exit(passes(results, { strict: args.flags.has('strict') }) ? 0 : 1);
 }

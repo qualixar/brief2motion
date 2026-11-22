@@ -4,6 +4,7 @@ html { -webkit-text-size-adjust: 100%; --focus: var(--color-focus); --focus-halo
 body { margin: 0; background: var(--color-canvas); color: var(--color-text); font: var(--font-size-body) / var(--font-leading-body) var(--font-family-text); }
 img, svg { max-width: 100%; }
 a { color: var(--color-action); text-underline-offset: 0.2em; }
+.link-alone { display: inline-block; padding-block: 4px; }   /* a link on a line of its own is a tap target, not a link in a sentence */
 .wrap { width: min(100% - 2 * var(--gutter-phone), 70rem); margin-inline: auto; }
 @media (min-width: 800px) { .wrap { width: min(100% - 2 * var(--gutter-wide), 70rem); } }
 h1, h2, h3 { font-family: var(--font-family-display); font-weight: 600; text-wrap: balance; margin: 0; }

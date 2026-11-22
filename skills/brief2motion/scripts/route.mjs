@@ -5,7 +5,7 @@
 //   echo "make my logo out of dust" | node route.mjs -
 // It is a keyword scorer over references/routing.json and references/styles.json, not a judge: it never sees the
 // product. Treat the answer as a first proposal, check it against the brief, and write the final choice and the
-// reason in SPEC.md. The brief's own words always win: if it names a library, a style or colours, use those.
+// reason in SPEC.md. Anything the brief states outright overrides it: a library, a style or colours it names are used as given.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';

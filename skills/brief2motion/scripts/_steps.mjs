@@ -5,7 +5,7 @@
 //   { "role": "status", "contains": "Check your inbox" } for things such as live regions, which have no name of their own.
 // A step is one of: { click: target } { fill: target, value } { press: "Enter", target? } { check: target }
 //   { select: target, value } { hover: target } { wait: ms (at most 2000) }.
-// An expectation is { url: "/start/" } (the path), { text: "..." } or { role, name } (visible), { focus: target }, or a list of them.
+// An expectation is { url: "/start/" } (the path; "/#when" also checks the anchor), { text: "..." } or { role, name } (visible), { focus: target }, or a list of them.
 
 const STEP_KEYS = ['click', 'fill', 'press', 'check', 'select', 'hover', 'wait'];
 
@@ -50,14 +50,14 @@ export async function runSteps(page, steps = [], { timeout = 4000 } = {}) {
 export async function checkExpect(page, expect, { timeout = 3000 } = {}) {
   for (const e of [].concat(expect || [])) {
     try {
-      if (e.url) await page.waitForFunction((p) => location.pathname === p, e.url, { timeout });
+      if (e.url) await page.waitForFunction((p) => (p.includes('#') ? location.pathname + location.hash : location.pathname) === p, e.url, { timeout });
       else if (e.focus) await page.waitForFunction(() => !!document.activeElement && document.activeElement !== document.body, null, { timeout }).then(async () => {
         const want = await locator(page, e.focus).elementHandle({ timeout });
         const same = await page.evaluate((el) => el === document.activeElement, want);
         if (!same) throw new Error(`focus is not on ${describe(e.focus)}`);
       });
       else await locator(page, e).waitFor({ state: 'visible', timeout });
-    } catch (err) { return { ok: false, reason: `expected ${e.url ? `path ${e.url}` : e.focus ? `focus on ${describe(e.focus)}` : describe(e)}${e.url ? ` (page is at ${await page.evaluate(() => location.pathname)})` : ' to be visible'}` }; }
+    } catch (err) { return { ok: false, reason: `expected ${e.url ? `path ${e.url}` : e.focus ? `focus on ${describe(e.focus)}` : describe(e)}${e.url ? ` (page is at ${await page.evaluate(() => location.pathname + location.hash)})` : ' to be visible'}` }; }
   }
   return { ok: true, reason: '' };
 }
@@ -81,14 +81,28 @@ export async function ready(page, { ms = 600, waitMotion = true } = {}) {
   }, null, { timeout: 4000, polling: 100 }).catch(() => {});
 }
 
-// Opens a route and, for a declared state, performs its steps. Returns { ok, error }.
+// Loads a page and says whether it is one: an answer of 400 or more (a route with no file is a 404) or a body that is
+// not HTML is not a page, and measuring it would report its error text as a passing layout. Returns { ok, error }.
+export async function loadPage(page, url) {
+  const resp = await page.goto(url, { waitUntil: 'load', timeout: 45000 });
+  const at = new URL(url).pathname;
+  if (!resp) return { ok: false, error: `${at} gave no response` };
+  if (resp.status() >= 400) return { ok: false, error: `${at} answered ${resp.status()}: there is no page there` };
+  const type = (resp.headers()['content-type'] || '').toLowerCase();
+  if (!/^(text\/html|application\/xhtml\+xml)/.test(type)) return { ok: false, error: `${at} is not an HTML page (${type || 'no content type'})` };
+  return { ok: true, error: null };
+}
+
+// Opens a route and, for a declared state, performs its steps. Returns { ok, error, loaded }: loaded is false when the
+// page itself did not load (see loadPage), true when it loaded and a state's steps could not be done.
 export async function openTarget(page, base, target, opts = {}) {
-  await page.goto(new URL(target.path, base).href, { waitUntil: 'load', timeout: 45000 });
+  const load = await loadPage(page, new URL(target.path, base).href);
+  if (!load.ok) return { ok: false, error: load.error, loaded: false };
   await ready(page, opts);
   if (target.state?.steps?.length) {
     const r = await runSteps(page, target.state.steps);
-    if (!r.ok) return { ok: false, error: r.error };
+    if (!r.ok) return { ok: false, error: r.error, loaded: true };
     await page.waitForTimeout(450);
   }
-  return { ok: true, error: null };
+  return { ok: true, error: null, loaded: true };
 }
