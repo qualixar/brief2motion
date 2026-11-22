@@ -60,6 +60,7 @@ h1 { font: 700 clamp(2.3rem, 6vw, 5.4rem)/1 var(--display); letter-spacing: -.02
 .water::after { content: ""; position: absolute; inset: 0; background: var(--water); transform-origin: bottom; transform: scaleY(var(--fill, .8)); }
 .pots li:nth-child(1) { --fill: .9; } .pots li:nth-child(2) { --fill: .75; } .pots li:nth-child(3) { --fill: .6; } .pots li:nth-child(4) { --fill: .5; } .pots li:nth-child(5) { --fill: .08; }
 @media (max-width: 560px) { .pots { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; } .pots li span:last-child { font-size: 11px; } }
+@media (max-width: 420px) { .pots { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 28px; } }   /* five names do not fit in a row at 320 px: three and two */
 
 /* Native scroll-driven animation: the water level is tied to how far the row has travelled up the screen.
    No JavaScript. Browsers without animation-timeline, and visitors with reduced motion, see the filled pots. */
