@@ -1,0 +1,5 @@
+{ "site": { "name": "A11y edge cases", "origin": "https://a11y-edge.example" },
+  "routes": [
+    { "id": "home", "path": "/", "template": "landing", "title": "A11y edge cases", "primaryAction": { "id": "finish", "label": "Finish", "role": "link" }, "links": ["missing"] },
+    { "id": "missing", "path": "/missing/", "parent": "home", "template": "page", "title": "A page without its primary action", "primaryAction": { "id": "buy", "label": "Buy now", "role": "link" }, "links": ["home"] }
+  ] }

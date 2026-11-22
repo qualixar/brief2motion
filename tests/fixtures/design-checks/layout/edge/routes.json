@@ -1,0 +1,2 @@
+{ "site": { "name": "Layout edge cases", "origin": "https://edge.example" },
+  "routes": [ { "id": "home", "path": "/", "template": "landing", "title": "Layout edge cases", "primaryAction": { "id": "go", "label": "Go ahead", "role": "link" }, "links": [] } ] }

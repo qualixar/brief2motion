@@ -10,6 +10,9 @@ All notable changes to brief2motion. The format follows [Keep a Changelog](https
 - `references/page-blueprints.md`, `references/design-review.md`, and sections 10 to 15 of `design-fundamentals.md` (type, measure, colour roles, images, responsive sweep, forms and states, in numbers).
 - `examples/larkspur`: a three-page SaaS launch site for a made-up product, built through every stage, with its stage files, `qa.json` and `site-report.json`.
 
+### Fixed
+- The older examples now pass the site-mode checkers: every example page carries a canonical link, `og:url` and a 1200 x 630 `og:image` (halvorsen also a sitemap and robots.txt); relay's step logs wrap instead of scrolling sideways and its headline settles before `ready`; sprout's pots wrap to three and two at 320 px; halden-one's keyboard focus is no longer smooth-scrolled; tidewater and keeling keep text contrast at 3:1 or 4.5:1 while dimmed, and tidewater's sideways gallery is a labelled, focusable region.
+
 ### Changed
 - The layout and tap-target probes moved from `check_site.mjs` into `scripts/_probes.mjs` (same code). A radio button or checkbox with a label is now measured by its label, which takes the click.
 

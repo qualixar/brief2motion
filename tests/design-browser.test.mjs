@@ -57,6 +57,7 @@ test('check_a11y: the failing page fails axe rules (image alt, button name, labe
   assert.deepEqual(outcomeOf(r.results, 'a11y.keyboard-primary'), ['FAIL', 'FAIL'], 'tabindex=-1 puts the primary action out of reach');
   if (outcomeOf(r.results, 'a11y.axe').includes('PENDING')) return t.diagnostic('axe-core could not be loaded (offline): axe assertions skipped');
   for (const id of ['image-alt', 'button-name', 'label', 'color-contrast']) assert.deepEqual(outcomeOf(r.results, `a11y.axe.${id}`), ['FAIL', 'FAIL'], id);
+  assert.deepEqual(outcomeOf(r.results, 'a11y.axe'), ['FAIL', 'FAIL'], 'the per-page summary fails too, so a report that shows only summaries still shows the failure');
 });
 test('check_a11y offline: the axe results are PENDING with a message, the keyboard walk still runs, and nothing is blamed on the page', (t) => {
   const r = run('check_a11y.mjs', ['a11y', 'pass'], [], { BRIEF2MOTION_OFFLINE: '1', BRIEF2MOTION_AXE_CACHE: tmp('empty') });

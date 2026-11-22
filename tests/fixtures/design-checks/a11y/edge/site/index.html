@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>A11y edge cases</title>
+<style>
+  body { margin: 0; font: 1rem/1.55 system-ui, sans-serif; color: #1c2230; background: #fff; }
+  main { max-width: 50ch; margin: 0 auto; padding: 24px 18px; }
+  ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 16px; }
+  a { display: inline-block; min-height: 24px; }
+  :focus-visible { outline: 3px solid #1b4dff; outline-offset: 3px; }
+  .photo { color: #fff; padding: 12px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='60'%3E%3Cdefs%3E%3ClinearGradient id='g'%3E%3Cstop offset='0' stop-color='%23000'/%3E%3Cstop offset='1' stop-color='%23fff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='200' height='60' fill='url(%23g)'/%3E%3C/svg%3E"); background-size: cover; }
+</style></head>
+<body><main>
+  <h1>A page with a long run of links</h1>
+  <p class="photo">White text over a picture whose brightness changes: contrast cannot be decided by a tool.</p>
+  <ul><li><a href="#n1">Item 1</a></li><li><a href="#n2">Item 2</a></li><li><a href="#n3">Item 3</a></li><li><a href="#n4">Item 4</a></li><li><a href="#n5">Item 5</a></li><li><a href="#n6">Item 6</a></li><li><a href="#n7">Item 7</a></li><li><a href="#n8">Item 8</a></li><li><a href="#n9">Item 9</a></li><li><a href="#n10">Item 10</a></li><li><a href="#n11">Item 11</a></li><li><a href="#n12">Item 12</a></li><li><a href="#n13">Item 13</a></li><li><a href="#n14">Item 14</a></li><li><a href="#n15">Item 15</a></li><li><a href="#n16">Item 16</a></li><li><a href="#n17">Item 17</a></li><li><a href="#n18">Item 18</a></li><li><a href="#n19">Item 19</a></li><li><a href="#n20">Item 20</a></li><li><a href="#n21">Item 21</a></li><li><a href="#n22">Item 22</a></li><li><a href="#n23">Item 23</a></li><li><a href="#n24">Item 24</a></li><li><a href="#n25">Item 25</a></li><li><a href="#n26">Item 26</a></li><li><a href="#n27">Item 27</a></li><li><a href="#n28">Item 28</a></li><li><a href="#n29">Item 29</a></li><li><a href="#n30">Item 30</a></li><li><a href="#n31">Item 31</a></li><li><a href="#n32">Item 32</a></li><li><a href="#n33">Item 33</a></li><li><a href="#n34">Item 34</a></li><li><a href="#n35">Item 35</a></li><li><a href="#n36">Item 36</a></li><li><a href="#n37">Item 37</a></li><li><a href="#n38">Item 38</a></li><li><a href="#n39">Item 39</a></li></ul>
+  <p><a href="#done">Finish</a></p>
+</main></body></html>

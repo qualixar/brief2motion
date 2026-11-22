@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Layout edge cases</title>
+<style>
+  body { margin: 0; font: 16px/1.5 system-ui, sans-serif; color: #1c2230; background: #faf7f0; }
+  main { padding: 16px; }
+  .ok24 { width: 24px; height: 24px; padding: 0; border: 1px solid #1c2230; background: #fff; }        /* exactly the minimum target */
+  .primary { display: inline-flex; align-items: center; height: 40px; padding: 0 16px; background: #4b3fbf; color: #fff; text-decoration: none; }   /* 40 px: allowed, but a phone prefers 44 */
+  .row button { display: inline-block; margin: 0; border: 1px solid #1c2230; width: 90px; height: 44px; background: #fff; }                          /* touching, not overlapping */
+  .card { position: relative; width: 200px; }
+  .card button { width: 200px; height: 60px; }
+  .badge { position: absolute; left: 10px; top: 4px; font-size: 12px; pointer-events: none; }                              /* text that sits inside another box */
+  .trunc { width: 10ch; overflow-x: auto; scrollbar-width: none; white-space: nowrap; text-overflow: ellipsis; font: 16px/1.5 monospace; }   /* a scroller, because the checker reports an overflow:hidden ellipsis as plain clipped text */
+  .short { max-width: 24ch; }
+  .spacer { height: 1500px; }
+  .partial { display: block; width: 100%; height: 44px; }
+  .bar { position: fixed; left: 0; bottom: 0; width: 40%; height: 120px; background: #1c2230; color: #fff; padding: 12px; box-sizing: border-box; }
+  :focus-visible { outline: 3px solid #1b4dff; outline-offset: 3px; }
+</style></head>
+<body><main>
+  <h1>Edge cases that sit exactly on a limit</h1>
+  <p><button class="ok24" aria-label="Exactly 24 pixels"></button> <a class="primary" href="#end">Go ahead</a></p>
+  <p>Read <a href="#end">the policy</a> now.</p>
+  <div class="row"><button>Left</button><button>Right</button></div>
+  <div class="card"><button>Buy</button><span class="badge">new</span></div>
+  <div class="trunc">A title that is much too long for its box</div>
+  <p class="short">This paragraph is set in a column of twenty-four characters, which is narrower than the forty-five a reader wants on a tablet or a desktop, and long enough to wrap onto many lines so the line length can be measured on it at every width.</p>
+  <div class="spacer"></div>
+  <a class="partial" href="#end" id="end">A link whose left part sits under the bar</a>
+</main>
+<div class="bar">Bar</div>
+</body></html>
