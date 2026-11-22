@@ -8,7 +8,7 @@
 
 <p align="center">
   <a href="https://github.com/qualixar/brief2motion/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/qualixar/brief2motion?style=flat&color=FF5A1F"></a>
-  <img alt="Version 1.0.0" src="https://img.shields.io/badge/version-1.0.0-FF5A1F">
+  <img alt="Version 1.1.0" src="https://img.shields.io/badge/version-1.1.0-FF5A1F">
   <a href="https://github.com/qualixar/brief2motion/actions/workflows/test.yml"><img alt="Tests" src="https://github.com/qualixar/brief2motion/actions/workflows/test.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="MIT licence" src="https://img.shields.io/badge/licence-MIT-16130F"></a>
   <img alt="Node 22 or newer" src="https://img.shields.io/badge/node-22%2B-16130F">
@@ -241,7 +241,7 @@ If a check fails, the skill fixes the page and checks again. It never relaxes a 
 
 ### Site mode: a whole site, or a page that must convert
 
-For a brief that asks for several pages, or for one page whose job is to get a visitor to do something, the skill first writes one short file per stage (`DISCOVERY.md`, `CONTENT.md`, `routes.json`, phone-first wireframes, `tokens.json`, `DESIGN.md`, `MOTION.md`; copies are in `skills/brief2motion/templates/site-mode/`), then builds, then runs checks beside `check_site.mjs`. Every record lands in `check/qa.json` as PASS, FAIL, REVIEW (a person must look) or PENDING (no evidence yet, such as a sign-up that ends at a fixture).
+For a brief that asks for several pages, or for one page whose job is to get a visitor to do something, the skill works in nine stages: discovery, content, routes, wireframes, tokens, design, motion, build, checks. Each of the first seven writes one short file (`DISCOVERY.md`, `CONTENT.md`, `routes.json`, phone-first wireframes, `tokens.json`, `DESIGN.md`, `MOTION.md`; copies are in `skills/brief2motion/templates/site-mode/`), then builds, then runs checks beside `check_site.mjs`. Every record lands in `check/qa.json` as PASS, FAIL, REVIEW (a person must look) or PENDING (no evidence yet, such as a sign-up that ends at a fixture).
 
 | Script | What it checks |
 |---|---|
@@ -252,7 +252,7 @@ For a brief that asks for several pages, or for one page whose job is to get a v
 | `check_journeys.mjs` | the journeys in `journeys.json`, written by role and name, on a phone and a desktop width |
 | `check_meta.mjs` | title, description, canonical, share image size, robots, `sitemap.xml` |
 
-Each checker is tested against a passing and a failing fixture in `tests/fixtures/design-checks/`. Automation covers part of the job: `references/design-review.md` is the rubric for the second reader, and [`examples/larkspur`](examples/larkspur/) shows the whole path on a made-up product.
+To run every check on the worked example, use `bash examples/larkspur/tools/run-checks.sh` (add `--no-perf` on a machine with no GPU). Each checker is tested against a passing and a failing fixture in `tests/fixtures/design-checks/`. Automation covers part of the job: `references/design-review.md` is the rubric for the second reader, and [`examples/larkspur`](examples/larkspur/) shows the whole path on a made-up product.
 
 Three test layers back this up: unit tests for the router, the kit and the measuring code; a real-browser smoke test per stack that proves each documented pattern does what it says (the poster really morphs between pages, keyboard reorder really moves the row, the canvas really changes with scroll); and the full check on every example.
 
@@ -271,6 +271,7 @@ Ten folders in [`examples/`](examples/), each with `BRIEF.md`, the site, and `si
 | [sprout](examples/sprout/) | CSS and JavaScript, Lottie | 27 of 27 |
 | [copper-no-7](examples/copper-no-7/) | the dust engine | 27 of 27, plus the dust engine's own check |
 | [style-atlas](examples/style-atlas/) | CSS | 27 of 27 |
+| [larkspur](examples/larkspur/) | site mode, CSS and JavaScript, three pages | 74 of 74, and 337 site-mode checks pass, 2 pending |
 
 Every product in the examples is made up, and each page says so. The one page with real numbers, `keeling`, takes them from NOAA's published file and links to it.
 

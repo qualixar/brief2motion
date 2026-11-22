@@ -3,7 +3,7 @@ name: brief2motion
 description: Turn a plain brief into a website with professional motion, measured in a real browser. Use when asked to build or animate a website, landing page, product launch page, portfolio, scroll story or data story; to add a hero animation, scroll animation, scrollytelling, parallax, page transitions, kinetic typography, micro-interactions, a 3D product viewer or turntable, particles or dust that form a product, logo, face or words, SVG or Lottie or Rive animation; to pick a visual style such as neubrutalism, glassmorphism, neumorphism, claymorphism, bento, Swiss or minimal; or to "make my site feel alive"; or to design a whole site or a page that must convert (site mode: discovery, content, routes, wireframes, tokens, design, then layout, accessibility, journey and meta checks). Chooses the motion stack (plain CSS and JavaScript, GSAP with ScrollTrigger and Lenis, Motion for vanilla or React, three.js or React Three Fiber, the View Transitions API, SVG, Lottie, Rive) and the style from the brief and says why, builds the page, serves it at a localhost address, then checks frame rate, phone layout, reduced motion, keyboard focus, contrast, no-WebGL and no-JavaScript fallbacks, fixes what fails, and can hand the page to brief2mp4 to become a video.
 ---
 
-# brief2motion 1.0.0
+# brief2motion 1.1.0
 
 A brief goes in. A working site comes out in `site/`, with `REPORT.md` proving every line of the brief with a measured number or a named screenshot, and an `http://localhost` address the user can open.
 
