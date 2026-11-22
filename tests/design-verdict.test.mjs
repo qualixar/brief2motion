@@ -38,6 +38,7 @@ test('qa.json carries the verdict, whether it is complete, and marks records fro
   writeQa(dir, 'check_a11y', [result('a11y.axe', 'PASS')], {}, { site });
   assert.deepEqual([read().verdict, read().complete, read().staleCheckers], ['PASS', true, []]);
   assert.ok(read().results.every((r) => r.when && r.siteHash), 'each record says when and on which build it was measured');
+  assert.ok(read().results.every((r) => !path.isAbsolute(r.site)), 'the folder is stored relative to qa.json, never as an absolute path');
   fs.writeFileSync(path.join(site, 'index.html'), '<p>two, a new build</p>');
   writeQa(dir, 'check_meta', [result('meta.title', 'PASS')], {}, { site });
   const q = read();
