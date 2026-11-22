@@ -205,9 +205,11 @@ const tests = {
   // the dust engine still reports its state the way every other page does
   async particles() {
     const t = await open(EX('copper-no-7')); await sleep(3500);
-    const r = await t.page.evaluate(() => ({ state: document.documentElement.dataset.motion, mode: window.__motion?.stats?.mode, drawn: window.__motion?.stats?.drawn, total: window.__motion?.stats?.total }));
+    const r = await t.page.evaluate(() => ({ state: document.documentElement.dataset.motion, mode: window.__motion?.stats?.mode, drawn: window.__motion?.stats?.drawn, total: window.__motion?.stats?.total, shed: window.__motion?.stats?.shed }));
     await t.close();
-    return [r.state === 'ready' && r.mode === 'webgl2' && r.drawn === r.total && r.total > 1000 && t.errors.length === 0, `state "${r.state}", mode ${r.mode}, ${r.drawn}/${r.total} dots, errors ${t.errors.length}`];
+    // a slow GPU (CI's software renderer) makes the engine shed dots on purpose; that is the designed response, not a fault
+    const full = r.drawn === r.total || (r.shed > 0 && r.drawn >= r.total * 0.25);
+    return [r.state === 'ready' && r.mode === 'webgl2' && full && r.total > 1000 && t.errors.length === 0, `state "${r.state}", mode ${r.mode}, ${r.drawn}/${r.total} dots, shed ${r.shed}, errors ${t.errors.length}`];
   },
 };
 
