@@ -1,0 +1,2 @@
+{ "site": { "name": "CSP fixture", "origin": "https://csp.example" },
+  "routes": [ { "id": "home", "path": "/", "template": "landing", "title": "A page with a strict Content-Security-Policy", "primaryAction": { "id": "go", "label": "Read the policy", "role": "link" }, "links": [] } ] }

@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+<title>A page with a strict Content-Security-Policy</title>
+<link rel="stylesheet" href="style.css"></head>
+<body><main><h1>Strict policy, still checkable</h1>
+<p>This page allows scripts only from its own origin, as a careful site does. The accessibility checker must still run axe-core on it.</p>
+<p><a class="btn" href="#policy">Read the policy</a></p>
+<p id="policy">No inline script and no script from another host may run here.</p></main>
+<script src="main.js"></script></body></html>

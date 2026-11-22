@@ -78,6 +78,14 @@ test('check_a11y offline: the axe results are PENDING with a message, the keyboa
   assert.deepEqual(outcomeOf(r.results, 'a11y.keyboard-primary'), ['PASS', 'PASS']);
 });
 
+test('check_a11y runs axe on a page with a strict Content-Security-Policy (no inline scripts allowed)', (t) => {
+  const r = run('check_a11y.mjs', ['a11y', 'csp']);
+  if (noBrowser(t, r)) return;
+  assert.equal(r.status, 0, `${r.stderr.slice(0, 400)} ${JSON.stringify(r.results?.filter((x) => x.outcome !== 'PASS'))}`);
+  if (outcomeOf(r.results, 'a11y.axe').includes('PENDING')) return t.diagnostic('axe-core could not be loaded (offline): axe assertions skipped');
+  assert.deepEqual(outcomeOf(r.results, 'a11y.axe'), ['PASS', 'PASS']);
+  assert.ok(r.results.find((x) => x.id === 'a11y.axe').measured >= 5, 'axe really ran its rules');
+});
 test('loadAxe verifies the pinned hash before it uses or keeps a file', async () => {
   const body = Buffer.from('window.axe = {};');
   const good = { ...AXE, integrity: `sha384-${(await import('node:crypto')).createHash('sha384').update(body).digest('base64')}` };

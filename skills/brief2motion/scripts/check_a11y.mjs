@@ -3,7 +3,8 @@
 //   node check_a11y.mjs <project-dir> [--site <dir>] [--out check] [--widths 390,1440] [--themes light,dark] [--strict] [--json]
 // axe-core (Deque Systems, MPL-2.0, https://github.com/dequelabs/axe-core) is fetched at CHECK TIME from cdn.jsdelivr.net at a
 // pinned version, verified against a SHA-384 integrity hash, kept in the checker's cache folder and injected into the page the
-// checker opens. The site under test never carries it and never requests it. Offline with nothing cached: the axe results are
+// checker opens (evaluated through the DevTools protocol, so a strict Content-Security-Policy on the page does not block it).
+// The site under test never carries it and never requests it. Offline with nothing cached: the axe results are
 // PENDING with a message saying so, and the keyboard walk still runs.
 //   a11y.axe.<rule>       a WCAG 2.0 to 2.2 A or AA rule that failed (FAIL), or that axe could not decide (REVIEW, for example
 //                         contrast over a picture); one result per rule, route, state and width
@@ -87,7 +88,10 @@ if (process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.rea
           if (!r.ok) { results.push(result(r.loaded ? 'state.reached' : 'page.loaded', 'FAIL', { ...at, reason: r.error })); continue; }
           if (!axe.ok) results.push(result('a11y.axe', 'PENDING', { ...at, reason: `axe-core not run: ${axe.reason}` }));
           else {
-            await page.addScriptTag({ content: axe.source });
+            // Evaluated through the DevTools protocol, not as a <script> tag: a page whose Content-Security-Policy forbids
+            // inline scripts would block the tag. The page's own policy stays in force for its own code. The source is the
+            // file whose SHA-384 loadAxe checked.
+            await page.evaluate(axe.source);
             const run = await page.evaluate((tags) => axe.run(document, { runOnly: { type: 'tag', values: tags }, resultTypes: ['violations', 'incomplete', 'passes'] }), AXE.tags);
             for (const v of run.violations) results.push(result(`a11y.axe.${v.id}`, 'FAIL', { ...at, measured: v.nodes.length, threshold: v.tags.filter((x) => /^wcag\d/.test(x)).join(' ') || v.tags[0], evidence: v.nodes[0]?.target?.[0] ?? null, reason: nodesText(v) }));
             for (const v of run.incomplete) results.push(result(`a11y.axe.${v.id}`, 'REVIEW', { ...at, measured: v.nodes.length, threshold: v.tags.filter((x) => /^wcag\d/.test(x)).join(' ') || v.tags[0], evidence: v.nodes[0]?.target?.[0] ?? null, reason: `axe could not decide: ${nodesText(v)}` }));
