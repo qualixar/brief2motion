@@ -10,12 +10,15 @@
 //   layout.line-length    body text runs 45 to 75 characters a line (the short end is only judged from 768, and not for text in columns or cards)  REVIEW
 //   layout.focus          Tab through the first 20 stops: none entirely covered or off screen                FAIL (partly covered: REVIEW)
 // With --wireframes the pages are wireframes/<template>.html (index.html for a one-template site), results go to wireframes/qa.json and full-page shots to
-// wireframes/shots/ at 390 and 1440. Otherwise shots go to <out>/shots/. Exit 0 when nothing FAILs, 1 on a FAIL, 2 if it cannot run.
+// wireframes/shots/ at 390 and 1440. Otherwise shots go to <out>/shots/.
+// The run's verdict (_design.mjs verdict): FAIL on any FAIL or when nothing was checked (exit 1); INCOMPLETE when
+// something is PENDING (no evidence yet), never printed as PASS (exit 0, 1 with --strict); PASS otherwise (exit 0, 1 with
+// --strict when anything needs REVIEW). Exit 2 when the tool cannot run.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { openSite, newPage } from './_common.mjs';
-import { parseArgs, loadRoutes, projectFiles, targets, wireframeFile, result, writeQa, passes, printResults } from './_design.mjs';
+import { parseArgs, loadRoutes, projectFiles, targets, wireframeFile, listOf, result, writeQa, passes, printResults } from './_design.mjs';
 import { LAYOUT_PROBE, TAP_PROBE, CLIP_PROBE, OVERLAP_PROBE, MEASURE_PROBE, FOCUS_PROBE } from './_probes.mjs';
 import { openTarget } from './_steps.mjs';
 import { typicalLineLength } from './_measure.mjs';
@@ -85,10 +88,8 @@ if (process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.rea
   if (args.flags.has('help')) { console.log(USAGE); process.exit(0); }
   if (!args.pos[0]) { console.error(USAGE); process.exit(2); }
   const wf = args.flags.has('wireframes'), f = projectFiles(args.pos[0], wf ? path.join(path.resolve(args.pos[0]), 'wireframes') : args.opts.site);
-  const themes = (args.opts.themes || 'light').split(',').map((x) => x.trim()).filter((x) => x === 'light' || x === 'dark');
-  const widths = (args.opts.widths || Object.keys(SIZES).join(',')).split(',').map(Number).filter(Boolean);
-  let doc;
-  try { doc = loadRoutes(f.routes); } catch (e) { console.error(`check_layout: ${e.message}`); process.exit(2); }
+  let doc, themes, widths;
+  try { themes = listOf(args.opts.themes, 'light', 'themes'); widths = listOf(args.opts.widths, Object.keys(SIZES).join(','), 'widths'); doc = loadRoutes(f.routes); } catch (e) { console.error(`check_layout: ${e.message}`); process.exit(2); }
   if (!f.siteBuilt) { console.error(`check_layout: no ${wf ? 'wireframes' : 'site'} folder at ${f.site}`); process.exit(2); }
   const outDir = path.resolve(args.opts.out || (wf ? f.wireframes : f.out)), shots = path.join(outDir, 'shots');
   fs.mkdirSync(shots, { recursive: true });
@@ -115,8 +116,8 @@ if (process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.rea
     }
   } catch (e) { console.error('check_layout crashed:', (e && e.stack) || e); code = 2; } finally { await session.close(); }
   if (code === 2) process.exit(2);
-  writeQa(outDir, 'check_layout', results, { browser: `Chrome ${session.version}` });
+  writeQa(outDir, 'check_layout', results, { browser: `Chrome ${session.version}` }, { site: f.site });
   if (args.flags.has('json')) console.log(JSON.stringify(results, null, 2));
-  else printResults(`brief2motion layout check${wf ? ' (wireframes)' : ''}`, results, `${doc.routes.length} routes, widths ${widths.join(', ')}, themes ${themes.join(', ')}${args.flags.has('all') ? '' : '  (PASS lines hidden; --all shows them)'}`, args.flags.has('all') ? null : (r) => r.outcome !== 'PASS');
+  else printResults(`brief2motion layout check${wf ? ' (wireframes)' : ''}`, results, `${doc.routes.length} routes, widths ${widths.join(', ')}, themes ${themes.join(', ')}${args.flags.has('all') ? '' : '  (PASS lines hidden; --all shows them)'}`, args.flags.has('all') ? null : (r) => r.outcome !== 'PASS', { strict: args.flags.has('strict') });
   process.exit(passes(results, { strict: args.flags.has('strict') }) ? 0 : 1);
 }

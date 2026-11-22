@@ -11,7 +11,10 @@
 //   journey.<id>              the steps ran and the expectation came true                                      FAIL otherwise
 //   journey.<id>.console      no console error or uncaught exception during the journey                          FAIL otherwise
 //   journey.<id>.integration  PENDING when the journey ends at a fixture: the interaction passed, the real service is not proven
-// A screenshot of where each journey ended is kept in <out>/shots/. Exit 0 when nothing FAILs, 1 on a FAIL, 2 if it cannot run.
+// A screenshot of where each journey ended is kept in <out>/shots/.
+// The run's verdict (_design.mjs verdict): FAIL on any FAIL or when nothing was checked (exit 1); INCOMPLETE when
+// something is PENDING (no evidence yet), never printed as PASS (exit 0, 1 with --strict); PASS otherwise (exit 0, 1 with
+// --strict when anything needs REVIEW). Exit 2 when the tool cannot run.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -65,8 +68,8 @@ if (process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.rea
     for (const j of js.journeys) for (const vpName of j.viewports || ['phone', 'desktop']) results.push(...await runJourney(session.browser, session.base, j, doc.routes, vpName, shots, session.version));
   } catch (e) { console.error('check_journeys crashed:', (e && e.stack) || e); code = 2; } finally { await session.close(); }
   if (code === 2) process.exit(2);
-  writeQa(outDir, 'check_journeys', results, { browser: `Chrome ${session.version}` });
+  writeQa(outDir, 'check_journeys', results, { browser: `Chrome ${session.version}` }, { site: f.site });
   if (args.flags.has('json')) console.log(JSON.stringify(results, null, 2));
-  else printResults('brief2motion journeys', results, `${js.journeys.length} journeys`);
+  else printResults('brief2motion journeys', results, `${js.journeys.length} journeys`, null, { strict: args.flags.has('strict') });
   process.exit(passes(results, { strict: args.flags.has('strict') }) ? 0 : 1);
 }

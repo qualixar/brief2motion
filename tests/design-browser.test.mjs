@@ -68,7 +68,7 @@ test('check_a11y: the failing page fails axe rules (image alt, button name, labe
   for (const id of ['image-alt', 'button-name', 'label', 'color-contrast']) assert.deepEqual(outcomeOf(r.results, `a11y.axe.${id}`), ['FAIL', 'FAIL'], id);
   assert.deepEqual(outcomeOf(r.results, 'a11y.axe'), ['FAIL', 'FAIL'], 'the per-page summary fails too, so a report that shows only summaries still shows the failure');
 });
-test('check_a11y offline: the axe results are PENDING with a message, the keyboard walk still runs, and nothing is blamed on the page', (t) => {
+test('check_a11y offline: the axe results are PENDING, the run is INCOMPLETE (not PASS, and --strict fails), the keyboard walk still runs', (t) => {
   const r = run('check_a11y.mjs', ['a11y', 'pass'], [], { BRIEF2MOTION_OFFLINE: '1', BRIEF2MOTION_AXE_CACHE: tmp('empty') });
   if (noBrowser(t, r)) return;
   assert.equal(r.status, 0);
@@ -76,6 +76,11 @@ test('check_a11y offline: the axe results are PENDING with a message, the keyboa
   assert.match(r.results.find((x) => x.id === 'a11y.axe').reason, /axe-core not run: BRIEF2MOTION_OFFLINE is set/);
   assert.match(r.stderr, /axe-core skipped: .*keyboard walk still runs/);
   assert.deepEqual(outcomeOf(r.results, 'a11y.keyboard-primary'), ['PASS', 'PASS']);
+  const env = { BRIEF2MOTION_OFFLINE: '1', BRIEF2MOTION_AXE_CACHE: tmp('empty') };
+  const text = runChecker('check_a11y.mjs', [path.join(FIX, 'a11y', 'pass'), '--out', tmp('out')], { env, json: false });
+  assert.match(text.stdout, /RESULT: INCOMPLETE/, 'a run where axe did not run is not printed as a pass');
+  assert.doesNotMatch(text.stdout, /RESULT: PASS/);
+  assert.equal(runChecker('check_a11y.mjs', [path.join(FIX, 'a11y', 'pass'), '--out', tmp('out'), '--strict'], { env }).status, 1, '--strict fails when axe did not run');
 });
 
 test('check_a11y runs axe on a page with a strict Content-Security-Policy (no inline scripts allowed)', (t) => {

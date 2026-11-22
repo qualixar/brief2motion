@@ -13,7 +13,9 @@
 //   plan.wireframes         each template has a wireframe and the primary action is on it
 //   plan.links-built        (needs site/) every declared link exists in the built page; every internal href lands somewhere
 // Outcomes: PASS, FAIL, REVIEW (a person should look), PENDING (nothing to check yet, such as a site not built).
-// Exit 0 when nothing FAILs (--strict: nothing needs REVIEW either), 1 on a FAIL, 2 when the tool cannot run.
+// The run's verdict (_design.mjs verdict): FAIL on any FAIL or when nothing was checked (exit 1); INCOMPLETE when
+// something is PENDING (no evidence yet), never printed as PASS (exit 0, 1 with --strict); PASS otherwise (exit 0, 1 with
+// --strict when anything needs REVIEW). Exit 2 when the tool cannot run.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -179,8 +181,8 @@ if (process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.rea
   const f = projectFiles(args.pos[0], args.opts.site);
   try { results = planChecks(f); } catch (e) { console.error(`check_plan: ${e.message}`); process.exit(2); }
   const outDir = path.resolve(args.opts.out || f.out);
-  writeQa(outDir, 'check_plan', results);
+  writeQa(outDir, 'check_plan', results, {}, { site: f.siteBuilt ? f.site : null });
   if (args.flags.has('json')) console.log(JSON.stringify(results, null, 2));
-  else printResults('brief2motion plan check', results, f.root);
+  else printResults('brief2motion plan check', results, f.root, null, { strict: args.flags.has('strict') });
   process.exit(passes(results, { strict: args.flags.has('strict') }) ? 0 : 1);
 }

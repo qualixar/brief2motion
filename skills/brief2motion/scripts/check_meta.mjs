@@ -10,7 +10,10 @@
 //   meta.robots       an indexable route has no noindex; a route with "indexable": false has one (FAIL)
 //   meta.robots-txt   robots.txt exists and does not block the whole site (FAIL if it does, REVIEW if missing)
 //   meta.sitemap      more than one route: sitemap.xml lists exactly the indexable routes (FAIL); one route: not needed
-// An image on another host cannot be read from here and is PENDING. Exit 0 when nothing FAILs, 1 on a FAIL, 2 if it cannot run.
+// An image on another host cannot be read from here and is PENDING; so is everything when the site is not built yet.
+// The run's verdict (_design.mjs verdict): FAIL on any FAIL or when nothing was checked (exit 1); INCOMPLETE when
+// something is PENDING (no evidence yet), never printed as PASS (exit 0, 1 with --strict); PASS otherwise (exit 0, 1 with
+// --strict when anything needs REVIEW). Exit 2 when the tool cannot run.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -91,8 +94,8 @@ if (process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.rea
   const f = projectFiles(args.pos[0], args.opts.site);
   let results;
   try { results = metaChecks(f); } catch (e) { console.error(`check_meta: ${e.message}`); process.exit(2); }
-  writeQa(path.resolve(args.opts.out || f.out), 'check_meta', results);
+  writeQa(path.resolve(args.opts.out || f.out), 'check_meta', results, {}, { site: f.site });
   if (args.flags.has('json')) console.log(JSON.stringify(results, null, 2));
-  else printResults('brief2motion meta check', results, f.site);
+  else printResults('brief2motion meta check', results, f.site, null, { strict: args.flags.has('strict') });
   process.exit(passes(results, { strict: args.flags.has('strict') }) ? 0 : 1);
 }

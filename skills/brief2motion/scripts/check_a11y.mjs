@@ -12,12 +12,15 @@
 //   a11y.keyboard-primary Tab from the top of the page reaches the route's primary action (routes.json primaryAction) (FAIL if
 //                         it cannot be reached or does not exist; REVIEW past 25 stops)
 // Automation covers part of WCAG. A screen-reader pass and a person's judgement are still needed; the report says so.
+// The run's verdict (_design.mjs verdict): FAIL on any FAIL or when nothing was checked (exit 1); INCOMPLETE when
+// something is PENDING (no evidence yet), never printed as PASS (exit 0, 1 with --strict); PASS otherwise (exit 0, 1 with
+// --strict when anything needs REVIEW). Exit 2 when the tool cannot run.
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { openSite, newPage, DEPS } from './_common.mjs';
-import { parseArgs, loadRoutes, projectFiles, targets, result, writeQa, passes, printResults } from './_design.mjs';
+import { parseArgs, loadRoutes, projectFiles, targets, listOf, result, writeQa, passes, printResults } from './_design.mjs';
 import { openTarget } from './_steps.mjs';
 
 export const AXE = {
@@ -68,11 +71,9 @@ if (process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.rea
   if (args.flags.has('help')) { console.log(USAGE); process.exit(0); }
   if (!args.pos[0]) { console.error(USAGE); process.exit(2); }
   const f = projectFiles(args.pos[0], args.opts.site);
-  let doc;
-  try { doc = loadRoutes(f.routes); } catch (e) { console.error(`check_a11y: ${e.message}`); process.exit(2); }
+  let doc, themes, widths;
+  try { themes = listOf(args.opts.themes, 'light', 'themes'); widths = listOf(args.opts.widths, '390,1440', 'widths'); doc = loadRoutes(f.routes); } catch (e) { console.error(`check_a11y: ${e.message}`); process.exit(2); }
   if (!f.siteBuilt) { console.error(`check_a11y: no site folder at ${f.site}`); process.exit(2); }
-  const themes = (args.opts.themes || 'light').split(',').map((x) => x.trim()).filter((x) => x === 'light' || x === 'dark');
-  const widths = (args.opts.widths || '390,1440').split(',').map(Number).filter(Boolean);
   const axe = await loadAxe();
   if (!axe.ok) console.error(`check_a11y: axe-core skipped: ${axe.reason}. The keyboard walk still runs; run again with a network connection for the axe results.`);
   const session = await openSite(f.site);
@@ -107,10 +108,10 @@ if (process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.rea
   } catch (e) { console.error('check_a11y crashed:', (e && e.stack) || e); code = 2; } finally { await session.close(); }
   if (code === 2) process.exit(2);
   const outDir = path.resolve(args.opts.out || f.out);
-  writeQa(outDir, 'check_a11y', results, { browser: `Chrome ${session.version}`, axe: axe.ok ? AXE.version : 'not run' });
+  writeQa(outDir, 'check_a11y', results, { browser: `Chrome ${session.version}`, axe: axe.ok ? AXE.version : 'not run' }, { site: f.site });
   if (args.flags.has('json')) console.log(JSON.stringify(results, null, 2));
   else {
-    printResults('brief2motion accessibility check', results, `axe-core ${axe.ok ? AXE.version : '(not run)'}, widths ${widths.join(', ')}, themes ${themes.join(', ')}  (PASS lines hidden)`, (r) => r.outcome !== 'PASS');
+    printResults('brief2motion accessibility check', results, `axe-core ${axe.ok ? AXE.version : '(not run)'}, widths ${widths.join(', ')}, themes ${themes.join(', ')}  (PASS lines hidden)`, (r) => r.outcome !== 'PASS', { strict: args.flags.has('strict') });
     console.log('Automated checks cover part of WCAG 2.2. Keyboard use by a person and a screen reader pass are still needed.');
   }
   process.exit(passes(results, { strict: args.flags.has('strict') }) ? 0 : 1);
