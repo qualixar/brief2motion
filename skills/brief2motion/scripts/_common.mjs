@@ -27,7 +27,7 @@ export async function loadPlaywright() {
       fs.mkdirSync(DEPS, { recursive: true });
       const prefix = process.platform === 'win32' ? `"${DEPS}"` : DEPS;   // a shell joins the arguments on Windows
       execFileSync(NPM, ['i', '--no-save', '--no-audit', '--no-fund', '--ignore-scripts', '--prefix', prefix, `playwright-core@${PW_VERSION}`],
-        { stdio: ['ignore', 'inherit', 'inherit'], shell: process.platform === 'win32' });
+        { stdio: ['ignore', process.stderr, 'inherit'], shell: process.platform === 'win32' });
     } catch (e) {
       console.error(`Could not install playwright-core. Run by hand:\n  npm i --no-save --ignore-scripts --prefix "${DEPS}" playwright-core@${PW_VERSION}`);
       process.exit(2);
