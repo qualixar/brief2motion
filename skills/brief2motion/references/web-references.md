@@ -74,7 +74,7 @@ Use these first. A browser feature costs no library and cannot fail to load.
 | [Theatre.js](https://www.theatrejs.com/) ([repo](https://github.com/theatre-js/theatre)) | A visual timeline editor for tuning camera and object keyframes by hand | Apache-2.0. Last push Aug 2024: stale, use only when a person will tune by hand | keyframes editor, camera path, timeline |
 | [Lottie](https://lottie.airbnb.tech/) ([lottie-web](https://github.com/airbnb/lottie-web)), [dotLottie](https://dotlottie.io/) ([repo](https://github.com/LottieFiles/dotlottie-web)), [LottieFiles](https://lottiefiles.com/), [LottieFiles docs](https://docs.lottiefiles.com/en) | Playing After Effects exports as small vector animations; the dotLottie format and player | Players MIT. Each animation file has its own licence: check before use | Lottie, After Effects, animated icon, JSON animation |
 | [Rive](https://rive.app/) with its [docs](https://rive.app/docs/getting-started/introduction), the [marketplace](https://rive.app/marketplace/) and the [runtime](https://github.com/rive-app/rive-wasm) | Interactive vector animation with state machines (a button that reacts, a character that follows) | Runtime MIT. Each `.riv` file has its own licence | Rive, interactive illustration, state machine, mascot |
-| [Scrollama](https://github.com/russellsamora/scrollama) | The "step nearest a line is active" model for scroll stories | MIT; the kit re-implements the idea in ten lines | scrollytelling, steps |
+| [Scrollama](https://github.com/russellsamora/scrollama) | The "step nearest a line is active" model for scroll stories | MIT; a library, not loaded by the kit | scrollytelling, steps |
 
 ## 5. Shaders
 
