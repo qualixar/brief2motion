@@ -38,3 +38,25 @@ test('check_a11y and check_journeys: a missing page FAILs instead of being check
   assert.equal(j.status, 1);
   assert.match(j.results.find((x) => x.id === 'journey.see-pricing').reason, /the start page did not load: \/pricing\/ answered 404/);
 });
+
+// The probes on cases a looser rule gets wrong: two slides left visible at the same spot (one line's box lies inside the
+// other's, which is still a collision), menu links of 11 px (list items, not links in a sentence), a page 10 px too wide,
+// a crossfade whose hidden slide is transparent through its container, and a card covered by one link on purpose.
+test('check_layout probes: text painted on top of text, tiny menu links and a 10 px overflow all FAIL', (t) => {
+  const r = runChecker('check_layout.mjs', [path.join(FIX, 'layout', 'probes-fail'), '--widths', '390,1440', '--out', tmp('probes-fail')]);
+  if (noBrowser(t, r)) return;
+  assert.equal(r.status, 1);
+  for (const w of [390, 1440]) {
+    const at = (id) => r.results.find((x) => x.id === id && x.viewport === `${w}px`);
+    assert.equal(at('layout.overlap').outcome, 'FAIL', `overlap ${w}`); assert.match(at('layout.overlap').reason, /text\/text: p\.slide/);
+    assert.equal(at('layout.tap-targets').outcome, 'FAIL', `tap ${w}`); assert.match(at('layout.tap-targets').reason, /a\.tiny-nav "Docs"/);
+    assert.match(at('layout.tap-targets').reason, /a\.nav-sentence "notes"/, 'inside a nav even a sentence link is a menu target');
+    assert.match(at('layout.tap-targets').reason, /a\.tiny-foot "Terms"/, 'a list item holding only a link and a separator is not a sentence');
+    assert.equal(at('layout.overflow').outcome, 'FAIL', `overflow ${w}`); assert.equal(at('layout.overflow').measured, 10);
+  }
+});
+test('check_layout probes: a transparent crossfade slide and a card-wide link do not count as overlaps', (t) => {
+  const r = runChecker('check_layout.mjs', [path.join(FIX, 'layout', 'probes-pass'), '--widths', '390,1440', '--out', tmp('probes-pass')]);
+  if (noBrowser(t, r)) return;
+  assert.equal(r.status, 0, JSON.stringify(r.results?.filter((x) => x.outcome !== 'PASS')));
+});

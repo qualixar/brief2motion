@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Probe fixture (fails)</title>
+<style>
+  body { margin: 0; font: 1rem/1.55 system-ui, sans-serif; color: #1c2230; background: #faf7f0; }
+  main { max-width: 50ch; margin: 0 auto; padding: 24px 18px; }
+  /* two slides left visible at the same spot: their first lines are painted on top of each other */
+  .stage { position: relative; height: 120px; }
+  .slide { position: absolute; top: 0; left: 0; right: 0; opacity: 1; }
+  /* a menu of tiny links: list items, but not links in a sentence */
+  nav ul { list-style: none; display: flex; gap: 4px; padding: 0; margin: 0 0 24px; }
+  nav a, .foot a { font-size: 11px; line-height: 1; } .navnote { font-size: 11px; line-height: 1; }
+  /* 10 px wider than the screen at every width */
+  .over { position: absolute; left: 0; top: 0; width: calc(100vw + 10px); height: 8px; background: #c33; }
+</style></head>
+<body><main>
+  <nav aria-label="Main"><ul><li><a class="tiny-nav" href="#a">Docs</a></li></ul><p class="navnote">Read the <a class="nav-sentence" href="#c">notes</a> before you start.</p></nav>
+  <div class="stage"><p class="slide s1">The first slide says one thing on a long line.</p><p class="slide s2">The second, shorter.</p></div>
+  <div class="over"></div>
+  <ul class="foot"><li><a class="tiny-foot" href="#d">Terms</a> · </li></ul>
+</main></body></html>
