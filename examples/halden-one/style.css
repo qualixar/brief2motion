@@ -8,6 +8,7 @@
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+html:has(:focus-visible) { scroll-behavior: auto; }   /* Tab moves focus at once: a long smooth scroll would leave it off screen for a second */
 body { margin: 0; color: var(--ink); background: var(--sweep-1); font: 400 clamp(16px, .5vw + 14px, 19px)/1.55 var(--text); }
 h1, h2, p, ul, table { margin: 0; padding: 0; }
 a { color: var(--ink); }
