@@ -71,6 +71,14 @@ export async function ready(page, { ms = 600, waitMotion = true } = {}) {
   await page.evaluate(() => (document.fonts ? document.fonts.ready : null)).catch(() => {});
   await page.waitForTimeout(ms);
   await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)))).catch(() => {});
+  // let entrance animations finish (CSS, Web Animations and GSAP tweens that end), so a mid-fade colour is never measured;
+  // endless loops and scroll-bound tweens are not waited for. Gives up after 4 s.
+  await page.waitForFunction(() => {
+    const css = (document.getAnimations ? document.getAnimations() : []).some((a) => a.playState === 'running' && Number.isFinite(a.effect?.getComputedTiming?.().endTime));
+    const g = window.gsap?.globalTimeline?.getChildren?.(true, true, false) || [];
+    const tw = g.some((t) => t.isActive() && t.repeat() !== -1 && !t.scrollTrigger && Number.isFinite(t.totalDuration()));
+    return !css && !tw;
+  }, null, { timeout: 4000, polling: 100 }).catch(() => {});
 }
 
 // Opens a route and, for a declared state, performs its steps. Returns { ok, error }.

@@ -60,11 +60,11 @@ export async function layoutOne(page, route, w) {
   for (let i = 0; i < MAX_TABS; i++) {
     await page.keyboard.press('Tab');
     let f = null;
-    for (let tries = 0, last = null; tries < 12; tries++) {   // wait for the scroll Tab caused to stop
+    for (let tries = 0, last = null, still = 0; tries < 60 && still < 2; tries++) {   // wait (up to 3 s) for the scroll Tab caused to stop
       await page.waitForTimeout(50);
       f = await page.evaluate(FOCUS_PROBE);
       const key = f ? `${f.idx}:${await page.evaluate(() => scrollY)}` : null;
-      if (key === last) break;
+      still = key === last ? still + 1 : 0;
       last = key;
     }
     if (!f || seen.has(f.idx)) break;   // Tab left the page, or wrapped back to where it started
@@ -77,7 +77,7 @@ export async function layoutOne(page, route, w) {
   return R;
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.realpathSync(fileURLToPath(import.meta.url))) {
   const USAGE = 'usage: node check_layout.mjs <project-dir> [--site <dir>] [--out <dir>] [--widths 320,390,768,1440] [--themes light,dark] [--wireframes] [--all] [--strict] [--json]';
   let args;
   try { args = parseArgs(process.argv.slice(2), { value: ['site', 'out', 'widths', 'themes'], flags: ['strict', 'json', 'wireframes', 'all'] }); } catch (e) { console.error(`${e.message}\n${USAGE}`); process.exit(2); }

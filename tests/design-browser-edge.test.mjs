@@ -5,6 +5,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import path from 'node:path';
+import fs from 'node:fs';
 import { FIX, tmp, runChecker, outcomeOf } from './_design_helpers.mjs';
 
 const run = (script, fixture, extra = []) => runChecker(script, [path.join(FIX, ...fixture), '--out', tmp('edge'), ...extra]);
@@ -77,4 +78,27 @@ test('check_journeys edge: a live journey is not left pending, an unknown start 
   assert.equal(ghost.outcome, 'FAIL'); assert.match(ghost.reason, /start route "ghost" is not in routes\.json/);
   assert.equal(ghost.viewport, 'desktop 1440px'); assert.equal(ghost.input, 'keyboard');
   assert.equal(r.results.find((x) => x.id === 'journey.missing-button').outcome, 'FAIL');
+});
+
+// A correct page that a naive checker calls broken: a screen-reader copy hidden with inline styles (no .sr-only class),
+// an intended ellipsis, a sideways scroller inside a parent that hides overflow, a fade-in headline and a smooth scroll to
+// a far-down button. Nothing may FAIL; the ellipsis goes to REVIEW.
+test('check_layout and check_a11y: the tricky but correct page does not fail', (t) => {
+  const r = run('check_layout.mjs', ['layout', 'tricky']);
+  if (noBrowser(t, r)) return;
+  assert.equal(r.status, 0, JSON.stringify(r.results?.filter((x) => x.outcome === 'FAIL')));
+  assert.deepEqual([...new Set(outcomeOf(r.results, 'layout.text-clipped'))], ['REVIEW'], 'the ellipsis is reviewed, not failed');
+  const a = run('check_a11y.mjs', ['layout', 'tricky']);
+  assert.equal(a.status, 0, JSON.stringify(a.results?.filter((x) => x.outcome === 'FAIL')));
+});
+
+// The checkers run when started through a symlinked path (skills are often installed as links). Before the fix the
+// main-module test compared a symlinked path with the real one, so the script did nothing and exited 0.
+test('a checker started through a symlink still runs and still fails a failing page', (t) => {
+  const link = path.join(tmp('link'), 'scripts');
+  fs.symlinkSync(path.resolve('skills/brief2motion/scripts'), link);
+  const r = runChecker(path.join(link, 'check_layout.mjs'), [path.join(FIX, 'layout', 'fail'), '--out', tmp('edge')]);
+  if (noBrowser(t, r)) return;
+  assert.equal(r.status, 1, 'the failing page must fail when the checker is reached through a link');
+  assert.ok(r.results?.length > 0);
 });

@@ -12,7 +12,7 @@ export const tmp = (name) => fs.mkdtempSync(path.join(os.tmpdir(), `b2m-${name}-
 
 // Runs `node <script> <args> --json` and returns { status, results, stdout, stderr }. results is the parsed JSON, or null.
 export function runChecker(script, args, { env = {}, json = true } = {}) {
-  const r = spawnSync(process.execPath, [path.join(SCRIPTS, script), ...args, ...(json ? ['--json'] : [])], { encoding: 'utf8', env: { ...process.env, ...env }, timeout: 240000 });
+  const r = spawnSync(process.execPath, [path.resolve(SCRIPTS, script), ...args, ...(json ? ['--json'] : [])], { encoding: 'utf8', env: { ...process.env, ...env }, timeout: 240000 });
   let results = null;
   if (json) { try { results = JSON.parse(r.stdout); } catch { /* not JSON: the tool failed before printing */ } }
   return { status: r.status, results, stdout: r.stdout, stderr: r.stderr };

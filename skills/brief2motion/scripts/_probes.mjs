@@ -39,6 +39,16 @@ export const TAP_PROBE = (min) => {
 // if less than 90% of a line of text is left inside, it is clipped. Scrollers (overflow auto or scroll) are not clipping.
 // Elements marked data-allow-clip (a marquee, say) are skipped. Ellipsis truncation is reported on its own, as `truncated`.
 export const CLIP_PROBE = () => {
+  // the usual visually-hidden techniques: a 1-2 px box that clips, or the legacy clip property, on the element or an ancestor
+  const visuallyHidden = (el) => {
+    for (let a = el; a && a !== document.body; a = a.parentElement) {
+      const s = getComputedStyle(a), rr = a.getBoundingClientRect();
+      const clips = s.overflow === 'hidden' || s.overflow === 'clip' || (s.clipPath && s.clipPath !== 'none');
+      if (rr.width <= 2 && rr.height <= 2 && clips) return true;
+      if (s.position === 'absolute' && s.clip && s.clip !== 'auto') return true;
+    }
+    return false;
+  };
   const clipped = [], truncated = [], seen = new Set();
   const name = (el) => `${el.tagName.toLowerCase()}${el.id ? '#' + el.id : ''}${el.classList[0] ? '.' + el.classList[0] : ''} "${(el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 30)}"`;
   const rootW = document.documentElement.clientWidth;
@@ -52,19 +62,29 @@ export const CLIP_PROBE = () => {
     if (dt && !dt.open && !el.closest('summary')) continue;   // the body of a closed disclosure is not shown
     const cs = getComputedStyle(el);
     if (cs.display === 'none' || cs.visibility === 'hidden') continue;
+    if (visuallyHidden(el)) continue;                          // a screen-reader copy, hidden on purpose (any class name)
     seen.add(el);
     const range = document.createRange(); range.selectNodeContents(n);
     for (const fr of range.getClientRects()) {
       if (fr.width <= 1 || fr.height <= 1) continue;
       let l = fr.left, r = fr.right, t = fr.top, b = fr.bottom;
+      // wl..wb is the part a reader can reach: text scrolled out of a scroller is reachable by scrolling, not cut off
+      let wl = l, wr = r, wt = t, wb = b;
       for (let a = el; a; a = a.parentElement) {
         const s = getComputedStyle(a), root = a === document.body || a === document.documentElement;
-        const cx = s.overflowX === 'hidden' || s.overflowX === 'clip', cy = !root && (s.overflowY === 'hidden' || s.overflowY === 'clip');
         const ar = a.getBoundingClientRect();
-        if (cx) { l = Math.max(l, root ? 0 : ar.left + a.clientLeft); r = Math.min(r, root ? rootW : ar.left + a.clientLeft + a.clientWidth); }
-        if (cy) { t = Math.max(t, ar.top + a.clientTop); b = Math.min(b, ar.top + a.clientTop + a.clientHeight); }
+        const il = ar.left + a.clientLeft, ir = il + a.clientWidth, it = ar.top + a.clientTop, ib = it + a.clientHeight;
+        const sx = !root && (s.overflowX === 'auto' || s.overflowX === 'scroll'), sy = !root && (s.overflowY === 'auto' || s.overflowY === 'scroll');
+        if (sx) { wl = Math.max(wl, il); wr = Math.min(wr, ir); l = Math.max(l, il); r = Math.min(r, ir); }
+        if (sy) { wt = Math.max(wt, it); wb = Math.min(wb, ib); t = Math.max(t, it); b = Math.min(b, ib); }
+        if (s.textOverflow === 'ellipsis') continue;            // ellipsis truncation is intended; it is reported as truncated
+        const cx = s.overflowX === 'hidden' || s.overflowX === 'clip', cy = !root && (s.overflowY === 'hidden' || s.overflowY === 'clip');
+        if (cx) { l = Math.max(l, root ? 0 : il); r = Math.min(r, root ? rootW : ir); }
+        if (cy) { t = Math.max(t, it); b = Math.min(b, ib); }
       }
-      const kept = Math.max(0, r - l) * Math.max(0, b - t), whole = fr.width * fr.height;
+      const whole = Math.max(0, wr - wl) * Math.max(0, wb - wt);
+      if (whole <= 1) continue;                                 // scrolled out of view inside a scroller: reachable
+      const kept = Math.max(0, r - l) * Math.max(0, b - t);
       if (kept < whole * 0.9) { clipped.push(`${name(el)} ${Math.round((1 - kept / whole) * 100)}% cut off`); break; }
     }
     if (cs.textOverflow === 'ellipsis' && el.scrollWidth > el.clientWidth + 1) truncated.push(name(el));
