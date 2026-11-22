@@ -23,12 +23,22 @@ export async function loadPlaywright() {
   try { have = JSON.parse(fs.readFileSync(path.join(DEPS, 'node_modules', 'playwright-core', 'package.json'), 'utf8')).version; } catch { /* not installed */ }
   if (have !== PW_VERSION || !fs.existsSync(entry)) {
     console.error(`playwright-core ${PW_VERSION} is not installed${have ? ` (found ${have})` : ''}. Installing it into ${DEPS} (one time, about 14 MB on disk; install scripts are not run).`);
+    // Install into a private staging folder, then move the finished package into place with one rename. Two checkers
+    // started at once on a fresh machine then never see a half-written install: the first rename wins and the other
+    // uses it. playwright-core has no dependencies, so its folder is the whole install.
+    const stage = path.join(DEPS, `.stage-${process.pid}-${Date.now()}`);
+    const target = path.join(DEPS, 'node_modules', 'playwright-core');
     try {
-      fs.mkdirSync(DEPS, { recursive: true });
-      const prefix = process.platform === 'win32' ? `"${DEPS}"` : DEPS;   // a shell joins the arguments on Windows
+      fs.mkdirSync(path.join(DEPS, 'node_modules'), { recursive: true });
+      const prefix = process.platform === 'win32' ? `"${stage}"` : stage;   // a shell joins the arguments on Windows
       execFileSync(NPM, ['i', '--no-save', '--no-audit', '--no-fund', '--ignore-scripts', '--prefix', prefix, `playwright-core@${PW_VERSION}`],
         { stdio: ['ignore', process.stderr, 'inherit'], shell: process.platform === 'win32' });
+      if (have && have !== PW_VERSION) { try { fs.renameSync(target, `${target}.old-${process.pid}`); } catch { /* someone else moved it */ } }
+      try { fs.renameSync(path.join(stage, 'node_modules', 'playwright-core'), target); } catch { /* another checker installed it first */ }
+      fs.rmSync(stage, { recursive: true, force: true });
+      if (!fs.existsSync(entry)) throw new Error('playwright-core is not in place after install');
     } catch (e) {
+      fs.rmSync(stage, { recursive: true, force: true });
       console.error(`Could not install playwright-core. Run by hand:\n  npm i --no-save --ignore-scripts --prefix "${DEPS}" playwright-core@${PW_VERSION}`);
       process.exit(2);
     }
