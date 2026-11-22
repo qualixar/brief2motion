@@ -14,6 +14,7 @@ const noBrowser = (t, r) => { if (r.status === 2) { t.skip(`no browser could sta
 test('check_layout: the passing page has no failure and nothing to review', (t) => {
   const r = run('check_layout.mjs', ['layout', 'pass']);
   if (noBrowser(t, r)) return;
+  assert.ok(r.results, `no JSON on stdout (exit ${r.status}); stdout starts ${JSON.stringify(r.stdout.slice(0, 400))}; stderr ${JSON.stringify(r.stderr.slice(0, 400))}`);
   assert.equal(r.status, 0, JSON.stringify(r.results?.filter((x) => x.outcome !== 'PASS')));
   assert.equal(r.results.filter((x) => x.outcome !== 'PASS').length, 0, JSON.stringify(r.results.filter((x) => x.outcome !== 'PASS')));
   for (const id of ['layout.overflow', 'layout.text-clipped', 'layout.overlap', 'layout.tap-targets', 'layout.line-length', 'layout.focus']) assert.equal(outcomeOf(r.results, id).length, 4, `${id} ran at four widths`);
