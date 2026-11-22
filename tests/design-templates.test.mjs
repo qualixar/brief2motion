@@ -31,6 +31,15 @@ test('the template wireframe passes the layout check at four widths', (t) => {
   assert.equal(r.results.filter((x) => x.outcome !== 'PASS').length, 0);
 });
 
+test('the template journey checks an outcome only its step can cause, and passes on the template wireframe', (t) => {
+  const d = tmp('tpl-j'); fs.cpSync(TPL, d, { recursive: true });
+  fs.mkdirSync(path.join(d, 'site')); fs.copyFileSync(path.join(d, 'wireframes', 'landing.html'), path.join(d, 'site', 'index.html'));
+  const r = runChecker('check_journeys.mjs', [d, '--out', tmp('tpl-j-out')]);
+  if (noBrowser(t, r)) return;
+  assert.equal(r.status, 0, JSON.stringify(r.results?.filter((x) => x.outcome !== 'PASS')));
+  assert.deepEqual([...new Set(r.results.filter((x) => x.id === 'journey.reserve-tickets').map((x) => x.outcome))], ['PASS'], 'not a REVIEW for an expectation that was true before the click');
+});
+
 test('the larkspur example is clearly fictional and invents no proof', () => {
   const content = fs.readFileSync(path.join(LK, 'CONTENT.md'), 'utf8');
   const pages = ['index.html', 'pricing/index.html', 'start/index.html'].map((f) => fs.readFileSync(path.join(LK, 'site', f), 'utf8'));

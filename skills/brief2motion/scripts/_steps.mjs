@@ -5,7 +5,7 @@
 //   { "role": "status", "contains": "Check your inbox" } for things such as live regions, which have no name of their own.
 // A step is one of: { click: target } { fill: target, value } { press: "Enter", target? } { check: target }
 //   { select: target, value } { hover: target } { wait: ms (at most 2000) }.
-// An expectation is { url: "/start/" } (the path), { text: "..." } or { role, name } (visible), { focus: target }, or a list of them.
+// An expectation is { url: "/start/" } (the path; "/#when" also checks the anchor), { text: "..." } or { role, name } (visible), { focus: target }, or a list of them.
 
 const STEP_KEYS = ['click', 'fill', 'press', 'check', 'select', 'hover', 'wait'];
 
@@ -50,14 +50,14 @@ export async function runSteps(page, steps = [], { timeout = 4000 } = {}) {
 export async function checkExpect(page, expect, { timeout = 3000 } = {}) {
   for (const e of [].concat(expect || [])) {
     try {
-      if (e.url) await page.waitForFunction((p) => location.pathname === p, e.url, { timeout });
+      if (e.url) await page.waitForFunction((p) => (p.includes('#') ? location.pathname + location.hash : location.pathname) === p, e.url, { timeout });
       else if (e.focus) await page.waitForFunction(() => !!document.activeElement && document.activeElement !== document.body, null, { timeout }).then(async () => {
         const want = await locator(page, e.focus).elementHandle({ timeout });
         const same = await page.evaluate((el) => el === document.activeElement, want);
         if (!same) throw new Error(`focus is not on ${describe(e.focus)}`);
       });
       else await locator(page, e).waitFor({ state: 'visible', timeout });
-    } catch (err) { return { ok: false, reason: `expected ${e.url ? `path ${e.url}` : e.focus ? `focus on ${describe(e.focus)}` : describe(e)}${e.url ? ` (page is at ${await page.evaluate(() => location.pathname)})` : ' to be visible'}` }; }
+    } catch (err) { return { ok: false, reason: `expected ${e.url ? `path ${e.url}` : e.focus ? `focus on ${describe(e.focus)}` : describe(e)}${e.url ? ` (page is at ${await page.evaluate(() => location.pathname + location.hash)})` : ' to be visible'}` }; }
   }
   return { ok: true, reason: '' };
 }

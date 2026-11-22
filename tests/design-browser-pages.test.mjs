@@ -60,3 +60,17 @@ test('check_layout probes: a transparent crossfade slide and a card-wide link do
   if (noBrowser(t, r)) return;
   assert.equal(r.status, 0, JSON.stringify(r.results?.filter((x) => x.outcome !== 'PASS')));
 });
+
+// journeys.json mistakes that used to pass or crash: a journey with no expectation, one whose expectation was already true
+// before its steps (it proves nothing), and a viewport name the checker does not know. A path#anchor expectation works.
+test('check_journeys: no expectation FAILs, an expectation already true is a REVIEW, an unknown viewport FAILs alone, an anchor can be expected', (t) => {
+  const r = runChecker('check_journeys.mjs', [path.join(FIX, 'journeys', 'vacuous'), '--out', tmp('vac')]);
+  if (noBrowser(t, r)) return;
+  assert.equal(r.status, 1, r.stderr.slice(0, 400));
+  const j = (id, vp) => r.results.find((x) => x.id === `journey.${id}` && (!vp || x.viewport.startsWith(vp)));
+  assert.equal(j('no-expect').outcome, 'FAIL'); assert.match(j('no-expect').reason, /no "expect"/);
+  assert.equal(j('already-true').outcome, 'REVIEW'); assert.match(j('already-true').reason, /already true before the steps/);
+  assert.equal(j('odd-viewport', 'tablet').outcome, 'FAIL'); assert.match(j('odd-viewport', 'tablet').reason, /unknown viewport "tablet" \(use phone or desktop\)/);
+  assert.equal(j('odd-viewport', 'desktop').outcome, 'PASS', 'the other viewports still run');
+  assert.equal(j('to-anchor').outcome, 'PASS', j('to-anchor').reason);
+});

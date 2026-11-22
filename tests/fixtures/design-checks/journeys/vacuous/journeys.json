@@ -1,0 +1,6 @@
+{ "journeys": [
+  { "id": "no-expect", "start": "home", "viewports": ["desktop"], "steps": [ { "click": { "role": "link", "name": "Start free trial" } } ] },
+  { "id": "already-true", "start": "home", "viewports": ["desktop"], "steps": [ { "click": { "role": "link", "name": "Read more" } } ], "expect": [ { "text": "Start free trial" } ] },
+  { "id": "odd-viewport", "start": "home", "viewports": ["tablet", "desktop"], "steps": [ { "click": { "role": "link", "name": "Start free trial" } } ], "expect": [ { "url": "/start/" } ] },
+  { "id": "to-anchor", "start": "home", "viewports": ["desktop"], "steps": [ { "click": { "role": "link", "name": "Read more" } } ], "expect": [ { "url": "/#more" } ] }
+] }

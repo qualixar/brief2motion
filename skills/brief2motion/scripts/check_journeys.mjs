@@ -6,9 +6,11 @@
 //       "viewports": ["phone", "desktop"],              (default both: phone is 390x844 with touch, desktop 1440x900)
 //       "integration": "fixture",                        (optional: the last step ends at a fixture, not a live service)
 //       "steps": [ { "click": { "role": "link", "name": "Start free trial" } }, { "fill": { "label": "Work email" }, "value": "ada@example.test" } ],
-//       "expect": [ { "url": "/start/" }, { "role": "status", "contains": "..." } ] } ] }
+//       "expect": [ { "url": "/start/" }, { "role": "status", "contains": "..." } ] } ] }     ("url": "/#when" also checks the anchor)
 // Steps and expectations use role, accessible name, label or visible text (see _steps.mjs), the way a person finds things.
 //   journey.<id>              the steps ran and the expectation came true                                      FAIL otherwise
+//                             (FAIL with no "expect" or an unknown viewport name; REVIEW when the expectation was
+//                             already true before the steps, which then prove nothing)
 //   journey.<id>.console      no console error or uncaught exception during the journey                          FAIL otherwise
 //   journey.<id>.integration  PENDING when the journey ends at a fixture: the interaction passed, the real service is not proven
 // A screenshot of where each journey ended is kept in <out>/shots/.
@@ -27,21 +29,26 @@ export const VIEWPORTS = { phone: { width: 390, height: 844, mobile: true }, des
 export async function runJourney(browser, base, j, routes, vpName, shotsDir, version) {
   const route = routes.find((r) => r.id === j.start);
   const vp = VIEWPORTS[vpName];
+  if (!vp) return [result(`journey.${j.id}`, 'FAIL', { route: j.start, viewport: String(vpName), browser: `Chrome ${version}`, reason: `unknown viewport "${vpName}" (use ${Object.keys(VIEWPORTS).join(' or ')})` })];
   const at = { route: j.start, state: null, viewport: `${vpName} ${vp.width}px`, browser: `Chrome ${version}`, input: vp.mobile ? 'touch' : 'keyboard' };
   if (!route) return [result(`journey.${j.id}`, 'FAIL', { ...at, reason: `start route "${j.start}" is not in routes.json` })];
+  if (![].concat(j.expect || []).length) return [result(`journey.${j.id}`, 'FAIL', { ...at, reason: 'the journey has no "expect": without an outcome to check it proves nothing' })];
   const { ctx, page, errors } = await newPage(browser, { viewport: { width: vp.width, height: vp.height }, mobile: vp.mobile });
   const out = [];
   try {
     const load = await loadPage(page, new URL(route.path, base).href);
     if (!load.ok) { out.push(result(`journey.${j.id}`, 'FAIL', { ...at, reason: `the start page did not load: ${load.error}` })); return out; }
     await ready(page, { ms: 400 });
+    // an outcome that is already there before any step was taken does not show the steps lead to it
+    const before = (j.steps || []).length ? await checkExpect(page, j.expect, { timeout: 250 }) : { ok: false };
     const run = await runSteps(page, j.steps || []);
     let ok = run.ok, why = run.error;
     if (ok) { const ex = await checkExpect(page, j.expect); ok = ex.ok; why = ex.reason; }
+    const vacuous = ok && before.ok;
     const shot = path.join(shotsDir, `journey-${j.id}-${vpName}.png`);
     await page.screenshot({ path: shot }).catch(() => {});
     const evidence = path.basename(shotsDir) + '/' + path.basename(shot);
-    out.push(result(`journey.${j.id}`, ok ? 'PASS' : 'FAIL', { ...at, evidence, measured: (j.steps || []).length, reason: ok ? `${(j.steps || []).length} steps done and the expected outcome appeared${j.task ? ` (task ${j.task})` : ''}` : why }));
+    out.push(result(`journey.${j.id}`, vacuous ? 'REVIEW' : ok ? 'PASS' : 'FAIL', { ...at, evidence, measured: (j.steps || []).length, reason: vacuous ? 'the expected outcome was already true before the steps ran, so it does not show they work: expect something only the steps can cause (a path, a status message)' : ok ? `${(j.steps || []).length} steps done and the expected outcome appeared${j.task ? ` (task ${j.task})` : ''}` : why }));
     out.push(result(`journey.${j.id}.console`, errors.length ? 'FAIL' : 'PASS', { ...at, measured: errors.length, reason: errors.length ? errors.slice(0, 2).join(' || ').slice(0, 200) : 'no console errors' }));
     if (ok && j.integration === 'fixture') out.push(result(`journey.${j.id}.integration`, 'PENDING', { ...at, reason: 'the journey ends at a fixture; the real service is not proven. Connect it and run again.' }));
   } finally { await ctx.close(); }

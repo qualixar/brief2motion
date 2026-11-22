@@ -3,7 +3,7 @@
     {
       "id": "reserve-tickets", "task": "T1", "start": "home", "integration": "fixture",
       "steps": [{ "click": { "role": "link", "name": "Reserve free tickets" } }],
-      "expect": [{ "text": "Reserve free tickets" }]
+      "expect": [{ "url": "/#when" }, { "role": "heading", "name": "When and where" }]
     }
   ]
 }

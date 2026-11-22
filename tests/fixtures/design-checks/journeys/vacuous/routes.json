@@ -1,0 +1,5 @@
+{ "site": { "name": "Journey fixture", "origin": "https://journey.example" },
+  "routes": [
+    { "id": "home", "path": "/", "template": "landing", "title": "Journey fixture", "primaryAction": { "id": "start", "label": "Start free trial", "role": "link" }, "links": ["start"] },
+    { "id": "start", "path": "/start/", "parent": "home", "template": "form", "title": "Start a trial", "primaryAction": { "id": "send", "label": "Start trial", "role": "button" }, "links": ["home"], "states": [] }
+  ] }
