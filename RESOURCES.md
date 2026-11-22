@@ -41,7 +41,6 @@ Open repositories people use to make motion graphics and animated websites with 
 | [pmndrs/maath](https://github.com/pmndrs/maath) | Small maths helpers: easing, random points inside shapes, noise. Handy for particle layouts. | 1,344 | MIT | Yes |
 | [stegu/webgl-noise](https://github.com/stegu/webgl-noise) | Plain noise functions in shader code. Gives dust its drifting, organic movement. | 600 | MIT | Yes |
 | [patriciogonzalezvivo/lygia](https://github.com/patriciogonzalezvivo/lygia) | A very large shader library. Strong, but the licence has a catch. | 3,494 | Prosperity 3.0 or Patron (NOASSERTION on GitHub) | Yes, with condition: free for non-commercial use only, unless you sponsor or contribute to the project (Patron License) or buy a commercial licence. Treat it as an optional add-on. |
-| [cullenwebber/three-ml-sharp](https://github.com/cullenwebber/three-ml-sharp) | Photo to point cloud to particles. The closest public example of a face made of dust. | 123 | None stated | Reference only: no licence means all rights reserved. Read it, do not copy it. |
 | [cortiz2894/hologram-particles](https://github.com/cortiz2894/hologram-particles) | A hologram particle effect in WebGPU. Nice to study. | 110 | None stated | Reference only: no licence means all rights reserved. |
 
 ## Scroll and page motion
