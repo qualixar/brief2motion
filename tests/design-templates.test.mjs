@@ -3,7 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import { ROOT, tmp, runChecker } from './_design_helpers.mjs';
+import { ROOT, tmp, runChecker, noBrowser } from './_design_helpers.mjs';
 
 const TPL = path.join(ROOT, 'skills', 'brief2motion', 'templates', 'site-mode');
 const LK = path.join(ROOT, 'examples', 'larkspur');
@@ -26,7 +26,7 @@ test('the template project passes the plan check (the site is not built, so that
 });
 test('the template wireframe passes the layout check at four widths', (t) => {
   const r = runChecker('check_layout.mjs', [TPL, '--wireframes', '--out', tmp('tpl-wf')]);
-  if (r.status === 2) return t.skip('no browser could start');
+  if (noBrowser(t, r)) return;
   assert.equal(r.status, 0, JSON.stringify(r.results.filter((x) => x.outcome !== 'PASS')));
   assert.equal(r.results.filter((x) => x.outcome !== 'PASS').length, 0);
 });
@@ -60,6 +60,6 @@ test('the larkspur plan, meta and journeys run clean from the command line', (t)
   assert.equal(runChecker('check_plan.mjs', [LK, '--out', tmp('lk')]).status, 0);
   assert.equal(runChecker('check_meta.mjs', [LK, '--out', tmp('lk')]).status, 0);
   const j = runChecker('check_journeys.mjs', [LK, '--out', tmp('lk')]);
-  if (j.status === 2) return t.skip('no browser could start');
+  if (noBrowser(t, j)) return;
   assert.equal(j.status, 0, JSON.stringify(j.results.filter((x) => x.outcome === 'FAIL')));
 });

@@ -1,16 +1,25 @@
 // Site mode, the checkers that drive Chrome: check_layout, check_a11y, check_journeys. Each runs from the command line on its
 // passing fixture (must exit 0) and on its failing one (must exit 1 and name the defects it was built to find). When no
-// browser can start the checker exits 2; the test is then skipped rather than failed.
+// browser can start the checker exits 2 and says so; the test is then skipped. Any other exit 2 is a crash and fails the test.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import { FIX, tmp, runChecker, outcomeOf } from './_design_helpers.mjs';
+import { FIX, tmp, runChecker, outcomeOf, noBrowser } from './_design_helpers.mjs';
 import { AXE, loadAxe } from '../skills/brief2motion/scripts/check_a11y.mjs';
 
 const run = (script, fixture, extra = [], env = {}) => runChecker(script, [path.join(FIX, ...fixture), '--out', tmp('out'), ...extra], { env });
-const noBrowser = (t, r) => { if (r.status === 2) { t.skip(`no browser could start: ${r.stderr.split('\n')[0]}`); return true; } return false; };
 
+test('the harness skips only when no browser could start; a checker that crashes fails the test', () => {
+  const skipped = [];
+  const t = { skip: (m) => skipped.push(m) };
+  assert.equal(noBrowser(t, { status: 0, stderr: '' }), false);
+  assert.equal(noBrowser(t, { status: 1, stderr: '' }), false);
+  assert.equal(noBrowser(t, { status: 2, stderr: 'Could not start a browser. Tried, in order:\n  Google Chrome: not found' }), true);
+  assert.equal(noBrowser(t, { status: 2, stderr: 'Could not install playwright-core. Run by hand:' }), true);
+  assert.equal(skipped.length, 2);
+  assert.throws(() => noBrowser(t, { status: 2, stderr: 'check_layout crashed: TypeError: x is not a function' }), /crashed:\ncheck_layout crashed: TypeError/);
+});
 test('check_layout: the passing page has no failure and nothing to review', (t) => {
   const r = run('check_layout.mjs', ['layout', 'pass']);
   if (noBrowser(t, r)) return;

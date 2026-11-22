@@ -6,10 +6,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import path from 'node:path';
 import fs from 'node:fs';
-import { FIX, tmp, runChecker, outcomeOf } from './_design_helpers.mjs';
+import { FIX, tmp, runChecker, outcomeOf, noBrowser } from './_design_helpers.mjs';
 
 const run = (script, fixture, extra = []) => runChecker(script, [path.join(FIX, ...fixture), '--out', tmp('edge'), ...extra]);
-const noBrowser = (t, r) => { if (r.status === 2) { t.skip(`no browser could start: ${r.stderr.split('\n')[0]}`); return true; } return false; };
 const at = (r, id, w) => (r.results || []).find((x) => x.id === id && x.viewport === `${w}px`);
 const WIDTHS = [320, 390, 768, 1440];
 

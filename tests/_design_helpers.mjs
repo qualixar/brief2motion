@@ -18,3 +18,13 @@ export function runChecker(script, args, { env = {}, json = true } = {}) {
   return { status: r.status, results, stdout: r.stdout, stderr: r.stderr };
 }
 export const outcomeOf = (results, id, filter = () => true) => (results || []).filter((r) => r.id === id && filter(r)).map((r) => r.outcome);
+
+// A browser checker exits 2 both when no browser can start and when it crashes. Only the first is a reason to skip:
+// _common.mjs prints "Could not start a browser" (or "Could not install playwright-core" offline) in that case. Any other
+// exit 2 is a crash, and the test fails with the checker's stderr. Returns true when the test was skipped.
+export const NO_BROWSER = /Could not start a browser|Could not install playwright-core/;
+export function noBrowser(t, r) {
+  if (r.status !== 2) return false;
+  if (NO_BROWSER.test(r.stderr || '')) { t.skip(`no browser could start: ${(r.stderr.match(NO_BROWSER) || [''])[0]}`); return true; }
+  throw new Error(`the checker exited 2 but a browser was available, so it crashed:\n${String(r.stderr).slice(0, 1500)}`);
+}
