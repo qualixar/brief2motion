@@ -317,8 +317,6 @@ The "done when" lines matter most, because they are what the checks measure. Say
 
 **Is there a GSAP or three.js skill for Claude Code?** brief2motion covers both, and eight more: GSAP with ScrollTrigger and Lenis for scroll animation, three.js and React Three Fiber for 3D, Motion, the View Transitions API, SVG and D3, Lottie, Rive, native CSS scroll-driven animation and its own particle engine. Each has a reference file with tested patterns in [`references/stacks/`](skills/brief2motion/references/stacks/).
 
-**How is it different from Anthropic's frontend-design skill?** frontend-design guides how a page looks. brief2motion is about how it moves: it routes the brief to a motion stack, ships tested animation helpers, and measures frame time, layout, focus, contrast and reduced motion in a real browser before it says done. They work well together.
-
 **Which visual styles does it know?** 32, from neubrutalism, glassmorphism, neumorphism and claymorphism to Swiss, bento, Y2K, vaporwave, Art Deco and cyberpunk, each with design tokens, the motion that suits it, its accessibility pitfalls and sources. See the [style system](#the-style-system).
 
 **Does it cost anything?** The skill is free and MIT licensed. The agent runs on your own Claude Code or Codex plan, and the checks run on your machine.
@@ -360,7 +358,7 @@ skills/brief2motion/
 examples/                     ten complete sites, each with its brief and its passing report
 tests/                        unit tests, per-stack browser smoke tests, repo checks, the example checker
 docs/guide/                   the learning guide: editable HTML, CSS and Python source, and the built PDF
-RESOURCES.md, NOTICE          the repositories this was learned from, with licences
+RESOURCES.md, NOTICE          a reading list of motion repositories; the licences of what ships or loads
 CHANGELOG.md                  what changed in each release
 ```
 
@@ -374,7 +372,7 @@ Made something with it? Open an issue with the brief and a screenshot; the usefu
 
 ## Licence and credits
 
-brief2motion is MIT. Sites it builds load three.js, Lenis, Motion, React, lottie-web, the Rive runtime (all MIT), htm (Apache-2.0), D3 modules (ISC) and GSAP (free under GSAP's own "no charge" licence, which allows AI-written GSAP code) from a CDN at pinned versions, and bundle none of them. No code from another project is copied into this repository. [RESOURCES.md](RESOURCES.md) lists the repositories the skill was learned from, each with its licence and what was taken from it; [NOTICE](NOTICE) carries the attributions; [`references/licences.md`](skills/brief2motion/references/licences.md) explains each licence and what it means for you.
+brief2motion is MIT. Sites it builds load three.js, Lenis, Motion, React, lottie-web, the Rive runtime (all MIT), htm (Apache-2.0), D3 modules (ISC) and GSAP (free under GSAP's own "no charge" licence, which allows AI-written GSAP code) from a CDN at pinned versions, and bundle none of them. No code from another project is copied into this repository. [NOTICE](NOTICE) lists the software built sites load and the data, images and fonts that ship, with their licences; [RESOURCES.md](RESOURCES.md) is a reading list of motion repositories; [`references/licences.md`](skills/brief2motion/references/licences.md) explains each licence and what it means for you.
 
 **Libraries and tools.** Every tool the skill uses or loads, with who makes it and its licence:
 
@@ -393,8 +391,6 @@ brief2motion is MIT. Sites it builds load three.js, Lenis, Motion, React, lottie
 | [LYGIA](https://lygia.xyz/) and [Depth Anything V2 Small](https://huggingface.co/onnx-community/depth-anything-v2-small), optional, never bundled | Patricio Gonzalez Vivo; the Depth Anything authors | Prosperity Public License 3.0 or Patron License; Apache-2.0 |
 
 The full table, with where each is used and what each licence means for you, is in [`references/licences.md`](skills/brief2motion/references/licences.md). The sites linked in [`references/web-references.md`](skills/brief2motion/references/web-references.md) (galleries, component libraries, documentation) are for study; nothing is copied from them, and the page records each site's stated terms.
-
-**Inspiration.** The particle-face idea was inspired by Thomas Cullen's [faces playground](https://playground.thomascullen.io/faces). The design guidance in `SKILL.md` and `design-fundamentals.md` draws on Anthropic's [frontend-design skill](https://github.com/anthropics/skills) (Apache-2.0), in our own words.
 
 **Data.** The carbon dioxide numbers in `examples/keeling` are NOAA's annual means for Mauna Loa: Dr. Xin Lan, NOAA/GML ([gml.noaa.gov/ccgg/trends](https://gml.noaa.gov/ccgg/trends/)) and Dr. Ralph Keeling, Scripps Institution of Oceanography ([scrippsco2.ucsd.edu](https://scrippsco2.ucsd.edu/)).
 

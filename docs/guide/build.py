@@ -385,7 +385,7 @@ section('design', 'Design fundamentals: what every page gets', 'Design', lead(
     'The first screen states what the product is and what to do next, with real content. People spend 57% of their viewing time above the fold and 74% in the first two screens (Nielsen Norman Group, 2018), so the first screen must not be a slow reveal of nothing.') + h2('Type and space') + ul([
         'Body text 16 px or larger. Line length 45 to 90 characters. Line height about 1.5 for text, 0.95 to 1.15 for headlines.',
         'A scale of four or five sizes, not a pile. Fluid headlines with `clamp()` and a rem floor.',
-        'One family or two; if two, clearly different. System fonts unless the brief supplies one.',
+        'Usually a single family; a second only when it contrasts plainly with the first. System fonts unless the brief supplies one.',
         'Spacing in steps of 4 px. Group with space before lines.',
     ]) + h2('Colour and contrast') + ul([
         'Text contrast at least 4.5:1; large text 3:1; control edges 3:1. The thresholds are not rounded.',
@@ -400,8 +400,8 @@ section('design', 'Design fundamentals: what every page gets', 'Design', lead(
         ['Direct feedback', 'about 100 ms'], ['Most interface changes', '200 to 300 ms'], ['Large movements', 'up to 400 ms; 500 ms and more drags'],
         ['Entering against leaving', 'entering slightly longer, for example 300 ms in and 200 ms out'], ['Stagger between related items', '30 to 80 ms, in reading order'],
         ['A hero sequence', 'over in about 1.5 seconds']], ['45%', '55%']) + p(
-    'Every animation has a reason: it shows what changed, where something came from, or what to look at. One orchestrated moment beats many scattered ones. '
-    'A fade on every section and a hover effect on every card is the commonest sign of a generated page. Motion that answers input is always welcome.') + note('Never invent proof', 'No made-up reviews, ratings, customer names, logos or numbers. If the brief has none, the section is left out. Made-up examples say that they are made up.'))
+    'Every animation has a job: point the eye, explain a change of state, or show where an element came from or went. Spend the motion budget on one planned entrance; '
+    'when every block fades up and every card lifts on hover, nothing stands out and the page looks machine-made. Brief feedback to a visitor\'s own action is always worth animating.') + note('Never invent proof', 'No made-up reviews, ratings, customer names, logos or numbers. If the brief has none, the section is left out. Made-up examples say that they are made up.'))
 
 
 def style_block(s):
@@ -601,8 +601,8 @@ section('sources', 'Sources and what was verified', 'Reference', lead('What this
 ]) + h2('Published sources for the styles and the rules') + '<p class="src">' + '<br>'.join(E(u) for u in src_rows + [
     'https://www.nngroup.com/articles/homepage-design-principles/', 'https://www.nngroup.com/articles/scrolling-and-attention/', 'https://www.nngroup.com/articles/animation-duration/',
     'https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html', 'https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html', 'https://web.dev/articles/vitals',
-    'https://tailwindcss.com/docs/responsive-design', 'https://gsap.com/community/standard-license/', 'https://github.com/anthropics/skills']) + '</p>' + p(
-    'The repositories studied, with licences and what was taken from each, are in `RESOURCES.md`. No code from another project is copied into brief2motion. Facts were checked on 17 November 2026.'))
+    'https://tailwindcss.com/docs/responsive-design', 'https://gsap.com/community/standard-license/']) + '</p>' + p(
+    'The software built sites load, with its licences, is in `NOTICE` and `references/licences.md`; `RESOURCES.md` is a reading list. No code from another project is copied into brief2motion. Facts were checked on 17 November 2026.'))
 
 # ---------------------------------------------------------------------------------------------------- assemble
 toc = ''.join(f'<a href="#{sid}">{E(title)}</a>' for sid, title, _, _, in_toc in SECTIONS if in_toc)

@@ -46,7 +46,7 @@ brief2motion grows from one effect (dust that forms a picture) into a skill for 
 - **`capture_site.mjs`**: screenshots, a contact sheet and a short film of any site.
 - **Tests.** 43 unit tests (router, kit, measuring code, style data), a real-browser smoke test per stack, test pages for React Three Fiber, Rive and a three.js model and post-processing pipeline, and `tests/check_examples.sh`.
 - **A learning guide** as a PDF with editable HTML, CSS and Python source in `docs/guide/`.
-- A logo, a banner and an architecture diagram with their sources in `docs/diagrams/`; `NOTICE`; a study section in `RESOURCES.md` covering 43 repositories.
+- A logo, a banner and an architecture diagram with their sources in `docs/diagrams/`; `NOTICE`; a reading list in `RESOURCES.md`.
 
 ### Changed
 - `SKILL.md` now runs route, spec, build, check, fix, deliver, and the spec template has a design plan and a motion plan.

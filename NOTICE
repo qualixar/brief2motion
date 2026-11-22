@@ -2,44 +2,8 @@ brief2motion
 Copyright (c) 2026 Varun Pratap Bhardwaj
 Licensed under the MIT License (see LICENSE).
 
-No source code from another project is included in this repository. This file records the published work
-whose ideas shaped it, and the libraries that sites built by the skill load at run time.
-
-------------------------------------------------------------------------------------------------------------
-Ideas and patterns (restated in our own code and words)
-------------------------------------------------------------------------------------------------------------
-
-Anthropic, "frontend-design" skill (github.com/anthropics/skills, skills/frontend-design), Apache License 2.0.
-  The design-plan and motion-restraint guidance in skills/brief2motion/SKILL.md, templates/SPEC.md and
-  references/design-fundamentals.md follows its advice. No text is copied.
-
-ekmas/neobrutalism-components, MIT License, Copyright (c) 2023 Samuel Breznjak.
-  The button that translates by its shadow offset, in references/styles/neubrutalism.css.
-
-Michal Malewicz, "Claymorphism in user interfaces" and "How to create claymorphism using CSS" (hype4.academy).
-  The shadow recipe described in references/styles/claymorphism.css.
-
-material-components/material-web, Apache License 2.0, Copyright Google LLC.
-  Motion duration, easing and shape token values quoted in references/design-fundamentals.md and
-  references/styles/material.css.
-
-tailwindlabs/tailwindcss, MIT License, Copyright (c) Tailwind Labs, Inc.
-  Type scale, spacing unit and breakpoint values quoted in references/design-fundamentals.md.
-
-shshaw/Splitting, MIT License, Copyright (c) 2018 Stephen Shaw; lukePeavey/SplitType, ISC.
-  Per-piece CSS index variables and line detection by measured position, in kit/split-text.js.
-
-russellsamora/scrollama, MIT License, Copyright (c) 2022 Russell Samora.
-  The "step nearest a line is active" model, in examples/keeling/main.js.
-
-pmndrs/maath, MIT License.
-  Frame-rate independent damping, in kit/motion-core.js.
-
-darkroomengineering/lenis, MIT License, Copyright (c) 2024 darkroom.
-  The GSAP ticker wiring shown in its README, in references/stacks/gsap.md and examples/tidewater/main.js.
-
-Thomas Cullen, faces playground (playground.thomascullen.io/faces).
-  Inspiration for the particle-face effect. No code, images or data are shared.
+No source code from another project is included in this repository. This file lists the software that sites built by
+the skill load at run time, the tools the checkers download, and the data, images and fonts that ship here.
 
 ------------------------------------------------------------------------------------------------------------
 Libraries loaded at run time by built sites (from cdn.jsdelivr.net, pinned; never bundled here)
