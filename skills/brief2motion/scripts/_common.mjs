@@ -13,8 +13,32 @@ export const HERE = path.dirname(fileURLToPath(import.meta.url));
 export const DEPS = process.env.BRIEF2MOTION_DEPS || path.join(os.homedir(), '.cache', 'brief2motion', 'deps');
 export const PW_VERSION = '1.65.1';
 
-// Windows needs npm.cmd and a shell to start it; elsewhere plain npm.
-const NPM = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+// How to start npm with no shell in between, so no folder name (one with a space, & or ^ in it) is ever parsed by one.
+// On Windows npm is a .cmd file, which only a shell can start; Node's own copy of npm (node_modules/npm/bin/npm-cli.js
+// next to node.exe) is started with node instead. Only when that file is missing does it fall back to npm.cmd in a shell.
+export function npmCommand({ platform = process.platform, execPath = process.execPath, exists = fs.existsSync } = {}) {
+  if (platform !== 'win32') return { cmd: 'npm', pre: [], shell: false };
+  const cli = path.win32.join(path.win32.dirname(execPath), 'node_modules', 'npm', 'bin', 'npm-cli.js');
+  return exists(cli) ? { cmd: execPath, pre: [cli], shell: false } : { cmd: 'npm.cmd', pre: [], shell: true };
+}
+
+// Is the package folder a complete install of this version? (its package.json says so and its entry file exists)
+export function installed(dir, version) {
+  try { return JSON.parse(fs.readFileSync(path.join(dir, 'package.json'), 'utf8')).version === version && fs.existsSync(path.join(dir, 'index.mjs')); } catch { return false; }
+}
+// Moves a finished install from `fresh` to `target`. A target that is already a complete install of `version` (another
+// checker got there first) is kept and the fresh copy dropped, so a running checker never loses files under it. A target
+// that is the wrong version or broken (a half-copied folder, a missing entry file) is moved aside and deleted, so it can
+// never block the install for good. Leftover folders from earlier runs are swept up.
+export function placeInstall(fresh, target, version) {
+  const parent = path.dirname(target), base = path.basename(target);
+  if (!installed(target, version) && fs.existsSync(target)) {
+    const aside = `${target}.old-${process.pid}-${Date.now()}`;
+    try { fs.renameSync(target, aside); } catch { /* another checker moved it */ }
+  }
+  try { if (!fs.existsSync(target)) fs.renameSync(fresh, target); } catch { /* another checker placed its copy first */ }
+  for (const e of fs.readdirSync(parent)) if (e.startsWith(`${base}.old-`)) fs.rmSync(path.join(parent, e), { recursive: true, force: true });
+}
 
 export async function loadPlaywright() {
   // Only the pinned copy in DEPS is used: a stray playwright-core from some parent folder could be any version.
@@ -30,11 +54,10 @@ export async function loadPlaywright() {
     const target = path.join(DEPS, 'node_modules', 'playwright-core');
     try {
       fs.mkdirSync(path.join(DEPS, 'node_modules'), { recursive: true });
-      const prefix = process.platform === 'win32' ? `"${stage}"` : stage;   // a shell joins the arguments on Windows
-      execFileSync(NPM, ['i', '--no-save', '--no-audit', '--no-fund', '--ignore-scripts', '--prefix', prefix, `playwright-core@${PW_VERSION}`],
-        { stdio: ['ignore', process.stderr, 'inherit'], shell: process.platform === 'win32' });
-      if (have && have !== PW_VERSION) { try { fs.renameSync(target, `${target}.old-${process.pid}`); } catch { /* someone else moved it */ } }
-      try { fs.renameSync(path.join(stage, 'node_modules', 'playwright-core'), target); } catch { /* another checker installed it first */ }
+      const npm = npmCommand(), prefix = npm.shell ? `"${stage}"` : stage;   // only the fallback goes through a shell
+      execFileSync(npm.cmd, [...npm.pre, 'i', '--no-save', '--no-audit', '--no-fund', '--ignore-scripts', '--prefix', prefix, `playwright-core@${PW_VERSION}`],
+        { stdio: ['ignore', process.stderr, 'inherit'], shell: npm.shell });
+      placeInstall(path.join(stage, 'node_modules', 'playwright-core'), target, PW_VERSION);
       fs.rmSync(stage, { recursive: true, force: true });
       if (!fs.existsSync(entry)) throw new Error('playwright-core is not in place after install');
     } catch (e) {
@@ -89,20 +112,25 @@ const MIME = {
 };
 
 // Static server on a free localhost port. Returns { url, close }.
+// Only files inside the folder are served: a path that climbs out ("/../", encoded or not) and a symlink that points out
+// are refused with 403. A malformed %-escape is a 400.
 export function serveDir(dir, port = 0) {
-  const root = path.resolve(dir);
+  const root = path.resolve(dir), realRoot = fs.realpathSync(root);
+  const within = (f, r) => f === r || f.startsWith(r + path.sep);
   const server = http.createServer((req, res) => {
     try {
       if (req.url === '/favicon.ico') { res.writeHead(204).end(); return; } // the checker's own server has no favicon; not a page error
-      let p = decodeURIComponent(new URL(req.url, 'http://x').pathname);
+      let p;
+      try { p = decodeURIComponent(new URL(req.url, 'http://x').pathname); } catch { res.writeHead(400, { 'content-type': 'text/plain' }).end('bad request'); return; }
       let file = path.resolve(root, '.' + p);
-      if (file !== root && !file.startsWith(root + path.sep)) { res.writeHead(403).end('forbidden'); return; }
+      if (!within(file, root)) { res.writeHead(403).end('forbidden'); return; }
       if (fs.existsSync(file) && fs.statSync(file).isDirectory()) file = path.join(file, 'index.html');
       if (!fs.existsSync(file)) { res.writeHead(404, { 'content-type': 'text/plain' }).end('not found'); return; }
+      if (!within(fs.realpathSync(file), realRoot)) { res.writeHead(403).end('forbidden'); return; }
       const body = fs.readFileSync(file);
       res.writeHead(200, { 'content-type': MIME[path.extname(file).toLowerCase()] || 'application/octet-stream', 'content-length': body.length, 'cache-control': 'no-store' });
       res.end(body);
-    } catch (e) { res.writeHead(500).end(String(e)); }
+    } catch { res.writeHead(500, { 'content-type': 'text/plain' }).end('server error'); }
   });
   return new Promise((ok, fail) => {
     server.once('error', fail);   // for example EADDRINUSE: the caller can try another port
