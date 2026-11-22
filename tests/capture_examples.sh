@@ -12,4 +12,7 @@ for spec in "halden-one 0 44" "tidewater 2 40" "relay 3 30" "keeling 0 40" "spro
   nice -n 15 node skills/brief2motion/scripts/capture_site.mjs "examples/$1" --out "$WORK/$1" --size 1280x800 --frames "$3" --intro "$2" --film | tail -1
   cp "$WORK/$1/film.webp" "assets/examples/$1.webp"
 done
+# a site-mode project keeps its site in site/
+nice -n 15 node skills/brief2motion/scripts/capture_site.mjs examples/larkspur/site --out "$WORK/larkspur" --size 1280x800 --frames 30 --intro 2 --film | tail -1
+cp "$WORK/larkspur/film.webp" assets/examples/larkspur.webp
 ls -la assets/examples | awk '{print $5, $9}'
