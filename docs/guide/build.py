@@ -11,9 +11,13 @@ from examples/<name>/site-report.json. Edit the prose in this file, the look in 
 import html
 import json
 import re
+import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+import extra  # noqa: E402  (the 1.1.0 sections: site mode and motion patterns)
 REPO = HERE.parent.parent
 SKILL = REPO / 'skills' / 'brief2motion'
 E = html.escape
@@ -99,6 +103,8 @@ def brief(name):
     return '\n'.join(x for x in lines if x.strip())
 
 
+HELPERS = SimpleNamespace(p=p, lead=lead, h2=h2, h3=h3, ul=ul, ol=ol, code=code, table=table, note=note, fig=fig, two=two)
+
 # ----------------------------------------------------------------------------------------------------- content
 
 section('what', 'What you can build', 'Orientation', lead(
@@ -119,7 +125,8 @@ section('what', 'What you can build', 'Orientation', lead(
     ], ['20%', '38%', '24%', '18%']) + two(fig('halden-one-top.jpg', '`halden-one`: a radio built from about forty shapes in three.js. No model file, no photograph.'),
                                          fig('tidewater-25.jpg', '`tidewater`: the crystal is 48 pictures; your scroll position picks one.'))
     + note('What it is not', 'It is not a page builder with a visual editor, and it does not host your site. It writes ordinary '
-           'files (HTML, CSS, JavaScript) into a folder that you can read, change and upload anywhere.'))
+           'files (HTML, CSS, JavaScript) into a folder that you can read, change and upload anywhere.')
+    + note('A bigger brief', 'For a site with several pages, or one page that must get a visitor to sign up or buy, the agent adds nine stages of planning and five more checks around the loop on the next page. That is site mode, described after Routing.'))
 
 section('loop', 'How it works: one loop for every site', 'Orientation', lead(
     'Whatever the brief asks for, the agent goes through the same six steps. The fourth is the one that matters: '
@@ -204,6 +211,8 @@ Style: Editorial / magazine (inferred)
     'If nothing matches, it says so and suggests none. A brand\'s own colours and type always replace a style\'s tokens. '
     'The rule book is `references/routing.json`; adding a phrase is a one-line change, and the tests check that every '
     'example\'s own brief still routes to the stack that example was built with.'))
+
+section('site', 'Site mode: a whole site, or a page that must convert', 'The first step', extra.site_mode_body(HELPERS))
 
 section('kit', 'The default stack: plain CSS and JavaScript, with the kit', 'Stacks', lead(
     'Most motion on a website needs no library. The kit is ten small files that handle the parts that are easy to get wrong.') + table(['File', 'What it does'], [
@@ -368,6 +377,8 @@ section('type', 'Kinetic type and scroll stories', 'Techniques', lead('Two techn
     'the text beside the graphic. Parallax adds little by itself and makes some people nauseous; a 2013 Purdue study found it did not improve the experience.') + h2('WebAssembly') + p(
     'Almost no motion on a website needs it. It cannot speed up moving page elements or drawing, which the browser and the graphics chip already do. '
     'It can help with heavy arithmetic every frame: physics with thousands of bodies, fluid or cloth, processing pictures or video. Prove the JavaScript version is too slow first.'))
+
+section('patterns', 'Motion patterns: recipes you can name', 'Techniques', extra.patterns_body(HELPERS))
 
 section('design', 'Design fundamentals: what every page gets', 'Design', lead(
     'Motion sits on top of a page. If the page under it is hard to read, badly spaced or slow, no animation rescues it.') + h2('Say what it is, at the top') + p(
@@ -542,7 +553,8 @@ python3 skills/brief2motion/scripts/serve.py site                    # preview a
 node skills/brief2motion/scripts/check_site.mjs site --out check     # measure it
 node skills/brief2motion/scripts/check_site.mjs site --no-perf       # on a machine with no GPU
 node skills/brief2motion/scripts/capture_site.mjs site --out media --film   # pictures and a short film
-node skills/brief2motion/scripts/build_styles.mjs                    # regenerate the style pages and atlas'''))
+node skills/brief2motion/scripts/build_styles.mjs                    # regenerate the style pages and atlas
+bash examples/larkspur/tools/run-checks.sh                           # every site-mode check on the worked example'''))
 
 section('trouble', 'Troubleshooting and questions', 'Reference', table(['Symptom', 'Cause and fix'], [
     ['The page is blank', 'You opened the file, not the address. Run `serve.py` and open the link it prints.'],
@@ -601,7 +613,7 @@ cover = f'''<section class="cover"><div class="eyebrow">Qualixar<span>Field guid
 <div class="by">Varun Pratap Bhardwaj · github.com/qualixar/brief2motion · MIT licence · A companion to release {VERSION}, November 2026</div></section>'''
 parts = [cover, f'<section id="contents"><div class="eyebrow">Contents<span>brief2motion {VERSION}</span></div><h1>Contents</h1><div class="toc">{toc}</div>'
          + note('How to use this guide', 'New machine: start with Setup. To shape a request: the brief pages. To understand a choice the agent made: Routing and the stack pages. '
-                'To pick a look: the style pages. To judge a result: the checks.') + '</section>']
+                'To pick a look: the style pages. To plan a whole site: Site mode. To find a named motion: Motion patterns. To judge a result: the checks.') + '</section>']
 for sid, title, eyebrow, body, _ in SECTIONS:
     parts.append(f'<section id="{sid}"><div class="eyebrow">{E(eyebrow)}<span>brief2motion {VERSION}</span></div><h1>{E(title)}</h1>{body}</section>')
 doc = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><title>brief2motion {VERSION}: the web motion guide</title>

@@ -11,6 +11,7 @@ How it works: one loop for every site
 Setup
 Writing a brief that can be checked
 Routing: how the stack and the style are chosen
+Site mode: a whole site, or a page that must convert
 The default stack: plain CSS and JavaScript, with the kit
 GSAP, ScrollTrigger and Lenis
 Motion, for plain pages and for React
@@ -19,6 +20,7 @@ The dust engine
 Page transitions with the View Transitions API
 SVG, charts, Lottie and Rive
 Kinetic type and scroll stories
+Motion patterns: recipes you can name
 Design fundamentals: what every page gets
 The style system: 32 styles and approaches
 Motion-led approaches
@@ -29,7 +31,7 @@ The examples
 Recipes on one page
 Troubleshooting and questions
 Sources and what was verified
-How to use this guideNew machine: start with Setup. To shape a request: the brief pages. To understand a choice the agent made: Routing and the stack pages. To pick a look: the style pages. To judge a result: the checks.
+How to use this guideNew machine: start with Setup. To shape a request: the brief pages. To understand a choice the agent made: Routing and the stack pages. To pick a look: the style pages. To plan a whole site: Site mode. To find a named motion: Motion patterns. To judge a result: the checks.
 Orientationbrief2motion 1.1.0
 What you can build
 brief2motion is a skill for Claude Code and Codex. You describe a website in plain words, and the agent builds it with motion that suits it, then measures the result in a real browser before you see it.
@@ -73,6 +75,7 @@ copper-no-7
 halden-one: a radio built from about forty shapes in three.js. No model file, no photograph.
 tidewater: the crystal is 48 pictures; your scroll position picks one.
 What it is notIt is not a page builder with a visual editor, and it does not host your site. It writes ordinary files (HTML, CSS, JavaScript) into a folder that you can read, change and upload anywhere.
+A bigger briefFor a site with several pages, or one page that must get a visitor to sign up or buy, the agent adds nine stages of planning and five more checks around the loop on the next page. That is site mode, described after Routing.
 Orientationbrief2motion 1.1.0
 How it works: one loop for every site
 Whatever the brief asks for, the agent goes through the same six steps. The fourth is the one that matters: the page is measured, and a failed check is a fix, not a footnote.
@@ -225,6 +228,151 @@ magazine, publication, journalisw+, newsroom, long-form, essay, report ...
 Editorial / magazine, Swiss / International Typographic Style, Grain / noise texture
 reading comes first: a type scale, a measure and a grid
 If nothing matches, it says so and suggests none. A brand's own colours and type always replace a style's tokens. The rule book is references/routing.json; adding a phrase is a one-line change, and the tests check that every example's own brief still routes to the stack that example was built with.
+The first stepbrief2motion 1.1.0
+Site mode: a whole site, or a page that must convert
+Some briefs ask for more than a page that moves. They ask for a site with several pages, or for one page that has to make a visitor do something. For those, brief2motion works through nine stages. Each writes one short file that you and the agent can both read, and each has a check.
+When to use it
+Use site mode when the brief asks for a site with several pages, or for one page whose job is to get a visitor to sign up, buy, book or register. Stay with the six-step loop when the motion is the point of the page: a product to turn, a scroll story, a particle portrait.
+Site mode puts design before motion. Stages 1 to 5 come before the loop's first step. Stage 6 holds the routing and the spec. Stages 8 and 9 are the loop's build and check.
+The nine stages
+Stage
+What it settles
+File it writes
+Checked by
+1. Discovery
+who visits, what each of them wants to do, what the owner counts as success, the limits, and every open question with the assumption you took
+DISCOVERY.md
+check_plan
+2. Content
+every word on every page; each claim has an ID and a source, or is marked DRAFTED
+CONTENT.md
+check_plan
+3. Routes
+for each page: path, parent, template, title, description, main action, states, links
+routes.json, SITEMAP.md
+check_plan, check_meta
+4. Wireframes
+grey boxes with the real copy, phone first, with the main action in reach
+wireframes/<template>.html
+check_layout
+5. Tokens
+colours, type and spacing as named values, light and dark, with the text pairs to measure
+tokens.json, then site/tokens.css
+build_tokens
+6. Visual design
+one idea taken from the subject; type, grid, colour, pictures; the one thing a visitor will remember. Then the router and SPEC.md, as in the loop
+DESIGN.md, ASSETS.json
+check_plan
+7. Motion
+for each movement: its purpose, trigger, states, how it can be interrupted, its reduced-motion form and its pattern page
+MOTION.md
+check_site
+8. Build
+semantic HTML first, motion on top
+site/
+everything above
+9. Checks and a second reader
+the tasks a visitor must finish, the checker records, and notes from someone who did not build it
+journeys.json, check/qa.json, REVIEW.md
+five checkers
+Only the brief's facts. No invented reviews, logos, customers or numbers. check_plan fails a drafted claim that looks like proof and sends a drafted figure to review.
+Phone first. Wireframes are drawn for 390 px first, and every journey runs on a phone as well as on a desktop.
+States are declared. A page with a form, a search or a fetched list lists its empty, loading, error and success states in routes.json, and each one is loaded by the checkers.
+Page types
+Stage 2 and stage 4 start from the kind of page. references/page-blueprints.md gives the usual order of sections for seven kinds, with one action for each. Keep only the sections the visitor's decision needs.
+Page type
+Sections, in the order the visitor's questions arrive
+The one action
+Product launch
+What it is and what changed (with the date or availability), then the product in use, then how it differs from what the visitor has now, then availability, eligibility and limits, then answers
+Buy, watch the demo, or join the waiting list, whichever matches the product's real status
+SaaS
+Who it is for and the outcome, then the workflow with the real interface shown, then use cases, then proof near the claims it backs, then pricing or the evaluation path, then objections (security, switching, cancelling)
+Start a trial or book a demo, as the brief says, and make the comparison route obvious for buyers who are still weighing it
+Portfolio
+Name and discipline, then selected work, each with role and scope, then case pages with the process and the outcome, then about, then contact
+Open a case, then reach the right contact path
+Agency
+Who the studio works with and what it delivers, then relevant work, then the scope of services and the process, then the people or client evidence, then an enquiry
+See related work, or send a brief
+Event
+What, when (with the time zone) and where, then featured people or the programme, then tickets and availability, then travel, access and refunds, then questions
+Register or buy, or see the schedule
+Documentation
+Product and version, then search and sidebar, then quickstart, then tasks, reference and explanation kept apart, then next steps
+Complete the quickstart from a clean environment, and say so when you did
+E-commerce product page
+Title and useful media, then price, variants, stock and the buy controls, then shipping and returns, then detailed specification, proof and comparisons
+Add the chosen variant to the cart
+A one-page brief
+A small brief does not need nine long documents. For a one-page site, keep one short entry in each file. You may skip stage 4 when the page has no template choice, and stage 7 when it has no motion. A site with several page types writes one entry per route or template.
+Never skip stages 1, 2, 3 and 9. Without them nothing says what the page is for, whether its words are true, where it sits, or whether it worked.
+The five checks
+Five checkers write into one file, check/qa.json. Each record names the page, the state, the width, the browser, what was measured and the threshold. Beside them, build_tokens measures the colour pairs and check_site still runs the motion, fallback and weight checks.
+Check
+It opens
+What it catches
+check_plan
+the plan files, no browser
+a task with no page to do it on; a claim with no source; an invented review or logo; a picture with no rights record; a page nothing links to; a form with no declared states
+check_layout
+every page and state in Chrome at 320, 390, 768 and 1440 px
+sideways scroll; text cut off; text and buttons colliding; tap targets under 24 px; lines far too long; a focused control hidden under a sticky bar
+check_a11y
+every page and state, light and dark
+failed axe-core rules (names, roles, labels, landmarks, contrast); the Tab key not reaching the page's main action
+check_journeys
+a phone and a desktop window, driven by journeys.json
+a visitor who cannot finish the task: click this link, fill this field, expect this message; any console error on the way
+check_meta
+the built pages, no browser
+a missing or repeated title or description; a wrong canonical address; a share image that is missing or too small; a sitemap that disagrees with routes.json
+What PASS, FAIL, REVIEW and PENDING mean
+Outcome
+Meaning
+What you do
+PASS
+measured, and within its threshold
+nothing
+FAIL
+measured, and over the threshold; blocks the release
+fix the page, run again
+REVIEW
+the tool cannot decide: text over a picture, a drafted figure, an ambiguous overlap
+look at it yourself and decide
+PENDING
+no evidence exists yet: a site not built, a sign-up that ends at a fixture, axe-core not loaded offline
+connect the missing piece and run again
+Exit code 0 means no FAIL. Add --strict and a REVIEW fails too.
+The second reader
+A checker measures. It cannot see that a layout is dull or that the first screen says nothing. So the last part of site mode is a second reader: a different agent or a person who did not build the page and has not read the brief. They get what a visitor gets, the built site and its screenshots, and write notes in REVIEW.md.
+They start with three questions, answered cold from the first screen at 390 px and again at 1440: what does this page offer, and to whom; what did your eye land on first; what would you do next. Then they read the brief. Wherever their answers differ from what the brief meant, that is a finding, even if every check passed.
+Three short tests follow. Switch to reduced motion and mute the tab: is the page still complete? Use it one-handed on a phone: can a thumb reach the main action? Shrink the first screen to 480 px wide: can you still say what it offers? Two rounds of fixes are enough. A third means the brief is unclear, and the question goes back to the owner.
+Worked case: Larkspur
+examples/larkspur/ is a 3-page launch site for a shared inbox, built through the nine stages, all but the second reader's notes. Larkspur is a made-up product, and the site says so near the top and in the footer. Its brief gives the facts it may state, two plans and a 14-day trial, and says there are no customers, logos, reviews or statistics. So the site has none. The brief's "done when" asks for a visitor on a phone to get from the home page to a finished trial form, including after one mistake.
+larkspur, home page. One idea (the inbox drawn in code, marked as sample data), one action, and no invented proof.
+The stage files are the content of the folder: 3 routes in routes.json, 11 sourced claims in CONTENT.md, 3 journeys in journeys.json, and one script that runs everything.
+The script is examples/larkspur/tools/run-checks.sh. It runs those commands in stage order, keeps qa.json and site-report.json beside the example, and exits 0 when nothing failed. Copy it into your own project and change the folder names. Add --no-perf on a machine with no graphics chip. Start it with:
+The result, read from qa.json when this guide is built: 337 PASS, 0 FAIL, 0 REVIEW, 2 PENDING, out of 339 records, in Chrome 158.0.8127.36 with axe-core 4.14.1.
+Check
+Records in qa.json
+build_tokens: colour pairs, light and dark
+21
+check_plan
+12
+check_layout: every page, state and wireframe at four widths
+240
+check_a11y
+32
+check_journeys
+14
+check_meta
+20
+All together
+339
+The two PENDING records are one journey, "start the trial", on a phone and on a desktop. The form is a fixture: it checks the entry and shows a thank-you, and sends and stores nothing. The click-through passed, but nothing proves that a real service would receive the sign-up, so the report does not say PASS. Connect the service, run again, and they change.
+The motion checks on the same pages (check_site) passed 74 of 74. Each page is 28 to 32 KB, and nothing loads from another host. The slowest 95th-percentile frame is 16.8 ms, on desktop and on the emulated phone alike.
+What a green report does not coverLarkspur has no REVIEW.md from a second reader, no screen-reader pass and no back end. All three are named in its README. A report with no FAIL says the measurable things hold. It does not say the page is good.
 Stacksbrief2motion 1.1.0
 The default stack: plain CSS and JavaScript, with the kit
 Most motion on a website needs no library. The kit is ten small files that handle the parts that are easy to get wrong.
@@ -380,6 +528,135 @@ enhancements that may be absent
 Scrolling scrolls: do not hijack it, do not make one wheel tick equal one section, do not block the keyboard. One change per step, with the text beside the graphic. Parallax adds little by itself and makes some people nauseous; a 2013 Purdue study found it did not improve the experience.
 WebAssembly
 Almost no motion on a website needs it. It cannot speed up moving page elements or drawing, which the browser and the graphics chip already do. It can help with heavy arithmetic every frame: physics with thousands of bodies, fluid or cloth, processing pictures or video. Prove the JavaScript version is too slow first.
+Techniquesbrief2motion 1.1.0
+Motion patterns: recipes you can name
+A pattern is a recipe for one motion you can name: a headline that rises line by line, a number that counts up, a card that grows into its page. There are 27, one page each in references/patterns/.
+Every page has the same parts. Use when and Not when say whether the pattern fits. Stack names the tool. Brief words are the phrases that point to it. Sketch is a short piece of code written against the kit. Budget is the cost, Reduced motion is what a visitor with that setting sees, and Checks says what check_site.mjs measures and what you must look at by eye.
+A sketch is something to copy and change, not a finished page. The tests check that each sketch's JavaScript parses and that every file it imports from the kit exists. The examples are the tested pages.
+Four rules every pattern follows
+The content is in the HTML and readable without JavaScript.
+Motion is created only when reduced motion is off.
+The page ends its setup with signal('ready'), signal('reduced') or signal('static').
+Nothing else moves than what the motion plan lists.
+How route.mjs suggests them
+Each pattern has phrases with weights in references/routing.json. The router adds up the weights of the phrases it finds in your brief. A pattern with a total of 4 or more is suggested. At most four are shown, best first, each with the words that led there. Their pages are added to the list the agent reads before building.
+Take this brief text:
+The router prints:
+A phrase it does not know, such as "drifts sideways", scores nothing, which is why the brief above says "marquee". The "Brief words" line on each page lists what it listens for. To add a pattern, write its page with the same parts, list it in the index and in patterns in routing.json with its phrases, and run node --test tests/*.test.mjs.
+All 27 patterns
+Generated from the pattern pages and routing.json when this guide is built. The last column is what a visitor with reduced motion sees.
+Pattern
+Stack
+Use it when
+With reduced motion
+hero-load-sequence
+vanilla
+The brief says the hero should "animate in", "set itself", "feel alive on load", or a launch page needs a first impression
+No movement. The finished hero is on screen, and signal('reduced') says so
+text-line-reveal
+gsap
+A type-led page, a headline that carries the brief, a section title that should feel crafted
+gsap.matchMedia() creates the motion only inside the no-preference branch
+word-by-word-read
+vanilla
+A manifesto, a mission paragraph or a single key statement that should be read slowly, once
+--w is never set, so every word is at full opacity
+mask-reveal
+vanilla
+Hero or gallery images, project covers, a section that needs a deliberate "uncover" beat
+No animation is created; the full image is on screen
+number-counter
+vanilla
+One to four headline figures (customers served, hours saved, a measured result) that the brief supplies
+countUp returns at once: the final number is the only number
+marquee
+vanilla
+A strip of partner names the brief supplies, a ribbon of keywords, a kinetic divider between sections
+The animation is only declared inside no-preference
+step-scrollytelling
+vanilla
+Explaining a process, a chart with several states, a data story, a before-and-after
+States still change on scroll, in cuts (no transition)
+pinned-scene-scrub
+vanilla
+One idea needs 200 to 300% of a screen to unfold; a 3D object changing pose; a diagram assembling
+Nothing pins and nothing scrubs: the scene is a normal block in its finished state
+horizontal-scroll
+gsap
+A timeline, a gallery or a set of case studies that suits a left-to-right order, on a wide screen
+A native swipe row with scroll snap: the same content, no pin, no hijack, keyboard scrollable (tabindex="0" on the track if it has no focusable children)
+image-sequence-scrub
+vanilla
+The brief has a rendered or filmed object whose motion the reader should control
+The canvas shows the last frame and nothing scrubs
+parallax-depth
+vanilla
+One hero or one divider, lightly, where the brief asks for "depth" or "layers"
+No drift at all: the layers sit at their rest position (the CSS is only declared inside no-preference, the script returns)
+scroll-progress-bar
+vanilla
+A long read, an article, a scroll story where "how far" helps
+Kept, because it is information: the bar grows with the reader's own scroll, with no animation
+product-3d-scroll
+three
+Hardware, a physical product, an object whose shape is the selling point, with a model (.glb) from the user
+One still frame; scroll changes the pose in cuts (each invalidate renders once), never a glide
+shader-background
+three
+A hero or a section that wants atmosphere the brief names: "flowing", "aurora", "liquid", "gradient mesh"
+One frame at a fixed time (stage.still), no loop
+magnetic-button
+vanilla
+One primary call to action on a pointer device, where the brief wants a tactile, playful feel
+Not created. The button is a plain button
+cursor-follower
+vanilla
+An expressive portfolio or an agency page, on desktop, where the brief asks for a custom cursor
+Not created: no dot is added, and the normal cursor is used with no lag and no growth
+tilt-spotlight-cards
+vanilla
+A row of feature or project cards on a pointer device, where the brief asks for "interactive", "premium" or "glow" cards
+No listener is attached: flat cards, no light
+bento-motion
+vanilla
+A features overview with five to nine items of unequal weight, a product summary, a dashboard-style section
+reveal returns at once: all tiles visible
+page-transition
+View Transitions
+A multi-page site (portfolio, studio, documentation with a few pages) where the brief wants it to feel continuous
+The block is inside no-preference, so there is no transition and the page changes at once
+shared-element-morph
+View Transitions
+A portfolio, case-study index, product grid or gallery with a detail page for each item
+Declared only inside no-preference: no morph, a plain page change
+layout-reorder
+View Transitions
+A filterable portfolio, a sortable list, a gallery with tags, a dashboard whose cards reorder
+transition() runs the update directly: same result, no travel
+theme-toggle-transition
+View Transitions
+The brief asks for a dark or light switch, and the page supports both
+set(next) runs directly: an instant switch
+section-colour-shift
+vanilla
+A story or a launch page with distinct chapters that each deserve a mood
+The transition is declared only inside no-preference, so the colours switch at once: this is a cut, which is allowed
+scroll-snap-carousel
+vanilla
+Testimonials the user supplies, products, case studies, steps: anything with three to ten similar items in a row
+scroll-behavior: smooth is declared only in no-preference, and the buttons use behavior: 'auto': jumps, not glides
+svg-line-draw
+svg
+A signature underline, a route or timeline, a hand-drawn diagram, a chart line
+prepareDraw leaves the offset at 0: the whole line is there
+lottie-rive-spot
+players
+The user supplies a Lottie JSON or a .riv file, or the brief names After Effects, Lottie or Rive
+Lottie loads paused on stillFrame; Rive draws one frame
+particles-form
+particles
+The brief wants particles, dust, dots, halftone or stipple that become something
+The finished state is shown still (the engine keeps a still image of the formed shape for this and for no WebGL); the page scrolls normally and nothing travels
 Designbrief2motion 1.1.0
 Design fundamentals: what every page gets
 Motion sits on top of a page. If the page under it is hard to read, badly spaced or slow, no animation rescues it.
