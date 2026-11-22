@@ -129,7 +129,7 @@
       "why": "The brief describes a sequence tied to scrolling: pinned sections, scrubbed timelines, sideways galleries or a picture sequence. GSAP timelines with ScrollTrigger are the dependable tool for that, with Lenis for smooth scroll.",
       "signals": [
         [
-          "\\b(scrollytelling|scroll[- ]?story|scroll[- ]driven|scroll[- ]telling|as (you|i|they) scroll|when (you|i|they) scroll|on scroll)\\b",
+          "\\b(scrollytelling|scroll[- ]?story|scroll[- ]driven|scroll[- ]telling|as (you|i|they) scroll|when (you|i|they) scroll|on scroll|(by|with) (the )?scroll(ing)?)\\b",
           4
         ],
         [
@@ -233,8 +233,12 @@
       "why": "The brief is led by type and interface feel on a plain page: headlines that set themselves, springs, scroll-linked values. Motion's small JavaScript API does that with hardware-accelerated animations and no framework.",
       "signals": [
         [
-          "\\b(kinetic (type|typography|text)|type animation|text animation|split text|word by word|letter by letter|headline animat\\w+|marquee)\\b",
+          "\\b(kinetic (type|typography|text)|type animation|text animation|split text|word by word|letter by letter|headline animat\\w+)\\b",
           6
+        ],
+        [
+          "\\bmarquee\\b",
+          2
         ],
         [
           "\\b(springs?|springy|bouncy|physics-?based)\\b",

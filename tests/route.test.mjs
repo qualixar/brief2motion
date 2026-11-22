@@ -138,3 +138,11 @@ test('the command line prints patterns in JSON', () => {
   const json = JSON.parse(execFileSync('node', [cli, '-', '--json'], { input: 'A horizontal scroll section for the timeline.', encoding: 'utf8' }));
   assert.equal(json.patterns[0].id, 'horizontal-scroll'); assert.equal(json.patterns[0].ref, 'patterns/horizontal-scroll.md');
 });
+
+test('a pinned, scrubbed scene leads to GSAP even when the brief also names a marquee and a hero; a marquee alone is plain CSS', () => {
+  const r = route('the hero animates in, a marquee of logos, a magnetic button, and a pinned scene scrubbed by scroll');
+  assert.equal(r.stack.id, 'gsap', JSON.stringify(r.stack.matched));
+  assert.ok(r.patterns.some((p) => p.id === 'pinned-scene-scrub'));
+  assert.equal(route('a marquee of client logos under the headline').stack.id, 'vanilla', 'the marquee pattern is a CSS loop, not a reason for a library');
+  assert.equal(route('kinetic typography: the headline sets itself word by word').stack.id, 'motion');
+});
