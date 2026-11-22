@@ -8,7 +8,7 @@ Plain CSS and JavaScript with the kit; editorial and calm, in the brief's own co
 ## Done when
 | Line | Proof |
 |---|---|
-| Plan: routes reachable, tasks mapped, claims sourced, assets with rights, wireframes carry the primary action, links in the built pages | `check_plan.mjs`: 12 of 12 PASS (`qa.json`) |
+| Plan: routes reachable, tasks mapped, claims sourced, assets with rights, wireframes carry the primary action, links in the built pages | `check_plan.mjs`: 13 of 13 PASS (`qa.json`) |
 | Tokens: every reference resolves, no cycles, every declared pair meets AA in light and dark | `build_tokens.mjs`: 21 of 21 PASS, 20 contrast pairs (lowest 5.73:1) |
 | Wireframes hold together at 320, 390, 768, 1440 px | `wireframes/qa.json`: 72 of 72 PASS; shots in `wireframes/shots/` |
 | Layout of the built site, both themes, five targets (three routes and two form states), four widths | `check_layout.mjs`: 240 of 240 PASS: no overflow, clipped text, overlap, target under 24 px, covered focus; no paragraph outside 45 to 75 characters |
