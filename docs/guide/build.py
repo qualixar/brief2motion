@@ -156,7 +156,7 @@ section('setup', 'Setup', 'Getting started', lead('Two commands in Claude Code, 
         ['ffmpeg', 'a short film of the page (optional)', '`brew install ffmpeg`'],
     ], ['26%', '42%', '32%']) + p(
     'Check a machine at any time with `bash skills/brief2motion/scripts/doctor.sh`. It prints `ok` or the exact install '
-    'command for each tool, for macOS, Windows and Linux.') + note('What has been tested', 'Everything in this guide was built and measured on macOS with Chrome 157. The Windows and Linux '
+    'command for each tool, for macOS, Windows and Linux.') + note('What has been tested', 'Everything in this guide was built and measured on macOS with Chrome 157 and 158. The Windows and Linux '
         'commands are written but were not run by the author. Codex has a plugin manifest but no recorded run.') + h2('Opening the page') + p(
     'When the agent says it is done, it gives you a link such as `http://localhost:8421/`. Open that address. Do not '
     'double-click `site/index.html`: browsers refuse to load JavaScript modules from a file, so you would see a blank page. '
@@ -474,18 +474,18 @@ section('perf', 'Performance', 'Quality', lead('A page that looks right on a fas
 ]) + h2('What the examples measure') + table(['Example', 'Desktop, p95 frame', 'Emulated phone, p95 frame'], [
     [f'`{n}`', f'{frame(n, "desktop")} ms', f'{frame(n, "phone")} ms'] for n in ['halden-one', 'tidewater', 'relay', 'keeling', 'mise', 'sprout', 'copper-no-7', 'style-atlas']
 ], ['40%', '30%', '30%']) + p(
-    'These are from the reports in the repository, measured on an Apple M-series laptop with Chrome 157. A screen that refreshes 60 times a second gives a frame every 16.7 ms, so these '
+    'These are from the reports in the repository, measured on an Apple M-series laptop with Chrome 158. A screen that refreshes 60 times a second gives a frame every 16.7 ms, so these '
     'pages are at the screen\'s own limit. The phone run is this machine\'s graphics chip with the processor slowed down. It is not a real phone: it catches layout and most '
     'performance problems, and you should still look at the page on yours.'))
 
-section('checks', 'The checks, one by one', 'Quality', lead('`check_site.mjs` opens every page in Chrome seven ways. A page with one WebGL canvas gets 27 checks.') + table(['Run', 'What it checks', 'A failure means'], [
+section('checks', 'The checks, one by one', 'Quality', lead('`check_site.mjs` opens every page in Chrome seven ways. A page with one WebGL canvas gets 28 checks.') + table(['Run', 'What it checks', 'A failure means'], [
     ['Desktop', 'the page reports its motion state; frame time while idle and scrolling; no sideways scroll at six scroll positions; one main heading, a language, a title and description, zoom allowed, alt text, a main landmark and a skip link; a visible focus ring on the first twelve keyboard stops; page weight', 'the page is slow, wider than the screen, or missing basics'],
     ['Phone, 390 px', 'frame time with the processor slowed four times; sideways scroll; tap targets of 24 px or more; page weight', 'it will stutter or be hard to tap'],
     ['Phone, 320 px', 'sideways scroll, loaded fresh at that width', 'the layout breaks on the narrowest phones'],
     ['Reduced motion', 'the page says so; no animation longer than a quarter of a second is running; two screenshots 0.7 seconds apart are identical at three scroll positions; every heading and paragraph is fully visible at some point; text contrast; normal scrolling works', 'something still moves, or some text never appears'],
     ['JavaScript off', 'something readable is on the page', 'the content only exists after a script runs'],
     ['WebGL off', 'the headline is readable; a still stands in for each WebGL canvas', 'visitors without WebGL get a hole'],
-    ['Every run', 'no console errors; requests only to the page itself and one CDN', 'something is broken or leaking'],
+    ['Every run', 'no console errors; requests only to the page itself and one CDN; the dev-only tuning panel is not shipped', 'something is broken, leaking, or left over from development'],
 ], ['15%', '58%', '27%']) + h2('What a checker cannot see') + p(
     'It cannot see that a layout is dull, that a headline says nothing, or that text sits on a busy picture: text over pictures, gradients and canvas has no single '
     'background colour, so its contrast is not measured. After the checks pass, the agent opens the screenshots and looks at them against every "done when" line. So should you.') + h2('What the checker found in its first week') + ul([
@@ -593,7 +593,7 @@ section('sources', 'Sources and what was verified', 'Reference', lead('What this
     'Each stack\'s pattern is exercised by a smoke test in a real browser, including test pages for React Three Fiber, Rive, and a three.js model with post-processing.',
     'The router, the kit\'s maths, the measuring code and the style data have unit tests.',
 ]) + h2('Not verified') + ul([
-    'Windows and Linux. Real phones and tablets. Safari and Firefox: the checks ran in Chrome 157 only.',
+    'Windows and Linux. Real phones and tablets. Safari and Firefox: the checks ran in Chrome 157 and 158 only.',
     'Codex: the manifest is included, no run is recorded.',
     'Screen readers: the structure is checked mechanically, not by listening.',
     'React stacks inside a real bundled project: the React example and the React Three Fiber test page run from CDN modules.',

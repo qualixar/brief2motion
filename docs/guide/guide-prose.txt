@@ -125,7 +125,7 @@ ffmpeg
 a short film of the page (optional)
 brew install ffmpeg
 Check a machine at any time with bash skills/brief2motion/scripts/doctor.sh. It prints ok or the exact install command for each tool, for macOS, Windows and Linux.
-What has been testedEverything in this guide was built and measured on macOS with Chrome 157. The Windows and Linux commands are written but were not run by the author. Codex has a plugin manifest but no recorded run.
+What has been testedEverything in this guide was built and measured on macOS with Chrome 157 and 158. The Windows and Linux commands are written but were not run by the author. Codex has a plugin manifest but no recorded run.
 Opening the page
 When the agent says it is done, it gives you a link such as http://localhost:8421/. Open that address. Do not double-click site/index.html: browsers refuse to load JavaScript modules from a file, so you would see a blank page. To start the preview yourself: python3 skills/brief2motion/scripts/serve.py site. It serves the folder on your own machine only, and Ctrl-C stops it. To publish, upload the site/ folder to any static host.
 The briefbrief2motion 1.1.0
@@ -353,13 +353,13 @@ examples/larkspur/ is a 3-page launch site for a shared inbox, built through the
 larkspur, home page. One idea (the inbox drawn in code, marked as sample data), one action, and no invented proof.
 The stage files are the content of the folder: 3 routes in routes.json, 11 sourced claims in CONTENT.md, 3 journeys in journeys.json, and one script that runs everything.
 The script is examples/larkspur/tools/run-checks.sh. It runs those commands in stage order, keeps qa.json and site-report.json beside the example, and exits 0 when nothing failed. Copy it into your own project and change the folder names. Add --no-perf on a machine with no graphics chip. Start it with:
-The result, read from qa.json when this guide is built: 337 PASS, 0 FAIL, 0 REVIEW, 2 PENDING, out of 339 records, in Chrome 158.0.8127.36 with axe-core 4.14.1.
+The result, read from qa.json when this guide is built: 338 PASS, 0 FAIL, 0 REVIEW, 2 PENDING, out of 340 records, in Chrome 158.0.8127.36 with axe-core 4.14.1.
 Check
 Records in qa.json
 build_tokens: colour pairs, light and dark
 21
 check_plan
-12
+13
 check_layout: every page, state and wireframe at four widths
 240
 check_a11y
@@ -369,7 +369,7 @@ check_journeys
 check_meta
 20
 All together
-339
+340
 The two PENDING records are one journey, "start the trial", on a phone and on a desktop. The form is a fixture: it checks the entry and shows a thank-you, and sends and stores nothing. The click-through passed, but nothing proves that a real service would receive the sign-up, so the report does not say PASS. Connect the service, run again, and they change.
 The motion checks on the same pages (check_site) passed 74 of 74. Each page is 28 to 32 KB, and nothing loads from another host. The slowest 95th-percentile frame is 16.8 ms, on desktop and on the emulated phone alike.
 What a green report does not coverLarkspur has no REVIEW.md from a second reader, no screen-reader pass and no back end. All three are named in its README. A report with no FAIL says the measurable things hold. It does not say the page is good.
@@ -665,7 +665,7 @@ The first screen states what the product is and what to do next, with real conte
 Type and space
 Body text 16 px or larger. Line length 45 to 90 characters. Line height about 1.5 for text, 0.95 to 1.15 for headlines.
 A scale of four or five sizes, not a pile. Fluid headlines with clamp() and a rem floor.
-One family or two; if two, clearly different. System fonts unless the brief supplies one.
+Usually a single family; a second only when it contrasts plainly with the first. System fonts unless the brief supplies one.
 Spacing in steps of 4 px. Group with space before lines.
 Colour and contrast
 Text contrast at least 4.5:1; large text 3:1; control edges 3:1. The thresholds are not rounded.
@@ -691,7 +691,7 @@ Stagger between related items
 30 to 80 ms, in reading order
 A hero sequence
 over in about 1.5 seconds
-Every animation has a reason: it shows what changed, where something came from, or what to look at. One orchestrated moment beats many scattered ones. A fade on every section and a hover effect on every card is the commonest sign of a generated page. Motion that answers input is always welcome.
+Every animation has a job: point the eye, explain a change of state, or show where an element came from or went. Spend the motion budget on one planned entrance; when every block fades up and every card lifts on hover, nothing stands out and the page looks machine-made. Brief feedback to a visitor's own action is always worth animating.
 Never invent proofNo made-up reviews, ratings, customer names, logos or numbers. If the brief has none, the section is left out. Made-up examples say that they are made up.
 Stylesbrief2motion 1.1.0
 The style system: 32 styles and approaches
@@ -1430,10 +1430,10 @@ copper-no-7
 style-atlas
 16.7 ms
 16.7 ms
-These are from the reports in the repository, measured on an Apple M-series laptop with Chrome 157. A screen that refreshes 60 times a second gives a frame every 16.7 ms, so these pages are at the screen's own limit. The phone run is this machine's graphics chip with the processor slowed down. It is not a real phone: it catches layout and most performance problems, and you should still look at the page on yours.
+These are from the reports in the repository, measured on an Apple M-series laptop with Chrome 158. A screen that refreshes 60 times a second gives a frame every 16.7 ms, so these pages are at the screen's own limit. The phone run is this machine's graphics chip with the processor slowed down. It is not a real phone: it catches layout and most performance problems, and you should still look at the page on yours.
 Qualitybrief2motion 1.1.0
 The checks, one by one
-check_site.mjs opens every page in Chrome seven ways. A page with one WebGL canvas gets 27 checks.
+check_site.mjs opens every page in Chrome seven ways. A page with one WebGL canvas gets 28 checks.
 Run
 What it checks
 A failure means
@@ -1456,8 +1456,8 @@ WebGL off
 the headline is readable; a still stands in for each WebGL canvas
 visitors without WebGL get a hole
 Every run
-no console errors; requests only to the page itself and one CDN
-something is broken or leaking
+no console errors; requests only to the page itself and one CDN; the dev-only tuning panel is not shipped
+something is broken, leaking, or left over from development
 What a checker cannot see
 It cannot see that a layout is dull, that a headline says nothing, or that text sits on a busy picture: text over pictures, gradients and canvas has no single background colour, so its contrast is not measured. After the checks pass, the agent opens the screenshots and looks at them against every "done when" line. So should you.
 What the checker found in its first week
@@ -1633,10 +1633,10 @@ Every example passes check_site.mjs; the reports are in the repository. The numb
 Each stack's pattern is exercised by a smoke test in a real browser, including test pages for React Three Fiber, Rive, and a three.js model with post-processing.
 The router, the kit's maths, the measuring code and the style data have unit tests.
 Not verified
-Windows and Linux. Real phones and tablets. Safari and Firefox: the checks ran in Chrome 157 only.
+Windows and Linux. Real phones and tablets. Safari and Firefox: the checks ran in Chrome 157 and 158 only.
 Codex: the manifest is included, no run is recorded.
 Screen readers: the structure is checked mechanically, not by listening.
 React stacks inside a real bundled project: the React example and the React Three Fiber test page run from CDN modules.
 Some style entries are thinner than others, and say so. Aurora, maximalism and editorial are documented as trends or traditions, not as defined web styles.
 Published sources for the styles and the rules
-The repositories studied, with licences and what was taken from each, are in RESOURCES.md. No code from another project is copied into brief2motion. Facts were checked on 17 November 2026.
+The software built sites load, with its licences, is in NOTICE and references/licences.md; RESOURCES.md is a reading list. No code from another project is copied into brief2motion. Facts were checked on 17 November 2026.

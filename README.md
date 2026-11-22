@@ -33,7 +33,7 @@
   <img src="assets/examples/halden-one.webp" alt="A product page for a blue enamel table radio. As the page scrolls, the 3D radio turns, the camera moves in on the brass dial, the radio comes apart into labelled layers, and four colour buttons appear." width="100%">
 </p>
 
-<p align="center"><b>One brief, one page.</b> This is <a href="examples/halden-one/">Halden One</a>, built from <a href="examples/halden-one/BRIEF.md">this brief</a>: a radio made of about forty shapes in three.js, with no model file and no photo. It turns, opens into an exploded view and changes colour as you scroll. Its <a href="examples/halden-one/site-report.json">report</a> shows 27 of 27 checks passed, including a still picture for browsers without WebGL and cuts instead of travel for visitors with reduced motion.</p>
+<p align="center"><b>One brief, one page.</b> This is <a href="examples/halden-one/">Halden One</a>, built from <a href="examples/halden-one/BRIEF.md">this brief</a>: a radio made of about forty shapes in three.js, with no model file and no photo. It turns, opens into an exploded view and changes colour as you scroll. Its <a href="examples/halden-one/site-report.json">report</a> shows 28 of 28 checks passed, including a still picture for browsers without WebGL and cuts instead of travel for visitors with reduced motion.</p>
 
 <p align="center"><b>▶ brief2motion in 84 seconds:</b> one product photo and a brief become a website whose dust forms the bottle, then nine more sites in nine different motion stacks.</p>
 
@@ -122,7 +122,7 @@ That makes the agent go back to your original brief line by line, show the evide
 | ffmpeg | a short film of the page (optional) | `brew install ffmpeg` | `winget install -e --id Gyan.FFmpeg` | `sudo apt install ffmpeg` |
 | brief2mp4 | finishing that film as a checked MP4 (optional) | see [brief2mp4](https://github.com/qualixar/brief2mp4) | same | same |
 
-Development and every run recorded here were on macOS with Chrome 157. The Windows and Linux paths are written but not run by the author.
+Development and every run recorded here were on macOS with Chrome 157 and 158. The Windows and Linux paths are written but not run by the author.
 
 ## brief2mp4: the video side, installed with it
 
@@ -258,20 +258,20 @@ Three test layers back this up: unit tests for the router, the kit and the measu
 
 ## Examples
 
-Ten folders in [`examples/`](examples/), each with `BRIEF.md`, the site, and `site-report.json` from its passing check on an Apple M-series laptop with Chrome 157:
+Ten folders in [`examples/`](examples/), each with `BRIEF.md`, the site, and `site-report.json` from its passing check on an Apple M-series laptop with Chrome 158:
 
 | Example | Stack | Checks |
 |---|---|---|
-| [halden-one](examples/halden-one/) | three.js | 27 of 27 |
-| [tidewater](examples/tidewater/) | GSAP, ScrollTrigger, Lenis | 27 of 27 |
-| [relay](examples/relay/) | Motion | 27 of 27 |
+| [halden-one](examples/halden-one/) | three.js | 28 of 28 |
+| [tidewater](examples/tidewater/) | GSAP, ScrollTrigger, Lenis | 28 of 28 |
+| [relay](examples/relay/) | Motion | 28 of 28 |
 | [halvorsen](examples/halvorsen/) | View Transitions API, five pages | all pages pass |
-| [keeling](examples/keeling/) | SVG, D3 scales, NOAA data | 27 of 27 |
-| [mise](examples/mise/) | React, Motion for React | 27 of 27 |
-| [sprout](examples/sprout/) | CSS and JavaScript, Lottie | 27 of 27 |
-| [copper-no-7](examples/copper-no-7/) | the dust engine | 27 of 27, plus the dust engine's own check |
-| [style-atlas](examples/style-atlas/) | CSS | 27 of 27 |
-| [larkspur](examples/larkspur/) | site mode, CSS and JavaScript, three pages | 74 of 74, and 337 site-mode checks pass, 2 pending |
+| [keeling](examples/keeling/) | SVG, D3 scales, NOAA data | 28 of 28 |
+| [mise](examples/mise/) | React, Motion for React | 28 of 28 |
+| [sprout](examples/sprout/) | CSS and JavaScript, Lottie | 28 of 28 |
+| [copper-no-7](examples/copper-no-7/) | the dust engine | 28 of 28, plus the dust engine's own check |
+| [style-atlas](examples/style-atlas/) | CSS | 28 of 28 |
+| [larkspur](examples/larkspur/) | site mode, CSS and JavaScript, three pages | 74 of 74, and 338 site-mode checks pass, 2 pending (the sign-up ends at a fixture) |
 
 Every product in the examples is made up, and each page says so. The one page with real numbers, `keeling`, takes them from NOAA's published file and links to it.
 
