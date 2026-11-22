@@ -125,7 +125,7 @@ export function report(r) {
   return L.join('\n');
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.realpathSync(fileURLToPath(import.meta.url))) {
   const args = process.argv.slice(2), file = args.find((a) => !a.startsWith('--'));
   if (!file || args.includes('--help') || args.includes('-h')) { console.log('usage: node route.mjs <BRIEF.md | -> [--json]\n  Suggests a motion stack and a visual style for a brief, with reasons. "-" reads the brief from standard input.'); process.exit(args.includes('--help') || args.includes('-h') ? 0 : 2); }
   let brief;

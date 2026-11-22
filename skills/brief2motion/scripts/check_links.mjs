@@ -43,7 +43,7 @@ export async function checkAll(urls, concurrency = 8) {
   return urls.map((u) => out.find((o) => o.url === u));
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.realpathSync(fileURLToPath(import.meta.url))) {
   const args = process.argv.slice(2), files = args.filter((a) => !a.startsWith('--'));
   if (!files.length || args.includes('--help') || args.includes('-h')) { console.log('usage: node check_links.mjs <file.md ...> [--json]\n  Fetches every link in the files and reports ok, challenge (bot check) and dead.'); process.exit(args.includes('--help') || args.includes('-h') ? 0 : 2); }
   let text = '';

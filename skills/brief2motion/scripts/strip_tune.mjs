@@ -45,7 +45,7 @@ export function stripSite(dir) {
   return { removed, edited, left: findDevTools(dir) };
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.realpathSync(fileURLToPath(import.meta.url))) {
   const args = process.argv.slice(2), dir = args.find((a) => !a.startsWith('--'));
   if (!dir || args.includes('--help') || args.includes('-h')) { console.log('usage: node strip_tune.mjs <site-dir> [--check]\n  Removes the dev-only tuning panel (kit/tune.js and tune:start ... tune:end blocks) before delivery.'); process.exit(args.includes('--help') || args.includes('-h') ? 0 : 2); }
   if (!fs.existsSync(dir) || !fs.statSync(dir).isDirectory()) { console.error(`strip_tune.mjs: ${dir} is not a folder`); process.exit(2); }

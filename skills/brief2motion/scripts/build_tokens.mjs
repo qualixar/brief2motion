@@ -141,7 +141,7 @@ export function buildTokens(doc) {
 }
 
 // ---- command line ----
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.realpathSync(fileURLToPath(import.meta.url))) {
   const USAGE = 'usage: node build_tokens.mjs tokens.json [--out site/tokens.css] [--check] [--json] [--qa <dir>]';
   let args;
   try { args = parseArgs(process.argv.slice(2), { value: ['out', 'qa'], flags: ['check', 'json'] }); } catch (e) { console.error(`${e.message}\n${USAGE}`); process.exit(2); }

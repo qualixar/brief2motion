@@ -82,7 +82,7 @@ export function metaChecks(project) {
   return out;
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.realpathSync(fileURLToPath(import.meta.url))) {
   const USAGE = 'usage: node check_meta.mjs <project-dir> [--site <dir>] [--out <dir>] [--strict] [--json]';
   let args;
   try { args = parseArgs(process.argv.slice(2), { value: ['site', 'out'], flags: ['strict', 'json'] }); } catch (e) { console.error(`${e.message}\n${USAGE}`); process.exit(2); }

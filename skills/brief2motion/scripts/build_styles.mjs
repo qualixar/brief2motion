@@ -41,7 +41,7 @@ export function scopedCss(style) {
 }
 
 // Everything below runs only when this file is the program (tests import the two functions above).
-const IS_MAIN = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+const IS_MAIN = process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.realpathSync(fileURLToPath(import.meta.url));
 if (IS_MAIN) {
 const specimens = data.styles.filter((s) => s.specimen), approaches = data.styles.filter((s) => !s.specimen);
 const list = (items) => items.map((x) => `- ${x}`).join('\n');

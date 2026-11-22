@@ -60,7 +60,7 @@ export async function tabToPrimary(page, action, max = 40) {
   return { found: false, stops: max, why: `not reached in ${max} Tab stops` };
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.realpathSync(fileURLToPath(import.meta.url))) {
   const USAGE = 'usage: node check_a11y.mjs <project-dir> [--site <dir>] [--out <dir>] [--widths 390,1440] [--themes light,dark] [--strict] [--json]';
   let args;
   try { args = parseArgs(process.argv.slice(2), { value: ['site', 'out', 'widths', 'themes'], flags: ['strict', 'json'] }); } catch (e) { console.error(`${e.message}\n${USAGE}`); process.exit(2); }

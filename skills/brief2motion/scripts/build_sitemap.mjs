@@ -34,7 +34,7 @@ export function sitemapXml({ site, routes }) {
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`;
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.realpathSync(fileURLToPath(import.meta.url))) {
   const USAGE = 'usage: node build_sitemap.mjs <project-dir> [--check] [--no-xml]';
   let args;
   try { args = parseArgs(process.argv.slice(2), { value: ['site'], flags: ['check', 'no-xml'] }); } catch (e) { console.error(`${e.message}\n${USAGE}`); process.exit(2); }
