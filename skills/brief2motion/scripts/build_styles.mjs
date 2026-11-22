@@ -115,9 +115,13 @@ const html = `<!doctype html>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Style atlas · ${specimens.length} web design styles, live</title>
   <meta name="description" content="${specimens.length} web design styles shown side by side on the same small page: neubrutalism, glassmorphism, neumorphism, claymorphism, Swiss, bento, Y2K, Art Deco and more, each with its rules, motion and accessibility notes. Part of brief2motion.">
+  <link rel="canonical" href="https://style-atlas.example/">
   <meta property="og:title" content="Style atlas · ${specimens.length} web design styles, live">
   <meta property="og:description" content="The same small page in ${specimens.length} visual styles, with the rules, motion and accessibility notes for each.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://style-atlas.example/">
+  <meta property="og:image" content="https://style-atlas.example/og.jpg">
+  <meta property="og:image:alt" content="Style atlas: the opening screen of a page that shows ${specimens.length} web design styles.">
   <meta name="theme-color" content="#f5f5f2">
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="kit/kit.css">
