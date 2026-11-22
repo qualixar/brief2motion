@@ -1,7 +1,7 @@
 {
   "tool": "check_site",
   "site": "style-atlas",
-  "when": "2026-11-22T07:01:42.245Z",
+  "when": "2026-11-22T09:52:14.364Z",
   "budgets": {
     "desktopP95": 20,
     "mobileP95": 40,

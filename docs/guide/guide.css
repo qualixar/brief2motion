@@ -4,7 +4,7 @@
 @font-face { font-family: Space; src: url('fonts/space-grotesk-700.woff2'); font-weight: 700; }
 @font-face { font-family: Mono; src: url('fonts/DejaVuSansMono.ttf'); }
 @page { size: A4; margin: 16mm 16mm 18mm; background: #F2EDE4;
-  @bottom-left { content: 'QUALIXAR   /   BRIEF2MOTION 1.0   /   THE WEB MOTION GUIDE'; font: 7pt Inter; color: #756F65; letter-spacing: .4pt; }
+  @bottom-left { content: 'QUALIXAR   /   BRIEF2MOTION 1.1   /   THE WEB MOTION GUIDE'; font: 7pt Inter; color: #756F65; letter-spacing: .4pt; }
   @bottom-right { content: counter(page); font: 700 9pt Inter; color: #16130F; } }
 @page :first { background: #16130F; @bottom-left { content: none; } @bottom-right { content: none; } }
 * { box-sizing: border-box; }
@@ -44,7 +44,7 @@ figcaption { font-size: 7.8pt; line-height: 1.4; color: #756F65; margin-top: 1.6
 .three { display: flex; gap: 4mm; } .three > * { flex: 1; min-width: 0; }
 aside { border-left: 2.5pt solid #FF5A1F; background: #E9E2D6; padding: 3mm 4mm; margin: 3.5mm 0; break-inside: avoid; }
 aside b { font-size: 8.8pt; } aside p { margin: 1.4mm 0 0; font-size: 9.2pt; }
-.toc a { display: block; border-bottom: .5pt solid #C9C1B5; padding: 1.9mm 0; font-size: 10pt; }
+.toc a { display: block; border-bottom: .5pt solid #C9C1B5; padding: 1.2mm 0; font-size: 10pt; }
 .toc a::after { content: target-counter(attr(href), page); float: right; font: 700 10.5pt Space; color: #FF5A1F; }
 .style { break-inside: avoid; border-top: 1pt solid #16130F; padding-top: 2.2mm; margin-bottom: 3.5mm; }
 .style h2 { margin-top: 0; }

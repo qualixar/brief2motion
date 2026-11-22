@@ -1,7 +1,7 @@
 {
   "tool": "check_site",
   "site": "halvorsen",
-  "when": "2026-11-22T06:56:36.432Z",
+  "when": "2026-11-22T09:47:08.594Z",
   "budgets": {
     "desktopP95": 20,
     "mobileP95": 40,
@@ -113,7 +113,7 @@
       "phone": {
         "samples": 499,
         "medianMs": 16.7,
-        "p95Ms": 16.8,
+        "p95Ms": 16.7,
         "maxMs": 16.8,
         "fps": 59.9
       },
@@ -226,7 +226,7 @@
       "phone": {
         "samples": 499,
         "medianMs": 16.7,
-        "p95Ms": 16.8,
+        "p95Ms": 16.7,
         "maxMs": 16.8,
         "fps": 59.9
       },
@@ -450,7 +450,7 @@
         "cdnBytes": 0
       },
       "phone": {
-        "samples": 499,
+        "samples": 498,
         "medianMs": 16.7,
         "p95Ms": 16.7,
         "maxMs": 16.8,
@@ -475,7 +475,7 @@
       "desktop": {
         "samples": 499,
         "medianMs": 16.7,
-        "p95Ms": 16.7,
+        "p95Ms": 16.8,
         "maxMs": 16.8,
         "fps": 59.9
       },
@@ -565,7 +565,7 @@
       "phone": {
         "samples": 499,
         "medianMs": 16.7,
-        "p95Ms": 16.8,
+        "p95Ms": 16.7,
         "maxMs": 16.8,
         "fps": 59.9
       },
@@ -668,7 +668,7 @@
     {
       "name": "[index.html] phone p95 frame <= 40 ms",
       "pass": true,
-      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
     },
     {
       "name": "[index.html] phone: no sideways scroll",
@@ -783,7 +783,7 @@
     {
       "name": "[work/ember.html] phone p95 frame <= 40 ms",
       "pass": true,
-      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
     },
     {
       "name": "[work/ember.html] phone: no sideways scroll",
@@ -1013,7 +1013,7 @@
     {
       "name": "[work/moth.html] phone p95 frame <= 40 ms",
       "pass": true,
-      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 498 frames"
     },
     {
       "name": "[work/moth.html] phone: no sideways scroll",
@@ -1078,7 +1078,7 @@
     {
       "name": "[work/ledger.html] desktop p95 frame <= 20 ms",
       "pass": true,
-      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
     },
     {
       "name": "[work/ledger.html] desktop: no sideways scroll",
@@ -1128,7 +1128,7 @@
     {
       "name": "[work/ledger.html] phone p95 frame <= 40 ms",
       "pass": true,
-      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
     },
     {
       "name": "[work/ledger.html] phone: no sideways scroll",

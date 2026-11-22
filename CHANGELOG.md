@@ -2,19 +2,49 @@
 
 All notable changes to brief2motion. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [1.1.0] - 2026-11-22
+
+This release adds site mode, for building a whole site or a page that has to convert, and a larger set of motion references. Existing briefs and sites work as before.
 
 ### Added
-- **Site mode**: design before motion, for a whole site or a page that must convert. One short file per stage (`DISCOVERY.md`, `CONTENT.md`, `routes.json`, wireframes, `tokens.json`, `DESIGN.md`, `MOTION.md`) with filled-in copies in `templates/site-mode/`, and a "Site mode" section in `SKILL.md`.
-- `build_tokens.mjs` (design tokens to CSS, rejecting missing references, cycles and contrast below AA), `build_sitemap.mjs`, and the checkers `check_plan.mjs`, `check_layout.mjs`, `check_a11y.mjs` (axe-core 4.14.1, MPL-2.0, fetched at check time with an integrity hash, never part of a site), `check_journeys.mjs` and `check_meta.mjs`. Results are PASS, FAIL, REVIEW or PENDING records in `check/qa.json`. Each has a passing and a failing fixture in `tests/fixtures/design-checks/`.
-- `references/page-blueprints.md`, `references/design-review.md`, and sections 10 to 15 of `design-fundamentals.md` (type, measure, colour roles, images, responsive sweep, forms and states, in numbers).
-- `examples/larkspur`: a three-page SaaS launch site for a made-up product, built through every stage, with its stage files, `qa.json` and `site-report.json`.
-
-### Fixed
-- The older examples now pass the site-mode checkers: every example page carries a canonical link, `og:url` and a 1200 x 630 `og:image` (halvorsen also a sitemap and robots.txt); relay's step logs wrap instead of scrolling sideways and its headline settles before `ready`; sprout's pots wrap to three and two at 320 px; halden-one's keyboard focus is no longer smooth-scrolled; tidewater and keeling keep text contrast at 3:1 or 4.5:1 while dimmed, and tidewater's sideways gallery is a labelled, focusable region.
+- **Site mode.** For a brief that asks for several pages, or for one page whose job is to get a visitor to act, the skill now works in stages: discovery, content, routes, wireframes, tokens, design, motion, build, checks. Each stage writes one short file (`DISCOVERY.md`, `CONTENT.md`, `routes.json`, wireframes, `tokens.json`, `DESIGN.md`, `MOTION.md`), with filled-in copies in `templates/site-mode/`. A one-page brief gets one short file per stage. `SKILL.md` has a "Site mode" section.
+- **New checks for site mode.** Each writes PASS, FAIL, REVIEW or PENDING records to `check/qa.json`. `check_plan.mjs` covers routes, visitor tasks, claims and asset rights. `check_layout.mjs` covers overflow, clipped text, overlaps, tap targets, line length and focus hidden by sticky bars, at 320, 390, 768 and 1440 px. `check_a11y.mjs` runs axe-core 4.14.1 (fetched at check time with an integrity hash, never part of a site) and walks the Tab key to the main action. `check_journeys.mjs` runs the main task from `journeys.json`. `check_meta.mjs` covers title, description, canonical link, share image, robots and sitemap. Each has a passing and a failing fixture in `tests/fixtures/design-checks/`.
+- `build_tokens.mjs` turns `tokens.json` into `site/tokens.css`. It rejects missing references and alias cycles, and fails any text pair declared in `tokens.json` that is below WCAG AA in light or dark (only declared pairs are measured). `build_sitemap.mjs` writes `SITEMAP.md` and `sitemap.xml` from `routes.json`.
+- `examples/larkspur`: a three-page launch site for a made-up product, built through every stage, with its stage files, `qa.json` and `site-report.json`.
+- `references/page-blueprints.md` (what each kind of page contains and in what order), `references/design-review.md` (a rubric for a second reader, with the muted, phone and 480 px tests), and sections 10 to 15 of `design-fundamentals.md` (type, line length, colour roles, images, responsive sweep, forms and states, in numbers).
+- **27 motion pattern recipes** in `references/patterns/`, among them hero sequence, pinned scene, horizontal scroll, marquee, magnetic button, mask reveal, number counter, page transition and shader background. Each gives when to use it, when not, a performance and accessibility budget, a reduced-motion form and a sketch to start from (its script parses and its kit imports exist; it is not a tested page, the examples are). `route.mjs` now lists the patterns that match the words in a brief.
+- `references/motion-doctrine.md`: timing, easing, blur, transition and pacing rules, with web examples.
+- `references/web-references.md`: a library of sites, component libraries and technique demos to study, each with what to learn from it and its stated terms. `check_links.mjs` tests every link in it (`B2M_CHECK_LINKS=1 bash tests/run_checks.sh`).
+- A tuning panel for development. Add `?tune` to a page that includes `kit/tune.js` and Tweakpane shows sliders for its values. `strip_tune.mjs` removes it from a build, and `check_site.mjs` fails a site that ships it.
 
 ### Changed
-- The layout and tap-target probes moved from `check_site.mjs` into `scripts/_probes.mjs` (same code). A radio button or checkbox with a label is now measured by its label, which takes the click.
+- GSAP is pinned to 3.15.1 and three.js to 0.187.0 everywhere, including `doctor.sh` and the example credits. A test fails if any other version is written next to those names.
+- SVG lines are drawn with their measured length (`getTotalLength()`) instead of `pathLength="1"`, which drew the wrong amount with a non-scaling stroke and failed in frame-by-frame renders. The kit, the stack references, `relay` and `sprout` follow this one rule.
+- The GSAP reference and `tidewater` use `power3.out` for dots and cards that appear, not an overshooting `back.out(2.5)`.
+- The layout and tap-target probes moved from `check_site.mjs` into `scripts/_probes.mjs`. A radio button or checkbox with a label is now measured by its label, which takes the click. A link is exempt from the 24 px minimum only inside a sentence: a menu link or a link alone on its line is a target like any other (`keeling` and `larkspur` were adjusted).
+- A checker run with PENDING checks now ends `RESULT: INCOMPLETE`, never PASS; `--strict` exits 1 on PENDING as well as REVIEW, and `qa.json` carries `verdict`, `complete` and stale records from an older build of `site/`.
+- The router weighs a pinned or scrubbed scene above a passing mention of a marquee, so such a brief gets GSAP; a marquee alone is a CSS loop.
+- The SKILL.md description is under the 1,024-character Agent Skills limit.
+- The credits name only the software the skill loads or downloads and the data, images and fonts it ships. `RESOURCES.md` is a reading list.
+- The credits in the README and `references/licences.md` list every tool the skill calls, with its licence.
+
+### Fixed
+- The examples now pass the site-mode checks. Every example page has a canonical link, `og:url` and a 1200 x 630 `og:image` (`halvorsen` also a sitemap and robots.txt). `relay`'s step logs wrap instead of scrolling sideways, and its headline settles before `ready`. `sprout`'s pots wrap to three and two at 320 px so the names no longer overlap. Keyboard focus in `halden-one` is no longer smooth-scrolled, so it lands on screen at once. `tidewater` and `keeling` keep text contrast at 3:1 or 4.5:1 while dimmed, and `tidewater`'s sideways gallery is a labelled region you can reach with the keyboard.
+- The site checkers no longer report five false failures: screen-reader text hidden with inline styles, an intended ellipsis (now REVIEW), text in a scroller inside an overflow-hidden parent, axe measuring colours in the middle of a fade, and the focus walk during a long smooth scroll.
+- The checkers now run when started through a symlinked path. Before, they exited without doing anything.
+- On the first run, the Playwright download wrote npm output into `--json` output, which broke anything reading it. It now goes to stderr.
+- The style atlas generator writes the canonical, `og:url` and `og:image` tags that its example carries.
+- `check_layout`, `check_a11y` and `check_journeys` FAIL a route that answers 404 or is not HTML, instead of measuring the error page as a pass. `check_layout --wireframes` finds `wireframes/index.html` for a one-template site, as `check_plan` does.
+- `check_a11y` runs axe-core on a page with a strict Content-Security-Policy (it used to crash); the hash check is unchanged.
+- The overlap check catches text painted on top of other text at the same spot (two slides left visible) and ignores text made invisible by an ancestor's opacity.
+- `check_meta` judges robots.txt by the group for every crawler, so blocking one named bot is not a failure; it reads an `og:image` with a query string from its file, and fails a sitemap with relative addresses. `build_sitemap` refuses to write one without `site.origin`.
+- `check_plan` decodes encoded and non-ASCII link paths, and fails a built site that still carries the dev-only tuning panel. Wrong field types in `routes.json` are refused with a message instead of a crash.
+- `check_journeys` fails a journey with no expectation and an unknown viewport name (one journey, not the whole run), sends an expectation already true before the steps to REVIEW, and can expect an anchor (`"url": "/#when"`). The template journey now expects the anchor its link leads to.
+- `--out=dir` works, a value option with nothing after it is an error, and an unusable `--widths` or `--themes` stops the run instead of printing PASS over nothing.
+- `check_links` tells a bot check from a page that really answers 403, which now counts like a dead link.
+- The checkers' static server refuses symlinks that point out of its folder and answers a malformed address with 400. The one-time playwright-core install repairs a broken copy, removes old copies, and starts npm without a shell.
+- Naming Tweakpane in a credits page no longer counts as shipping the tuning panel.
+- The tests run from a folder whose path has a space, a browser test fails (not skips) when a checker crashes, and CI prints failing and skipped tests instead of discarding them.
 
 ## [1.0.0] - 2026-11-18
 
@@ -31,7 +61,7 @@ brief2motion grows from one effect (dust that forms a picture) into a skill for 
 - **`capture_site.mjs`**: screenshots, a contact sheet and a short film of any site.
 - **Tests.** 43 unit tests (router, kit, measuring code, style data), a real-browser smoke test per stack, test pages for React Three Fiber, Rive and a three.js model and post-processing pipeline, and `tests/check_examples.sh`.
 - **A learning guide** as a PDF with editable HTML, CSS and Python source in `docs/guide/`.
-- A logo, a banner and an architecture diagram with their sources in `docs/diagrams/`; `NOTICE`; a study section in `RESOURCES.md` covering 43 repositories.
+- A logo, a banner and an architecture diagram with their sources in `docs/diagrams/`; `NOTICE`; a reading list in `RESOURCES.md`.
 
 ### Changed
 - `SKILL.md` now runs route, spec, build, check, fix, deliver, and the spec template has a design plan and a motion plan.

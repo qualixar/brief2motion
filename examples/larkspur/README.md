@@ -17,7 +17,7 @@ The point of the example is the process, so the stage files are the content of t
 | 9. Checks | [qa.json](qa.json), [site-report.json](site-report.json), [journeys.json](journeys.json), [REPORT.md](REPORT.md) |
 
 - **Stack:** plain CSS and JavaScript with the kit. One motion moment: an inbox drawing where a message arrives and a teammate claims it, once, about a second and a half; the finished state is the default for reduced motion and for no JavaScript.
-- **What the checks say:** `qa.json` has every record with its outcome. The sign-up form is a fixture (it sends and stores nothing), so its journey is PENDING for the real service, not PASS. Frame-time budgets were skipped when the report was made; REPORT.md says why.
+- **What the checks say:** `qa.json` has every record with its outcome. The sign-up form is a fixture (it sends and stores nothing), so its journey is PENDING for the real service, not PASS. The frame-time budgets were on and passed.
 - **Not done here:** a second reader's `REVIEW.md` (see `references/design-review.md`), a screen-reader pass, and anything that needs a real back end.
 
 ```bash

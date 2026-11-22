@@ -8,7 +8,7 @@
 
 <p align="center">
   <a href="https://github.com/qualixar/brief2motion/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/qualixar/brief2motion?style=flat&color=FF5A1F"></a>
-  <img alt="Version 1.0.0" src="https://img.shields.io/badge/version-1.0.0-FF5A1F">
+  <img alt="Version 1.1.0" src="https://img.shields.io/badge/version-1.1.0-FF5A1F">
   <a href="https://github.com/qualixar/brief2motion/actions/workflows/test.yml"><img alt="Tests" src="https://github.com/qualixar/brief2motion/actions/workflows/test.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="MIT licence" src="https://img.shields.io/badge/licence-MIT-16130F"></a>
   <img alt="Node 22 or newer" src="https://img.shields.io/badge/node-22%2B-16130F">
@@ -33,7 +33,7 @@
   <img src="assets/examples/halden-one.webp" alt="A product page for a blue enamel table radio. As the page scrolls, the 3D radio turns, the camera moves in on the brass dial, the radio comes apart into labelled layers, and four colour buttons appear." width="100%">
 </p>
 
-<p align="center"><b>One brief, one page.</b> This is <a href="examples/halden-one/">Halden One</a>, built from <a href="examples/halden-one/BRIEF.md">this brief</a>: a radio made of about forty shapes in three.js, with no model file and no photo. It turns, opens into an exploded view and changes colour as you scroll. Its <a href="examples/halden-one/site-report.json">report</a> shows 27 of 27 checks passed, including a still picture for browsers without WebGL and cuts instead of travel for visitors with reduced motion.</p>
+<p align="center"><b>One brief, one page.</b> This is <a href="examples/halden-one/">Halden One</a>, built from <a href="examples/halden-one/BRIEF.md">this brief</a>: a radio made of about forty shapes in three.js, with no model file and no photo. It turns, opens into an exploded view and changes colour as you scroll. Its <a href="examples/halden-one/site-report.json">report</a> shows 28 of 28 checks passed, including a still picture for browsers without WebGL and cuts instead of travel for visitors with reduced motion.</p>
 
 <p align="center"><b>▶ brief2motion in 84 seconds:</b> one product photo and a brief become a website whose dust forms the bottle, then nine more sites in nine different motion stacks.</p>
 
@@ -122,7 +122,7 @@ That makes the agent go back to your original brief line by line, show the evide
 | ffmpeg | a short film of the page (optional) | `brew install ffmpeg` | `winget install -e --id Gyan.FFmpeg` | `sudo apt install ffmpeg` |
 | brief2mp4 | finishing that film as a checked MP4 (optional) | see [brief2mp4](https://github.com/qualixar/brief2mp4) | same | same |
 
-Development and every run recorded here were on macOS with Chrome 157. The Windows and Linux paths are written but not run by the author.
+Development and every run recorded here were on macOS with Chrome 157 and 158. The Windows and Linux paths are written but not run by the author.
 
 ## brief2mp4: the video side, installed with it
 
@@ -241,7 +241,7 @@ If a check fails, the skill fixes the page and checks again. It never relaxes a 
 
 ### Site mode: a whole site, or a page that must convert
 
-For a brief that asks for several pages, or for one page whose job is to get a visitor to do something, the skill first writes one short file per stage (`DISCOVERY.md`, `CONTENT.md`, `routes.json`, phone-first wireframes, `tokens.json`, `DESIGN.md`, `MOTION.md`; copies are in `skills/brief2motion/templates/site-mode/`), then builds, then runs checks beside `check_site.mjs`. Every record lands in `check/qa.json` as PASS, FAIL, REVIEW (a person must look) or PENDING (no evidence yet, such as a sign-up that ends at a fixture).
+For a brief that asks for several pages, or for one page whose job is to get a visitor to do something, the skill works in nine stages: discovery, content, routes, wireframes, tokens, design, motion, build, checks. Each of the first seven writes one short file (`DISCOVERY.md`, `CONTENT.md`, `routes.json`, phone-first wireframes, `tokens.json`, `DESIGN.md`, `MOTION.md`; copies are in `skills/brief2motion/templates/site-mode/`), then builds, then runs checks beside `check_site.mjs`. Every record lands in `check/qa.json` as PASS, FAIL, REVIEW (a person must look) or PENDING (no evidence yet, such as a sign-up that ends at a fixture).
 
 | Script | What it checks |
 |---|---|
@@ -252,25 +252,26 @@ For a brief that asks for several pages, or for one page whose job is to get a v
 | `check_journeys.mjs` | the journeys in `journeys.json`, written by role and name, on a phone and a desktop width |
 | `check_meta.mjs` | title, description, canonical, share image size, robots, `sitemap.xml` |
 
-Each checker is tested against a passing and a failing fixture in `tests/fixtures/design-checks/`. Automation covers part of the job: `references/design-review.md` is the rubric for the second reader, and [`examples/larkspur`](examples/larkspur/) shows the whole path on a made-up product.
+To run every check on the worked example, use `bash examples/larkspur/tools/run-checks.sh` (add `--no-perf` on a machine with no GPU). Each checker is tested against a passing and a failing fixture in `tests/fixtures/design-checks/`. Automation covers part of the job: `references/design-review.md` is the rubric for the second reader, and [`examples/larkspur`](examples/larkspur/) shows the whole path on a made-up product.
 
 Three test layers back this up: unit tests for the router, the kit and the measuring code; a real-browser smoke test per stack that proves each documented pattern does what it says (the poster really morphs between pages, keyboard reorder really moves the row, the canvas really changes with scroll); and the full check on every example.
 
 ## Examples
 
-Ten folders in [`examples/`](examples/), each with `BRIEF.md`, the site, and `site-report.json` from its passing check on an Apple M-series laptop with Chrome 157:
+Ten folders in [`examples/`](examples/), each with `BRIEF.md`, the site, and `site-report.json` from its passing check on an Apple M-series laptop with Chrome 158:
 
 | Example | Stack | Checks |
 |---|---|---|
-| [halden-one](examples/halden-one/) | three.js | 27 of 27 |
-| [tidewater](examples/tidewater/) | GSAP, ScrollTrigger, Lenis | 27 of 27 |
-| [relay](examples/relay/) | Motion | 27 of 27 |
+| [halden-one](examples/halden-one/) | three.js | 28 of 28 |
+| [tidewater](examples/tidewater/) | GSAP, ScrollTrigger, Lenis | 28 of 28 |
+| [relay](examples/relay/) | Motion | 28 of 28 |
 | [halvorsen](examples/halvorsen/) | View Transitions API, five pages | all pages pass |
-| [keeling](examples/keeling/) | SVG, D3 scales, NOAA data | 27 of 27 |
-| [mise](examples/mise/) | React, Motion for React | 27 of 27 |
-| [sprout](examples/sprout/) | CSS and JavaScript, Lottie | 27 of 27 |
-| [copper-no-7](examples/copper-no-7/) | the dust engine | 27 of 27, plus the dust engine's own check |
-| [style-atlas](examples/style-atlas/) | CSS | 27 of 27 |
+| [keeling](examples/keeling/) | SVG, D3 scales, NOAA data | 28 of 28 |
+| [mise](examples/mise/) | React, Motion for React | 28 of 28 |
+| [sprout](examples/sprout/) | CSS and JavaScript, Lottie | 28 of 28 |
+| [copper-no-7](examples/copper-no-7/) | the dust engine | 28 of 28, plus the dust engine's own check |
+| [style-atlas](examples/style-atlas/) | CSS | 28 of 28 |
+| [larkspur](examples/larkspur/) | site mode, CSS and JavaScript, three pages | 74 of 74, and 338 site-mode checks pass, 2 pending (the sign-up ends at a fixture) |
 
 Every product in the examples is made up, and each page says so. The one page with real numbers, `keeling`, takes them from NOAA's published file and links to it.
 
@@ -316,8 +317,6 @@ The "done when" lines matter most, because they are what the checks measure. Say
 
 **Is there a GSAP or three.js skill for Claude Code?** brief2motion covers both, and eight more: GSAP with ScrollTrigger and Lenis for scroll animation, three.js and React Three Fiber for 3D, Motion, the View Transitions API, SVG and D3, Lottie, Rive, native CSS scroll-driven animation and its own particle engine. Each has a reference file with tested patterns in [`references/stacks/`](skills/brief2motion/references/stacks/).
 
-**How is it different from Anthropic's frontend-design skill?** frontend-design guides how a page looks. brief2motion is about how it moves: it routes the brief to a motion stack, ships tested animation helpers, and measures frame time, layout, focus, contrast and reduced motion in a real browser before it says done. They work well together.
-
 **Which visual styles does it know?** 32, from neubrutalism, glassmorphism, neumorphism and claymorphism to Swiss, bento, Y2K, vaporwave, Art Deco and cyberpunk, each with design tokens, the motion that suits it, its accessibility pitfalls and sources. See the [style system](#the-style-system).
 
 **Does it cost anything?** The skill is free and MIT licensed. The agent runs on your own Claude Code or Codex plan, and the checks run on your machine.
@@ -359,7 +358,7 @@ skills/brief2motion/
 examples/                     ten complete sites, each with its brief and its passing report
 tests/                        unit tests, per-stack browser smoke tests, repo checks, the example checker
 docs/guide/                   the learning guide: editable HTML, CSS and Python source, and the built PDF
-RESOURCES.md, NOTICE          the repositories this was learned from, with licences
+RESOURCES.md, NOTICE          a reading list of motion repositories; the licences of what ships or loads
 CHANGELOG.md                  what changed in each release
 ```
 
@@ -373,7 +372,7 @@ Made something with it? Open an issue with the brief and a screenshot; the usefu
 
 ## Licence and credits
 
-brief2motion is MIT. Sites it builds load three.js, Lenis, Motion, React, lottie-web, the Rive runtime (all MIT), htm (Apache-2.0), D3 modules (ISC) and GSAP (free under GSAP's own "no charge" licence, which allows AI-written GSAP code) from a CDN at pinned versions, and bundle none of them. No code from another project is copied into this repository. [RESOURCES.md](RESOURCES.md) lists the repositories the skill was learned from, each with its licence and what was taken from it; [NOTICE](NOTICE) carries the attributions; [`references/licences.md`](skills/brief2motion/references/licences.md) explains each licence and what it means for you.
+brief2motion is MIT. Sites it builds load three.js, Lenis, Motion, React, lottie-web, the Rive runtime (all MIT), htm (Apache-2.0), D3 modules (ISC) and GSAP (free under GSAP's own "no charge" licence, which allows AI-written GSAP code) from a CDN at pinned versions, and bundle none of them. No code from another project is copied into this repository. [NOTICE](NOTICE) lists the software built sites load and the data, images and fonts that ship, with their licences; [RESOURCES.md](RESOURCES.md) is a reading list of motion repositories; [`references/licences.md`](skills/brief2motion/references/licences.md) explains each licence and what it means for you.
 
 **Libraries and tools.** Every tool the skill uses or loads, with who makes it and its licence:
 
@@ -392,8 +391,6 @@ brief2motion is MIT. Sites it builds load three.js, Lenis, Motion, React, lottie
 | [LYGIA](https://lygia.xyz/) and [Depth Anything V2 Small](https://huggingface.co/onnx-community/depth-anything-v2-small), optional, never bundled | Patricio Gonzalez Vivo; the Depth Anything authors | Prosperity Public License 3.0 or Patron License; Apache-2.0 |
 
 The full table, with where each is used and what each licence means for you, is in [`references/licences.md`](skills/brief2motion/references/licences.md). The sites linked in [`references/web-references.md`](skills/brief2motion/references/web-references.md) (galleries, component libraries, documentation) are for study; nothing is copied from them, and the page records each site's stated terms.
-
-**Inspiration.** The particle-face idea was inspired by Thomas Cullen's [faces playground](https://playground.thomascullen.io/faces). The design guidance in `SKILL.md` and `design-fundamentals.md` draws on Anthropic's [frontend-design skill](https://github.com/anthropics/skills) (Apache-2.0), in our own words.
 
 **Data.** The carbon dioxide numbers in `examples/keeling` are NOAA's annual means for Mauna Loa: Dr. Xin Lan, NOAA/GML ([gml.noaa.gov/ccgg/trends](https://gml.noaa.gov/ccgg/trends/)) and Dr. Ralph Keeling, Scripps Institution of Oceanography ([scrippsco2.ucsd.edu](https://scrippsco2.ucsd.edu/)).
 

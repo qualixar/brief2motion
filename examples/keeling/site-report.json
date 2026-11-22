@@ -1,7 +1,7 @@
 {
   "tool": "check_site",
   "site": "keeling",
-  "when": "2026-11-22T06:59:42.241Z",
+  "when": "2026-11-22T09:50:14.611Z",
   "budgets": {
     "desktopP95": 20,
     "mobileP95": 40,
@@ -102,8 +102,8 @@
         }
       ],
       "weightDesktop": {
-        "localBytes": 32784,
-        "cdnBytes": 43959
+        "localBytes": 32902,
+        "cdnBytes": 43596
       },
       "phone": {
         "samples": 499,
@@ -113,8 +113,8 @@
         "fps": 59.9
       },
       "weightPhone": {
-        "localBytes": 32784,
-        "cdnBytes": 43937
+        "localBytes": 32902,
+        "cdnBytes": 43967
       },
       "contrast": {
         "measured": 69,

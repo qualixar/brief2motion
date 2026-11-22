@@ -1,6 +1,6 @@
 {
   "tool": "brief2motion site mode",
-  "when": "2026-11-21T21:12:16.706Z",
+  "when": "2026-11-22T09:19:49.286Z",
   "environment": {
     "browser": "Chrome 158.0.8127.36"
   },
@@ -10,10 +10,16 @@
     "REVIEW": 0,
     "PENDING": 0
   },
+  "verdict": "PASS",
   "pass": true,
+  "complete": true,
+  "staleCheckers": [],
   "results": [
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "landing",
@@ -29,6 +35,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "landing",
@@ -44,6 +53,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "landing",
@@ -59,6 +71,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "landing",
@@ -74,6 +89,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "landing",
@@ -89,6 +107,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "landing",
@@ -104,6 +125,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "pricing",
@@ -119,6 +143,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "pricing",
@@ -134,6 +161,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "pricing",
@@ -149,6 +179,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "pricing",
@@ -164,6 +197,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "pricing",
@@ -179,6 +215,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "pricing",
@@ -194,6 +233,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "form",
@@ -209,6 +251,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "form",
@@ -224,6 +269,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "form",
@@ -239,6 +287,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "form",
@@ -254,6 +305,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "form",
@@ -269,6 +323,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "form",
@@ -284,6 +341,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "landing",
@@ -299,6 +359,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "landing",
@@ -314,6 +377,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "landing",
@@ -329,6 +395,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "landing",
@@ -344,6 +413,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "landing",
@@ -359,6 +431,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "landing",
@@ -374,6 +449,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "pricing",
@@ -389,6 +467,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "pricing",
@@ -404,6 +485,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "pricing",
@@ -419,6 +503,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "pricing",
@@ -434,6 +521,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "pricing",
@@ -449,6 +539,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "pricing",
@@ -464,6 +557,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "form",
@@ -479,6 +575,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "form",
@@ -494,6 +593,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "form",
@@ -509,6 +611,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "form",
@@ -524,6 +629,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "form",
@@ -539,6 +647,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "form",
@@ -554,6 +665,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "landing",
@@ -569,6 +683,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "landing",
@@ -584,6 +701,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "landing",
@@ -599,6 +719,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "landing",
@@ -614,6 +737,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "landing",
@@ -629,6 +755,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "landing",
@@ -644,6 +773,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "pricing",
@@ -659,6 +791,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "pricing",
@@ -674,6 +809,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "pricing",
@@ -689,6 +827,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "pricing",
@@ -704,6 +845,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "pricing",
@@ -719,6 +863,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "pricing",
@@ -734,6 +881,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "form",
@@ -749,6 +899,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "form",
@@ -764,6 +917,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "form",
@@ -779,6 +935,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "form",
@@ -794,6 +953,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "form",
@@ -809,6 +971,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "form",
@@ -824,6 +989,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "landing",
@@ -839,6 +1007,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "landing",
@@ -854,6 +1025,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "landing",
@@ -869,6 +1043,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "landing",
@@ -884,6 +1061,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "landing",
@@ -899,6 +1079,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "landing",
@@ -914,6 +1097,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "pricing",
@@ -929,6 +1115,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "pricing",
@@ -944,6 +1133,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "pricing",
@@ -959,6 +1151,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "pricing",
@@ -974,6 +1169,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "pricing",
@@ -989,6 +1187,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "pricing",
@@ -1004,6 +1205,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "form",
@@ -1019,6 +1223,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "form",
@@ -1034,6 +1241,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "form",
@@ -1049,6 +1259,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "form",
@@ -1064,6 +1277,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "form",
@@ -1079,6 +1295,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:19:49.286Z",
+      "site": ".",
+      "siteHash": "89876f358917b37b",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "form",

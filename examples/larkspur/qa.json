@@ -1,20 +1,24 @@
 {
   "tool": "brief2motion site mode",
-  "when": "2026-11-21T21:14:40.357Z",
+  "when": "2026-11-22T09:22:00.630Z",
   "environment": {
     "browser": "Chrome 158.0.8127.36",
     "axe": "4.14.1"
   },
   "summary": {
-    "PASS": 337,
+    "PASS": 338,
     "FAIL": 0,
     "REVIEW": 0,
     "PENDING": 2
   },
+  "verdict": "INCOMPLETE",
   "pass": true,
+  "complete": false,
+  "staleCheckers": [],
   "results": [
     {
       "checker": "build_tokens",
+      "when": "2026-11-22T09:19:21.633Z",
       "id": "tokens.resolve",
       "outcome": "PASS",
       "route": null,
@@ -30,6 +34,7 @@
     },
     {
       "checker": "build_tokens",
+      "when": "2026-11-22T09:19:21.633Z",
       "id": "tokens.contrast",
       "outcome": "PASS",
       "route": null,
@@ -45,6 +50,7 @@
     },
     {
       "checker": "build_tokens",
+      "when": "2026-11-22T09:19:21.633Z",
       "id": "tokens.contrast",
       "outcome": "PASS",
       "route": null,
@@ -60,6 +66,7 @@
     },
     {
       "checker": "build_tokens",
+      "when": "2026-11-22T09:19:21.633Z",
       "id": "tokens.contrast",
       "outcome": "PASS",
       "route": null,
@@ -75,6 +82,7 @@
     },
     {
       "checker": "build_tokens",
+      "when": "2026-11-22T09:19:21.633Z",
       "id": "tokens.contrast",
       "outcome": "PASS",
       "route": null,
@@ -90,6 +98,7 @@
     },
     {
       "checker": "build_tokens",
+      "when": "2026-11-22T09:19:21.633Z",
       "id": "tokens.contrast",
       "outcome": "PASS",
       "route": null,
@@ -105,6 +114,7 @@
     },
     {
       "checker": "build_tokens",
+      "when": "2026-11-22T09:19:21.633Z",
       "id": "tokens.contrast",
       "outcome": "PASS",
       "route": null,
@@ -120,6 +130,7 @@
     },
     {
       "checker": "build_tokens",
+      "when": "2026-11-22T09:19:21.633Z",
       "id": "tokens.contrast",
       "outcome": "PASS",
       "route": null,
@@ -135,6 +146,7 @@
     },
     {
       "checker": "build_tokens",
+      "when": "2026-11-22T09:19:21.633Z",
       "id": "tokens.contrast",
       "outcome": "PASS",
       "route": null,
@@ -150,6 +162,7 @@
     },
     {
       "checker": "build_tokens",
+      "when": "2026-11-22T09:19:21.633Z",
       "id": "tokens.contrast",
       "outcome": "PASS",
       "route": null,
@@ -165,6 +178,7 @@
     },
     {
       "checker": "build_tokens",
+      "when": "2026-11-22T09:19:21.633Z",
       "id": "tokens.contrast",
       "outcome": "PASS",
       "route": null,
@@ -180,6 +194,7 @@
     },
     {
       "checker": "build_tokens",
+      "when": "2026-11-22T09:19:21.633Z",
       "id": "tokens.contrast",
       "outcome": "PASS",
       "route": null,
@@ -195,6 +210,7 @@
     },
     {
       "checker": "build_tokens",
+      "when": "2026-11-22T09:19:21.633Z",
       "id": "tokens.contrast",
       "outcome": "PASS",
       "route": null,
@@ -210,6 +226,7 @@
     },
     {
       "checker": "build_tokens",
+      "when": "2026-11-22T09:19:21.633Z",
       "id": "tokens.contrast",
       "outcome": "PASS",
       "route": null,
@@ -225,6 +242,7 @@
     },
     {
       "checker": "build_tokens",
+      "when": "2026-11-22T09:19:21.633Z",
       "id": "tokens.contrast",
       "outcome": "PASS",
       "route": null,
@@ -240,6 +258,7 @@
     },
     {
       "checker": "build_tokens",
+      "when": "2026-11-22T09:19:21.633Z",
       "id": "tokens.contrast",
       "outcome": "PASS",
       "route": null,
@@ -255,6 +274,7 @@
     },
     {
       "checker": "build_tokens",
+      "when": "2026-11-22T09:19:21.633Z",
       "id": "tokens.contrast",
       "outcome": "PASS",
       "route": null,
@@ -270,6 +290,7 @@
     },
     {
       "checker": "build_tokens",
+      "when": "2026-11-22T09:19:21.633Z",
       "id": "tokens.contrast",
       "outcome": "PASS",
       "route": null,
@@ -285,6 +306,7 @@
     },
     {
       "checker": "build_tokens",
+      "when": "2026-11-22T09:19:21.633Z",
       "id": "tokens.contrast",
       "outcome": "PASS",
       "route": null,
@@ -300,6 +322,7 @@
     },
     {
       "checker": "build_tokens",
+      "when": "2026-11-22T09:19:21.633Z",
       "id": "tokens.contrast",
       "outcome": "PASS",
       "route": null,
@@ -315,6 +338,7 @@
     },
     {
       "checker": "build_tokens",
+      "when": "2026-11-22T09:19:21.633Z",
       "id": "tokens.contrast",
       "outcome": "PASS",
       "route": null,
@@ -330,6 +354,9 @@
     },
     {
       "checker": "check_plan",
+      "when": "2026-11-22T09:19:21.658Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "plan.routes-valid",
       "outcome": "PASS",
       "route": null,
@@ -345,6 +372,9 @@
     },
     {
       "checker": "check_plan",
+      "when": "2026-11-22T09:19:21.658Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "plan.reachable",
       "outcome": "PASS",
       "route": null,
@@ -360,6 +390,9 @@
     },
     {
       "checker": "check_plan",
+      "when": "2026-11-22T09:19:21.658Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "plan.tasks-mapped",
       "outcome": "PASS",
       "route": null,
@@ -375,6 +408,9 @@
     },
     {
       "checker": "check_plan",
+      "when": "2026-11-22T09:19:21.658Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "plan.discovery-complete",
       "outcome": "PASS",
       "route": null,
@@ -390,6 +426,9 @@
     },
     {
       "checker": "check_plan",
+      "when": "2026-11-22T09:19:21.658Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "plan.content-routes",
       "outcome": "PASS",
       "route": null,
@@ -405,6 +444,9 @@
     },
     {
       "checker": "check_plan",
+      "when": "2026-11-22T09:19:21.658Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "plan.claims-sourced",
       "outcome": "PASS",
       "route": null,
@@ -420,6 +462,9 @@
     },
     {
       "checker": "check_plan",
+      "when": "2026-11-22T09:19:21.658Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "plan.claims-resolve",
       "outcome": "PASS",
       "route": null,
@@ -435,6 +480,9 @@
     },
     {
       "checker": "check_plan",
+      "when": "2026-11-22T09:19:21.658Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "plan.states-declared",
       "outcome": "PASS",
       "route": null,
@@ -450,6 +498,9 @@
     },
     {
       "checker": "check_plan",
+      "when": "2026-11-22T09:19:21.658Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "plan.assets-rights",
       "outcome": "PASS",
       "route": null,
@@ -465,6 +516,9 @@
     },
     {
       "checker": "check_plan",
+      "when": "2026-11-22T09:19:21.658Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "plan.assets-listed",
       "outcome": "PASS",
       "route": null,
@@ -480,6 +534,9 @@
     },
     {
       "checker": "check_plan",
+      "when": "2026-11-22T09:19:21.658Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "plan.wireframes",
       "outcome": "PASS",
       "route": null,
@@ -495,6 +552,27 @@
     },
     {
       "checker": "check_plan",
+      "when": "2026-11-22T09:19:21.658Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
+      "id": "plan.dev-panel",
+      "outcome": "PASS",
+      "route": null,
+      "state": null,
+      "viewport": null,
+      "browser": null,
+      "theme": "light",
+      "input": "pointer",
+      "measured": 0,
+      "threshold": null,
+      "evidence": "site/",
+      "reason": "no tuning panel in the built site"
+    },
+    {
+      "checker": "check_plan",
+      "when": "2026-11-22T09:19:21.658Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "plan.links-built",
       "outcome": "PASS",
       "route": null,
@@ -510,6 +588,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "home",
@@ -525,6 +606,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "home",
@@ -540,6 +624,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "home",
@@ -555,6 +642,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "home",
@@ -570,6 +660,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "home",
@@ -585,6 +678,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "home",
@@ -600,6 +696,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "pricing",
@@ -615,6 +714,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "pricing",
@@ -630,6 +732,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "pricing",
@@ -645,6 +750,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "pricing",
@@ -660,6 +768,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "pricing",
@@ -675,6 +786,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "pricing",
@@ -690,6 +804,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "start",
@@ -705,6 +822,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "start",
@@ -720,6 +840,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "start",
@@ -735,6 +858,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "start",
@@ -750,6 +876,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "start",
@@ -765,6 +894,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "start",
@@ -780,6 +912,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "start",
@@ -795,6 +930,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "start",
@@ -810,6 +948,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "start",
@@ -825,6 +966,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "start",
@@ -840,6 +984,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "start",
@@ -855,6 +1002,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "start",
@@ -870,6 +1020,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "start",
@@ -885,6 +1038,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "start",
@@ -900,6 +1056,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "start",
@@ -915,6 +1074,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "start",
@@ -930,6 +1092,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "start",
@@ -945,6 +1110,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "start",
@@ -960,6 +1128,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "home",
@@ -975,6 +1146,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "home",
@@ -990,6 +1164,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "home",
@@ -1005,6 +1182,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "home",
@@ -1020,6 +1200,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "home",
@@ -1035,6 +1218,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "home",
@@ -1050,6 +1236,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "pricing",
@@ -1065,6 +1254,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "pricing",
@@ -1080,6 +1272,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "pricing",
@@ -1095,6 +1290,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "pricing",
@@ -1110,6 +1308,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "pricing",
@@ -1125,6 +1326,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "pricing",
@@ -1140,6 +1344,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "start",
@@ -1155,6 +1362,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "start",
@@ -1170,6 +1380,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "start",
@@ -1185,6 +1398,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "start",
@@ -1200,6 +1416,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "start",
@@ -1215,6 +1434,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "start",
@@ -1230,6 +1452,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "start",
@@ -1245,6 +1470,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "start",
@@ -1260,6 +1488,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "start",
@@ -1275,6 +1506,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "start",
@@ -1290,6 +1524,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "start",
@@ -1305,6 +1542,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "start",
@@ -1320,6 +1560,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "start",
@@ -1335,6 +1578,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "start",
@@ -1350,6 +1596,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "start",
@@ -1365,6 +1614,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "start",
@@ -1380,6 +1632,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "start",
@@ -1395,6 +1650,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "start",
@@ -1410,6 +1668,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "home",
@@ -1425,6 +1686,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "home",
@@ -1440,6 +1704,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "home",
@@ -1455,6 +1722,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "home",
@@ -1470,6 +1740,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "home",
@@ -1485,6 +1758,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "home",
@@ -1500,6 +1776,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "pricing",
@@ -1515,6 +1794,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "pricing",
@@ -1530,6 +1812,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "pricing",
@@ -1545,6 +1830,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "pricing",
@@ -1560,6 +1848,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "pricing",
@@ -1575,6 +1866,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "pricing",
@@ -1590,6 +1884,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "start",
@@ -1605,6 +1902,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "start",
@@ -1620,6 +1920,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "start",
@@ -1635,6 +1938,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "start",
@@ -1650,6 +1956,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "start",
@@ -1665,6 +1974,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "start",
@@ -1680,6 +1992,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "start",
@@ -1695,6 +2010,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "start",
@@ -1710,6 +2028,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "start",
@@ -1725,6 +2046,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "start",
@@ -1740,6 +2064,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "start",
@@ -1755,6 +2082,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "start",
@@ -1770,6 +2100,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "start",
@@ -1785,6 +2118,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "start",
@@ -1800,6 +2136,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "start",
@@ -1815,6 +2154,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "start",
@@ -1830,6 +2172,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "start",
@@ -1845,6 +2190,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "start",
@@ -1860,6 +2208,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "home",
@@ -1875,6 +2226,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "home",
@@ -1890,6 +2244,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "home",
@@ -1905,6 +2262,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "home",
@@ -1920,6 +2280,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "home",
@@ -1935,6 +2298,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "home",
@@ -1950,6 +2316,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "pricing",
@@ -1965,6 +2334,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "pricing",
@@ -1980,6 +2352,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "pricing",
@@ -1995,6 +2370,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "pricing",
@@ -2010,6 +2388,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "pricing",
@@ -2025,6 +2406,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "pricing",
@@ -2040,6 +2424,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "start",
@@ -2055,6 +2442,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "start",
@@ -2070,6 +2460,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "start",
@@ -2085,6 +2478,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "start",
@@ -2100,6 +2496,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "start",
@@ -2115,6 +2514,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "start",
@@ -2130,6 +2532,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "start",
@@ -2145,6 +2550,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "start",
@@ -2160,6 +2568,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "start",
@@ -2175,6 +2586,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "start",
@@ -2190,6 +2604,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "start",
@@ -2205,6 +2622,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "start",
@@ -2220,6 +2640,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "start",
@@ -2235,6 +2658,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "start",
@@ -2250,6 +2676,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "start",
@@ -2265,6 +2694,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "start",
@@ -2280,6 +2712,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "start",
@@ -2295,6 +2730,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "start",
@@ -2310,6 +2748,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "home",
@@ -2325,6 +2766,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "home",
@@ -2340,6 +2784,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "home",
@@ -2355,6 +2802,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "home",
@@ -2370,6 +2820,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "home",
@@ -2385,6 +2838,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "home",
@@ -2400,6 +2856,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "pricing",
@@ -2415,6 +2874,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "pricing",
@@ -2430,6 +2892,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "pricing",
@@ -2445,6 +2910,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "pricing",
@@ -2460,6 +2928,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "pricing",
@@ -2475,6 +2946,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "pricing",
@@ -2490,6 +2964,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "start",
@@ -2505,6 +2982,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "start",
@@ -2520,6 +3000,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "start",
@@ -2535,6 +3018,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "start",
@@ -2550,6 +3036,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "start",
@@ -2565,6 +3054,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "start",
@@ -2580,6 +3072,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "start",
@@ -2595,6 +3090,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "start",
@@ -2610,6 +3108,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "start",
@@ -2625,6 +3126,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "start",
@@ -2640,6 +3144,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "start",
@@ -2655,6 +3162,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "start",
@@ -2670,6 +3180,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "start",
@@ -2685,6 +3198,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "start",
@@ -2700,6 +3216,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "start",
@@ -2715,6 +3234,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "start",
@@ -2730,6 +3252,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "start",
@@ -2745,6 +3270,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "start",
@@ -2760,6 +3288,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "home",
@@ -2775,6 +3306,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "home",
@@ -2790,6 +3324,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "home",
@@ -2805,6 +3342,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "home",
@@ -2820,6 +3360,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "home",
@@ -2835,6 +3378,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "home",
@@ -2850,6 +3396,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "pricing",
@@ -2865,6 +3414,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "pricing",
@@ -2880,6 +3432,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "pricing",
@@ -2895,6 +3450,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "pricing",
@@ -2910,6 +3468,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "pricing",
@@ -2925,6 +3486,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "pricing",
@@ -2940,6 +3504,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "start",
@@ -2955,6 +3522,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "start",
@@ -2970,6 +3540,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "start",
@@ -2985,6 +3558,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "start",
@@ -3000,6 +3576,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "start",
@@ -3015,6 +3594,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "start",
@@ -3030,6 +3612,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "start",
@@ -3045,6 +3630,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "start",
@@ -3060,6 +3648,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "start",
@@ -3075,6 +3666,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "start",
@@ -3090,6 +3684,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "start",
@@ -3105,6 +3702,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "start",
@@ -3120,6 +3720,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "start",
@@ -3135,6 +3738,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "start",
@@ -3150,6 +3756,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "start",
@@ -3165,6 +3774,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "start",
@@ -3180,6 +3792,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "start",
@@ -3195,6 +3810,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "start",
@@ -3210,6 +3828,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "home",
@@ -3225,6 +3846,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "home",
@@ -3240,6 +3864,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "home",
@@ -3255,6 +3882,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "home",
@@ -3270,6 +3900,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "home",
@@ -3285,6 +3918,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "home",
@@ -3300,6 +3936,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "pricing",
@@ -3315,6 +3954,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "pricing",
@@ -3330,6 +3972,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "pricing",
@@ -3345,6 +3990,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "pricing",
@@ -3360,6 +4008,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "pricing",
@@ -3375,6 +4026,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "pricing",
@@ -3390,6 +4044,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "start",
@@ -3405,6 +4062,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "start",
@@ -3420,6 +4080,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "start",
@@ -3435,6 +4098,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "start",
@@ -3450,6 +4116,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "start",
@@ -3465,6 +4134,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "start",
@@ -3480,6 +4152,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "start",
@@ -3495,6 +4170,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "start",
@@ -3510,6 +4188,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "start",
@@ -3525,6 +4206,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "start",
@@ -3540,6 +4224,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "start",
@@ -3555,6 +4242,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "start",
@@ -3570,6 +4260,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "start",
@@ -3585,6 +4278,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "start",
@@ -3600,6 +4296,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "start",
@@ -3615,6 +4314,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "start",
@@ -3630,6 +4332,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "start",
@@ -3645,6 +4350,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "start",
@@ -3660,6 +4368,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "home",
@@ -3675,6 +4386,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "home",
@@ -3690,6 +4404,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "home",
@@ -3705,6 +4422,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "home",
@@ -3720,6 +4440,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "home",
@@ -3735,6 +4458,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "home",
@@ -3750,6 +4476,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "pricing",
@@ -3765,6 +4494,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "pricing",
@@ -3780,6 +4512,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "pricing",
@@ -3795,6 +4530,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "pricing",
@@ -3810,6 +4548,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "pricing",
@@ -3825,6 +4566,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "pricing",
@@ -3840,6 +4584,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "start",
@@ -3855,6 +4602,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "start",
@@ -3870,6 +4620,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "start",
@@ -3885,6 +4638,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "start",
@@ -3900,6 +4656,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "start",
@@ -3915,6 +4674,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "start",
@@ -3930,6 +4692,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "start",
@@ -3945,6 +4710,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "start",
@@ -3960,6 +4728,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "start",
@@ -3975,6 +4746,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "start",
@@ -3990,6 +4764,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "start",
@@ -4005,6 +4782,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "start",
@@ -4020,6 +4800,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overflow",
       "outcome": "PASS",
       "route": "start",
@@ -4035,6 +4818,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.text-clipped",
       "outcome": "PASS",
       "route": "start",
@@ -4050,6 +4836,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.overlap",
       "outcome": "PASS",
       "route": "start",
@@ -4065,6 +4854,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.tap-targets",
       "outcome": "PASS",
       "route": "start",
@@ -4080,6 +4872,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.line-length",
       "outcome": "PASS",
       "route": "start",
@@ -4095,6 +4890,9 @@
     },
     {
       "checker": "check_layout",
+      "when": "2026-11-22T09:21:31.629Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "layout.focus",
       "outcome": "PASS",
       "route": "start",
@@ -4110,6 +4908,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.axe",
       "outcome": "PASS",
       "route": "home",
@@ -4125,6 +4926,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.keyboard-primary",
       "outcome": "PASS",
       "route": "home",
@@ -4140,6 +4944,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.axe",
       "outcome": "PASS",
       "route": "home",
@@ -4155,6 +4962,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.keyboard-primary",
       "outcome": "PASS",
       "route": "home",
@@ -4170,6 +4980,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.axe",
       "outcome": "PASS",
       "route": "pricing",
@@ -4185,6 +4998,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.keyboard-primary",
       "outcome": "PASS",
       "route": "pricing",
@@ -4200,6 +5016,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.axe",
       "outcome": "PASS",
       "route": "pricing",
@@ -4215,6 +5034,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.keyboard-primary",
       "outcome": "PASS",
       "route": "pricing",
@@ -4230,6 +5052,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.axe",
       "outcome": "PASS",
       "route": "start",
@@ -4245,6 +5070,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.keyboard-primary",
       "outcome": "PASS",
       "route": "start",
@@ -4260,6 +5088,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.axe",
       "outcome": "PASS",
       "route": "start",
@@ -4275,6 +5106,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.keyboard-primary",
       "outcome": "PASS",
       "route": "start",
@@ -4290,6 +5124,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.axe",
       "outcome": "PASS",
       "route": "start",
@@ -4305,6 +5142,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.axe",
       "outcome": "PASS",
       "route": "start",
@@ -4320,6 +5160,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.axe",
       "outcome": "PASS",
       "route": "start",
@@ -4335,6 +5178,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.axe",
       "outcome": "PASS",
       "route": "start",
@@ -4350,6 +5196,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.axe",
       "outcome": "PASS",
       "route": "home",
@@ -4365,6 +5214,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.keyboard-primary",
       "outcome": "PASS",
       "route": "home",
@@ -4380,6 +5232,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.axe",
       "outcome": "PASS",
       "route": "home",
@@ -4395,6 +5250,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.keyboard-primary",
       "outcome": "PASS",
       "route": "home",
@@ -4410,6 +5268,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.axe",
       "outcome": "PASS",
       "route": "pricing",
@@ -4425,6 +5286,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.keyboard-primary",
       "outcome": "PASS",
       "route": "pricing",
@@ -4440,6 +5304,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.axe",
       "outcome": "PASS",
       "route": "pricing",
@@ -4455,6 +5322,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.keyboard-primary",
       "outcome": "PASS",
       "route": "pricing",
@@ -4470,6 +5340,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.axe",
       "outcome": "PASS",
       "route": "start",
@@ -4485,6 +5358,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.keyboard-primary",
       "outcome": "PASS",
       "route": "start",
@@ -4500,6 +5376,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.axe",
       "outcome": "PASS",
       "route": "start",
@@ -4515,6 +5394,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.keyboard-primary",
       "outcome": "PASS",
       "route": "start",
@@ -4530,6 +5412,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.axe",
       "outcome": "PASS",
       "route": "start",
@@ -4545,6 +5430,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.axe",
       "outcome": "PASS",
       "route": "start",
@@ -4560,6 +5448,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.axe",
       "outcome": "PASS",
       "route": "start",
@@ -4575,6 +5466,9 @@
     },
     {
       "checker": "check_a11y",
+      "when": "2026-11-22T09:21:53.133Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "a11y.axe",
       "outcome": "PASS",
       "route": "start",
@@ -4590,6 +5484,9 @@
     },
     {
       "checker": "check_journeys",
+      "when": "2026-11-22T09:22:00.600Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "journey.start-trial",
       "outcome": "PASS",
       "route": "home",
@@ -4605,6 +5502,9 @@
     },
     {
       "checker": "check_journeys",
+      "when": "2026-11-22T09:22:00.600Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "journey.start-trial.console",
       "outcome": "PASS",
       "route": "home",
@@ -4620,6 +5520,9 @@
     },
     {
       "checker": "check_journeys",
+      "when": "2026-11-22T09:22:00.600Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "journey.start-trial.integration",
       "outcome": "PENDING",
       "route": "home",
@@ -4635,6 +5538,9 @@
     },
     {
       "checker": "check_journeys",
+      "when": "2026-11-22T09:22:00.600Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "journey.start-trial",
       "outcome": "PASS",
       "route": "home",
@@ -4650,6 +5556,9 @@
     },
     {
       "checker": "check_journeys",
+      "when": "2026-11-22T09:22:00.600Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "journey.start-trial.console",
       "outcome": "PASS",
       "route": "home",
@@ -4665,6 +5574,9 @@
     },
     {
       "checker": "check_journeys",
+      "when": "2026-11-22T09:22:00.600Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "journey.start-trial.integration",
       "outcome": "PENDING",
       "route": "home",
@@ -4680,6 +5592,9 @@
     },
     {
       "checker": "check_journeys",
+      "when": "2026-11-22T09:22:00.600Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "journey.compare-plans",
       "outcome": "PASS",
       "route": "home",
@@ -4695,6 +5610,9 @@
     },
     {
       "checker": "check_journeys",
+      "when": "2026-11-22T09:22:00.600Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "journey.compare-plans.console",
       "outcome": "PASS",
       "route": "home",
@@ -4710,6 +5628,9 @@
     },
     {
       "checker": "check_journeys",
+      "when": "2026-11-22T09:22:00.600Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "journey.compare-plans",
       "outcome": "PASS",
       "route": "home",
@@ -4725,6 +5646,9 @@
     },
     {
       "checker": "check_journeys",
+      "when": "2026-11-22T09:22:00.600Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "journey.compare-plans.console",
       "outcome": "PASS",
       "route": "home",
@@ -4740,6 +5664,9 @@
     },
     {
       "checker": "check_journeys",
+      "when": "2026-11-22T09:22:00.600Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "journey.recover-from-a-mistake",
       "outcome": "PASS",
       "route": "start",
@@ -4755,6 +5682,9 @@
     },
     {
       "checker": "check_journeys",
+      "when": "2026-11-22T09:22:00.600Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "journey.recover-from-a-mistake.console",
       "outcome": "PASS",
       "route": "start",
@@ -4770,6 +5700,9 @@
     },
     {
       "checker": "check_journeys",
+      "when": "2026-11-22T09:22:00.600Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "journey.recover-from-a-mistake",
       "outcome": "PASS",
       "route": "start",
@@ -4785,6 +5718,9 @@
     },
     {
       "checker": "check_journeys",
+      "when": "2026-11-22T09:22:00.600Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "journey.recover-from-a-mistake.console",
       "outcome": "PASS",
       "route": "start",
@@ -4800,6 +5736,9 @@
     },
     {
       "checker": "check_meta",
+      "when": "2026-11-22T09:22:00.630Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "meta.title",
       "outcome": "PASS",
       "route": "home",
@@ -4815,6 +5754,9 @@
     },
     {
       "checker": "check_meta",
+      "when": "2026-11-22T09:22:00.630Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "meta.description",
       "outcome": "PASS",
       "route": "home",
@@ -4830,6 +5772,9 @@
     },
     {
       "checker": "check_meta",
+      "when": "2026-11-22T09:22:00.630Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "meta.canonical",
       "outcome": "PASS",
       "route": "home",
@@ -4845,6 +5790,9 @@
     },
     {
       "checker": "check_meta",
+      "when": "2026-11-22T09:22:00.630Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "meta.og",
       "outcome": "PASS",
       "route": "home",
@@ -4860,6 +5808,9 @@
     },
     {
       "checker": "check_meta",
+      "when": "2026-11-22T09:22:00.630Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "meta.og-image",
       "outcome": "PASS",
       "route": "home",
@@ -4875,6 +5826,9 @@
     },
     {
       "checker": "check_meta",
+      "when": "2026-11-22T09:22:00.630Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "meta.robots",
       "outcome": "PASS",
       "route": "home",
@@ -4890,6 +5844,9 @@
     },
     {
       "checker": "check_meta",
+      "when": "2026-11-22T09:22:00.630Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "meta.title",
       "outcome": "PASS",
       "route": "pricing",
@@ -4905,6 +5862,9 @@
     },
     {
       "checker": "check_meta",
+      "when": "2026-11-22T09:22:00.630Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "meta.description",
       "outcome": "PASS",
       "route": "pricing",
@@ -4920,6 +5880,9 @@
     },
     {
       "checker": "check_meta",
+      "when": "2026-11-22T09:22:00.630Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "meta.canonical",
       "outcome": "PASS",
       "route": "pricing",
@@ -4935,6 +5898,9 @@
     },
     {
       "checker": "check_meta",
+      "when": "2026-11-22T09:22:00.630Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "meta.og",
       "outcome": "PASS",
       "route": "pricing",
@@ -4950,6 +5916,9 @@
     },
     {
       "checker": "check_meta",
+      "when": "2026-11-22T09:22:00.630Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "meta.og-image",
       "outcome": "PASS",
       "route": "pricing",
@@ -4965,6 +5934,9 @@
     },
     {
       "checker": "check_meta",
+      "when": "2026-11-22T09:22:00.630Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "meta.robots",
       "outcome": "PASS",
       "route": "pricing",
@@ -4980,6 +5952,9 @@
     },
     {
       "checker": "check_meta",
+      "when": "2026-11-22T09:22:00.630Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "meta.title",
       "outcome": "PASS",
       "route": "start",
@@ -4995,6 +5970,9 @@
     },
     {
       "checker": "check_meta",
+      "when": "2026-11-22T09:22:00.630Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "meta.description",
       "outcome": "PASS",
       "route": "start",
@@ -5010,6 +5988,9 @@
     },
     {
       "checker": "check_meta",
+      "when": "2026-11-22T09:22:00.630Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "meta.canonical",
       "outcome": "PASS",
       "route": "start",
@@ -5025,6 +6006,9 @@
     },
     {
       "checker": "check_meta",
+      "when": "2026-11-22T09:22:00.630Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "meta.og",
       "outcome": "PASS",
       "route": "start",
@@ -5040,6 +6024,9 @@
     },
     {
       "checker": "check_meta",
+      "when": "2026-11-22T09:22:00.630Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "meta.og-image",
       "outcome": "PASS",
       "route": "start",
@@ -5055,6 +6042,9 @@
     },
     {
       "checker": "check_meta",
+      "when": "2026-11-22T09:22:00.630Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "meta.robots",
       "outcome": "PASS",
       "route": "start",
@@ -5070,6 +6060,9 @@
     },
     {
       "checker": "check_meta",
+      "when": "2026-11-22T09:22:00.630Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "meta.robots-txt",
       "outcome": "PASS",
       "route": null,
@@ -5085,6 +6078,9 @@
     },
     {
       "checker": "check_meta",
+      "when": "2026-11-22T09:22:00.630Z",
+      "site": "../site",
+      "siteHash": "c854b9b873ebad1e",
       "id": "meta.sitemap",
       "outcome": "PASS",
       "route": null,

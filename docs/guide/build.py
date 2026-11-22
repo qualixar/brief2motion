@@ -11,9 +11,13 @@ from examples/<name>/site-report.json. Edit the prose in this file, the look in 
 import html
 import json
 import re
+import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+import extra  # noqa: E402  (the 1.1.0 sections: site mode and motion patterns)
 REPO = HERE.parent.parent
 SKILL = REPO / 'skills' / 'brief2motion'
 E = html.escape
@@ -99,6 +103,8 @@ def brief(name):
     return '\n'.join(x for x in lines if x.strip())
 
 
+HELPERS = SimpleNamespace(p=p, lead=lead, h2=h2, h3=h3, ul=ul, ol=ol, code=code, table=table, note=note, fig=fig, two=two)
+
 # ----------------------------------------------------------------------------------------------------- content
 
 section('what', 'What you can build', 'Orientation', lead(
@@ -119,7 +125,8 @@ section('what', 'What you can build', 'Orientation', lead(
     ], ['20%', '38%', '24%', '18%']) + two(fig('halden-one-top.jpg', '`halden-one`: a radio built from about forty shapes in three.js. No model file, no photograph.'),
                                          fig('tidewater-25.jpg', '`tidewater`: the crystal is 48 pictures; your scroll position picks one.'))
     + note('What it is not', 'It is not a page builder with a visual editor, and it does not host your site. It writes ordinary '
-           'files (HTML, CSS, JavaScript) into a folder that you can read, change and upload anywhere.'))
+           'files (HTML, CSS, JavaScript) into a folder that you can read, change and upload anywhere.')
+    + note('A bigger brief', 'For a site with several pages, or one page that must get a visitor to sign up or buy, the agent adds nine stages of planning and five more checks around the loop on the next page. That is site mode, described after Routing.'))
 
 section('loop', 'How it works: one loop for every site', 'Orientation', lead(
     'Whatever the brief asks for, the agent goes through the same six steps. The fourth is the one that matters: '
@@ -149,7 +156,7 @@ section('setup', 'Setup', 'Getting started', lead('Two commands in Claude Code, 
         ['ffmpeg', 'a short film of the page (optional)', '`brew install ffmpeg`'],
     ], ['26%', '42%', '32%']) + p(
     'Check a machine at any time with `bash skills/brief2motion/scripts/doctor.sh`. It prints `ok` or the exact install '
-    'command for each tool, for macOS, Windows and Linux.') + note('What has been tested', 'Everything in this guide was built and measured on macOS with Chrome 157. The Windows and Linux '
+    'command for each tool, for macOS, Windows and Linux.') + note('What has been tested', 'Everything in this guide was built and measured on macOS with Chrome 157 and 158. The Windows and Linux '
         'commands are written but were not run by the author. Codex has a plugin manifest but no recorded run.') + h2('Opening the page') + p(
     'When the agent says it is done, it gives you a link such as `http://localhost:8421/`. Open that address. Do not '
     'double-click `site/index.html`: browsers refuse to load JavaScript modules from a file, so you would see a blank page. '
@@ -204,6 +211,8 @@ Style: Editorial / magazine (inferred)
     'If nothing matches, it says so and suggests none. A brand\'s own colours and type always replace a style\'s tokens. '
     'The rule book is `references/routing.json`; adding a phrase is a one-line change, and the tests check that every '
     'example\'s own brief still routes to the stack that example was built with.'))
+
+section('site', 'Site mode: a whole site, or a page that must convert', 'The first step', extra.site_mode_body(HELPERS))
 
 section('kit', 'The default stack: plain CSS and JavaScript, with the kit', 'Stacks', lead(
     'Most motion on a website needs no library. The kit is ten small files that handle the parts that are easy to get wrong.') + table(['File', 'What it does'], [
@@ -369,12 +378,14 @@ section('type', 'Kinetic type and scroll stories', 'Techniques', lead('Two techn
     'Almost no motion on a website needs it. It cannot speed up moving page elements or drawing, which the browser and the graphics chip already do. '
     'It can help with heavy arithmetic every frame: physics with thousands of bodies, fluid or cloth, processing pictures or video. Prove the JavaScript version is too slow first.'))
 
+section('patterns', 'Motion patterns: recipes you can name', 'Techniques', extra.patterns_body(HELPERS))
+
 section('design', 'Design fundamentals: what every page gets', 'Design', lead(
     'Motion sits on top of a page. If the page under it is hard to read, badly spaced or slow, no animation rescues it.') + h2('Say what it is, at the top') + p(
     'The first screen states what the product is and what to do next, with real content. People spend 57% of their viewing time above the fold and 74% in the first two screens (Nielsen Norman Group, 2018), so the first screen must not be a slow reveal of nothing.') + h2('Type and space') + ul([
         'Body text 16 px or larger. Line length 45 to 90 characters. Line height about 1.5 for text, 0.95 to 1.15 for headlines.',
         'A scale of four or five sizes, not a pile. Fluid headlines with `clamp()` and a rem floor.',
-        'One family or two; if two, clearly different. System fonts unless the brief supplies one.',
+        'Usually a single family; a second only when it contrasts plainly with the first. System fonts unless the brief supplies one.',
         'Spacing in steps of 4 px. Group with space before lines.',
     ]) + h2('Colour and contrast') + ul([
         'Text contrast at least 4.5:1; large text 3:1; control edges 3:1. The thresholds are not rounded.',
@@ -389,8 +400,8 @@ section('design', 'Design fundamentals: what every page gets', 'Design', lead(
         ['Direct feedback', 'about 100 ms'], ['Most interface changes', '200 to 300 ms'], ['Large movements', 'up to 400 ms; 500 ms and more drags'],
         ['Entering against leaving', 'entering slightly longer, for example 300 ms in and 200 ms out'], ['Stagger between related items', '30 to 80 ms, in reading order'],
         ['A hero sequence', 'over in about 1.5 seconds']], ['45%', '55%']) + p(
-    'Every animation has a reason: it shows what changed, where something came from, or what to look at. One orchestrated moment beats many scattered ones. '
-    'A fade on every section and a hover effect on every card is the commonest sign of a generated page. Motion that answers input is always welcome.') + note('Never invent proof', 'No made-up reviews, ratings, customer names, logos or numbers. If the brief has none, the section is left out. Made-up examples say that they are made up.'))
+    'Every animation has a job: point the eye, explain a change of state, or show where an element came from or went. Spend the motion budget on one planned entrance; '
+    'when every block fades up and every card lifts on hover, nothing stands out and the page looks machine-made. Brief feedback to a visitor\'s own action is always worth animating.') + note('Never invent proof', 'No made-up reviews, ratings, customer names, logos or numbers. If the brief has none, the section is left out. Made-up examples say that they are made up.'))
 
 
 def style_block(s):
@@ -463,18 +474,18 @@ section('perf', 'Performance', 'Quality', lead('A page that looks right on a fas
 ]) + h2('What the examples measure') + table(['Example', 'Desktop, p95 frame', 'Emulated phone, p95 frame'], [
     [f'`{n}`', f'{frame(n, "desktop")} ms', f'{frame(n, "phone")} ms'] for n in ['halden-one', 'tidewater', 'relay', 'keeling', 'mise', 'sprout', 'copper-no-7', 'style-atlas']
 ], ['40%', '30%', '30%']) + p(
-    'These are from the reports in the repository, measured on an Apple M-series laptop with Chrome 157. A screen that refreshes 60 times a second gives a frame every 16.7 ms, so these '
+    'These are from the reports in the repository, measured on an Apple M-series laptop with Chrome 158. A screen that refreshes 60 times a second gives a frame every 16.7 ms, so these '
     'pages are at the screen\'s own limit. The phone run is this machine\'s graphics chip with the processor slowed down. It is not a real phone: it catches layout and most '
     'performance problems, and you should still look at the page on yours.'))
 
-section('checks', 'The checks, one by one', 'Quality', lead('`check_site.mjs` opens every page in Chrome seven ways. A page with one WebGL canvas gets 27 checks.') + table(['Run', 'What it checks', 'A failure means'], [
+section('checks', 'The checks, one by one', 'Quality', lead('`check_site.mjs` opens every page in Chrome seven ways. A page with one WebGL canvas gets 28 checks.') + table(['Run', 'What it checks', 'A failure means'], [
     ['Desktop', 'the page reports its motion state; frame time while idle and scrolling; no sideways scroll at six scroll positions; one main heading, a language, a title and description, zoom allowed, alt text, a main landmark and a skip link; a visible focus ring on the first twelve keyboard stops; page weight', 'the page is slow, wider than the screen, or missing basics'],
     ['Phone, 390 px', 'frame time with the processor slowed four times; sideways scroll; tap targets of 24 px or more; page weight', 'it will stutter or be hard to tap'],
     ['Phone, 320 px', 'sideways scroll, loaded fresh at that width', 'the layout breaks on the narrowest phones'],
     ['Reduced motion', 'the page says so; no animation longer than a quarter of a second is running; two screenshots 0.7 seconds apart are identical at three scroll positions; every heading and paragraph is fully visible at some point; text contrast; normal scrolling works', 'something still moves, or some text never appears'],
     ['JavaScript off', 'something readable is on the page', 'the content only exists after a script runs'],
     ['WebGL off', 'the headline is readable; a still stands in for each WebGL canvas', 'visitors without WebGL get a hole'],
-    ['Every run', 'no console errors; requests only to the page itself and one CDN', 'something is broken or leaking'],
+    ['Every run', 'no console errors; requests only to the page itself and one CDN; the dev-only tuning panel is not shipped', 'something is broken, leaking, or left over from development'],
 ], ['15%', '58%', '27%']) + h2('What a checker cannot see') + p(
     'It cannot see that a layout is dull, that a headline says nothing, or that text sits on a busy picture: text over pictures, gradients and canvas has no single '
     'background colour, so its contrast is not measured. After the checks pass, the agent opens the screenshots and looks at them against every "done when" line. So should you.') + h2('What the checker found in its first week') + ul([
@@ -542,7 +553,8 @@ python3 skills/brief2motion/scripts/serve.py site                    # preview a
 node skills/brief2motion/scripts/check_site.mjs site --out check     # measure it
 node skills/brief2motion/scripts/check_site.mjs site --no-perf       # on a machine with no GPU
 node skills/brief2motion/scripts/capture_site.mjs site --out media --film   # pictures and a short film
-node skills/brief2motion/scripts/build_styles.mjs                    # regenerate the style pages and atlas'''))
+node skills/brief2motion/scripts/build_styles.mjs                    # regenerate the style pages and atlas
+bash examples/larkspur/tools/run-checks.sh                           # every site-mode check on the worked example'''))
 
 section('trouble', 'Troubleshooting and questions', 'Reference', table(['Symptom', 'Cause and fix'], [
     ['The page is blank', 'You opened the file, not the address. Run `serve.py` and open the link it prints.'],
@@ -581,7 +593,7 @@ section('sources', 'Sources and what was verified', 'Reference', lead('What this
     'Each stack\'s pattern is exercised by a smoke test in a real browser, including test pages for React Three Fiber, Rive, and a three.js model with post-processing.',
     'The router, the kit\'s maths, the measuring code and the style data have unit tests.',
 ]) + h2('Not verified') + ul([
-    'Windows and Linux. Real phones and tablets. Safari and Firefox: the checks ran in Chrome 157 only.',
+    'Windows and Linux. Real phones and tablets. Safari and Firefox: the checks ran in Chrome 157 and 158 only.',
     'Codex: the manifest is included, no run is recorded.',
     'Screen readers: the structure is checked mechanically, not by listening.',
     'React stacks inside a real bundled project: the React example and the React Three Fiber test page run from CDN modules.',
@@ -589,8 +601,8 @@ section('sources', 'Sources and what was verified', 'Reference', lead('What this
 ]) + h2('Published sources for the styles and the rules') + '<p class="src">' + '<br>'.join(E(u) for u in src_rows + [
     'https://www.nngroup.com/articles/homepage-design-principles/', 'https://www.nngroup.com/articles/scrolling-and-attention/', 'https://www.nngroup.com/articles/animation-duration/',
     'https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html', 'https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html', 'https://web.dev/articles/vitals',
-    'https://tailwindcss.com/docs/responsive-design', 'https://gsap.com/community/standard-license/', 'https://github.com/anthropics/skills']) + '</p>' + p(
-    'The repositories studied, with licences and what was taken from each, are in `RESOURCES.md`. No code from another project is copied into brief2motion. Facts were checked on 17 November 2026.'))
+    'https://tailwindcss.com/docs/responsive-design', 'https://gsap.com/community/standard-license/']) + '</p>' + p(
+    'The software built sites load, with its licences, is in `NOTICE` and `references/licences.md`; `RESOURCES.md` is a reading list. No code from another project is copied into brief2motion. Facts were checked on 17 November 2026.'))
 
 # ---------------------------------------------------------------------------------------------------- assemble
 toc = ''.join(f'<a href="#{sid}">{E(title)}</a>' for sid, title, _, _, in_toc in SECTIONS if in_toc)
@@ -601,7 +613,7 @@ cover = f'''<section class="cover"><div class="eyebrow">Qualixar<span>Field guid
 <div class="by">Varun Pratap Bhardwaj · github.com/qualixar/brief2motion · MIT licence · A companion to release {VERSION}, November 2026</div></section>'''
 parts = [cover, f'<section id="contents"><div class="eyebrow">Contents<span>brief2motion {VERSION}</span></div><h1>Contents</h1><div class="toc">{toc}</div>'
          + note('How to use this guide', 'New machine: start with Setup. To shape a request: the brief pages. To understand a choice the agent made: Routing and the stack pages. '
-                'To pick a look: the style pages. To judge a result: the checks.') + '</section>']
+                'To pick a look: the style pages. To plan a whole site: Site mode. To find a named motion: Motion patterns. To judge a result: the checks.') + '</section>']
 for sid, title, eyebrow, body, _ in SECTIONS:
     parts.append(f'<section id="{sid}"><div class="eyebrow">{E(eyebrow)}<span>brief2motion {VERSION}</span></div><h1>{E(title)}</h1>{body}</section>')
 doc = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><title>brief2motion {VERSION}: the web motion guide</title>
