@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { percentile, parseColor, blend, luminance, contrastRatio, verdict } from '../skills/brief2motion/scripts/_measure.mjs';
 import { hoistKeyframes, scopedCss } from '../skills/brief2motion/scripts/build_styles.mjs';
+import { fileURLToPath } from 'node:url';
 
 const REF = new URL('../skills/brief2motion/references/', import.meta.url);
 const styles = JSON.parse(fs.readFileSync(new URL('styles.json', REF), 'utf8'));
@@ -71,6 +72,6 @@ test('no style on the list is one that research found to be unreal', () => {
   for (const n of styles.notReal) assert.ok(!styles.styles.some((s) => s.name.toLowerCase().includes(n.name.toLowerCase())));
 });
 test('the generated style pages and the atlas are current', () => {
-  const out = execFileSync('node', [new URL('../skills/brief2motion/scripts/build_styles.mjs', import.meta.url).pathname, '--check'], { encoding: 'utf8' });
+  const out = execFileSync('node', [fileURLToPath(new URL('../skills/brief2motion/scripts/build_styles.mjs', import.meta.url)), '--check'], { encoding: 'utf8' });
   assert.match(out, /generated files are current/);
 });

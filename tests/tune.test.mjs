@@ -7,8 +7,9 @@ import path from 'node:path';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { guessRange, snapshot, tuneRequested, tune, TWEAKPANE } from '../skills/brief2motion/kit/tune.js';
 import { stripTune, hasTune, findDevTools, stripSite } from '../skills/brief2motion/scripts/strip_tune.mjs';
+import { fileURLToPath } from 'node:url';
 
-const CLI = new URL('../skills/brief2motion/scripts/strip_tune.mjs', import.meta.url).pathname;
+const CLI = fileURLToPath(new URL('../skills/brief2motion/scripts/strip_tune.mjs', import.meta.url));
 const tmp = () => fs.mkdtempSync(path.join(os.tmpdir(), 'b2m-tune-'));
 const write = (dir, rel, text) => { fs.mkdirSync(path.dirname(path.join(dir, rel)), { recursive: true }); fs.writeFileSync(path.join(dir, rel), text); };
 const PAGE_JS = "import { signal } from './kit/motion-core.js';\nconst P = { duration: 0.7 };\n/* tune:start */\nif (new URLSearchParams(location.search).has('tune')) import('./kit/tune.js').then(({ tune }) => tune(P));\n/* tune:end */\nsignal('ready');\n";

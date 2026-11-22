@@ -5,6 +5,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { route, report } from '../skills/brief2motion/scripts/route.mjs';
+import { fileURLToPath } from 'node:url';
 
 const brief = (name) => fs.readFileSync(new URL(`../examples/${name}/BRIEF.md`, import.meta.url), 'utf8');
 const EXPECT = { 'copper-no-7': 'particles', relay: 'motion', 'halden-one': 'three', tidewater: 'gsap', halvorsen: 'view-transitions', keeling: 'svg', mise: 'motion-react', sprout: 'players', 'style-atlas': 'vanilla' };
@@ -77,8 +78,8 @@ test('the report names the stack, the reason and what to read', () => {
   assert.match(text, /Read before building:/);
 });
 test('the command line reads a file, standard input and rejects an empty brief', () => {
-  const cli = new URL('../skills/brief2motion/scripts/route.mjs', import.meta.url).pathname;
-  const json = JSON.parse(execFileSync('node', [cli, new URL('../examples/relay/BRIEF.md', import.meta.url).pathname, '--json'], { encoding: 'utf8' }));
+  const cli = fileURLToPath(new URL('../skills/brief2motion/scripts/route.mjs', import.meta.url));
+  const json = JSON.parse(execFileSync('node', [cli, fileURLToPath(new URL('../examples/relay/BRIEF.md', import.meta.url)), '--json'], { encoding: 'utf8' }));
   assert.equal(json.stack.id, 'motion');
   assert.match(execFileSync('node', [cli, '-'], { input: 'particles that form my logo', encoding: 'utf8' }), /dust engine/);
   assert.throws(() => execFileSync('node', [cli, '-'], { input: '   ', encoding: 'utf8', stdio: 'pipe' }));
@@ -133,7 +134,7 @@ test('the examples keep their stack when patterns are added', () => {
   }
 });
 test('the command line prints patterns in JSON', () => {
-  const cli = new URL('../skills/brief2motion/scripts/route.mjs', import.meta.url).pathname;
+  const cli = fileURLToPath(new URL('../skills/brief2motion/scripts/route.mjs', import.meta.url));
   const json = JSON.parse(execFileSync('node', [cli, '-', '--json'], { input: 'A horizontal scroll section for the timeline.', encoding: 'utf8' }));
   assert.equal(json.patterns[0].id, 'horizontal-scroll'); assert.equal(json.patterns[0].ref, 'patterns/horizontal-scroll.md');
 });
