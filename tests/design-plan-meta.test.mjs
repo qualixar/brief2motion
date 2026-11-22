@@ -76,3 +76,74 @@ test('check_meta CLI: exit codes follow the verdict', () => {
   assert.equal(runChecker('check_meta.mjs', [path.join(FIX, 'meta', 'pass'), '--out', out, '--strict']).status, 0);
 });
 
+
+// ---- boundaries and single-cause failures: each case starts from the passing fixture and breaks exactly one thing ----
+const copyOf = (kind, name) => { const dir = tmp(name); fs.cpSync(path.join(FIX, kind, 'pass'), dir, { recursive: true }); return dir; };
+const editFile = (file, fn) => fs.writeFileSync(file, fn(fs.readFileSync(file, 'utf8')));
+const editJson = (file, fn) => editFile(file, (t) => JSON.stringify(fn(JSON.parse(t))));
+const byId = (rs, id, route) => rs.find((r) => r.id === id && (route === undefined || r.route === route));
+const png = (w, h) => { const b = Buffer.alloc(33); Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]).copy(b); b.writeUInt32BE(13, 8); b.write('IHDR', 12); b.writeUInt32BE(w, 16); b.writeUInt32BE(h, 20); return b; };
+
+test('check_plan: a loop of parents, a form without states, a route two hops from home, an unlisted image and a missing wireframe each have their own result', () => {
+  const loop = copyOf('plan', 'plan-loop');
+  editJson(path.join(loop, 'routes.json'), (d) => { d.routes[0].parent = 'contact'; return d; });
+  assert.match(byId(planChecks(loop), 'plan.routes-valid').reason, /parents loop/);
+
+  const nostates = copyOf('plan', 'plan-states');
+  editJson(path.join(nostates, 'routes.json'), (d) => { d.routes[1].states = []; return d; });
+  assert.equal(byId(planChecks(nostates), 'plan.states-declared').outcome, 'REVIEW');
+
+  const deep = copyOf('plan', 'plan-deep');
+  editJson(path.join(deep, 'routes.json'), (d) => { d.routes[1].links.push('faq'); d.routes.push({ id: 'faq', path: '/faq/', parent: 'contact', template: 'landing', title: 'Questions', links: ['home'] }); return d; });
+  assert.equal(byId(planChecks(deep), 'plan.reachable').outcome, 'PASS', 'a route linked only from a page one hop from home is still reachable');
+
+  const loose = copyOf('plan', 'plan-loose');
+  fs.writeFileSync(path.join(loose, 'site', 'assets', 'extra.png'), png(10, 10));
+  const l = byId(planChecks(loose), 'plan.assets-listed');
+  assert.equal(l.outcome, 'REVIEW'); assert.match(l.reason, /extra\.png/);
+
+  const nowire = copyOf('plan', 'plan-nowire');
+  fs.rmSync(path.join(nowire, 'wireframes', 'form.html'));
+  const w = byId(planChecks(nowire), 'plan.wireframes');
+  assert.equal(w.outcome, 'FAIL'); assert.match(w.reason, /no wireframe for template "form"/);
+});
+
+test('check_meta: og:url must be present and equal the canonical; a relative canonical fails; an indexable page cannot carry noindex', () => {
+  const home = (dir) => path.join(dir, 'site', 'index.html');
+  const run = (edit, name) => { const dir = copyOf('meta', name); editFile(home(dir), edit); return metaChecks(dir); };
+  const og = (rs) => byId(rs, 'meta.og', 'home');
+  const differs = og(run((h) => h.replace('og:url" content="https://bakery.example/"', 'og:url" content="https://bakery.example/other/"'), 'meta-ogurl'));
+  assert.equal(differs.outcome, 'FAIL'); assert.match(differs.reason, /og:url .* differs from the canonical/);
+  const gone = og(run((h) => h.replace(/<meta property="og:url"[^>]*>\n/, ''), 'meta-ognourl'));
+  assert.equal(gone.outcome, 'FAIL'); assert.match(gone.reason, /missing og:url/);
+  const rel = byId(run((h) => h.replace('canonical" href="https://bakery.example/"', 'canonical" href="/"'), 'meta-rel'), 'meta.canonical', 'home');
+  assert.equal(rel.outcome, 'FAIL'); assert.match(rel.reason, /not an absolute address/);
+  const noOrigin = (href, name) => { const dir = copyOf('meta', name); editJson(path.join(dir, 'routes.json'), (d) => { delete d.site.origin; return d; }); editFile(home(dir), (h) => h.replace('canonical" href="https://bakery.example/"', `canonical" href="${href}"`)); return byId(metaChecks(dir), 'meta.canonical', 'home').outcome; };
+  assert.deepEqual([noOrigin('/', 'meta-noorigin-rel'), noOrigin('https://bakery.example/', 'meta-noorigin-abs')], ['FAIL', 'PENDING'], 'without site.origin an absolute canonical cannot be compared, but a relative one is still wrong');
+  const noidx = byId(run((h) => h.replace('</head>', '<meta name="robots" content="noindex"></head>'), 'meta-noindex'), 'meta.robots', 'home');
+  assert.equal(noidx.outcome, 'FAIL'); assert.match(noidx.reason, /meant to be indexed but has noindex/);
+});
+
+test('check_meta: the length limits are exact (description 49/50/160/161 characters, title 9/10/70/71)', () => {
+  const home = (dir) => path.join(dir, 'site', 'index.html');
+  const withDesc = (n) => { const dir = copyOf('meta', `meta-d${n}`); editFile(home(dir), (h) => h.replace(/(name="description" content=")[^"]*/, `$1${'d'.repeat(n)}`)); return byId(metaChecks(dir), 'meta.description', 'home').outcome; };
+  assert.deepEqual([49, 50, 160, 161].map(withDesc), ['FAIL', 'PASS', 'PASS', 'REVIEW']);
+  const withTitle = (n) => { const dir = copyOf('meta', `meta-t${n}`); editFile(home(dir), (h) => h.replace(/<title>[^<]*/, `<title>${'t'.repeat(n)}`)); return byId(metaChecks(dir), 'meta.title', 'home').outcome; };
+  assert.deepEqual([9, 10, 70, 71].map(withTitle), ['REVIEW', 'PASS', 'PASS', 'REVIEW']);
+});
+
+test('check_meta: a second page with the same description fails; the sitemap fails when it lists a noindex page; the og:image limits are exact (599x315 / 600x314 fail, 600x315 passes)', () => {
+  const dup = copyOf('meta', 'meta-dup');
+  const homeDesc = fs.readFileSync(path.join(dup, 'site', 'index.html'), 'utf8').match(/name="description" content="([^"]*)"/)[1];
+  const contact = path.join(dup, 'site', 'contact', 'index.html');
+  editFile(contact, (h) => h.replace(/(name="description" content=")[^"]*/, `$1${homeDesc}`));
+  assert.ok(metaChecks(dup).some((r) => r.id === 'meta.description' && r.outcome === 'FAIL' && /same description/.test(r.reason)));
+
+  const extra = copyOf('meta', 'meta-extra');
+  editFile(path.join(extra, 'site', 'sitemap.xml'), (x) => x.replace('</urlset>', '  <url><loc>https://bakery.example/thanks/</loc></url>\n</urlset>'));
+  const sm = byId(metaChecks(extra), 'meta.sitemap');
+  assert.equal(sm.outcome, 'FAIL'); assert.match(sm.reason, /lists pages that should not be there: https:\/\/bakery\.example\/thanks\//);
+
+  const sized = (w, h) => { const dir = copyOf('meta', `meta-img${w}x${h}`); fs.writeFileSync(path.join(dir, 'site', 'assets', 'og.png'), png(w, h)); return byId(metaChecks(dir), 'meta.og-image', 'home').outcome; };
+  assert.deepEqual([sized(599, 315), sized(600, 314), sized(600, 315)], ['FAIL', 'FAIL', 'PASS']);
+});
