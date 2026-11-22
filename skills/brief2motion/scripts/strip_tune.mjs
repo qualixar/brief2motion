@@ -10,7 +10,8 @@ import { fileURLToPath } from 'node:url';
 
 const BLOCKS = [/[ \t]*\/\*\s*tune:start\s*\*\/[\s\S]*?\/\*\s*tune:end\s*\*\/[ \t]*\r?\n?/g, /[ \t]*<!--\s*tune:start\s*-->[\s\S]*?<!--\s*tune:end\s*-->[ \t]*\r?\n?/g];
 const TEXT = /\.(js|mjs|html|css)$/i;
-const PANEL = /tweakpane/i;
+// a request for Tweakpane's code (a package name with a version, a .js file, an import), not the word in a credits line
+const PANEL = /tweakpane@|tweakpane(\.min)?\.m?js\b|\/npm\/tweakpane\b|from\s*['"][^'"]*tweakpane|import\(\s*['"][^'"]*tweakpane/i;
 
 // Pure, unit-tested: the text with every tune block removed.
 export const stripTune = (text) => BLOCKS.reduce((t, rx) => t.replace(rx, ''), text);
@@ -45,7 +46,7 @@ export function stripSite(dir) {
   return { removed, edited, left: findDevTools(dir) };
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.realpathSync(fileURLToPath(import.meta.url))) {
   const args = process.argv.slice(2), dir = args.find((a) => !a.startsWith('--'));
   if (!dir || args.includes('--help') || args.includes('-h')) { console.log('usage: node strip_tune.mjs <site-dir> [--check]\n  Removes the dev-only tuning panel (kit/tune.js and tune:start ... tune:end blocks) before delivery.'); process.exit(args.includes('--help') || args.includes('-h') ? 0 : 2); }
   if (!fs.existsSync(dir) || !fs.statSync(dir).isDirectory()) { console.error(`strip_tune.mjs: ${dir} is not a folder`); process.exit(2); }

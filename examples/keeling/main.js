@@ -97,7 +97,7 @@ async function start() {
     });
   };
 
-  // the active step is the one whose middle is closest to a line 55% down the screen (the scrollama idea, in 10 lines)
+  // the active step is the one whose middle is closest to a line 55% down the screen
   document.documentElement.classList.add('js-story');
   const steps = $$('.step');
   onScroll((vh) => {
@@ -105,7 +105,8 @@ async function start() {
     steps.forEach((s, i) => { const r = s.getBoundingClientRect(); const d = Math.abs((r.top + r.bottom) / 2 - mark); if (d < bestD) { bestD = d; best = i; } });
     go(best);
   });
-  $$('[data-count]').forEach((n) => countUp(n, { duration: 1400 }));
+  // the kit keeps the real number in a hidden first span; naming it .sr-only lets a layout check tell it from cut-off text
+  $$('[data-count]').forEach((n) => { countUp(n, { duration: 1400 }); n.firstElementChild?.classList.add('sr-only'); });
   signal(still ? 'reduced' : 'ready');
 }
 start();

@@ -5,9 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>The Keeling Curve in five steps · a data story</title>
   <meta name="description" content="Sixty-seven years of carbon dioxide measurements from Mauna Loa, told as a scroll-driven chart. A brief2motion example of data storytelling with SVG and D3 scales, using NOAA's published annual means.">
+  <link rel="canonical" href="https://keeling.example/">
   <meta property="og:title" content="The Keeling Curve in five steps">
   <meta property="og:description" content="A brief2motion example of data storytelling: one SVG chart that redraws itself as you read.">
   <meta property="og:type" content="article">
+  <meta property="og:url" content="https://keeling.example/">
+  <meta property="og:image" content="https://keeling.example/og.jpg">
+  <meta property="og:image:alt" content="The Keeling Curve in five steps: the opening screen of a data story about carbon dioxide measurements.">
   <meta name="theme-color" content="#fbfbf8">
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="kit/kit.css">
@@ -67,7 +71,7 @@
     <section class="data" id="data" aria-labelledby="data-title">
       <h2 id="data-title">The data</h2>
       <p>Every number on this page comes from one public file: NOAA's annual mean CO₂ at Mauna Loa, compiled by Dr. Xin Lan (NOAA/GML) and Dr. Ralph Keeling (Scripps Institution of Oceanography). The decade averages are computed in the page from the same numbers. From December 2022 to July 2023 the readings come from nearby Maunakea, because an eruption had closed the Mauna Loa site.</p>
-      <p><a href="https://gml.noaa.gov/ccgg/trends/">NOAA Global Monitoring Laboratory: Trends in CO₂</a> · <a href="https://scrippsco2.ucsd.edu/">Scripps CO₂ Program</a></p>
+      <p class="sources"><a href="https://gml.noaa.gov/ccgg/trends/">NOAA Global Monitoring Laboratory: Trends in CO₂</a> · <a href="https://scrippsco2.ucsd.edu/">Scripps CO₂ Program</a></p>
       <details>
         <summary>Show all 67 annual means as a table</summary>
         <div class="table-wrap"><table><thead><tr><th scope="col">Year</th><th scope="col">CO₂, ppm</th></tr></thead><tbody id="rows"></tbody></table></div>

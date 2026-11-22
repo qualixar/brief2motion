@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Layout edge failures</title>
+<style>
+  body { margin: 0; font: 16px/1.5 system-ui, sans-serif; color: #1c2230; background: #faf7f0; }
+  main { padding: 16px; }
+  .small23 { width: 23px; height: 23px; padding: 0; border: 1px solid #1c2230; background: #fff; }   /* one pixel under the minimum */
+  .half { font: 16px/1.5 monospace; width: 10ch; overflow: hidden; white-space: nowrap; }           /* shows exactly half of its text */
+  .away { position: absolute; left: -9999px; display: block; height: 44px; }                         /* focusable, never on screen */
+</style></head>
+<body><main>
+  <h1>Edge cases on the failing side</h1>
+  <p><button class="small23" aria-label="23 pixels"></button></p>
+  <div class="half">abcdefghij0123456789</div>
+  <a class="away" href="#end">A link placed far off to the left</a>
+  <p id="end">The end.</p>
+</main></body></html>

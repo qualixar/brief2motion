@@ -57,6 +57,9 @@ d3-scale and d3-shape, ISC License, Copyright 2010-2026 Mike Bostock.
 Tweakpane (development panel only, never shipped), MIT License, Copyright (c) 2016 cocopon.
 React Three Fiber and drei (test page only), MIT License, Copyright (c) Poimandres.
 playwright-core (downloaded by the checker, not shipped), Apache License 2.0, Copyright (c) Microsoft Corporation.
+axe-core 4.14.1 (fetched by check_a11y.mjs at check time from cdn.jsdelivr.net and checked against its hash; injected into the
+  checker's own page, never part of a site or of this repository), Mozilla Public License 2.0, Copyright (c) 2015-2026 Deque Systems, Inc.
+  Source and licence: https://github.com/dequelabs/axe-core
 
 ------------------------------------------------------------------------------------------------------------
 Data and images

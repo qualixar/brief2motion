@@ -20,6 +20,7 @@ import path from 'node:path';
 import { loadPlaywright, launchChrome, serveDir, HERE } from './_common.mjs';
 import { percentile, contrastRatio, parseColor, blend, verdict } from './_measure.mjs';
 import { findDevTools } from './strip_tune.mjs';
+import { LAYOUT_PROBE, TAP_PROBE } from './_probes.mjs';   // run inside the page; shared with the site-mode checkers
 
 export const BUDGET = { desktopP95: 20, mobileP95: 40, localBytes: 1.5 * 1024 * 1024, tapTarget: 24, contrast: 4.5, contrastLarge: 3 };
 const MIB = 1024 * 1024;
@@ -93,37 +94,6 @@ async function sampleFrames(page) {
   }), 6);
   return page.evaluate(() => { window.__raf.on = false; return window.__raf.times; });
 }
-
-// runs in the page: layout facts at the current scroll position
-const LAYOUT_PROBE = () => {
-  const vw = document.documentElement.clientWidth;
-  const over = document.documentElement.scrollWidth - vw;
-  const offenders = [];
-  if (over > 1) {
-    for (const el of document.querySelectorAll('body *')) {
-      const r = el.getBoundingClientRect();
-      if (r.width > 0 && r.right > vw + 1 && getComputedStyle(el).position !== 'fixed') {
-        let clipped = false;
-        for (let n = el.parentElement; n && n !== document.body; n = n.parentElement) { const o = getComputedStyle(n).overflowX; if (o === 'hidden' || o === 'clip' || o === 'auto' || o === 'scroll') { clipped = true; break; } }
-        if (!clipped) offenders.push(`${el.tagName.toLowerCase()}${el.id ? '#' + el.id : ''}${el.classList[0] ? '.' + el.classList[0] : ''} right=${Math.round(r.right)}`);
-      }
-      if (offenders.length >= 4) break;
-    }
-  }
-  return { vw, over, offenders };
-};
-
-const TAP_PROBE = (min) => {
-  const small = [];
-  for (const el of document.querySelectorAll('a[href], button, input:not([type=hidden]), select, textarea, [role=button], [tabindex]:not([tabindex="-1"])')) {
-    const cs = getComputedStyle(el), r = el.getBoundingClientRect();
-    if (cs.display === 'none' || cs.visibility === 'hidden' || r.width === 0 || r.height === 0) continue;
-    if (el.classList.contains('skip-link')) continue;                       // off screen until focused
-    if (el.tagName === 'A' && cs.display === 'inline' && el.closest('p, li, figcaption, small, dd, td')) continue;   // links inside a sentence are exempt (WCAG 2.5.8)
-    if (Math.min(r.width, r.height) < min - 0.5) small.push(`${el.tagName.toLowerCase()}${el.classList[0] ? '.' + el.classList[0] : ''} "${(el.textContent || el.getAttribute('aria-label') || '').trim().slice(0, 24)}" ${Math.round(r.width)}x${Math.round(r.height)}`);
-  }
-  return small;
-};
 
 const BASICS_PROBE = () => {
   const d = document, meta = (n) => d.querySelector(`meta[name="${n}"]`)?.getAttribute('content') || '';

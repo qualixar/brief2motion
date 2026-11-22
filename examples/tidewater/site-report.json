@@ -1,7 +1,7 @@
 {
   "tool": "check_site",
   "site": "tidewater",
-  "when": "2026-11-17T19:21:23.195Z",
+  "when": "2026-11-22T06:55:03.732Z",
   "budgets": {
     "desktopP95": 20,
     "mobileP95": 40,
@@ -11,14 +11,14 @@
     "contrastLarge": 3
   },
   "perfMeasured": true,
-  "chrome": "157.0.8103.79",
+  "chrome": "158.0.8127.36",
   "pages": {
     "index.html": {
       "state": "ready",
       "desktop": {
-        "samples": 499,
+        "samples": 498,
         "medianMs": 16.7,
-        "p95Ms": 16.7,
+        "p95Ms": 16.8,
         "maxMs": 16.8,
         "fps": 59.9
       },
@@ -71,6 +71,11 @@
           "onScreen": true
         },
         {
+          "what": "ul.year-track \"MarMend the clayWint\"",
+          "ring": true,
+          "onScreen": true
+        },
+        {
           "what": "a \"how it was made\"",
           "ring": true,
           "onScreen": true
@@ -94,27 +99,22 @@
           "what": "a.skip-link \"Skip to content\"",
           "ring": true,
           "onScreen": true
-        },
-        {
-          "what": "a.brand \"Tidewater Salt Works\"",
-          "ring": true,
-          "onScreen": true
         }
       ],
       "weightDesktop": {
-        "localBytes": 759603,
-        "cdnBytes": 53096
+        "localBytes": 760263,
+        "cdnBytes": 53100
       },
       "phone": {
-        "samples": 499,
+        "samples": 498,
         "medianMs": 16.7,
         "p95Ms": 16.7,
         "maxMs": 16.8,
         "fps": 59.9
       },
       "weightPhone": {
-        "localBytes": 759603,
-        "cdnBytes": 53095
+        "localBytes": 760263,
+        "cdnBytes": 53103
       },
       "contrast": {
         "measured": 109,
@@ -151,7 +151,7 @@
     {
       "name": "desktop p95 frame <= 20 ms",
       "pass": true,
-      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 498 frames"
     },
     {
       "name": "desktop: no sideways scroll",
@@ -196,12 +196,12 @@
     {
       "name": "desktop page weight <= 1.5 MiB",
       "pass": true,
-      "detail": "local 0.72 MiB, CDN 0.05 MiB"
+      "detail": "local 0.73 MiB, CDN 0.05 MiB"
     },
     {
       "name": "phone p95 frame <= 40 ms",
       "pass": true,
-      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 498 frames"
     },
     {
       "name": "phone: no sideways scroll",
@@ -216,7 +216,7 @@
     {
       "name": "phone page weight <= 1.5 MiB",
       "pass": true,
-      "detail": "local 0.72 MiB, CDN 0.05 MiB"
+      "detail": "local 0.73 MiB, CDN 0.05 MiB"
     },
     {
       "name": "320 px wide: no sideways scroll",
@@ -267,6 +267,11 @@
       "name": "WebGL off: a still stands in for each WebGL canvas",
       "pass": true,
       "detail": "the page has no canvas[data-webgl]"
+    },
+    {
+      "name": "dev tuning panel is not in the shipped page",
+      "pass": true,
+      "detail": "no kit/tune.js, no tune block, no Tweakpane request"
     },
     {
       "name": "third-party requests only to cdn.jsdelivr.net",

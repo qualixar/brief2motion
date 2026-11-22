@@ -28,7 +28,7 @@ function start() {
     const seqEl = $('.seq'), seq = createSequence($('canvas', seqEl), { count: FRAMES, src: frameUrl, fit: 'cover' });
     const steps = $$('.seq-steps li');
     seq.first.then(() => seqEl.classList.add('seq-live')).catch(() => {});
-    const showStep = (p) => { const on = Math.min(2, Math.floor(p * 3)); steps.forEach((li, i) => { li.classList.toggle('is-on', i === on); li.style.setProperty('--o', motion ? (i === on ? 1 : 0.38) : 1); }); seqEl.style.setProperty('--p', p.toFixed(4)); };
+    const showStep = (p) => { const on = Math.min(2, Math.floor(p * 3)); steps.forEach((li, i) => { li.classList.toggle('is-on', i === on); li.style.setProperty('--o', motion ? (i === on ? 1 : 0.7) : 1); }); seqEl.style.setProperty('--p', p.toFixed(4)); };
 
     if (!motion) {
       seq.draw(1); seq.all.then(() => seq.draw(1));
@@ -46,13 +46,13 @@ function start() {
 
     // load: headline from behind a mask, then the tide line
     SplitText.create('h1', { type: 'lines', mask: 'lines', autoSplit: true, onSplit: (self) => gsap.from(self.lines, { yPercent: 110, duration: 1.2, stagger: 0.12, ease: 'power4.out', delay: 0.15 }) });
-    gsap.from('.hero-place, .hero-sub', { opacity: 0, y: 14, duration: 0.8, stagger: 0.15, delay: 0.7, ease: 'power2.out' });
+    const intro = gsap.from('.hero-place, .hero-sub', { opacity: 0, y: 14, duration: 0.8, stagger: 0.15, delay: 0.7, ease: 'power2.out' });
     gsap.from('.tideline path', { drawSVG: '0%', duration: 2.2, delay: 0.5, ease: 'power2.inOut' });
     gsap.to('.tideline', { xPercent: -4, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
 
     // 1. the paragraph reads itself
-    const read = SplitText.create('[data-read]', { type: 'words', wordsClass: 'w' });
-    gsap.fromTo(read.words, { '--w': 0.22 }, { '--w': 1, stagger: 0.5, ease: 'none', scrollTrigger: { trigger: '.read', start: 'top 72%', end: 'bottom 62%', scrub: true } });
+    const read = SplitText.create('[data-read]', { type: 'words', wordsClass: 'w', aria: 'none' });   // the default aria-label is not allowed on a paragraph: the words stay readable as they are
+    gsap.fromTo(read.words, { '--w': 0.38 }, { '--w': 1, stagger: 0.5, ease: 'none', scrollTrigger: { trigger: '.read', start: 'top 72%', end: 'bottom 62%', scrub: true } });
 
     // 2. pinned scene: progress 0..1 picks the picture
     showStep(0);
@@ -73,7 +73,7 @@ function start() {
       .from('.tide .curve', { drawSVG: '0%', duration: 2.4, ease: 'power1.inOut' })
       .from('.tide .marks circle', { scale: 0, autoAlpha: 0, duration: 0.6, stagger: { amount: 0.5 }, ease: 'power3.out' }, 0.5);
 
-    signal('ready');
+    intro.then(() => signal('ready'));   // "ready" is the resting page: the opening fade has finished
     return () => { gsap.ticker.remove(tick); lenis.destroy(); delete window.__lenis; seq.destroy(); seqEl.classList.remove('seq-live'); read.revert(); };
   });
 }

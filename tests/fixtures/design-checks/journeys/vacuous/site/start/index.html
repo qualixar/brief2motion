@@ -1,0 +1,5 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Journey fixture</title><style>body{font:1rem/1.5 system-ui;margin:24px}a,button,input{min-height:44px;font:inherit}</style></head><body><main><h1>Start a trial</h1>
+<form id="f"><label for="e">Work email</label> <input id="e" type="email" required> <button type="submit">Start trial</button></form>
+<p id="ok" role="status"></p>
+<script>document.getElementById('f').addEventListener('submit', function (e) { e.preventDefault(); document.getElementById('ok').textContent = 'Check your inbox'; });</script>
+</main></body></html>

@@ -15,7 +15,7 @@ Worked examples: `examples/tidewater/` (GSAP: pinned picture sequence, sideways 
 
 Choose step-triggered when the content has states, and scrubbed when it has a continuous quantity (a camera move, a picture sequence, a line growing).
 
-## Step-triggered (the scrollama idea, in ten lines)
+## Step-triggered, in ten lines
 
 ```js
 import { onScroll } from './kit/motion-core.js';

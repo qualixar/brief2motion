@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>A11y fixture (passes)</title>
+<style>
+  body { margin: 0; font: 1rem/1.55 system-ui, sans-serif; color: #1c2230; background: #faf7f0; }
+  main { max-width: 50ch; margin: 0 auto; padding: 24px 18px; }
+  a.btn { display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; background: #4b3fbf; color: #fff; text-decoration: none; font-weight: 600; }
+  input { min-height: 44px; width: 100%; box-sizing: border-box; font: inherit; }
+  :focus-visible { outline: 3px solid #1b4dff; outline-offset: 3px; }
+</style></head>
+<body>
+<header><a href="#main">Skip to content</a></header>
+<main id="main">
+  <h1>An accessible page</h1>
+  <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='20'%3E%3Crect width='40' height='20' fill='%234b3fbf'/%3E%3C/svg%3E" width="40" height="20" alt="A small violet rectangle">
+  <p>Every control has a name, the text is dark on a light page, and the form field has a visible label.</p>
+  <p><a class="btn" href="#form">Start the tour</a></p>
+  <form id="form" action="#"><label for="e">Work email</label><input id="e" type="email" autocomplete="email"><button type="submit">Send</button></form>
+</main>
+</body></html>

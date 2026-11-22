@@ -5,7 +5,7 @@
 //   echo "make my logo out of dust" | node route.mjs -
 // It is a keyword scorer over references/routing.json and references/styles.json, not a judge: it never sees the
 // product. Treat the answer as a first proposal, check it against the brief, and write the final choice and the
-// reason in SPEC.md. The brief's own words always win: if it names a library, a style or colours, use those.
+// reason in SPEC.md. Anything the brief states outright overrides it: a library, a style or colours it names are used as given.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -125,7 +125,7 @@ export function report(r) {
   return L.join('\n');
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.realpathSync(fileURLToPath(import.meta.url))) {
   const args = process.argv.slice(2), file = args.find((a) => !a.startsWith('--'));
   if (!file || args.includes('--help') || args.includes('-h')) { console.log('usage: node route.mjs <BRIEF.md | -> [--json]\n  Suggests a motion stack and a visual style for a brief, with reasons. "-" reads the brief from standard input.'); process.exit(args.includes('--help') || args.includes('-h') ? 0 : 2); }
   let brief;

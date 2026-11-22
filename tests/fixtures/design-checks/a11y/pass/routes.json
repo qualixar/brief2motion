@@ -1,0 +1,2 @@
+{ "site": { "name": "A11y fixture", "origin": "https://a11y.example" },
+  "routes": [ { "id": "home", "path": "/", "template": "landing", "title": "A11y fixture (passes)", "primaryAction": { "id": "go", "label": "Start the tour", "role": "link" }, "links": [] } ] }

@@ -1,7 +1,7 @@
 {
   "tool": "check_site",
   "site": "relay",
-  "when": "2026-11-17T19:22:03.248Z",
+  "when": "2026-11-22T06:55:50.240Z",
   "budgets": {
     "desktopP95": 20,
     "mobileP95": 40,
@@ -11,7 +11,7 @@
     "contrastLarge": 3
   },
   "perfMeasured": true,
-  "chrome": "157.0.8103.79",
+  "chrome": "158.0.8127.36",
   "pages": {
     "index.html": {
       "state": "ready",
@@ -107,8 +107,8 @@
         }
       ],
       "weightDesktop": {
-        "localBytes": 35608,
-        "cdnBytes": 63602
+        "localBytes": 36496,
+        "cdnBytes": 64119
       },
       "phone": {
         "samples": 499,
@@ -118,8 +118,8 @@
         "fps": 59.9
       },
       "weightPhone": {
-        "localBytes": 35608,
-        "cdnBytes": 63601
+        "localBytes": 36496,
+        "cdnBytes": 64119
       },
       "contrast": {
         "measured": 128,
@@ -272,6 +272,11 @@
       "name": "WebGL off: a still stands in for each WebGL canvas",
       "pass": true,
       "detail": "the page has no canvas[data-webgl]"
+    },
+    {
+      "name": "dev tuning panel is not in the shipped page",
+      "pass": true,
+      "detail": "no kit/tune.js, no tune block, no Tweakpane request"
     },
     {
       "name": "third-party requests only to cdn.jsdelivr.net",

@@ -1,0 +1,4 @@
+{ "site": { "name": "One-template wireframe fixture", "origin": "https://wf.example" },
+  "routes": [
+    { "id": "home", "path": "/", "template": "landing", "title": "One template, wireframe at index.html", "links": ["about"] },
+    { "id": "about", "path": "/about/", "template": "landing", "title": "About, same template", "links": [] } ] }

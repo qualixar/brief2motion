@@ -1,0 +1,7 @@
+{ "journeys": [
+  { "id": "live-run", "task": "T1", "start": "home", "integration": "live", "viewports": ["phone"],
+    "steps": [ { "click": { "role": "link", "name": "Start free trial" } } ], "expect": [ { "url": "/start/" } ] },
+  { "id": "no-such-start", "start": "ghost", "viewports": ["desktop"], "steps": [], "expect": [] },
+  { "id": "missing-button", "start": "home", "viewports": ["desktop"],
+    "steps": [ { "click": { "role": "button", "name": "Does not exist" } } ], "expect": [] }
+] }

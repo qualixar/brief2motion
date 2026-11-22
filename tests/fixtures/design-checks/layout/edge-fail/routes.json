@@ -1,0 +1,2 @@
+{ "site": { "name": "Layout edge failures", "origin": "https://edge.example" },
+  "routes": [ { "id": "home", "path": "/", "template": "landing", "title": "Layout edge failures", "links": [] } ] }

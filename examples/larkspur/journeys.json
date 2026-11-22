@@ -1,0 +1,28 @@
+{
+  "journeys": [
+    {
+      "id": "start-trial", "task": "T3", "start": "home", "integration": "fixture",
+      "steps": [
+        { "click": { "role": "link", "name": "Start free trial" } },
+        { "fill": { "label": "Work email" }, "value": "sam@example.test" },
+        { "click": { "role": "button", "name": "Start trial" } }
+      ],
+      "expect": [{ "url": "/start/" }, { "role": "status", "contains": "Thanks" }]
+    },
+    {
+      "id": "compare-plans", "task": "T2", "start": "home",
+      "steps": [
+        { "click": { "role": "link", "name": "See pricing" } },
+        { "click": { "role": "link", "name": "Start Studio trial" } }
+      ],
+      "expect": [{ "url": "/start/" }, { "role": "heading", "name": "Start your free trial" }]
+    },
+    {
+      "id": "recover-from-a-mistake", "task": "T3", "start": "start",
+      "steps": [
+        { "click": { "role": "button", "name": "Start trial" } }
+      ],
+      "expect": [{ "role": "alert", "contains": "Enter your work email" }]
+    }
+  ]
+}

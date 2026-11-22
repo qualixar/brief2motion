@@ -1,0 +1,5 @@
+{ "site": { "name": "Missing pages fixture", "origin": "https://missing.example" },
+  "routes": [
+    { "id": "home", "path": "/", "template": "landing", "title": "Missing pages fixture", "links": ["pricing", "notes"] },
+    { "id": "pricing", "path": "/pricing/", "template": "pricing", "title": "Pricing (never built)", "links": [] },
+    { "id": "notes", "path": "/notes.txt", "template": "notes", "title": "A text file, not a page", "links": [] } ] }

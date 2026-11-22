@@ -1,0 +1,2 @@
+{ "site": { "name": "Tricky but correct page", "origin": "https://tricky.example" },
+  "routes": [ { "id": "home", "path": "/", "template": "landing", "title": "Tricky but correct", "primaryAction": { "id": "go", "label": "Book a demo", "role": "link" }, "links": [] } ] }

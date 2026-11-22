@@ -1,0 +1,2 @@
+{ "site": { "name": "Layout fixture", "origin": "https://layout.example" },
+  "routes": [ { "id": "home", "path": "/", "template": "landing", "title": "Layout fixture (fails)", "primaryAction": { "id": "go", "label": "Start the tour", "role": "link" }, "links": [] } ] }

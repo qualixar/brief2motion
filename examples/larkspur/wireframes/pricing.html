@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wireframe: pricing</title>
+<style>
+  /* grey boxes: layout only, no brand styling */
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; font: 1rem/1.5 system-ui, sans-serif; color: #222; background: #fff; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 16px; }
+  .skip-link { position: absolute; left: 8px; top: -64px; padding: 12px; background: #222; color: #fff; } .skip-link:focus { top: 8px; }
+  header.bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid #999; }
+  nav a, .btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 2px solid #222; color: #222; text-decoration: none; }
+  nav { display: flex; gap: 8px; } a.brand { border: 0; padding: 0; font-weight: 700; }
+  h1 { font-size: 2rem; line-height: 1.15; margin: 24px 0 8px; } h2 { margin: 32px 0 8px; }
+  p { max-width: 50ch; margin: 0 0 12px; }
+  .art { background: #ddd; border: 1px dashed #888; min-height: 220px; display: grid; place-items: center; margin: 16px 0; }
+  .grid { display: grid; gap: 16px; } .box { background: #eee; border: 1px dashed #888; padding: 12px; }
+  table { border-collapse: collapse; width: 100%; } th, td { border: 1px solid #999; padding: 8px; text-align: left; }
+  label { display: block; margin-top: 16px; } input[type=email] { display: block; width: 100%; max-width: 360px; min-height: 44px; font: inherit; padding: 0 10px; }
+  fieldset { margin: 16px 0; border: 1px solid #999; } fieldset label { display: flex; gap: 8px; align-items: center; min-height: 44px; margin: 0; }
+  button { min-height: 44px; font: inherit; padding: 0 20px; border: 2px solid #222; background: #fff; }
+  @media (min-width: 800px) { .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; } .cols { grid-template-columns: repeat(3, 1fr); } .two { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="bar"><a class="brand" href="/">Larkspur</a><nav aria-label="Main"><a href="/pricing/">Pricing</a><a href="/start/">Try free</a></nav></header>
+  <main id="main">
+    <h1>Two plans, billed monthly</h1>
+    <p>Prices are in US dollars per person per month. Both plans start with a 14-day free trial that needs no card, and you can cancel at any time.</p>
+    <table>
+      <caption>Larkspur plans compared</caption>
+      <thead><tr><td></td><th scope="col">Team</th><th scope="col">Studio</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Price</th><td>US$12</td><td>US$24</td></tr>
+        <tr><th scope="row">Inboxes</th><td>Up to 5</td><td>Unlimited</td></tr>
+        <tr><th scope="row">History</th><td>30 days</td><td>Full history</td></tr>
+      </tbody>
+    </table>
+    <p><a class="btn" href="/start/">Start Team trial</a> <a class="btn" href="/start/">Start Studio trial</a></p>
+    <p>Larkspur is a made-up product: these prices are invented for the demonstration.</p>
+  </main>
+</div>
+</body>
+</html>

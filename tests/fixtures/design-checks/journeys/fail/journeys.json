@@ -1,0 +1,7 @@
+{ "journeys": [
+  { "id": "broken-submit", "task": "T1", "start": "home",
+    "steps": [ { "click": { "role": "link", "name": "Start free trial" } }, { "fill": { "label": "Work email" }, "value": "ada@example.test" }, { "click": { "role": "button", "name": "Start trial" } } ],
+    "expect": [ { "role": "status", "contains": "Check your inbox" } ] },
+  { "id": "missing-link", "task": "T1", "start": "home",
+    "steps": [ { "click": { "role": "link", "name": "Begin your free trial" } } ], "expect": [ { "url": "/start/" } ] }
+] }

@@ -7,8 +7,9 @@ import path from 'node:path';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { guessRange, snapshot, tuneRequested, tune, TWEAKPANE } from '../skills/brief2motion/kit/tune.js';
 import { stripTune, hasTune, findDevTools, stripSite } from '../skills/brief2motion/scripts/strip_tune.mjs';
+import { fileURLToPath } from 'node:url';
 
-const CLI = new URL('../skills/brief2motion/scripts/strip_tune.mjs', import.meta.url).pathname;
+const CLI = fileURLToPath(new URL('../skills/brief2motion/scripts/strip_tune.mjs', import.meta.url));
 const tmp = () => fs.mkdtempSync(path.join(os.tmpdir(), 'b2m-tune-'));
 const write = (dir, rel, text) => { fs.mkdirSync(path.dirname(path.join(dir, rel)), { recursive: true }); fs.writeFileSync(path.join(dir, rel), text); };
 const PAGE_JS = "import { signal } from './kit/motion-core.js';\nconst P = { duration: 0.7 };\n/* tune:start */\nif (new URLSearchParams(location.search).has('tune')) import('./kit/tune.js').then(({ tune }) => tune(P));\n/* tune:end */\nsignal('ready');\n";
@@ -53,6 +54,10 @@ test('stripTune removes JS and HTML blocks and nothing else', () => {
 test('hasTune sees a marker or a Tweakpane reference, not a plain word', () => {
   assert.equal(hasTune(PAGE_JS), true); assert.equal(hasTune('import "https://x/tweakpane.js"'), true);
   assert.equal(hasTune('const tune = 3'), false);
+  assert.equal(hasTune('<p>The tuning panel used Tweakpane (MIT), see <a href="https://tweakpane.github.io/docs/">its docs</a>.</p>'), false, 'naming it in a credits page is fine');
+  assert.equal(hasTune("import { Pane } from 'tweakpane';"), true);
+  assert.equal(hasTune('<script src="https://cdn.jsdelivr.net/npm/tweakpane@4.0.5/dist/tweakpane.min.js"></script>'), true);
+  assert.equal(hasTune("await import('/vendor/tweakpane-4.js')"), true);
 });
 
 test('findDevTools and stripSite clean a site folder and leave the rest alone', () => {

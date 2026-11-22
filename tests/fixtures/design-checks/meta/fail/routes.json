@@ -1,0 +1,8 @@
+{
+  "site": { "name": "Fixture Bakery", "origin": "https://bakery.example", "lang": "en" },
+  "routes": [
+    { "id": "home", "path": "/", "template": "landing", "title": "Fixture Bakery", "primaryAction": { "id": "order", "label": "Order a loaf" }, "links": ["contact", "thanks"] },
+    { "id": "contact", "path": "/contact/", "parent": "home", "template": "form", "title": "Order", "primaryAction": { "id": "send", "label": "Send order" }, "links": ["home"] },
+    { "id": "thanks", "path": "/thanks/", "parent": "contact", "template": "page", "title": "Thanks", "indexable": false, "links": ["home"] }
+  ]
+}

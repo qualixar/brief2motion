@@ -9,6 +9,7 @@
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { loadPlaywright, launchChrome, serveDir } from '../../skills/brief2motion/scripts/_common.mjs';
 
@@ -189,6 +190,17 @@ const tests = {
       return [noPane === 0 && asked.length === 0 && rows >= 3 && changes >= 1 && /duration 1\.5/.test(out) && errors.length === 0 && stillWorks && bErrors.length === 0 && warns.some((w) => /Tweakpane did not load/.test(w)),
         `normal load: panel ${noPane}, requests ${asked.length}; ?tune: ${rows} rows, ${changes} change(s), page says "${out}", errors ${errors.length}; blocked CDN: page works=${stillWorks}, warned=${warns.length > 0}`];
     } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+  },
+  // site mode: every checker, run from the command line on the larkspur example, agrees it passes; the sign-up stays PENDING
+  async 'site-mode'() {
+    const run = (script, args) => {
+      const r = spawnSync(process.execPath, [path.join(ROOT, 'skills', 'brief2motion', 'scripts', script), EX('larkspur'), '--out', fs.mkdtempSync(path.join(os.tmpdir(), 'b2m-sm-')), '--json', ...args], { encoding: 'utf8', timeout: 300000 });
+      let rs = []; try { rs = JSON.parse(r.stdout); } catch { /* tool failed before printing */ }
+      return { status: r.status, fail: rs.filter((x) => x.outcome === 'FAIL').length, pending: rs.filter((x) => x.outcome === 'PENDING').length, n: rs.length };
+    };
+    const got = { plan: run('check_plan.mjs', []), meta: run('check_meta.mjs', []), layout: run('check_layout.mjs', ['--widths', '390,1440']), a11y: run('check_a11y.mjs', []), journeys: run('check_journeys.mjs', []) };
+    const ok = Object.values(got).every((g) => g.status === 0 && g.fail === 0 && g.n > 0) && got.journeys.pending === 2;
+    return [ok, Object.entries(got).map(([k, g]) => `${k}: exit ${g.status}, ${g.n} records, ${g.fail} FAIL${g.pending ? `, ${g.pending} PENDING` : ''}`).join('; ')];
   },
   // the dust engine still reports its state the way every other page does
   async particles() {

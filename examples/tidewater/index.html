@@ -5,9 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tidewater Salt Works · sea salt made by the tide</title>
   <meta name="description" content="Tidewater Salt Works is a made-up sea salt maker, built as a brief2motion example of scroll storytelling with GSAP ScrollTrigger and Lenis: a pinned image sequence, a sideways gallery and text that reads itself as you scroll.">
+  <link rel="canonical" href="https://tidewater.example/">
   <meta property="og:title" content="Tidewater Salt Works · sea salt made by the tide">
   <meta property="og:description" content="A brief2motion example of scroll storytelling: pinned scenes, a scrubbed image sequence and a sideways gallery.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tidewater.example/">
+  <meta property="og:image" content="https://tidewater.example/og.jpg">
+  <meta property="og:image:alt" content="Tidewater Salt Works, a made-up salt maker: the headline Salt, made by the tide on a dark blue page with an orange wave line.">
   <meta name="theme-color" content="#16212c">
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="kit/kit.css">
@@ -65,7 +69,7 @@
     <section class="year" id="year" aria-labelledby="year-title">
       <div class="year-pin">
         <h2 id="year-title">A year on the marsh</h2>
-        <ul class="year-track">
+        <ul class="year-track" tabindex="0" aria-label="The year, month by month" data-allow-clip>
           <li><span class="num">Mar</span><h3>Mend the clay</h3><p>Winter storms crack the pan walls. We puddle new clay with our feet, the way it was done here before pumps.</p></li>
           <li><span class="num">May</span><h3>First flood</h3><p>The first spring tide with a warm week behind it. One pan only, to see how the brine behaves this year.</p></li>
           <li><span class="num">Jul</span><h3>The long days</h3><p>Every pan is working. A full harvest takes about a week from flood to rake when the wind is from the land.</p></li>

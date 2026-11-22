@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Layout fixture (fails)</title>
+<style>
+  body { margin: 0; font: 1rem/1.5 system-ui, sans-serif; color: #1c2230; background: #faf7f0; }
+  main { padding: 16px; }
+  .wide { width: 900px; height: 40px; background: #ddd; }                                  /* 1. sideways scroll */
+  .cut { width: 120px; overflow: hidden; white-space: nowrap; border: 1px solid #999; }    /* 2. clipped text */
+  .stack { position: relative; height: 90px; }                                              /* 3. overlap */
+  .stack p { position: absolute; margin: 0; left: 0; width: 280px; }
+  .stack p.a { top: 10px; } .stack p.b { top: 20px; }
+  .tiny { font-size: 10px; height: 16px; padding: 0 2px; }                                  /* 4. tap target */
+  .prose { max-width: none; }                                                               /* 5. line length */
+  .spacer { height: 1600px; }                                                               /* 6. focus hidden */
+  .bar { position: fixed; left: 0; right: 0; bottom: 0; height: 120px; background: #1c2230; color: #fff; padding: 12px; }
+</style></head>
+<body><main>
+  <h1>A page that falls apart</h1>
+  <div class="wide">a block wider than every phone</div>
+  <div class="cut">This sentence is far longer than its box and the box hides the rest of it</div>
+  <div class="stack"><p class="a">First line of a paragraph that sits under another one.</p><p class="b">Second paragraph placed ten pixels lower, so the two collide.</p></div>
+  <p><button class="tiny">Tiny</button></p>
+  <p class="prose">This paragraph has no maximum width at all, so on a wide screen every line runs far past the seventy-five characters a reader can comfortably follow, and the checker should ask a person to look at it. It keeps going for several more lines so there is something to measure: a measure is only judged on text that wraps onto at least three lines, and this one does at every width from tablet up, which is where the long lines show.</p>
+  <div class="spacer"></div>
+  <a href="#end" id="end">A link that sits just below the fold</a>
+  <div style="height:40px"></div>
+</main>
+<div class="bar">A fixed bar painted over the bottom of the screen</div>
+</body></html>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Tricky but correct</title>
+<style>
+  /* Five things a correct page does that a naive checker calls broken. Nothing here may FAIL. */
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font: 1rem/1.55 system-ui, sans-serif; color: #1c2230; background: #faf7f0; }
+  .wrap { max-width: 50ch; margin: 0 auto; padding: 24px 18px 64px; }
+  h1 { font-size: clamp(2rem, 6vw, 3rem); line-height: 1.1; margin: 0 0 16px; animation: rise 1.4s ease-out both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  .word { display: inline-block; }
+  /* 1. a screen-reader copy hidden with inline styles and no .sr-only class */
+  /* 2. an intended ellipsis */
+  .name { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 14ch; }
+  /* 3. a sideways scroller inside a parent that hides overflow */
+  .frame { overflow: hidden; margin: 24px 0; }
+  .rail { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; }
+  .card { flex: 0 0 220px; padding: 16px; background: #fff; border: 1px solid #d8d2c4; border-radius: 8px; }
+  a.btn { display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; background: #4b3fbf; color: #fff; border-radius: 8px; text-decoration: none; font-weight: 600; }
+  :focus-visible { outline: 3px solid #1b4dff; outline-offset: 3px; }
+  .spacer { height: 2400px; }
+</style></head>
+<body><main class="wrap">
+  <h1><span aria-hidden="true"><span class="word">Ship</span> <span class="word">on</span> <span class="word">Friday.</span></span><span style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Ship on Friday.</span></h1>
+  <p>Release notes for <span class="name">the-very-long-workspace-name-that-will-not-fit</span> are ready.</p>
+  <div class="frame"><div class="rail" tabindex="0" role="region" aria-label="Customer stories">
+    <div class="card">First story: the team moved its release to Friday.</div>
+    <div class="card">Second story: on-call pages fell by a third.</div>
+    <div class="card">Third story: reviews take one day, not four.</div>
+    <div class="card">Fourth story: the dashboard loads in one second.</div>
+    <div class="card">Fifth story: new hires ship in their first week.</div>
+  </div></div>
+  <div class="spacer"></div>
+  <!-- 5. focus lands far below the fold and the page scrolls there smoothly -->
+  <a class="btn" href="#go" id="go">Book a demo</a>
+</main></body></html>

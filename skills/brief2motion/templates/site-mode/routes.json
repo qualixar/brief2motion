@@ -1,0 +1,13 @@
+{
+  "site": { "name": "Tidepool Open Day", "origin": "https://tidepool.example", "lang": "en" },
+  "routes": [
+    {
+      "id": "home", "path": "/", "parent": null, "template": "landing",
+      "title": "Tidepool Open Day: a free family morning at the harbour",
+      "description": "A made-up free family event at the harbour hall: touch tanks, a rock-pool walk and a talk for children, on Saturday 5 June.",
+      "primaryAction": { "id": "reserve", "label": "Reserve free tickets", "role": "link" },
+      "actions": [{ "id": "programme", "label": "See the programme" }],
+      "states": [], "links": [], "indexable": true
+    }
+  ]
+}

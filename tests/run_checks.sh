@@ -15,9 +15,9 @@ step() { if "${@:2}" >/dev/null 2>&1; then ok "$1"; else bad "$1"; fi; }
 
 # 1. syntax
 for f in $S/scripts/*.sh tests/*.sh; do step "bash -n $f" bash -n "$f"; done
-for f in $S/scripts/*.mjs $S/kit/*.js $T/*.js $E/config.js tests/*.mjs tests/browser/*.mjs examples/*/*.js examples/*/tools/*.mjs; do step "node --check $f" node --check "$f"; done
+for f in $S/scripts/*.mjs $S/kit/*.js $T/*.js $E/config.js tests/*.mjs tests/browser/*.mjs examples/*/*.js examples/*/site/*.js examples/*/tools/*.mjs; do step "node --check $f" node --check "$f"; done
 for f in examples/*/tools/*.py; do step "python3 parses $f" python3 -I -c "import ast,sys; ast.parse(open('$f').read())"; done
-for t in check_site capture_site route strip_tune check_links; do step "$t --help exits 0" node $S/scripts/$t.mjs --help; done
+for t in check_site capture_site route strip_tune check_links build_tokens build_sitemap check_plan check_meta check_layout check_a11y check_journeys; do step "$t --help exits 0" node $S/scripts/$t.mjs --help; done
 step "python3 parses serve.py" python3 -I -c "import ast,sys; ast.parse(open('$S/scripts/serve.py').read())"
 step "check_motion --help exits 0" node $S/scripts/check_motion.mjs --help
 if [[ "$(uname -s)" == Darwin ]] && command -v swiftc >/dev/null 2>&1; then step "swiftc -parse cutout.swift" swiftc -parse $S/scripts/cutout.swift; fi
@@ -41,15 +41,31 @@ done
 # 3b. every example is complete: the unchanged kit, its brief, a passing report, and a page that reports its motion state
 for d in examples/*/; do
   n="$(basename "$d")"
-  if [[ -d "$d/kit" ]]; then diff -rq -x tune.js "$S/kit" "$d/kit" >/dev/null 2>&1 && ok "example $n carries the unchanged kit" || bad "example $n: kit/ differs from $S/kit"; fi
+  sd="$d"; [[ -f "$d/routes.json" && -d "$d/site" ]] && sd="$d/site"   # a site-mode project keeps the site in site/
+  if [[ -d "$sd/kit" ]]; then diff -rq -x tune.js "$S/kit" "$sd/kit" >/dev/null 2>&1 && ok "example $n carries the unchanged kit" || bad "example $n: kit/ differs from $S/kit"; fi
   [[ -s "$d/BRIEF.md" && -s "$d/README.md" ]] && ok "example $n has BRIEF.md and README.md" || bad "example $n is missing BRIEF.md or README.md"
   python3 -I -c "import json,sys; r=json.load(open('$d/site-report.json')); sys.exit(0 if r['pass'] is True and all(c['pass'] for c in r['checks']) and len(r['checks'])>=27 else 1)" 2>/dev/null && ok "example $n has a passing site-report.json" || bad "example $n: site-report.json is missing or not a pass"
-  grep -rqE "signal\(|dataset\.motion" "$d"*.js 2>/dev/null && ok "example $n reports its motion state" || bad "example $n never sets <html data-motion>"
+  grep -rqE "signal\(|dataset\.motion" "${sd%/}/"*.js 2>/dev/null && ok "example $n reports its motion state" || bad "example $n never sets <html data-motion>"
 done
+
+# 3d. site mode: the template project and the larkspur example pass the checks that need no browser, and their generated files are current
+for p in $S/templates/site-mode examples/larkspur; do
+  n="$(basename "$p")"
+  step "site mode $n: check_plan has no FAIL" node $S/scripts/check_plan.mjs "$p" --out "$(mktemp -d)"
+  step "site mode $n: SITEMAP.md is current" node $S/scripts/build_sitemap.mjs "$p" --check --no-xml
+  if [[ -f "$p/site/tokens.css" ]]; then step "site mode $n: site/tokens.css is current and every pair meets AA" node $S/scripts/build_tokens.mjs "$p/tokens.json" --check --out "$p/site/tokens.css"
+  else step "site mode $n: tokens build and every pair meets AA" node $S/scripts/build_tokens.mjs "$p/tokens.json" --out "$(mktemp -d)/tokens.css"; fi
+done
+step "site mode larkspur: sitemap.xml is current" node $S/scripts/build_sitemap.mjs examples/larkspur --check
+step "site mode larkspur: check_meta has no FAIL" node $S/scripts/check_meta.mjs examples/larkspur --out "$(mktemp -d)"
+python3 -I -c "import json,sys; q=json.load(open('examples/larkspur/qa.json')); n=q['summary']; sys.exit(0 if q['pass'] is True and n['FAIL']==0 and n['PASS']>100 else 1)" 2>/dev/null && ok "example larkspur has a passing qa.json" || bad "example larkspur: qa.json is missing or has a FAIL"
 
 # 3c. generated files are current, and the unit tests pass
 step "style pages and atlas are current (build_styles.mjs --check)" node $S/scripts/build_styles.mjs --check
-if node --test tests/*.test.mjs >/dev/null 2>&1; then ok "unit tests pass (node --test tests/*.test.mjs)"; else bad "unit tests fail: run node --test tests/*.test.mjs"; fi
+# the unit tests: a failure prints the failing tests and their errors; in CI a skipped test is a failure (tests/run_unit.sh)
+if [[ "${B2M_UNIT_TESTS_RAN:-0}" == 1 ]]; then echo "skip  unit tests (B2M_UNIT_TESTS_RAN=1: CI ran tests/run_unit.sh in the step before)"
+elif out="$(bash tests/run_unit.sh --quiet)"; then ok "$(echo "$out" | tail -1)"
+else bad "$(echo "$out" | tail -1)"; echo "$out" | head -170; fi
 for f in $S/references/stacks/*.md $S/references/*.md; do [[ -s "$f" ]] || bad "$f is empty"; done
 
 # 4. integrity hashes on the CDN scripts are right (network; skipped when offline)
@@ -73,7 +89,7 @@ else echo "skip  link check (network not reachable)"; fi
 
 # 5. nothing personal or secret ships (the pattern is split in pieces so this file does not match itself)
 PRIV="varunpra""tap|/Use""rs/|claude-50""1|@gm""ail|BEGIN [A-Z ]*PRIVATE KEY|sk-[A-Za-z0-9]{20,}"
-if hits="$(grep -rIn -E "$PRIV" . --exclude-dir=.git --exclude-dir=node_modules 2>/dev/null)"; [[ -n "$hits" ]]; then
+if hits="$(grep -rIn -E "$PRIV" . --exclude-dir=.git --exclude=.git --exclude-dir=node_modules 2>/dev/null)"; [[ -n "$hits" ]]; then
   bad "privacy scan found something:"; echo "$hits" | cut -c1-160
 else ok "privacy scan clean"; fi
 grep -q $'\xe2\x80\x94' README.md && bad "README.md contains an em dash" || ok "README.md has no em dash"

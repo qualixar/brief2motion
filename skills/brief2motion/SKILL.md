@@ -1,6 +1,6 @@
 ---
 name: brief2motion
-description: Turn a plain brief into a website with professional motion, measured in a real browser. Use when asked to build or animate a website, landing page, product launch page, portfolio, scroll story or data story; to add a hero animation, scroll animation, scrollytelling, parallax, page transitions, kinetic typography, micro-interactions, a 3D product viewer or turntable, particles or dust that form a product, logo, face or words, SVG or Lottie or Rive animation; to pick a visual style such as neubrutalism, glassmorphism, neumorphism, claymorphism, bento, Swiss or minimal; or to "make my site feel alive". Chooses the motion stack (plain CSS and JavaScript, GSAP with ScrollTrigger and Lenis, Motion for vanilla or React, three.js or React Three Fiber, the View Transitions API, SVG, Lottie, Rive) and the style from the brief and says why, builds the page, serves it at a localhost address, then checks frame rate, phone layout, reduced motion, keyboard focus, contrast, no-WebGL and no-JavaScript fallbacks, fixes what fails, and can hand the page to brief2mp4 to become a video.
+description: Turn a plain brief into a website with professional motion, measured in a real browser. Use to build or animate a website, landing page, portfolio, scroll or data story, or a whole site or page that must convert (site mode: discovery, content, routes, wireframes, tokens, design, then layout, accessibility, journey and meta checks); to add a hero or scroll animation, scrollytelling, parallax, page transitions, kinetic type, micro-interactions, a 3D product viewer, particles or dust that form a logo, face or words, SVG, Lottie or Rive; to pick a style such as neubrutalism, glassmorphism, neumorphism, claymorphism, bento, Swiss or minimal; or to "make my site feel alive". Picks the stack (CSS and JavaScript, GSAP with ScrollTrigger and Lenis, Motion, three.js or React Three Fiber, SVG, Lottie, Rive) and the style with reasons, builds and serves the page, checks frame rate, phone layout, reduced motion, focus, contrast and no-WebGL and no-JS fallbacks, fixes what fails, and can hand it to brief2mp4 for video.
 ---
 
 # brief2motion 1.0.0
@@ -29,9 +29,9 @@ Save the brief as `BRIEF.md`, word for word, then:
 node <this skill's folder>/scripts/route.mjs BRIEF.md
 ```
 
-It prints a stack, a style, the phrases in the brief that led there, and the reference files to read. It is a keyword scorer and has never seen the product, so treat it as a first proposal: read the brief again, agree or overrule, and write the choice and the reason in `SPEC.md`. The brief's own words always win. If it names a library, a style or colours, use those.
+It prints a stack, a style, the phrases in the brief that led there, and the reference files to read. It is a keyword scorer and has never seen the product, so treat it as a first proposal: read the brief again, agree or overrule, and write the choice and the reason in `SPEC.md`. Anything the brief states outright overrides the router: a library, a style or colours it names are used as given.
 
-It also prints **patterns**: recipe pages in `references/patterns/` that match the motion words in the brief (a hero sequence, a marquee, a pinned scene, a magnetic button, a page transition, a 3D product that turns as you scroll, and 21 more; the index is `references/patterns/README.md`). Each pattern says when to use it and when not to, the stack, a minimal sketch written for the kit, its performance and accessibility budget, its reduced-motion form and how the checkers verify it. `references/web-references.md` is the verified library of galleries, component libraries, platform docs and canonical demos to study before you build (study, never copy), and `references/motion-doctrine.md` holds the timing and easing rules every motion plan follows. A pattern is a starting sketch, not a template: rewrite it for the brief's words.
+It also prints **patterns**: recipe pages in `references/patterns/` that match the motion words in the brief (a hero sequence, a marquee, a pinned scene, a magnetic button, a page transition, a 3D product that turns as you scroll, and 21 more; the index is `references/patterns/README.md`). Each pattern says when to use it and when not to, the stack, a minimal sketch written for the kit, its performance and accessibility budget, its reduced-motion form and how the checkers verify it. `references/web-references.md` is the verified library of galleries, component libraries, platform docs and canonical demos to study before you build (study, never copy), and `references/motion-doctrine.md` holds the timing and easing rules every motion plan follows. A pattern is a starting sketch, not a template and not a tested page (the tests only check that its script parses and its kit imports exist): rewrite it for the brief's words, then the checkers test the page you built.
 
 The stacks, and when each is right:
 
@@ -59,8 +59,8 @@ Always read, whatever the stack: `references/design-fundamentals.md` (hierarchy,
 Copy `templates/SPEC.md` and fill it in:
 
 1. **Stack and style**, with one sentence each on why, from step 1.
-2. **Design plan**: four to six named colours with their contrast pairs checked, the typefaces and their roles, a one-line layout idea, and the one thing on the page that should be memorable. If any part reads like what you would produce for any similar page, change it.
-3. **Motion plan**: three lists. On load, on scroll, on input. Each item says what moves and why, which pattern page it comes from if any, and what it does with reduced motion. If you cannot say why, cut it. One orchestrated moment beats a fade on every section.
+2. **Design plan**: a small palette (each colour named, each text pair's contrast checked), which typeface does which job, the layout in one line, and the single element a visitor should remember. Then test each part against the brief: if it would fit a different product just as well, it is a default, so replace it with something this subject suggests.
+3. **Motion plan**: three lists. On load, on scroll, on input. Each item says what moves and why, which pattern page it comes from if any, and what it does with reduced motion. If you cannot say why, cut it. Put the effort into one planned entrance; the same fade repeated on every block is noise.
 4. **Copy**: every word on the page, exactly as the brief gives it. If the brief gives none, write plain copy from what it says and mark it as drafted. Never invent reviews, ratings, customer names, logos or numbers. Made-up examples say that they are made up.
 5. **Done when**: one checkable line per requirement, each naming the number or screenshot that will prove it.
 
@@ -139,6 +139,39 @@ node <this skill's folder>/scripts/capture_site.mjs site --out media            
 bash <this skill's folder>/scripts/to_video.sh site final.mp4 --seconds 12              # the dust engine's frame-exact capture
 ```
 
+## Site mode: a whole site, or a page that must convert
+
+Use it when the brief asks for a site with several pages, or for one page whose job is to get a visitor to do something (sign up, buy, book, register). It puts the work a studio does first in front of steps 1 to 6: design before motion. Every stage writes one short file that a person and an agent can both read; `templates/site-mode/` holds a filled-in copy of each (README there has the commands), and `examples/larkspur/` is a SaaS site built through all of it.
+
+| Stage | File | Checked by |
+|---|---|---|
+| 1. Discovery: visitors, their tasks, the owner's goal and how it is observed, constraints, open questions with the assumption taken | `DISCOVERY.md` | `check_plan.mjs` |
+| 2. Content: every word per route; each claim has an ID and a source, or is marked DRAFTED | `CONTENT.md` | `check_plan.mjs` |
+| 3. Routes: id, path, parent, template, title, description, primary action, states, links | `routes.json`, `SITEMAP.md` (`build_sitemap.mjs`) | `check_plan.mjs`, `check_meta.mjs` |
+| 4. Wireframes: phone-first grey boxes with real copy and a reachable primary action | `wireframes/<template>.html` (`index.html` when there is one template) | `check_layout.mjs --wireframes` (a missing file FAILs) |
+| 5. Tokens: primitives, light and dark roles, text pairs | `tokens.json` -> `site/tokens.css` (`build_tokens.mjs`) | the same script: references, cycles, AA contrast for every text pair declared in `tokens.json` (only declared pairs are measured, so declare every pair the design uses) |
+| 6. Visual design: one idea from the subject, type, grid, colour, imagery, a single signature element; then the router and `SPEC.md` as before | `DESIGN.md`, `ASSETS.json` | `check_plan.mjs` (rights records) |
+| 7. Motion: per movement its intent, trigger, states, interruption, reduced form, pattern page | `MOTION.md` | `check_site.mjs` |
+| 8. Build: semantic HTML first, motion on top, with steps 3 to 5 above | `site/` | everything |
+| 9. Checks and a second reader | `journeys.json`, `check/qa.json`, `REVIEW.md` | `check_layout`, `check_a11y`, `check_journeys`, `check_meta`, `check_site` |
+
+Rules: the brief's own facts are the only facts (no invented reviews, logos, customers or numbers: `check_plan` fails a drafted claim that looks like proof and sends a drafted figure to review); phone first; states (empty, loading, error, success) are declared in `routes.json` and each one is loaded by the checkers. Read `references/page-blueprints.md` for the page type, `references/design-review.md` for the second reader, and sections 10 to 15 of `design-fundamentals.md` for the numbers.
+
+The commands, from the project root (`S` is this skill's `scripts` folder; `templates/site-mode/README.md` says what each one reads):
+
+```bash
+node $S/build_sitemap.mjs . && node $S/build_tokens.mjs tokens.json --qa check
+node $S/check_plan.mjs .                  # stages 1 to 4; after the build also links and the dev panel
+node $S/check_layout.mjs . --wireframes   # stage 4
+node $S/check_layout.mjs . --themes light,dark && node $S/check_a11y.mjs . --themes light,dark
+node $S/check_journeys.mjs . && node $S/check_meta.mjs .
+node $S/check_site.mjs site --out check   # motion, fallbacks, weight: site mode does not replace it
+```
+
+Every checker writes records into `check/qa.json`: `PASS` (measured, within threshold), `FAIL` (blocks), `REVIEW` (a person must look) or `PENDING` (no evidence yet: a site not built, a sign-up that ends at a fixture, axe-core offline). Each run ends with `RESULT: PASS`, `FAIL` or `INCOMPLETE`. INCOMPLETE means nothing failed but some checks are PENDING, so it is not a pass: say so, and do not report that stage as checked. Exit 1 means a FAIL (or nothing was checked); exit 0 covers both PASS and INCOMPLETE, so read the RESULT line, or run with `--strict`, which also exits 1 on PENDING and REVIEW. qa.json carries the same `verdict`, `complete: false` while anything is PENDING, and marks records measured on an older build of `site/` as stale. `check_a11y.mjs` fetches axe-core 4.14.1 (MPL-2.0) from cdn.jsdelivr.net when it runs, verifies its hash and injects it into the checker's own page; the site never carries it. A green report does not replace the second reader or a screen-reader pass.
+
+Compress for a small brief: a one-page site keeps one short entry in each file and may skip stages 4 and 7 when the page has no template choice and no motion; a site with several page types writes one entry per route or template. Never skip 1 to 3 and 9: without them nothing says what the page is for or whether it worked.
+
 ## Licences in one paragraph
 
-This skill's code is MIT. Sites it builds load libraries from a CDN at pinned versions and bundle none of them: three.js, Lenis, Motion, React, lottie-web, the Rive runtime and htm are MIT or Apache-2.0; D3 is ISC; Tweakpane (the dev-only `?tune` panel, never shipped) is MIT; GSAP 3.15.1 is free under GSAP's own "no charge" licence, which allows commercial use and AI-written GSAP code but not use inside no-code animation builders that compete with Webflow. Pages use system fonts and send no request to a font service. `references/licences.md` has the detail and the notice to write into each project.
+This skill's code is MIT. Sites it builds load libraries from a CDN at pinned versions and bundle none of them: three.js, Lenis, Motion, React, lottie-web, the Rive runtime and htm are MIT or Apache-2.0; D3 is ISC; Tweakpane (the dev-only `?tune` panel, never shipped) is MIT; axe-core (fetched by `check_a11y.mjs` at check time, never part of a page) is MPL-2.0; GSAP 3.15.1 is free under GSAP's own "no charge" licence, which allows commercial use and AI-written GSAP code but not use inside no-code animation builders that compete with Webflow. Pages use system fonts and send no request to a font service. `references/licences.md` has the detail and the notice to write into each project.
