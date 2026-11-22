@@ -26,6 +26,27 @@ import { typicalLineLength } from './_measure.mjs';
 export const SIZES = { 320: 640, 390: 844, 768: 1024, 1440: 900 };
 const MIN_TAP = 24, PREFER_TAP = 44, MEASURE = { lo: 45, hi: 75 }, MAX_TABS = 20;
 
+// Focus can move the page: a smooth scroll (CSS scroll-behavior, or a script that scrolls on focus) carries the focused
+// element on screen over several frames, and on a busy machine it can start late or stall. So the focus check waits on
+// conditions, not on a fixed pause: while any scroll is running it waits for that scroll to end (scrollend), and while the
+// focused element is off screen it gives it up to a second to arrive. Only then is anything measured. At most 4 s a stop.
+const TRACK_SCROLL = () => {
+  if (window.__b2mScroll) return;
+  const s = window.__b2mScroll = { scrolling: false, tabAt: 0 };
+  document.addEventListener('scroll', () => { s.scrolling = true; }, { capture: true, passive: true });
+  document.addEventListener('scrollend', () => { s.scrolling = false; }, { capture: true, passive: true });
+};
+async function focusSettled(page) {
+  await page.waitForFunction(() => {
+    const s = window.__b2mScroll, el = document.activeElement;
+    if (s.scrolling) return false;
+    if (!el || el === document.body) return true;
+    const r = el.getBoundingClientRect(), on = r.bottom > 0 && r.top < innerHeight && r.right > 0 && r.left < innerWidth;
+    return on || performance.now() - s.tabAt > 1000;
+  }, null, { timeout: 4000, polling: 'raf' }).catch(() => {});
+  await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)))).catch(() => {});
+}
+
 export async function layoutOne(page, route, w) {
   const R = [];
   const mobile = w <= 390, at = { route: route.id, viewport: `${w}px`, input: mobile ? 'touch' : 'keyboard' };
@@ -60,17 +81,13 @@ export async function layoutOne(page, route, w) {
 
   const bad = [], partly = []; let stops = 0;
   await page.evaluate(() => { document.activeElement?.blur?.(); window.scrollTo({ top: 0, behavior: 'instant' }); });
+  await page.evaluate(TRACK_SCROLL);
   const seen = new Set();
   for (let i = 0; i < MAX_TABS; i++) {
+    await page.evaluate(() => { window.__b2mScroll.tabAt = performance.now(); });
     await page.keyboard.press('Tab');
-    let f = null;
-    for (let tries = 0, last = null, still = 0; tries < 60 && still < 2; tries++) {   // wait (up to 3 s) for the scroll Tab caused to stop
-      await page.waitForTimeout(50);
-      f = await page.evaluate(FOCUS_PROBE);
-      const key = f ? `${f.idx}:${await page.evaluate(() => scrollY)}` : null;
-      still = key === last ? still + 1 : 0;
-      last = key;
-    }
+    await focusSettled(page);
+    const f = await page.evaluate(FOCUS_PROBE);
     if (!f || seen.has(f.idx)) break;   // Tab left the page, or wrapped back to where it started
     seen.add(f.idx); stops++;
     if (!f.onScreen) bad.push(`${f.label} is off screen`);
