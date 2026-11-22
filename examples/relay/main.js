@@ -9,6 +9,9 @@ import { splitText } from './kit/split-text.js';
 
 const $ = (q, el = document) => el.querySelector(q);
 const $$ = (q, el = document) => [...el.querySelectorAll(q)];
+// splitText keeps the sentence for screen readers in a first, visually hidden span; name it with the page's own
+// .sr-only class so a layout check can tell that hidden copy from text that is cut off by mistake
+const markHidden = (el) => el.firstElementChild?.classList.add('sr-only');
 
 /* ---- content that does not need the library: the rota (works with motion off) ---- */
 const ROTA = [0, 0, 1, 1, 2, 2, 1];            // who is on call each night, Monday to Sunday
@@ -49,11 +52,11 @@ async function start() {
   // 1. hero: split into words; the <mark> words are tagged so the amber block can wipe in behind them
   const title = $('.hero-title');
   const markText = $('mark', title).textContent.trim().split(/\s+/);
-  const split = splitText(title, { by: 'words' });
+  const split = splitText(title, { by: 'words' }); markHidden(title);
   const first = split.words.findIndex((w, i) => markText.every((m, k) => split.words[i + k]?.textContent === m));
   const marked = first >= 0 ? split.words.slice(first, first + markText.length) : [];
   marked.forEach((w) => { w.classList.add('is-marked'); w.style.setProperty('--wipe', 0); });
-  animate(split.words, { opacity: [0, 1], y: ['0.55em', '0em'], rotate: [4, 0] }, { duration: 0.9, delay: stagger(0.055, { startDelay: 0.1 }), ease: [0.2, 0.8, 0.2, 1] });
+  const heroIn = animate(split.words, { opacity: [0, 1], y: ['0.55em', '0em'], rotate: [4, 0] }, { duration: 0.9, delay: stagger(0.055, { startDelay: 0.1 }), ease: [0.2, 0.8, 0.2, 1] });
   marked.forEach((w, i) => animate(w, { '--wipe': [0, 1] }, { duration: 0.5, delay: 0.95 + i * 0.12, ease: [0.7, 0, 0.2, 1] }));
   animate('.hero-sub, .hero-actions', { opacity: [0, 1], y: [16, 0] }, { duration: 0.7, delay: stagger(0.12, { startDelay: 0.9 }) });
 
@@ -73,7 +76,7 @@ async function start() {
 
   // 4. section headings set word by word, once, when first seen
   for (const h of $$('h2[data-split]')) {
-    const s = splitText(h, { by: 'words' });
+    const s = splitText(h, { by: 'words' }); markHidden(h);
     s.words.forEach((w) => { w.style.opacity = 0; });
     kitInView(h, () => animate(s.words, { opacity: [0, 1], y: ['0.5em', '0em'] }, { duration: 0.8, delay: stagger(0.06), ease: [0.2, 0.8, 0.2, 1] }), { amount: 0.5 });
   }
@@ -94,6 +97,7 @@ async function start() {
   bar.setAttribute('aria-hidden', 'true'); $('.nav').append(bar);
   scroll(animate(bar, { scaleX: [0, 1] }, { ease: 'linear' }));
 
+  await heroIn.finished.catch(() => {});   // "ready" means the headline has settled, so a check reads the resting page, not a fade
   signal('ready');
 }
 start();

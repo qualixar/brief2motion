@@ -67,21 +67,21 @@
         <li class="step">
           <h3>An alert arrives</h3>
           <p>Your monitoring tool posts to Relay. Relay looks at the rota and picks the one person who is on call at that minute.</p>
-          <pre class="log" data-log aria-label="Example log"><code>03:07:12  alert   checkout-api latency above 2 s
+          <pre class="log" data-log role="group" aria-label="Example log"><code>03:07:12  alert   checkout-api latency above 2 s
 03:07:12  rota    on call: Tomás (until 08:00)
 03:07:13  page    Tomás · push + phone call</code></pre>
         </li>
         <li class="step">
           <h3>They acknowledge, or it moves on</h3>
           <p>One tap says "I have it" and the page stops. If five minutes pass with no tap, Relay pages the next name and tells the first one it did.</p>
-          <pre class="log" data-log aria-label="Example log"><code>03:07:41  ack     Tomás · "looking"
+          <pre class="log" data-log role="group" aria-label="Example log"><code>03:07:41  ack     Tomás · "looking"
 03:07:41  hold    escalation timer stopped
 03:07:42  notify  #incidents · Tomás has it</code></pre>
         </li>
         <li class="step">
           <h3>They resolve it, and the note stays</h3>
           <p>When the alert clears, Relay closes the page and files what happened, with times, so the morning handover is a link and not a memory.</p>
-          <pre class="log" data-log aria-label="Example log"><code>03:31:05  clear   checkout-api latency normal
+          <pre class="log" data-log role="group" aria-label="Example log"><code>03:31:05  clear   checkout-api latency normal
 03:31:06  resolve Tomás · "bad deploy, rolled back"
 03:31:06  file    handover note saved</code></pre>
         </li>
