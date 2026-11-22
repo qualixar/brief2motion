@@ -1,7 +1,7 @@
 {
   "tool": "check_site",
   "site": "mise",
-  "when": "2026-11-22T07:00:22.760Z",
+  "when": "2026-11-22T09:50:55.038Z",
   "budgets": {
     "desktopP95": 20,
     "mobileP95": 40,
@@ -108,7 +108,7 @@
       ],
       "weightDesktop": {
         "localBytes": 30751,
-        "cdnBytes": 147624
+        "cdnBytes": 147621
       },
       "phone": {
         "samples": 499,
@@ -119,7 +119,7 @@
       },
       "weightPhone": {
         "localBytes": 30751,
-        "cdnBytes": 147617
+        "cdnBytes": 147598
       },
       "contrast": {
         "measured": 165,

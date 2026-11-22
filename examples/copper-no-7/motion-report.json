@@ -1,6 +1,6 @@
 {
   "site": "copper-no-7",
-  "when": "2026-11-22T06:53:46.869Z",
+  "when": "2026-11-22T09:44:18.481Z",
   "budgets": {
     "desktopP95": 20,
     "mobileP95": 40,
@@ -40,7 +40,7 @@
       "consoleErrors": [],
       "weight": {
         "localBytes": 370550,
-        "cdnBytes": 371671,
+        "cdnBytes": 371667,
         "localFiles": [
           [
             "/",
@@ -118,19 +118,19 @@
         "cdnFiles": [
           [
             "https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js",
-            4979
-          ],
-          [
-            "https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js",
-            16718
-          ],
-          [
-            "https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js",
-            25963
+            5329
           ],
           [
             "https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/MotionPathPlugin.min.js",
             8896
+          ],
+          [
+            "https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js",
+            16376
+          ],
+          [
+            "https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js",
+            25963
           ],
           [
             "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js",
@@ -138,7 +138,7 @@
           ],
           [
             "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.core.js",
-            211687
+            211675
           ]
         ]
       }
@@ -150,7 +150,7 @@
       "lenis": true,
       "framesBeforeScroll": 151,
       "scrollable": 10822,
-      "rafSamples": 318,
+      "rafSamples": 319,
       "fps": 59.9,
       "medianMs": 16.7,
       "p95Ms": 16.7,
@@ -173,7 +173,7 @@
       "consoleErrors": [],
       "weight": {
         "localBytes": 452956,
-        "cdnBytes": 371658,
+        "cdnBytes": 371670,
         "localFiles": [
           [
             "/style.css",
@@ -196,12 +196,16 @@
             1970
           ],
           [
+            "/flight.js",
+            2225
+          ],
+          [
             "/page.js",
             9595
           ],
           [
-            "/flight.js",
-            2225
+            "/assemble.js",
+            24759
           ],
           [
             "/assets/notes-1-1200.webp",
@@ -210,10 +214,6 @@
           [
             "/assets/notes-2-1200.webp",
             52257
-          ],
-          [
-            "/assemble.js",
-            24759
           ],
           [
             "/assets/product.jpg",
@@ -250,20 +250,20 @@
         ],
         "cdnFiles": [
           [
+            "https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js",
+            5330
+          ],
+          [
+            "https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js",
+            25970
+          ],
+          [
             "https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/MotionPathPlugin.min.js",
             8896
           ],
           [
-            "https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js",
-            4979
-          ],
-          [
             "https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js",
-            16717
-          ],
-          [
-            "https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js",
-            25963
+            16369
           ],
           [
             "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js",
@@ -271,7 +271,7 @@
           ],
           [
             "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.core.js",
-            211675
+            211677
           ]
         ]
       }
@@ -279,8 +279,8 @@
     "reduced": {
       "mode": "reduced-motion",
       "p": 1,
-      "canvasInk": 154284,
-      "canvasInkAfterResize": 118968,
+      "canvasInk": 154303,
+      "canvasInkAfterResize": 118959,
       "headline": {
         "found": true,
         "opacity": 1,
@@ -318,12 +318,12 @@
     {
       "name": "reduced motion: finished shape on the canvas",
       "pass": true,
-      "detail": "mode=reduced-motion, uProgress=1, canvas ink px=154284"
+      "detail": "mode=reduced-motion, uProgress=1, canvas ink px=154303"
     },
     {
       "name": "reduced motion: shape survives a resize",
       "pass": true,
-      "detail": "canvas ink px after resize=118968"
+      "detail": "canvas ink px after resize=118959"
     },
     {
       "name": "reduced motion: headline readable",

@@ -1,7 +1,7 @@
 {
   "tool": "check_site",
   "site": "site",
-  "when": "2026-11-22T07:02:33.249Z",
+  "when": "2026-11-22T09:53:05.503Z",
   "budgets": {
     "desktopP95": 20,
     "mobileP95": 40,
@@ -76,7 +76,7 @@
           "onScreen": true
         },
         {
-          "what": "a \"Compare the plans\"",
+          "what": "a.link-alone \"Compare the plans\"",
           "ring": true,
           "onScreen": true
         },
@@ -107,18 +107,18 @@
         }
       ],
       "weightDesktop": {
-        "localBytes": 32339,
+        "localBytes": 32554,
         "cdnBytes": 0
       },
       "phone": {
         "samples": 499,
         "medianMs": 16.7,
-        "p95Ms": 16.7,
+        "p95Ms": 16.8,
         "maxMs": 16.8,
         "fps": 59.9
       },
       "weightPhone": {
-        "localBytes": 32339,
+        "localBytes": 32554,
         "cdnBytes": 0
       },
       "contrast": {
@@ -220,7 +220,7 @@
         }
       ],
       "weightDesktop": {
-        "localBytes": 28829,
+        "localBytes": 29025,
         "cdnBytes": 0
       },
       "phone": {
@@ -231,7 +231,7 @@
         "fps": 59.9
       },
       "weightPhone": {
-        "localBytes": 28829,
+        "localBytes": 29025,
         "cdnBytes": 0
       },
       "contrast": {
@@ -328,7 +328,7 @@
         }
       ],
       "weightDesktop": {
-        "localBytes": 28648,
+        "localBytes": 28844,
         "cdnBytes": 0
       },
       "phone": {
@@ -339,7 +339,7 @@
         "fps": 59.9
       },
       "weightPhone": {
-        "localBytes": 28648,
+        "localBytes": 28844,
         "cdnBytes": 0
       },
       "contrast": {
@@ -431,7 +431,7 @@
     {
       "name": "[index.html] phone p95 frame <= 40 ms",
       "pass": true,
-      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
     },
     {
       "name": "[index.html] phone: no sideways scroll",

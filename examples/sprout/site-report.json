@@ -1,7 +1,7 @@
 {
   "tool": "check_site",
   "site": "sprout",
-  "when": "2026-11-22T07:01:02.283Z",
+  "when": "2026-11-22T09:51:34.421Z",
   "budgets": {
     "desktopP95": 20,
     "mobileP95": 40,
@@ -18,7 +18,7 @@
       "desktop": {
         "samples": 499,
         "medianMs": 16.7,
-        "p95Ms": 16.8,
+        "p95Ms": 16.7,
         "maxMs": 16.8,
         "fps": 59.9
       },
@@ -103,18 +103,18 @@
       ],
       "weightDesktop": {
         "localBytes": 40214,
-        "cdnBytes": 60540
+        "cdnBytes": 60200
       },
       "phone": {
         "samples": 499,
         "medianMs": 16.7,
-        "p95Ms": 16.8,
+        "p95Ms": 16.7,
         "maxMs": 16.8,
         "fps": 59.9
       },
       "weightPhone": {
         "localBytes": 40214,
-        "cdnBytes": 60539
+        "cdnBytes": 60200
       },
       "contrast": {
         "measured": 84,
@@ -151,7 +151,7 @@
     {
       "name": "desktop p95 frame <= 20 ms",
       "pass": true,
-      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
     },
     {
       "name": "desktop: no sideways scroll",
@@ -201,7 +201,7 @@
     {
       "name": "phone p95 frame <= 40 ms",
       "pass": true,
-      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
     },
     {
       "name": "phone: no sideways scroll",

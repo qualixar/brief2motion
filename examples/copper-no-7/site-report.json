@@ -1,7 +1,7 @@
 {
   "tool": "check_site",
   "site": "copper-no-7",
-  "when": "2026-11-22T06:53:03.357Z",
+  "when": "2026-11-22T09:43:35.039Z",
   "budgets": {
     "desktopP95": 20,
     "mobileP95": 40,
@@ -18,8 +18,8 @@
       "desktop": {
         "samples": 498,
         "medianMs": 16.7,
-        "p95Ms": 16.8,
-        "maxMs": 33.4,
+        "p95Ms": 16.7,
+        "maxMs": 16.8,
         "fps": 59.9
       },
       "shots": [
@@ -103,18 +103,18 @@
       ],
       "weightDesktop": {
         "localBytes": 370550,
-        "cdnBytes": 373448
+        "cdnBytes": 371669
       },
       "phone": {
-        "samples": 499,
+        "samples": 498,
         "medianMs": 16.7,
-        "p95Ms": 16.8,
+        "p95Ms": 16.7,
         "maxMs": 16.8,
         "fps": 59.9
       },
       "weightPhone": {
         "localBytes": 452956,
-        "cdnBytes": 373461
+        "cdnBytes": 371670
       },
       "contrast": {
         "measured": 29,
@@ -151,7 +151,7 @@
     {
       "name": "desktop p95 frame <= 20 ms",
       "pass": true,
-      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=33.4 ms, 498 frames"
+      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 498 frames"
     },
     {
       "name": "desktop: no sideways scroll",
@@ -196,12 +196,12 @@
     {
       "name": "desktop page weight <= 1.5 MiB",
       "pass": true,
-      "detail": "local 0.35 MiB, CDN 0.36 MiB"
+      "detail": "local 0.35 MiB, CDN 0.35 MiB"
     },
     {
       "name": "phone p95 frame <= 40 ms",
       "pass": true,
-      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 498 frames"
     },
     {
       "name": "phone: no sideways scroll",
@@ -216,7 +216,7 @@
     {
       "name": "phone page weight <= 1.5 MiB",
       "pass": true,
-      "detail": "local 0.43 MiB, CDN 0.36 MiB"
+      "detail": "local 0.43 MiB, CDN 0.35 MiB"
     },
     {
       "name": "320 px wide: no sideways scroll",
