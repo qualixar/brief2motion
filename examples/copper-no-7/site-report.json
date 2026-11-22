@@ -1,7 +1,7 @@
 {
   "tool": "check_site",
   "site": "copper-no-7",
-  "when": "2026-11-17T19:19:22.793Z",
+  "when": "2026-11-22T06:53:03.357Z",
   "budgets": {
     "desktopP95": 20,
     "mobileP95": 40,
@@ -11,7 +11,7 @@
     "contrastLarge": 3
   },
   "perfMeasured": true,
-  "chrome": "157.0.8103.79",
+  "chrome": "158.0.8127.36",
   "pages": {
     "index.html": {
       "state": "ready",
@@ -19,7 +19,7 @@
         "samples": 498,
         "medianMs": 16.7,
         "p95Ms": 16.8,
-        "maxMs": 16.8,
+        "maxMs": 33.4,
         "fps": 59.9
       },
       "shots": [
@@ -102,19 +102,19 @@
         }
       ],
       "weightDesktop": {
-        "localBytes": 370228,
-        "cdnBytes": 371652
+        "localBytes": 370550,
+        "cdnBytes": 373448
       },
       "phone": {
         "samples": 499,
         "medianMs": 16.7,
-        "p95Ms": 16.7,
+        "p95Ms": 16.8,
         "maxMs": 16.8,
         "fps": 59.9
       },
       "weightPhone": {
-        "localBytes": 452634,
-        "cdnBytes": 371691
+        "localBytes": 452956,
+        "cdnBytes": 373461
       },
       "contrast": {
         "measured": 29,
@@ -151,7 +151,7 @@
     {
       "name": "desktop p95 frame <= 20 ms",
       "pass": true,
-      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 498 frames"
+      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=33.4 ms, 498 frames"
     },
     {
       "name": "desktop: no sideways scroll",
@@ -196,12 +196,12 @@
     {
       "name": "desktop page weight <= 1.5 MiB",
       "pass": true,
-      "detail": "local 0.35 MiB, CDN 0.35 MiB"
+      "detail": "local 0.35 MiB, CDN 0.36 MiB"
     },
     {
       "name": "phone p95 frame <= 40 ms",
       "pass": true,
-      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
     },
     {
       "name": "phone: no sideways scroll",
@@ -216,7 +216,7 @@
     {
       "name": "phone page weight <= 1.5 MiB",
       "pass": true,
-      "detail": "local 0.43 MiB, CDN 0.35 MiB"
+      "detail": "local 0.43 MiB, CDN 0.36 MiB"
     },
     {
       "name": "320 px wide: no sideways scroll",
@@ -267,6 +267,11 @@
       "name": "WebGL off: a still stands in for each WebGL canvas",
       "pass": true,
       "detail": "1 WebGL canvas, 1 visible [data-fallback]"
+    },
+    {
+      "name": "dev tuning panel is not in the shipped page",
+      "pass": true,
+      "detail": "no kit/tune.js, no tune block, no Tweakpane request"
     },
     {
       "name": "third-party requests only to cdn.jsdelivr.net",

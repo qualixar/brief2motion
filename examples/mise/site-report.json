@@ -1,7 +1,7 @@
 {
   "tool": "check_site",
   "site": "mise",
-  "when": "2026-11-17T19:23:45.582Z",
+  "when": "2026-11-22T07:00:22.760Z",
   "budgets": {
     "desktopP95": 20,
     "mobileP95": 40,
@@ -11,14 +11,14 @@
     "contrastLarge": 3
   },
   "perfMeasured": true,
-  "chrome": "157.0.8103.79",
+  "chrome": "158.0.8127.36",
   "pages": {
     "index.html": {
       "state": "ready",
       "desktop": {
         "samples": 499,
         "medianMs": 16.7,
-        "p95Ms": 16.8,
+        "p95Ms": 16.7,
         "maxMs": 16.8,
         "fps": 59.9
       },
@@ -107,8 +107,8 @@
         }
       ],
       "weightDesktop": {
-        "localBytes": 30459,
-        "cdnBytes": 144715
+        "localBytes": 30751,
+        "cdnBytes": 147624
       },
       "phone": {
         "samples": 499,
@@ -118,8 +118,8 @@
         "fps": 59.9
       },
       "weightPhone": {
-        "localBytes": 30459,
-        "cdnBytes": 144720
+        "localBytes": 30751,
+        "cdnBytes": 147617
       },
       "contrast": {
         "measured": 165,
@@ -156,7 +156,7 @@
     {
       "name": "desktop p95 frame <= 20 ms",
       "pass": true,
-      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
+      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
     },
     {
       "name": "desktop: no sideways scroll",
@@ -272,6 +272,11 @@
       "name": "WebGL off: a still stands in for each WebGL canvas",
       "pass": true,
       "detail": "the page has no canvas[data-webgl]"
+    },
+    {
+      "name": "dev tuning panel is not in the shipped page",
+      "pass": true,
+      "detail": "no kit/tune.js, no tune block, no Tweakpane request"
     },
     {
       "name": "third-party requests only to cdn.jsdelivr.net",

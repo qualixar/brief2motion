@@ -1,6 +1,6 @@
 {
   "site": "copper-no-7",
-  "when": "2026-11-17T19:20:05.968Z",
+  "when": "2026-11-22T06:53:46.869Z",
   "budgets": {
     "desktopP95": 20,
     "mobileP95": 40,
@@ -8,7 +8,7 @@
     "consoleErrors": 0,
     "mobileKeepShare": 0.6
   },
-  "chrome": "157.0.8103.79",
+  "chrome": "158.0.8127.36",
   "runs": {
     "desktop": {
       "name": "desktop",
@@ -20,7 +20,7 @@
       "rafSamples": 318,
       "fps": 59.9,
       "medianMs": 16.7,
-      "p95Ms": 16.7,
+      "p95Ms": 16.8,
       "maxMs": 16.8,
       "drawn": 60000,
       "minDrawn": 60000,
@@ -39,12 +39,12 @@
       ],
       "consoleErrors": [],
       "weight": {
-        "localBytes": 370228,
-        "cdnBytes": 371649,
+        "localBytes": 370550,
+        "cdnBytes": 371671,
         "localFiles": [
           [
             "/",
-            2442
+            2764
           ],
           [
             "/style.css",
@@ -63,12 +63,12 @@
             1970
           ],
           [
-            "/flight.js",
-            2225
-          ],
-          [
             "/page.js",
             9595
+          ],
+          [
+            "/flight.js",
+            2225
           ],
           [
             "/assemble.js",
@@ -118,27 +118,27 @@
         "cdnFiles": [
           [
             "https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js",
-            5328
+            4979
+          ],
+          [
+            "https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js",
+            16718
           ],
           [
             "https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js",
-            25969
+            25963
           ],
           [
             "https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/MotionPathPlugin.min.js",
             8896
           ],
           [
-            "https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js",
-            16354
-          ],
-          [
             "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js",
-            103427
+            103428
           ],
           [
             "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.core.js",
-            211675
+            211687
           ]
         ]
       }
@@ -172,8 +172,8 @@
       ],
       "consoleErrors": [],
       "weight": {
-        "localBytes": 452634,
-        "cdnBytes": 371659,
+        "localBytes": 452956,
+        "cdnBytes": 371658,
         "localFiles": [
           [
             "/style.css",
@@ -181,7 +181,7 @@
           ],
           [
             "/",
-            2442
+            2764
           ],
           [
             "/main.js",
@@ -204,16 +204,16 @@
             2225
           ],
           [
-            "/assemble.js",
-            24759
-          ],
-          [
             "/assets/notes-1-1200.webp",
             42285
           ],
           [
             "/assets/notes-2-1200.webp",
             52257
+          ],
+          [
+            "/assemble.js",
+            24759
           ],
           [
             "/assets/product.jpg",
@@ -251,27 +251,27 @@
         "cdnFiles": [
           [
             "https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/MotionPathPlugin.min.js",
-            8895
+            8896
           ],
           [
             "https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js",
-            4978
-          ],
-          [
-            "https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js",
-            25957
+            4979
           ],
           [
             "https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js",
             16717
           ],
           [
+            "https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js",
+            25963
+          ],
+          [
             "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js",
-            103427
+            103428
           ],
           [
             "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.core.js",
-            211685
+            211675
           ]
         ]
       }
@@ -279,8 +279,8 @@
     "reduced": {
       "mode": "reduced-motion",
       "p": 1,
-      "canvasInk": 154320,
-      "canvasInkAfterResize": 119035,
+      "canvasInk": 154284,
+      "canvasInkAfterResize": 118968,
       "headline": {
         "found": true,
         "opacity": 1,
@@ -318,12 +318,12 @@
     {
       "name": "reduced motion: finished shape on the canvas",
       "pass": true,
-      "detail": "mode=reduced-motion, uProgress=1, canvas ink px=154320"
+      "detail": "mode=reduced-motion, uProgress=1, canvas ink px=154284"
     },
     {
       "name": "reduced motion: shape survives a resize",
       "pass": true,
-      "detail": "canvas ink px after resize=119035"
+      "detail": "canvas ink px after resize=118968"
     },
     {
       "name": "reduced motion: headline readable",
@@ -353,7 +353,7 @@
     {
       "name": "desktop p95 frame <= 20 ms",
       "pass": true,
-      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms"
+      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=16.8 ms"
     },
     {
       "name": "mobile mode is webgl2",

@@ -1,7 +1,7 @@
 {
   "tool": "check_site",
   "site": "style-atlas",
-  "when": "2026-11-17T19:25:04.892Z",
+  "when": "2026-11-22T07:01:42.245Z",
   "budgets": {
     "desktopP95": 20,
     "mobileP95": 40,
@@ -11,7 +11,7 @@
     "contrastLarge": 3
   },
   "perfMeasured": true,
-  "chrome": "157.0.8103.79",
+  "chrome": "158.0.8127.36",
   "pages": {
     "index.html": {
       "state": "ready",
@@ -107,18 +107,18 @@
         }
       ],
       "weightDesktop": {
-        "localBytes": 126703,
+        "localBytes": 127022,
         "cdnBytes": 0
       },
       "phone": {
-        "samples": 497,
+        "samples": 499,
         "medianMs": 16.7,
-        "p95Ms": 16.8,
-        "maxMs": 50,
+        "p95Ms": 16.7,
+        "maxMs": 16.8,
         "fps": 59.9
       },
       "weightPhone": {
-        "localBytes": 126703,
+        "localBytes": 127022,
         "cdnBytes": 0
       },
       "contrast": {
@@ -204,7 +204,7 @@
     {
       "name": "phone p95 frame <= 40 ms",
       "pass": true,
-      "detail": "p95=16.8 ms, median=16.7 ms (59.9 fps), max=50 ms, 497 frames"
+      "detail": "p95=16.7 ms, median=16.7 ms (59.9 fps), max=16.8 ms, 499 frames"
     },
     {
       "name": "phone: no sideways scroll",
@@ -270,6 +270,11 @@
       "name": "WebGL off: a still stands in for each WebGL canvas",
       "pass": true,
       "detail": "the page has no canvas[data-webgl]"
+    },
+    {
+      "name": "dev tuning panel is not in the shipped page",
+      "pass": true,
+      "detail": "no kit/tune.js, no tune block, no Tweakpane request"
     },
     {
       "name": "third-party requests only to cdn.jsdelivr.net",
