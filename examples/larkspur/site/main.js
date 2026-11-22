@@ -34,7 +34,7 @@ function setupForm(form) {
     const problem = !v ? 'Enter your work email.' : !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v) ? 'Enter an email address with an @ in it, like name@company.test.' : '';
     if (problem) {
       const h = document.createElement('h2'); h.textContent = 'There is a problem';
-      const a = document.createElement('a'); a.href = '#email'; a.textContent = problem;
+      const a = document.createElement('a'); a.href = '#email'; a.className = 'link-alone'; a.textContent = problem;
       const li = document.createElement('li'); li.append(a);
       const ul = document.createElement('ul'); ul.append(li);
       summary.append(h, ul); summary.hidden = false;
@@ -49,7 +49,7 @@ function setupForm(form) {
     form.hidden = true;
     const h = document.createElement('h2'); h.textContent = 'Thanks';
     const p = document.createElement('p'); p.textContent = 'That is the end of the demo: no email was sent and nothing was stored.';
-    const back = document.createElement('p'), link = document.createElement('a'); link.href = '/'; link.textContent = 'Back to Larkspur'; back.append(link);
+    const back = document.createElement('p'), link = document.createElement('a'); link.href = '/'; link.className = 'link-alone'; link.textContent = 'Back to Larkspur'; back.append(link);
     result.append(h, p, back); result.focus();
   });
 }
