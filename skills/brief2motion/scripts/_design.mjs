@@ -60,9 +60,11 @@ export function writeQa(outDir, checker, results, env = {}, { site = null } = {}
   let doc = { tool: 'brief2motion site mode', results: [] };
   try { doc = JSON.parse(fs.readFileSync(file, 'utf8')); } catch { /* first run */ }
   const when = new Date().toISOString(), siteHash = site ? folderHash(site) : null;
+  // the folder is recorded relative to qa.json (never an absolute path, which would name the machine and its user)
+  const siteRel = site ? path.relative(path.resolve(outDir), path.resolve(site)).split(path.sep).join('/') || '.' : null;
   const kept = (doc.results || []).filter((r) => r.checker !== checker)
-    .map(({ stale, ...r }) => (siteHash && r.siteHash && r.site === path.resolve(site) && r.siteHash !== siteHash ? { ...r, stale: true } : stale ? { ...r, stale } : r));
-  const mine = results.map((r) => ({ checker, when, ...(site ? { site: path.resolve(site), siteHash } : {}), ...r }));
+    .map(({ stale, ...r }) => (siteHash && r.siteHash && r.site === siteRel && r.siteHash !== siteHash ? { ...r, stale: true } : stale ? { ...r, stale } : r));
+  const mine = results.map((r) => ({ checker, when, ...(site ? { site: siteRel, siteHash } : {}), ...r }));
   const all = [...kept, ...mine];
   const staleCheckers = [...new Set(all.filter((r) => r.stale).map((r) => r.checker))];
   let v = verdict(all);
