@@ -81,14 +81,28 @@ export async function ready(page, { ms = 600, waitMotion = true } = {}) {
   }, null, { timeout: 4000, polling: 100 }).catch(() => {});
 }
 
-// Opens a route and, for a declared state, performs its steps. Returns { ok, error }.
+// Loads a page and says whether it is one: an answer of 400 or more (a route with no file is a 404) or a body that is
+// not HTML is not a page, and measuring it would report its error text as a passing layout. Returns { ok, error }.
+export async function loadPage(page, url) {
+  const resp = await page.goto(url, { waitUntil: 'load', timeout: 45000 });
+  const at = new URL(url).pathname;
+  if (!resp) return { ok: false, error: `${at} gave no response` };
+  if (resp.status() >= 400) return { ok: false, error: `${at} answered ${resp.status()}: there is no page there` };
+  const type = (resp.headers()['content-type'] || '').toLowerCase();
+  if (!/^(text\/html|application\/xhtml\+xml)/.test(type)) return { ok: false, error: `${at} is not an HTML page (${type || 'no content type'})` };
+  return { ok: true, error: null };
+}
+
+// Opens a route and, for a declared state, performs its steps. Returns { ok, error, loaded }: loaded is false when the
+// page itself did not load (see loadPage), true when it loaded and a state's steps could not be done.
 export async function openTarget(page, base, target, opts = {}) {
-  await page.goto(new URL(target.path, base).href, { waitUntil: 'load', timeout: 45000 });
+  const load = await loadPage(page, new URL(target.path, base).href);
+  if (!load.ok) return { ok: false, error: load.error, loaded: false };
   await ready(page, opts);
   if (target.state?.steps?.length) {
     const r = await runSteps(page, target.state.steps);
-    if (!r.ok) return { ok: false, error: r.error };
+    if (!r.ok) return { ok: false, error: r.error, loaded: true };
     await page.waitForTimeout(450);
   }
-  return { ok: true, error: null };
+  return { ok: true, error: null, loaded: true };
 }

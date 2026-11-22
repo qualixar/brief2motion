@@ -17,7 +17,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { openSite, newPage } from './_common.mjs';
 import { parseArgs, loadRoutes, loadJson, projectFiles, result, writeQa, passes, printResults } from './_design.mjs';
-import { runSteps, checkExpect, ready } from './_steps.mjs';
+import { runSteps, checkExpect, ready, loadPage } from './_steps.mjs';
 
 export const VIEWPORTS = { phone: { width: 390, height: 844, mobile: true }, desktop: { width: 1440, height: 900, mobile: false } };
 
@@ -29,7 +29,8 @@ export async function runJourney(browser, base, j, routes, vpName, shotsDir, ver
   const { ctx, page, errors } = await newPage(browser, { viewport: { width: vp.width, height: vp.height }, mobile: vp.mobile });
   const out = [];
   try {
-    await page.goto(new URL(route.path, base).href, { waitUntil: 'load', timeout: 45000 });
+    const load = await loadPage(page, new URL(route.path, base).href);
+    if (!load.ok) { out.push(result(`journey.${j.id}`, 'FAIL', { ...at, reason: `the start page did not load: ${load.error}` })); return out; }
     await ready(page, { ms: 400 });
     const run = await runSteps(page, j.steps || []);
     let ok = run.ok, why = run.error;

@@ -92,6 +92,13 @@ export function routeFile(siteDir, routePath) {
   return null;
 }
 
+// The wireframe for a template: wireframes/<template>.html, or wireframes/index.html when the site has one template.
+// check_plan and check_layout --wireframes both use this, so the plan never accepts a file the layout check cannot open.
+export function wireframeFile(wfDir, template, routes) {
+  const single = new Set(routes.map((r) => r.template)).size === 1;
+  return [`${template}.html`, single ? 'index.html' : null].filter(Boolean).map((n) => path.join(wfDir, n)).find((p) => fs.existsSync(p) && fs.statSync(p).isFile()) || null;
+}
+
 // ---- markdown pieces the stage files use ----
 
 // The first table under a heading whose text matches `heading` (a RegExp) -> rows as { lower-cased header: cell }.

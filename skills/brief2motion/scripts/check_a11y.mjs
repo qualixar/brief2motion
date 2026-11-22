@@ -84,7 +84,7 @@ if (process.argv[1] && fs.realpathSync(path.resolve(process.argv[1])) === fs.rea
         const at = { route: t.route.id, state: t.state?.id ?? null, viewport: `${w}px`, browser: `Chrome ${session.version}`, input: 'keyboard', theme };
         try {
           const r = await openTarget(page, session.base, t);
-          if (!r.ok) { results.push(result('state.reached', 'FAIL', { ...at, reason: r.error })); continue; }
+          if (!r.ok) { results.push(result(r.loaded ? 'state.reached' : 'page.loaded', 'FAIL', { ...at, reason: r.error })); continue; }
           if (!axe.ok) results.push(result('a11y.axe', 'PENDING', { ...at, reason: `axe-core not run: ${axe.reason}` }));
           else {
             await page.addScriptTag({ content: axe.source });

@@ -17,7 +17,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { parseArgs, loadRoutes, loadJson, readText, projectFiles, homeOf, routeFile, mdTable, mdSections, result, writeQa, passes, printResults } from './_design.mjs';
+import { parseArgs, loadRoutes, loadJson, readText, projectFiles, homeOf, routeFile, mdTable, mdSections, wireframeFile, result, writeQa, passes, printResults } from './_design.mjs';
 import { hrefs } from './_html.mjs';
 
 const PLACEHOLDER = /^(|-|\?|tbd|todo|n\/a|na|none|unknown|\.\.\.|xxx)$/i;
@@ -134,7 +134,7 @@ export function planChecks(project) {
   else {
     const problems = [];
     for (const tpl of new Set(routes.map((r) => r.template))) {
-      const file = [`${tpl}.html`, routes.length === 1 || new Set(routes.map((r) => r.template)).size === 1 ? 'index.html' : null].filter(Boolean).map((n) => path.join(f.wireframes, n)).find((p) => fs.existsSync(p));
+      const file = wireframeFile(f.wireframes, tpl, routes);
       if (!file) { problems.push(`no wireframe for template "${tpl}" (wireframes/${tpl}.html)`); continue; }
       const html = fs.readFileSync(file, 'utf8');
       for (const r of routes.filter((x) => x.template === tpl && x.primaryAction)) {
