@@ -29,7 +29,8 @@ const STATE_TEMPLATES = new Set(['form', 'search', 'checkout', 'listing', 'signu
 const IMAGE = /\.(png|jpe?g|webp|gif|avif|svg|mp4|webm)$/i;
 const rel = (p, root) => path.relative(root, p) || '.';
 
-const routePathOf = (href, from) => { try { const u = new URL(href, `http://x${from}`); return u.origin === 'http://x' ? u.pathname : null; } catch { return null; } };
+// An href -> the site path it leads to, decoded ("/menu%20files/" and "/%C3%BCber/" are the folders "menu files" and "über").
+const routePathOf = (href, from) => { try { const u = new URL(href, `http://x${from}`); return u.origin === 'http://x' ? decodeURIComponent(u.pathname) : null; } catch { return null; } };
 
 export function planChecks(project) {
   const f = typeof project === 'string' ? projectFiles(project) : project;

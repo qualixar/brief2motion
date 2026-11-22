@@ -135,8 +135,20 @@ export function targets(routes) {
 export function loadRoutes(file) {
   const doc = loadJson(file, 'routes.json');
   if (!Array.isArray(doc.routes) || doc.routes.length === 0) throw new Error('routes.json: needs a non-empty "routes" array');
+  doc.routes.forEach(checkRoute);
+  if (doc.site !== undefined && (typeof doc.site !== 'object' || doc.site === null || Array.isArray(doc.site))) throw new Error('routes.json: "site" must be an object');
   const routes = doc.routes.map((r) => ({ parent: null, actions: [], states: [], links: [], indexable: true, ...r }));
   return { site: doc.site || {}, routes };
+}
+// The types every checker relies on, so a wrong one is a message here instead of a crash (or nonsense) later.
+function checkRoute(r, i) {
+  if (!r || typeof r !== 'object' || Array.isArray(r)) throw new Error(`routes.json: route ${i + 1} must be an object`);
+  const at = `routes.json: route "${r.id ?? i + 1}"`, isStr = (v) => typeof v === 'string';
+  for (const k of ['id', 'path', 'template', 'title', 'parent']) if (r[k] !== undefined && r[k] !== null && !isStr(r[k])) throw new Error(`${at}: "${k}" must be a string`);
+  if (r.links !== undefined && !(Array.isArray(r.links) && r.links.every(isStr))) throw new Error(`${at}: "links" must be a list of route ids, such as ["pricing"]`);
+  for (const k of ['states', 'actions']) if (r[k] !== undefined && !(Array.isArray(r[k]) && r[k].every((s) => s && typeof s === 'object'))) throw new Error(`${at}: "${k}" must be a list of objects`);
+  if (r.indexable !== undefined && typeof r.indexable !== 'boolean') throw new Error(`${at}: "indexable" must be true or false`);
+  if (r.primaryAction !== undefined && r.primaryAction !== null && !(typeof r.primaryAction === 'object' && isStr(r.primaryAction.label))) throw new Error(`${at}: "primaryAction" must be an object with a "label"`);
 }
 export const homeOf = (routes) => routes.find((r) => r.path === '/') || routes.find((r) => r.id === 'home') || routes[0];
 
