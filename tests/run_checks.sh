@@ -89,7 +89,7 @@ else echo "skip  link check (network not reachable)"; fi
 
 # 5. nothing personal or secret ships (the pattern is split in pieces so this file does not match itself)
 PRIV="varunpra""tap|/Use""rs/|claude-50""1|@gm""ail|BEGIN [A-Z ]*PRIVATE KEY|sk-[A-Za-z0-9]{20,}"
-if hits="$(grep -rIn -E "$PRIV" . --exclude-dir=.git --exclude-dir=node_modules 2>/dev/null)"; [[ -n "$hits" ]]; then
+if hits="$(grep -rIn -E "$PRIV" . --exclude-dir=.git --exclude=.git --exclude-dir=node_modules 2>/dev/null)"; [[ -n "$hits" ]]; then
   bad "privacy scan found something:"; echo "$hits" | cut -c1-160
 else ok "privacy scan clean"; fi
 grep -q $'\xe2\x80\x94' README.md && bad "README.md contains an em dash" || ok "README.md has no em dash"
