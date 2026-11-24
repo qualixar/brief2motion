@@ -6,6 +6,23 @@
 
 <p align="center"><b>The website animation skill for Claude Code and Codex. Write a plain brief, get a website with professional motion (GSAP and ScrollTrigger scroll animation, three.js 3D, kinetic type, page transitions), built and then checked in a real browser for speed, layout and accessibility before you see it.</b><br>scroll stories · 3D product pages · landing pages and whole sites · kinetic type · page transitions · data stories · interface motion · particles that form a face · 27 motion patterns · 32 visual styles</p>
 
+<table align="center">
+  <tr>
+    <td align="center" width="50%">
+      <a href="https://youtu.be/fI3a3oDvLE4"><img src="assets/yt-film-and-website.webp" width="360" alt="Video: Claude Code Motion Graphics, Make a Film AND a Website"></a><br>
+      <b><a href="https://youtu.be/fI3a3oDvLE4">▶ Make a film AND a website</a></b><br>
+      <sub>brief2motion builds the website, brief2mp4 the film</sub>
+    </td>
+    <td align="center" width="50%">
+      <a href="https://youtu.be/aP2wHwG_dSA"><img src="assets/yt-documentary.webp" width="360" alt="Video: I Gave Claude Code One Brief. It Made a Full Documentary"></a><br>
+      <b><a href="https://youtu.be/aP2wHwG_dSA">▶ Claude Code made a full documentary</a></b><br>
+      <sub>Made with the sister skill, brief2mp4</sub>
+    </td>
+  </tr>
+</table>
+
+<p align="center">One install gives you both skills in Claude Code:<br><code>/plugin marketplace add qualixar/brief2mp4</code> then <code>/plugin install brief2mp4@brief2mp4</code></p>
+
 <p align="center">
   <a href="https://github.com/qualixar/brief2motion"><img alt="GitHub stars" src="https://img.shields.io/github/stars/qualixar/brief2motion?style=flat&color=FF5A1F"></a>
   <img alt="Version 1.1.0" src="https://img.shields.io/badge/version-1.1.0-FF5A1F">
