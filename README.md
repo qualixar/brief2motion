@@ -21,7 +21,7 @@
   </tr>
 </table>
 
-<p align="center">One install gives you both skills in Claude Code:<br><code>/plugin marketplace add qualixar/brief2mp4</code> then <code>/plugin install brief2mp4@brief2mp4</code></p>
+<p align="center">One install gives you both skills in Claude Code:<br><code>/plugin marketplace add qualixar/brief2mp4</code> then <code>/plugin install brief2mp4@brief2mp4</code><br><b><a href="docs/guide/brief2motion-guide.pdf">Free 63-page guide (PDF)</a></b></p>
 
 <p align="center">
   <a href="https://github.com/qualixar/brief2motion"><img alt="GitHub stars" src="https://img.shields.io/github/stars/qualixar/brief2motion?style=flat&color=FF5A1F"></a>
@@ -62,11 +62,6 @@ brief2motion is a free, MIT-licensed agent skill for Claude Code and Codex. From
 <p align="center"><b>▶ brief2motion in 84 seconds:</b> one product photo and a brief become a website whose dust forms the bottle, then nine more sites in nine different motion stacks.</p>
 
 https://github.com/user-attachments/assets/8b780cc9-e70f-4c7c-b3ac-7fdb56ede3ff
-
-<p align="center">
-  <a href="https://youtu.be/fI3a3oDvLE4"><img src="assets/video-thumbnail.jpg" alt="Watch the video: Claude Code Motion Graphics, make a film AND a website" width="560"></a><br>
-  <b><a href="https://youtu.be/fI3a3oDvLE4">▶ The full tutorial: Claude Code Motion Graphics, Make a Film AND a Website</a></b> (YouTube, English and Hindi audio) · <b><a href="docs/guide/brief2motion-guide.pdf">Free 63-page guide (PDF)</a></b>
-</p>
 
 <p align="center">⭐ <b>Free and MIT. If brief2motion builds a page you keep, <a href="https://github.com/qualixar/brief2motion">star the repo</a>.</b> It is the only signal I get that it worked for you, and it is how other Claude Code and Codex users find it.</p>
 
